@@ -1,7 +1,7 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row justify-content-center mt-5">
-    <div class="col-sm-6">
+    <div class="col-6">
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
@@ -24,10 +24,10 @@
         <%}%>
       </div>
     </div>
-    <div class="col-sm-3 mt-5">
+    <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
-    <div class="col-sm-6 mt-5">
+    <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>

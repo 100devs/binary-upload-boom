@@ -30,7 +30,7 @@ module.exports = {
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
-      console.log(result);
+
       await Post.create({
         title: req.body.title,
         image: result.secure_url,
@@ -61,8 +61,12 @@ module.exports = {
   },
   deletePost: async (req, res) => {
     try {
-      console.log(req.params);
-      await Post.findOneAndDelete({ _id: req.params.id });
+      // Find post by id
+      let post = await Post.findById({ _id: req.params.id });
+      // Delete image from cloudinary
+      await cloudinary.uploader.destroy(post.cloudinaryId);
+      // Delete post from db
+      await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
       res.redirect("/profile");
     } catch (err) {

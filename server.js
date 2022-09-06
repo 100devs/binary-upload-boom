@@ -23,7 +23,7 @@ connectDB();
 //Using EJS for views
 app.set("view engine", "ejs");
 
-//Static Folder
+//Static Folderr
 app.use(express.static("public"));
 
 //Body Parsing

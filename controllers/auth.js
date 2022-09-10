@@ -45,14 +45,15 @@ exports.postLogin = (req, res, next) => {
 };
 
 exports.logout = (req, res) => {
-  req.logout();
-  req.session.destroy((err) => {
-    if (err)
-      console.log("Error : Failed to destroy the session during logout.", err);
-    req.user = null;
-    res.redirect("/");
-  });
-};
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    // if you're using express-flash
+    req.flash('success_msg', 'session terminated');
+    res.redirect('/login');
+  })
+}
 
 exports.getSignup = (req, res) => {
   if (req.user) {
@@ -65,6 +66,7 @@ exports.getSignup = (req, res) => {
 
 exports.postSignup = (req, res, next) => {
   const validationErrors = [];
+  // this checks the validity of the email and returns error messages to ejs.
   if (!validator.isEmail(req.body.email))
     validationErrors.push({ msg: "Please enter a valid email address." });
   if (!validator.isLength(req.body.password, { min: 8 }))

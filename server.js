@@ -1,3 +1,5 @@
+//this is the hub of the app where the middleware is stored and directed to use it
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");

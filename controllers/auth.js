@@ -45,6 +45,7 @@ exports.postLogin = (req, res, next) => {
 };
 
 exports.logout = (req, res) => {
+
   req.logout(function (err) {
     if (err) {
       return next(err);
@@ -54,6 +55,7 @@ exports.logout = (req, res) => {
     res.redirect('/login');
   })
 }
+
 
 exports.getSignup = (req, res) => {
   if (req.user) {

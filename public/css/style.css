@@ -1,0 +1,29 @@
+/* Overlay the username above the sibling image*/
+.username-overlay {
+    transform: translateY(-100%);
+    text-decoration: none;
+    text-decoration-style: revert;
+    color: white;
+    font-size: 1.5rem;
+}
+.comments {
+    margin: 2rem 0;
+}
+.comment {
+    margin: 1.5rem 0;
+    background-color: #FEFEFE;
+    border-radius: 5px;
+    padding: 0.5rem;
+}
+.comment-text {
+    font-size: 1rem;
+    margin: 0;
+}
+.comment-username {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #343434;
+}
+.comment-input-label {
+    font-size: 0.75rem
+}

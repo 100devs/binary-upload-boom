@@ -32,6 +32,34 @@
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
   </div>
+  <div class="row justify-content-center mt-5">
+    <div class="col-12">
+      <h3>Comments</h3>
+      <form
+          action="/comment/createComment"
+          method="POST"
+          class="col-12"
+        >
+        <input name="post" type="text" hidden value=<%= post.id%>>
+        <input name="userName" type="text" hidden value=<%= user.userName%>>
+        
+        <textarea style="height: 100px;" class="form-control" name="text" id="commentText" placeholder="add comment here"></textarea>
+          <button class="btn btn-primary" type="submit">Add Comment</button>
+        </form>
+        <%comments.forEach(comment => {%>
+          <% console.log(comment) %>
+          <div class="position-relative mt-3 p-3 text-light bg-success bg-opacity-10 border border-info border-start-0 rounded-end">
+            <p ><%=comment.text%>
+              <span class="position-absolute bottom-0 start-50 translate-middle badge rounded-pill bg-secondary">
+                <%=comment.createdAt%>
+            </p>
+            <span class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger">
+              <%=comment.userName %>
+            </span>
+          </div>
+      <%})%>
+    </div>
+  </div>
 </div>
 
 <%- include('partials/footer') -%>

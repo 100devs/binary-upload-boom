@@ -11,12 +11,12 @@ const PostSchema = new mongoose.Schema({
   //image property, string from cloudinary
   image: {
     type: String,
-    require: true,
+    required: true,
   },
   // the cloudinary id so we can delete if needed
   cloudinaryId: {
     type: String,
-    require: true,
+    required: true,
   },
   //caption property
   caption: {

@@ -28,8 +28,15 @@ module.exports = {
   },
   createComment: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+        await Post.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+            comments: req.body.comments,
+          }
+        ,
+      );
+      console.log("Comment has been added!");
+      res.redirect(`/post/${req.params.id}`);
     } catch (err) {
       console.log(err);
     }
@@ -45,6 +52,7 @@ module.exports = {
         cloudinaryId: result.public_id,
         caption: req.body.caption,
         likes: 0,
+        comments: "No Comments Yet",
         user: req.user.id,
       });
       console.log("Post has been added!");

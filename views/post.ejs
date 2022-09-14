@@ -26,15 +26,6 @@
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
-      <p> Submit New Comment</p>
-            <form action="/posts/createComment" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="comment" class="form-label">Comment</label>
-                  <input type="text" class="form-control" id="comment" name="comment">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
-      <!-- <p><%= COMMENT SCHEMA %></p> -->
     </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>

@@ -29,7 +29,7 @@
     </div>
     <div class="mt-5">
         <h2>Add a comment</h2>
-        <form action="/comments/createComment/<%= posts[i].image%>" method="POST">
+        <form action="/comments/createComment/<%= post._id%>" method="POST">
           <div class="mb-3">
               <label for="comment" class="form-label">Comment</label>
               <input type="text" class="form-control" id="comment" name="comment">

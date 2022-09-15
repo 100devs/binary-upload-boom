@@ -1,11 +1,37 @@
-<%- include('partials/header') -%>
+<%- include('partials/headers/header-logo') -%>
 
-<main class="container">
-    <div class="row justify-content-around mt-5">
-        <a href="/login" class="col-3 btn btn-primary"> Login</a>
-        <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
-    </div>
+<main class="container-main">
+    <section class="container-landing">
+        <section class="left-container">
+            <section class="tag-line-section">
+            <h1 class="tag-line">Little leagues, big <span class="tag-line-sports">stats.</span></h1>
+            </section>
+           
+            <section class="buttons-section">
+                <a href="/login" class="btn-index btn-login">Sign In</a>
+                <a href="/signup" class="btn-index btn-signup"> Sign Up</a>
+            </section>
+        </section>
+        <section class="right-container">
+            <secction class="container-box">
+                <section class="img-box"></section>
+                <section class="img-box"></section>
+                <section class="img-box"></section>
+                <section class="img-box"></section>
+                <section class="img-box"></section>
+                <section class="img-box"></section>
+            </secction>
+        </section>
+        <%- include('partials/arrow') -%>  
+    </section>
+    <section class="container-about">
+        <h2>Follow leagues and teams</h2>
+        <ken-burns-carousel
+            images="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.wuD3S-WWcj4zslSBOgLGDgHaEo%26pid%3DApi&f=1">
+        </ken-burns-carousel>
+    </section>
 </main>
+
     
 
 <%- include('partials/footer') -%>

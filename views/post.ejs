@@ -26,6 +26,40 @@
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
+      <div>
+        <div>
+          <h3>Comments:</h3>
+          <%if(comments.length < 1){%>
+          <p>No comments yet</p>
+          <%}else{%>
+          <ul class="row list">
+            <%for(let i = 0; i < comments.length; i++) {%>
+            <li><%=comments[i].title%>: <%=comments[i].comment%></li>
+            <%}%>
+          </ul>
+          <%}%>
+        </div>
+        <h4>Leave a Comment</h4>
+        <form action="/post/createComment/" method="POST">
+          <input type="hidden" name="postId" value="<%=post.id%>" />
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" />
+          </div>
+          <div class="mb-3">
+            <label for="comment" class="form-label">Comment</label>
+            <textarea
+              class="form-control"
+              id="comment"
+              name="comment"
+            ></textarea>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button class="btn btn-danger">Cancel</button>
+          </div>
+        </form>
+      </div>
     </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>

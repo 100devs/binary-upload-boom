@@ -1,3 +1,4 @@
+//this file for connecting to cloudinary. It needs to view the .env file where our keys are stored
 const cloudinary = require("cloudinary").v2;
 
 require("dotenv").config({ path: "./config/.env" });

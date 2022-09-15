@@ -1,5 +1,8 @@
 module.exports = {
-  ensureAuth: function (req, res, next) {
+  ensureAuth: function (req, res, next) { //next passes along to next piece of middleware in the sequence/route
+    console.log(req.user)
+    console.log(req.session)
+    
     if (req.isAuthenticated()) {
       return next();
     } else {

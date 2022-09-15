@@ -1,6 +1,6 @@
 <%- include('partials/headers/header-menu') -%>
-<!-- <div class="container">
-  <div class="row mt-5">
+<div class="container">
+ <!--  <div class="row mt-5">
       <div class="col-6">
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
@@ -41,6 +41,25 @@
         </div>  
       </div>  
     </div>
-  </div>
-</div> -->
+  </div> -->
+  <main class="container-home">
+    <section class="container-main-home">
+      <section class="section-my-home section-my-leagues">
+        <h2>new data</h2>
+        <ul class="list-my-leagues">  
+          <li class="item-my-leagues add-league" data-toggle="modal" data-target="#add-data">
+            <a href="#" data-toggle="tooltip" data-placement="top" title="Click to Add"  >
+              <i class="fa-solid fa-circle-plus fa-2xl"></i>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class="section-my-home section-my-players">
+        <h2>your data</h2>
+      </section>
+    </section>
+    <section class="other-section"></section>
+  </main>
+</div>
+<%- include('partials/modal') -%>
 <%- include('partials/footer') -%>

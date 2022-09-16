@@ -1,0 +1,9 @@
+body {
+  background-color: rgb(48, 48, 48);
+  color: white;
+}
+
+.comments{
+  display: flex;
+  justify-content: flex-start;
+}

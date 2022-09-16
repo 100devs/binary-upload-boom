@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const commentssController = require("../controllers/comments");
+const commentsController = require("../controllers/comments");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Post Routes - simplified for now

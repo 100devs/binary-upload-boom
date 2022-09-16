@@ -3,6 +3,7 @@
   <div class="row justify-content-center mt-5">
     <div class="col-6">
       <h2><%= post.title %></h2>
+      <h3>Posted By: <%= postCreator.userName %></h3>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
         <form
@@ -31,7 +32,7 @@
       <h2>Add a Comment</h2>
       <form action="/comment/createComment/<%=post._id%>"  method="POST">
         <div class="mb-3">
-            <label for="title" class="form-label">Comment</label>
+            <label for="comment" class="form-label">Comment</label>
             <input type="text" class="form-control" id="comment" name="comment">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -40,7 +41,7 @@
     <ul>
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
-          <%= comments[i].comment %>          
+        <span><%= commentCreators[i].userName %> Says: <%= comments[i].comment %> </span>         
           </a>
         </li>
       <% } %>

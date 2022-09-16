@@ -39,14 +39,14 @@
     </div>
     <ul>
       <% for(var i=0; i<comments.length; i++) {%>
-        <!--get posts from our server db pulling from our controller-->
-                  <!--controller works with view, view doesnt communicate with others-->
+        <%/* <!--get posts from our server db pulling from our controller-->
+                  <!--controller works with view, view doesnt communicate with others--> */%>
         <li class="col-6 justify-content-between mt-5">
           <%= comments[i].comment%>
-          </a>
+          Comment Id: <%= comments[i].id%>
           <%if(comments[i].user == user.id){ %>
             <form
-              action="/post/deleteComment/<%= comments[i].id %>?_method=DELETE"
+              action="/comment/deleteComment/<%= comments[i]._id%>?_method=DELETE"
               method="POST"
               class="col-3"
             >
@@ -55,13 +55,13 @@
             <%}%>
         </li>
       <% } %>
-      
     </ul>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
   </div>
+  <script><%console.log(comments[0]._id) %></script>
 </div>
 
 <%- include('partials/footer') -%>

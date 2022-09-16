@@ -47,7 +47,7 @@
         <% for( let i = 0; i < comments.length; i++ ) { %>
         <li><%= comments[i].comment %></li>
         <form
-          action="/comment/delete/<%= comments[i]._id %>?_method=DELETE&postid=<%= post._id %> "
+          action="/comment/delete/<%= comments[i]._id %>?_method=DELETE&postid=<%=  post._id %> "
           method="POST"
         >
           <button type="submit" class="btn btn-primary fa fa-trash"></button>

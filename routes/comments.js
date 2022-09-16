@@ -1,0 +1,10 @@
+const express = require("express");
+const router = express.Router();
+const commentsController = require("../controllers/comments");
+const { ensureAuth, ensureGuest } = require("../middleware/auth");
+
+// @desc    Comment route
+// @route   POST /createComment/:id
+router.post("/createComment/:id", commentsController.createComment);
+
+module.exports = router;

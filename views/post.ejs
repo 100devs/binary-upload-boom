@@ -41,6 +41,7 @@
       <button class="btn btn-primary" type="submit" value="post comment">Post Comment</button>
     </form>
 
+    <!-- Loops through Post's comments Array and renders each post.title and post.body -->
     <div class="container">
       <div class="row justify-content-center mt-5">
         <ul class="row list-unstyled">
@@ -53,7 +54,7 @@
                 <%= post.comments[i].body %>
               </p>
             </li>
-          <% } %>
+          <% } %> 
           </ul>
       </div>
     </div>  

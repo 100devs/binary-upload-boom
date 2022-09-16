@@ -1,19 +1,7 @@
 const mongoose = require("mongoose");
 //setting up the post schema 
-const PostSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  image: {
-    type: String,
-    require: true,
-  },
-  cloudinaryId: {
-    type: String,
-    require: true,
-  },
-  caption: {
+const CommentSchema = new mongoose.Schema({
+  comment: {
     type: String,
     required: true,
   },
@@ -22,10 +10,14 @@ const PostSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  user: {
+  userIds: {
+    type: Array,
+    require: false,
+  },
+  post: {
     //grabbing the user id using the User Schema Moongoose will atomatically name the collection name the models name with an s so "Posts"
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "Post",
   },
   createdAt: {
     //setting the data created will use this to display the time and date 
@@ -36,9 +28,9 @@ const PostSchema = new mongoose.Schema({
 //creating a model Post using the postSchema     
 //Moongoose will atomatically name the collection name the models name with an "s" so "Posts"
  
-module.exports = mongoose.model("Post", PostSchema,);
+module.exports = mongoose.model("Comment", CommentSchema,);
 
 
 //mongoose custom name example
-module.exports = mongoose.model("Post", PostSchema, 'customname');
+//module.exports = mongoose.model("Post", PostSchema, 'customname');
 

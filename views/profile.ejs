@@ -1,14 +1,18 @@
+<!-- //reuseable ejs header in the partials folder -->
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row mt-5">
       <div class="col-6">
           <div>
+            <!-- display user's name -->
               <p><strong>User Name</strong>: <%= user.userName %></p>
+            <!-- display user's email    -->
               <p><strong>Email</strong>: <%= user.email %></p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
           <div class="mt-5">
             <h2>Add a post</h2>
+            <!-- form to sumbit a new post request with the route post/createPost-->
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
                   <label for="title" class="form-label">Title</label>
@@ -20,17 +24,22 @@
               </div>
               <div class="mb-3">
                 <label for="imgUpload" class="form-label">Image</label>
+                <!-- //input file type passing in our image file -->
                 <input type="file" class="form-control" id="imageUpload" name="file">
               </div>
               <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
             </form>
           </div>
       </div>
+      <!-- //this section displays all the users past posts -->
       <div class="col-6">
         <ul class="row list-unstyled">
+          <!-- //grab all the posts the user has submitted from the database posts varible which was passed in by the post controller using a for loop -->
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
+            <!-- //this ia a link to each specific post -->
             <a href="/post/<%= posts[i]._id%>">
+              <!-- //grabs just the image and displays it as the users post no other text is displayed -->
               <img class="img-fluid" src="<%= posts[i].image%>">
             </a>
           </li>
@@ -43,4 +52,5 @@
     </div>
   </div>
 </div>
+<!-- //this is the reusable ejs foot -->
 <%- include('partials/footer') -%>

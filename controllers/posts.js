@@ -12,7 +12,7 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      const posts = await Post.find().sort({ createdAt: "desc" }).lean(); //only return useful parts. faster response
       res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
@@ -61,7 +61,7 @@ module.exports = {
   },
   deletePost: async (req, res) => {
     try {
-      // Find post by id
+      // Find post by id - the following checks that it exists
       let post = await Post.findById({ _id: req.params.id });
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);

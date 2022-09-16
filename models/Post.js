@@ -22,7 +22,8 @@ const PostSchema = new mongoose.Schema({
     required: true,
   },
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,  //compare: Todo userID was simply typed as String
+    //also note: if front end needs to explicitly attach req.user unlike using ejs, ? esp if the logged in user is not the user who created the post
     ref: "User",
   },
   createdAt: {

@@ -1,17 +1,17 @@
-const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
-const passport = require("passport");
-const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
-const methodOverride = require("method-override");
-const flash = require("express-flash");
-const logger = require("morgan");
-const connectDB = require("./config/database");
-const mainRoutes = require("./routes/main");
-const postRoutes = require("./routes/posts");
+const express = require("express");                   // imports the express package, which facilitates server creation and handling
+const app = express();                                // makes an instance of express and storing it in a constant app
+const mongoose = require("mongoose");                 // imports the mongoose package, which helps us create a schema for our data and communicating with MongoDB
+const passport = require("passport");                 // imports the passport package, which helps us with adding an authentication feature
+const session = require("express-session");           // imports the session package, which helps us with session creation and handling
+const MongoStore = require("connect-mongo")(session); // imports the connect-mongo package, which allows us to create a session connection to the DB
+const methodOverride = require("method-override");    // imports the method-override package, which allows us to override the POST method in a form to be able to use PUT & DELETE instead.
+const flash = require("express-flash");               // imports the flash package, which allows us to define a flash message and render it without redirecting the request
+const logger = require("morgan");                     // imports the morgan package, which allows http request logging
+const connectDB = require("./config/database");       // imports the DB connection configuration from the config/database file
+const mainRoutes = require("./routes/main");          // imports the main routes from the routes/main file 
+const postRoutes = require("./routes/posts");         // imports the post routes from the routes/post file
 
-//Use .env file in config folder
+//Use .env file in config folder to keep all sensitive information secure 
 require("dotenv").config({ path: "./config/.env" });
 
 // Passport config

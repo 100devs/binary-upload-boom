@@ -12,8 +12,6 @@ const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
 const commentsRoutes = require("./routes/comments");
 
-
-
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
 
@@ -59,8 +57,8 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
-//Setup Routes for Comments
-app.use("/comments",commentsRoutes); //go into the comment folder where it is located
+app.use("/comments", commentsRoutes)
+
 //Server Running
 app.listen(process.env.PORT, () => {
   console.log("Server is running, you better catch it!");

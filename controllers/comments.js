@@ -1,11 +1,6 @@
-// const cloudinary = require("../middleware/cloudinary");
-// const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 
 module.exports = {
-  
-    
-
   createComment: async (req, res) => {
     try {
       await Comment.create({
@@ -35,11 +30,9 @@ module.exports = {
   },
   deleteComment: async (req, res) => {
     try {
-      // Find post by id
-      let comment = await Comment.findById({ _id: req.params.id });
-      // Delete image from cloudinary
-      await cloudinary.uploader.destroy(comment.cloudinaryId);
-      // Delete post from db
+      // Find Comment by id
+      let Comment = await Comment.findById({ _id: req.params.id });
+      // Delete Comment from db
       await Comment.remove({ _id: req.params.id });
       console.log("Deleted Comment");
       res.redirect("/profile");

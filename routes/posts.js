@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+//multer helps us upload the file
 const upload = require("../middleware/multer");
 const postsController = require("../controllers/posts");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");

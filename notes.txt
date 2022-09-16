@@ -1,0 +1,85 @@
+-------------------
+get mongo and cloudinary working
+
+start with model
+copy post model
+create comment.js, paste post model
+change post schema to comment schema
+
+nred a comment that is a string
+keep likes
+yeet stuff we don't need
+
+change user:{ 
+to post:{ 
+aka what post does this comment come from
+
+that way we know where the comment belongs
+
+change line 22 to "comment" and CommentSchema to export
+
+now - we will see this in the post ejs..
+
+go to the post controller
+we need to add a line to load the comment model.
+const Comment = require(".../models/comment")
+
+there are going to be a lot of comments.
+
+see getFeed - re-use that get posts line (one with sort)
+
+so under getPost:...
+add const comments = await Comment.find({post: req.params.id}).sort({createdAt: "desc" }).lean();
+this finds all comments w/ post property of the post we are currently on.
+
+look at the feed.ejs
+look for the loop code,
+yoink it for post.ejs 
+change to i<comments.length
+get rid of stuff until it's comments[i].comment
+now the loop will pull off all the comments.
+
+will also have to make a collection for database comments.
+
+
+now - how do we get users to add comments?
+need a form
+take the form from the profile.ejs
+
+change the code for add a comment.
+change form action , take out the thing next to it.
+change "title" instances to "comment"
+remove the unnecessary divs
+
+don't need the "upload" value
+
+create a route for comments.
+/comment/createComment on the same form.
+but need the comment to go to the correct post.
+plug in the post ID to the form. <%=post._id%>
+
+in server.js
+add the route
+requrire the comment route
+
+then make a comments.js file
+copy the stuff from posts.js
+change to commentsController
+we only need a post route.
+createComment/:id , commentsController.createComment 
+
+create a comments controller
+copy the stuff from the posts controller
+delete the cloudinary stuff because we don't need it
+
+under createComment 
+change to req.body.comment
+delete other stuff you don't need
+add post: req.params.id
+this is just like in the post controller in line 24
+
+redirect back to the same post. "/post/"+req.params.id
+
+
+
+

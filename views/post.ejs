@@ -31,10 +31,7 @@
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
-    <!-- add a comment form -->
-    <!-- comment -->
-    <%console.log(comment[0]._id,"-----------------")%>
-
+    <!-- comment ssection -->
     <div class="row d-flex justify-content-center">
   <div class="col-md-8 col-lg-6">
     <div class="card shadow-0 border" style="background-color: #f0f2f5;">
@@ -55,8 +52,7 @@
 
             <div class="d-flex justify-content-between">
               <div class="d-flex flex-row align-items-center">
-                <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25"
-                  height="25" /> -->
+                  <!-- place for user images -->
                 <p class="small mb-0 ms-2">By: <%=comment[i].user.userName%></p><br>
               </div>
               <div class="d-flex flex-row align-items-center">
@@ -66,8 +62,6 @@
                 method="POST"
               >
               <button class="btn btn-link far fa-thumbs-up mx-2 fa-xs text-black link-dark" type="submit"></button>
-              <!-- <button class="far fa-thumbs-up mx-2 fa-xs text-black" style="margin-top: -0.16rem;" type="submit"></button> -->
-
               </form>
 
                 <p class="small text-muted mb-0"><%=comment[i].likes%></p>

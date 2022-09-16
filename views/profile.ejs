@@ -3,7 +3,7 @@
     <div class="row mt-5">
       <div class="col-6">
         <div class="m2">
-          <h2>Add a post</h2>
+          <h2>Add a Kitty:</h2>
           <form action="/post/createPost" enctype="multipart/form-data" method="POST">
             <div class="mb-3">
               <label for="title" class="form-label">Title</label>
@@ -22,6 +22,7 @@
         </div>
       </div>
       <div class="col-6">
+        <h2>Your Kitties:</h2>
         <ul class="row list-unstyled">
           <% for(var i=0; i<posts.length; i++) {%>
             <li class="col-6 justify-content-between mt-5">

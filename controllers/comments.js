@@ -6,7 +6,7 @@ module.exports = {
       await Comment.create({
         comment: req.body.comment,
         likes: 0,
-        poast: req.params.id,
+        post: req.params.id,
       });
       console.log("Comment has been added!");
       res.redirect("/post/"+req.params.id);

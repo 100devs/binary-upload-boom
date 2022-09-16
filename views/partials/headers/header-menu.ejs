@@ -56,12 +56,30 @@
                 <h2 class="header-logo"><a href="/home">LUDO</a></h2>
             </section>
             <section class='container-nav-list'>
-                <ul class="container-list-menu">
-                    <!-- <li> <a href="/home">Home</a></li> -->
-                    <li> <a href="/feed">Stats</a></li>
-                    <li> <a href="#">Highlights</a></li>
-                    <li class="search-icon">
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                <ul class="container-list-menu"> 
+                    <li> 
+                      <% if (url === '/home') { %>
+                      <a href="/home" class="underline-menu">Home</a>
+                    
+                     <% }  else { %> 
+                      <a href="/home" class="no-underline">Home</a>
+                    <% } %>
+                    </li>
+                    <li> 
+                      <% if (url === '/feed') { %>
+                      <a href="/feed" class="underline-menu">Stats</a>
+                    
+                     <% }  else { %> 
+                      <a href="/feed" class="no-underline">Stats</a>
+                    <% } %>
+                    </li>
+                    <li> 
+                      <% if (url === '/highlights') { %>
+                      <a href="/#" class="underline-menu">Highlights</a>
+                    
+                     <% }  else { %> 
+                      <a href="/#" class="no-underline">Highlights</a>
+                    <% } %>
                     </li>
                 </ul>
                 
@@ -76,6 +94,8 @@
                           <li><a class="dropdown-item" href="/settings">Settings</a></li>
                           <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
+                        <!-- <% console.log(url)%> -->
+                        
                       </div>
                 </section>
             </section>

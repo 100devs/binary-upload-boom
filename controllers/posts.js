@@ -2,10 +2,12 @@ const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 
 module.exports = {
-  getProfile: async (req, res) => {
+  getHome: async (req, res) => { //changed getProfile to getHome
     try {
       const posts = await Post.find({ user: req.user.id });
-      res.render("home.ejs", { posts: posts, user: req.user }); //changed from profile.ejs to home.ejs //changes req.user to req.email
+      const url = await req.originalUrl;
+      res.render("home.ejs", { posts: posts, user: req.user, url: url }); //changed from profile.ejs to home.ejs //changes req.user to req.email
+
     } catch (err) {
       console.log(err);
     }
@@ -13,7 +15,8 @@ module.exports = {
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      const url = await req.originalUrl;
+      res.render("feed.ejs", { posts: posts, url: url});
     } catch (err) {
       console.log(err);
     }
@@ -21,7 +24,8 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user }); //changes req.user to req.email
+      const url = await req.originalUrl;
+      res.render("post.ejs", { post: post, user: req.user, url: url }); //changes req.user to req.email
     } catch (err) {
       console.log(err);
     }
@@ -29,18 +33,26 @@ module.exports = {
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
+      
       const result = await cloudinary.uploader.upload(req.file.path);
-
+      const pattern = await cloudinary.uploader
+      .upload(req.file.path, 
+        { eager: [
+          { width: 400, height: 300, crop: "pad" }, 
+          { width: 260, height: 200, crop: "crop", gravity: "north"} ]})
+      /* .then(result=> result ); */
+     
       await Post.create({
         team: req.body.team,
         player: req.body.player,
         position: req.body.position,
         notes: req.body.notes,
         user: req.user.id,
-        image: result.secure_url,
+        image: pattern.eager[0].secure_url,
         cloudinaryId: result.public_id
       });
       console.log("Post has been added!");
+      console.log(pattern)
       res.redirect("/home"); //changed from profile to home
     } catch (err) {
       console.log(err);
@@ -69,9 +81,9 @@ module.exports = {
       // Delete post from db
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
-      res.redirect("/home"); //changed from profile to hone
+      res.redirect("/feed"); //changed from profile to feed
     } catch (err) {
-      res.redirect("/home"); //changed from profile to hone
+      res.redirect("/feed"); //changed from profile to home
     }
   },
 };

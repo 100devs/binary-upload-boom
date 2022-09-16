@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+//const { url } = require("../middleware/cloudinary"); prob deleted it
 
 const PostSchema = new mongoose.Schema({
   team: {
@@ -7,7 +8,7 @@ const PostSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    require: false,
+    required: true,
   },
   cloudinaryId: {
     type: String,

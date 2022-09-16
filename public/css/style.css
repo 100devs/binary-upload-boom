@@ -84,6 +84,15 @@ body {
     padding: 0 1rem;
 }
 
+.container-list-menu li .underline-menu {
+    text-decoration-color: #E1A750;
+    text-decoration-thickness: 2px;
+    text-decoration-line: underline;
+}
+.container-list-menu li .no-underline {
+    text-decoration: none;
+}
+
 .container-nav-profile {
    /*  border: 1px solid red; */
     display: flex;
@@ -433,7 +442,7 @@ body {
     max-width: 99vw;
     min-height: 80vh;
     margin-top: 10vh;
-    /* border: 1px solid red; */
+    border: 1px solid red;
 }
 
 .container-main-home {
@@ -442,7 +451,7 @@ body {
     justify-content: space-evenly;
     min-height: 75vh;
     min-width: 100%;
-    /* border: 1px solid wheat; */
+    border: 1px solid wheat;
 }
 
 .pinned-home {
@@ -455,7 +464,7 @@ body {
     justify-content: space-between;
     min-height: 10rem;
     width: 100%;
-    /* border: 1px solid black; */
+    border: 1px solid black;
 }
 
 .list-my-leagues {
@@ -571,4 +580,64 @@ body {
 
 .feed-list h3 {
     color: white;
+}
+
+
+/* FEED ///////////////////////////*/
+
+.container-feed {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 99vw;
+    min-height: 80vh;
+    margin-top: 20vh;
+    /* border: 1px solid red; */
+}
+
+.section-feed {
+    display: flex;
+    justify-content: center;
+    min-height: 75vh;
+    min-width: 100%;
+    border: 1px solid magenta;
+}
+
+.section-list-feed {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-content: center; 
+    width: 85%;
+    border: 1px solid red;
+}
+
+.list-feed {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    /* align-content: space-around; */
+    align-content: stretch;
+    /* gap: 1px 2px; */
+    /* border: 2px solid greenyellow; */
+    gap: 1.5rem;
+}
+
+.item-list-feed {
+    /* margin: 0 .2rem 1rem 0; */
+    /* margin-bottom: 1rem;
+    margin-right: 1rem; */
+    width: 23.35%;
+    height: 28rem;
+    border: 1px solid red;
+}
+.card {
+    width: 100%;
+    height: 28rem;
+    /* border: 1px solid fuchsia; */
+}
+
+.fa-trash-can {
+    color: #E1A750;
 }

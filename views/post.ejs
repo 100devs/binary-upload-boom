@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
-      <h2><%= post.title %></h2>
+      <h2><%= post.title %> by <a href="/profile/<%= user._id %> "><%= user.userName %></a></h2>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
         <form
@@ -27,8 +27,23 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+
+    <h5 class="mt-5">Leave a Comment</h5>
+    <form action="/comment/createComment/<%= post.id %>" method="POST">
+      <textarea class="form-control textarea" name="comment" id="comment" cols="30" rows="5"></textarea>
+      <button type="submit" class="btn btn-primary mt-3">Post Comment</button>
+    </form>
+
+    <!-- Comments here -->
+    <ul>
+      <% for(let i = 0; i < comments.length; i++)  { %> 
+          <li><a href="/profile/<%= commentUsers[i].id %> "><%= commentUsers[i].userName %> </a><%= comments[i].comment %> </li>
+      <% } %> 
+    </ul>
+
+
     <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
+      <a class="btn btn-primary" href="/profile/<%= loggedUser.id %> ">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
   </div>

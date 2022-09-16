@@ -2,11 +2,14 @@
 <div class="container">
   <div class="row mt-5">
       <div class="col-6">
+        <h2><%= userProfile.userName %>'s Profile </h2>
+        <% if(user.id === userProfile.id)  {%>
           <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
+            <p><strong>User Name</strong>: <%= userProfile.userName %></p>
+              <p><strong>Email</strong>: <%= userProfile.email %></p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
+          
           <div class="mt-5">
             <h2>Add a post</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
@@ -25,6 +28,7 @@
               <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
             </form>
           </div>
+          <% } %> 
       </div>
       <div class="col-6">
         <ul class="row list-unstyled">

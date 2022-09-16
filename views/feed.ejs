@@ -1,6 +1,6 @@
 <%- include('partials/header') -%>
 <div class="container" style="border: 1px solid green;">
-    <div class="mt-5" style="border: 1px solid red;">
+    <div class="mt-5 d-flex align-items-center justify-content-center" style="border: 1px solid red;">
             <% for(var i=0; i<posts.length; i++) {%>
                 <div style="border: 1px solid yellow;">
                     <a href="/post/<%= posts[i]._id%>"><img class="rounded" src="<%= posts[i].image%>"></a>

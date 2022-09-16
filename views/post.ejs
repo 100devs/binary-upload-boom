@@ -40,8 +40,16 @@
     <ul>
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
-          <%= comments[i].comment%>
-          </a>
+          <%= comments[i].comment%> 
+          <%if(post.user == user.id){ %>
+            <form
+              action="/comment/deleteComment/<%= comments[i]._id %>?_method=DELETE"
+              method="POST"
+              class="col-3"
+            >
+              <button class="btn btn-primary fa fa-trash" type="submit"></button>
+            </form>
+            <%}%>
         </li>
       <% } %>
     </ul>

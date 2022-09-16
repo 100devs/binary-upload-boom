@@ -27,6 +27,39 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <ul class="list-unstyled">
+      <% for(var i=0; i<comments.length; i++) {%>
+        <li class="mt-4">
+          <%= comments[i].comment %> - Likes: <%= comments[i].likes %> 
+          <div class="row">
+            <form action="/comment/likeComment/<%= comments[i]._id %>?_method=PUT" method="POST" class="col-1">
+              <button class="btn btn-danger fa fa-heart" type="submit"></button>
+            </form>
+            <!-- need to perform a comparison with the person that created the post and the one that's logged in. think I need the id of the user in the comment schema -->
+            <%if(comments[i].createdBy._id == user.id){ %>
+              <form action="/comment/deleteComment/<%= comments[i]._id %>?_method=DELETE" method="POST" class="col-2">
+                <button class="btn btn-primary fa fa-trash" type="submit"></button>
+              </form>
+            <% } %>
+          </div>
+         
+          <!-- modify the ugly inline css -->
+          <span style="display: block;">
+            posted by <%= comments[i].createdBy.userName %> on <%= comments[i].createdAt.toLocaleString() %> 
+          </span>
+        </li>
+      <% } %>
+    </ul>
+    <div class="mt-5">
+      <h2>Add a comment</h2>
+      <form action="/comment/createComment/<%= post._id %>" method="POST">
+        <div class="mb-3">
+            <label for="title" class="form-label">Comment</label>
+            <input type="text" class="form-control" id="comment" name="comment">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

@@ -5,7 +5,6 @@ module.exports = {
     try {
       const comment = await Comment.create({
         comment: req.body.comment,
-        likes: 0,
         post: req.params.id,
         createdBy: req.user.id
       });      
@@ -15,16 +14,21 @@ module.exports = {
       console.log(err);
     }
   },
-  likeComment: async (req, res) => {
+  //if we don't want to remove the like, we could use $addToSet, so that only one like per user is permited.
+  likeComment : async (req, res) =>{
+    //saves the logged user's id to userId
+    const userId = req.user.id
     try {
-      const commentDoc = await Comment.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
-        }
-      );
-      console.log("Likes +1");
-      //we are redirecting to the post/postid where we wrote the comment. this is stored in comment.post (mongoose type objectId referencing post)
+      //finds the comment by the ID provided in :id (params)
+      const commentDoc = await Comment.findById(req.params.id);
+      //if that Id is NOT in the likes array, add the user id to it
+      if (!commentDoc.likes.includes(userId)) {
+        await commentDoc.updateOne({ $push: { likes: userId } });
+      //if it is, then remove it. This way you can only like a post ONCE, the second time it'll remove your like.
+      } else {
+        await commentDoc.updateOne({ $pull: { likes: userId } });
+      }
+      //sends the postID related to the comment, to go back to the same post page we were
       res.redirect(`/post/${commentDoc.post}`);
     } catch (err) {
       console.log(err);

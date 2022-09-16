@@ -30,15 +30,19 @@
     <ul class="list-unstyled">
       <% comments.forEach(comment => {%>
         <li class="mt-4">
-          <%= comment.comment %> - Likes: <%= comment.likes %> 
+          <%= comment.comment %> - Likes: <%= comment.likes.length %> 
           <div class="row">
-            <form action="/comment/likeComment/<%= comment._id %>?_method=PUT" method="POST" class="col-1">
-              <button class="btn btn-danger fa fa-heart" type="submit"></button>
-            </form>
+
+            <!-- like button will not appear on your own comments -->
+            <% if (user.id !== comment.createdBy._id.toString()) { %>
+              <form action="/comment/likeComment/<%= comment._id %>?_method=PUT" method="POST" class="col-1">
+                <button class="btn btn-danger fa fa-heart" type="submit"></button>
+              </form>
+            <% } %>
 
             <!-- if the user id in the comment document has the same id of the logged in user, then show the delete button (we can do the same with like so that we can't like our own posts/comments) -->
-            
-            <%if(comment.createdBy._id == user.id){ %>
+            <!-- using toString so that we can use ===. createdBy._id is a mongoose object, so the type would not match (it will pass the conditional with == though. since the value is the same) -->
+            <%if(comment.createdBy._id.toString() === user.id){ %>
               <form action="/comment/deleteComment/<%= comment._id %>?_method=DELETE" method="POST" class="col-2">
                 <button class="btn btn-primary fa fa-trash" type="submit"></button>
               </form>
@@ -52,11 +56,9 @@
       <% }) %>
     </ul>
     <div class="mt-5">
-      <h2>Add a comment</h2>
       <form action="/comment/createComment/<%= post._id %>" method="POST">
         <div class="mb-3">
-            <label for="title" class="form-label">Comment</label>
-            <input type="text" class="form-control" id="comment" name="comment">
+            <textarea name="comment" class="form-control" placeholder="Add a comment..."></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>

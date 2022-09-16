@@ -1,4 +1,5 @@
 const Comment = require("../models/Comment");
+const Post = require("../models/Post");
 
 
 module.exports = {
@@ -17,19 +18,15 @@ module.exports = {
   },
   deleteComment: async (req, res) => {
     try {
-      // const post = await Post.findById(req.params.id);
-      // let comment = await Comment.findById({ _id: req.params.id }); 
-      let comment = await Comment.findOneAndDelete({ _id: req.params.id }); 
-      console.log(comment)
-      console.log(req.body.post)
-      // await Comment.remove({ _id: req.params.id }); 
+      const comment = await Comment.findById({ _id: req.params.id }); 
+      await Comment.deleteOne({ _id: req.params.id }); 
       console.log("Deleted Comment");
-      // res.redirect(`/post/${req.body.post}`);
-      // res.redirect(`/profile`);
-      location.reload()
+      console.log(comment)
+      res.redirect(`/post/${comment.post}`); //<---- this is the change that worked
     } catch (err) {
       // res.redirect(`/post/${req.params.id}`);
       console.log(err)
     }
   },
-};
+}; 
+

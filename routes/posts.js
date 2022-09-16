@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/multer");
 const postsController = require("../controllers/posts");
+//add comments controller
 const commentsController = require("../controllers/comments")
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
@@ -14,6 +15,7 @@ router.put("/likePost/:id", postsController.likePost);
 
 router.delete("/deletePost/:id", postsController.deletePost);
 
+//add post comment route
 router.post("/createComment/:id", commentsController.createComment);
 
 module.exports = router;

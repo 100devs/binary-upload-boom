@@ -29,7 +29,7 @@
     </div>
 
     <div class="mt-5">
-      <h2>Add a post</h2>
+      <h2>Add a comment</h2>
       <form action="/comment/createComment/<%= post._id%>" method="POST">
         <textarea placeholder="Enter a comment" name="commentsText"> </textarea>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -43,7 +43,7 @@
           <div>
 
             <p><%= el.comment %></p>
-            <span><%= el.userName %></span>
+            <span style="color: blue"><%= el.userName %></span>
           </div>
         </li>
       <% }) %>

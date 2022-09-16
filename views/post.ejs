@@ -51,7 +51,7 @@
           <span>
             <%= el.comment%>
           </span>
-          <button class="btn btn-primary btn-sm deleteBtn float-end data-id="<%=el._id%>">Delete</button>
+          <a class="btn btn-primary btn-sm float-end" data-id="<%=el._id%>" href="/comment/deleteComment/<%=el._id%>/<%=post.id%>?_method=DELETE">Delete</a>
         </li>
         <%})%>
       </ul>

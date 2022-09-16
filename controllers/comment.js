@@ -8,6 +8,7 @@ module.exports = {
         comment: req.body.comment,
         likes: 0,
         post: req.params.id,
+        userId:req.user._id
       });
       console.log("Comment has been added!");
       res.redirect("/post/"+req.params.id);
@@ -17,8 +18,9 @@ module.exports = {
   },
   deleteComment: async (req,res,next) => {
     try {
-        await Comment.findOneAndDelete(req.body.commentId);
-        res.end();
+        console.log(req.params);
+        await Comment.findByIdAndRemove(req.params.id);
+        res.redirect(`/post/${req.params.postId}`);
     } catch (error) {
         return next(error);
     }

@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-6">
+          <div class="mt-5">
+            <h2>Add a comment</h2>
+            <form action="/comments/createComment/<%= post._id%>"  method="POST">
+              <div class="mb-3">
+                  <label for="comment" class="form-label">Comment</label>
+                  <input type="text" class="form-control" id="comment" name="comment">
+              </div>
+              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+            </form>
+          </div>
+    </div>
+  </div>
+      <div class="col-6">
+        <ul class="">
+        <% for(var i=0; i<comments.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+               <%=comments[i].comment%>
+          </li>
+        <% } %>
+        </ul>
+      </div>  
+</div>
+

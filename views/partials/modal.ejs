@@ -1,40 +1,49 @@
- <!-- Modal -->
- <div class="modal fade" id="add-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Create Something</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Player's Name</label>
-                  <input type="player-name" class="form-control" id="exampleFormControlInput1" placeholder="Name">
-                </div><br>
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">Position</label>
-                  <select class="form-control" id="exampleFormControlSelect1">
-                    <option>1-PG</option>
-                    <option>2-SG</option>
-                    <option>3-SF</option>
-                    <option>4-PF</option>
-                    <option>5-C</option>
-                  </select>
-                </div>
-                <br>
-                <div class="form-group">
-                  <label for="exampleFormControlTextarea1">Notes</label>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-              </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" value="Upload">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
+ 
+                  <div class="modal fade" id="add-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Create Something</h5>
+                         <!--  <button type="button" data-dismiss="modal"> -->
+                            
+                            <i class="fa-solid fa-square-xmark close" data-dismiss="modal"></i>
+                         <!--  </button> -->
+                        </div>
+                        <div class="modal-body">
+                          <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+                            <div class="mb-3">
+                                <label  for="team" class="form-label">Team</label>
+                                <input type="text" class="form-control form-control-sm" id="team" name="team" placeholder="Team"> 
+                            </div>
+                            <div class="mb-3">
+                              <label for="player" class="form-label">Player</label>
+                             <input type="text" class="form-control form-control-sm" id="player" name="player"  placeholder="Player">
+                            </div>
+                            <div class="mb-3">
+                                <label for="position" class="form-label">Position</label>
+                                <select class="form-select form-select-sm" id="position" name="position" >
+                                  <option selected>Select</option>
+                                  <option>1-PG</option>
+                                  <option>2-SG</option>
+                                  <option>3-SF</option>
+                                  <option>4-PF</option>
+                                  <option>5-C</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="imgUpload" class="form-label">Image</label>
+                                <input type="file" class="form-control form-control-sm" id="imageUpload" name="file">
+                              </div>
+                              <div class="mb-3">
+                                <label for="notes" class="form-label">Notes</label>
+                                <textarea class="form-control form-label-sm" id="notes" name="notes" ></textarea>
+                            </div>
+                             <div class="modal-footer">
+                                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                                <button type="submit" class="btn btn-primary submit" value="Upload">Submit</button>
+                            </div>
+                        </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>

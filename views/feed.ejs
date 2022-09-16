@@ -7,6 +7,17 @@
             <a href="/post/<%= posts[i]._id%>">
               <img class="img-fluid" src="<%= posts[i].image%>">
             </a>
+
+            <!-- changed link above for link below -->
+          </li>
+          <li class="col-6 justify-content-between mt-5 feed-list">
+            <!-- <a href="/post/<%= posts[i]._id%>">
+              
+            </a> -->
+            <h3> <%= posts[i].player%> </h3>
+              <h3><%= posts[i].team%></h3>
+              <h3><%= posts[i].position%></h3>
+              <h3><%= posts[i].notes%></h3>
           </li>
         <% } %>
         </ul>

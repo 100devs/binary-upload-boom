@@ -5,6 +5,7 @@ body {
     /* min-height: 105vh; */
     /* background: #26231e; */
     background: #302f2d;
+    /* background: white; */
 }
 
 /* .header-logo a:link, .header-logo a:visited, .header-logo a:active, .header-logo a:hover {
@@ -290,7 +291,7 @@ body {
     font-family: 'Jaldi', sans-serif;
     height: 100%;
     width: 100%;
-    /* border: 1px solid red; */
+    
 }
 
 .section-login-signup-form {
@@ -298,6 +299,7 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
     width: 100%;
+    border: 1px solid red;
 }
 
 .section-each-input-login-signup{
@@ -364,12 +366,12 @@ body {
 .container-alert {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 100%;
     height: 2rem;
     color: white;
     font-size: 15px;
     padding-left: 8%;
-    /* border: 1px solid purple; */
+    border: 1px solid purple;
 }
 
 /* LOGIN PAGE ///////////////////////////*/
@@ -395,10 +397,6 @@ body {
 .section-each-input-login .form-input {
     height: 55%;
 }
-
-
-
-
 /* SIGNUP PAGE ///////////////////////////*/
 
 .container-signup-section form {
@@ -457,7 +455,7 @@ body {
     justify-content: space-between;
     min-height: 10rem;
     width: 100%;
-    border: 1px solid greenyellow;
+    /* border: 1px solid black; */
 }
 
 .list-my-leagues {
@@ -476,6 +474,26 @@ body {
     border: 1px solid #E1A750;
 }
 
+.recently-added-item {
+    width: 80%;
+    min-height: 10rem;
+    border-left: 1px solid #E1A750;
+}
+.recently-added-container {
+    width: 100%;
+    min-height: 10rem;
+    /* border: 1px solid yellowgreen; */
+}
+
+.recently-heading {
+    /* border: 1px solid fuchsia; */
+    width: fit-content;
+    text-align: center;
+}
+
+.recently-added-list {
+    padding-left: 1rem;
+}
 .add-league {
     border: 1px dashed #E1A750;
 }
@@ -500,4 +518,57 @@ body {
 .section-my-home h2 {
     color: #E1A750;
     font-family: 'Jaldi', sans-serif;
+}
+
+
+/* MODAL ///////////////////////////*/
+
+.modal-content {
+    font-size: 1.5rem;
+    background: #302f2d;
+    color: white; 
+    border-radius: 5px;
+    border: 1px solid #E1A750;
+    font-family: 'Jaldi', sans-serif;
+}
+
+.modal-content .close {
+    color: #E1A750;
+}
+
+.modal-content .close:hover {
+    cursor: pointer;
+}
+
+.modal-body {
+    font-size: 1.2rem;
+    border-radius: 5px;
+}
+
+.mb-3 input, .mb-3 select, .mb-3 textarea {
+    border: 1px solid #E1A750;
+    border-style: outset;
+    /* background: #302f2d; */
+    color:#302f2d;
+}
+
+
+.mb-3 input:focus, .mb-3 select:focus, .mb-3 textarea:focus {
+    border: 1px solid #E1A750;
+}
+
+.mb-3 select {
+    color: black;
+}
+
+.modal-body  .submit {
+    color:#302f2d;
+    background: #E1A750;
+    border: #302f2d;
+    font-weight: bold;
+}
+
+
+.feed-list h3 {
+    color: white;
 }

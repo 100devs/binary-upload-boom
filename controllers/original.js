@@ -5,7 +5,7 @@ module.exports = {
   getProfile: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.user.id });
-      res.render("home.ejs", { posts: posts, user: req.user }); //changed from profile.ejs to home.ejs //changes req.user to req.email
+      res.render("home.ejs", { posts: posts, user: req.user }); //changed from profile.ejs to home.ejs
     } catch (err) {
       console.log(err);
     }
@@ -21,7 +21,7 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user }); //changes req.user to req.email
+      res.render("post.ejs", { post: post, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -31,14 +31,13 @@ module.exports = {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
 
-      await Post.create({
-        team: req.body.team,
-        player: req.body.player,
-        position: req.body.position,
-        notes: req.body.notes,
-        user: req.user.id,
+       await Post.create({
+        title: req.body.title,
         image: result.secure_url,
-        cloudinaryId: result.public_id
+        cloudinaryId: result.public_id,
+        caption: req.body.caption,
+        likes: 0,
+        user: req.user.id,
       });
       console.log("Post has been added!");
       res.redirect("/home"); //changed from profile to home

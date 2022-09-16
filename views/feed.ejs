@@ -1,10 +1,11 @@
 <%- include('partials/headerSignedIn') -%>
   <div class="container">
-    <h2 class="text-center mb-5">Let's see some kitties.</h2>
+    <h2 class="text-center my-4">Let's see some kitties.</h2>
     <div class="d-md-flex justify-content-between align-items-center">
       <div class="row g4">
-        <div class="col-sm-6 col-md-3 my-2" <% for(var i=0; i<posts.length; i++) {%>
-          <div class="card bg-light border-secondary">
+        <div class="col-sm-6 col-md-3 my-2">
+          <% for(var i=0; i<posts.length; i++) {%>
+          <div class="card bg-light mx-2">
             <img class="card-img-top" src="<%= posts[i].image%>">
             <div class="card-body">
               <h5 class="card-title">

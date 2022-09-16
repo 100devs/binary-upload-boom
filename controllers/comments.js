@@ -16,6 +16,20 @@ module.exports = {
       console.log(err);
     }
   },
+  likeComment: async (req, res) => {
+    try {
+      const comment = await Comment.findOneAndUpdate( 
+        { _id: req.params.id },
+        {
+          $inc: { likes: 1 }, //$inc is a increment thing included with mongo/mongoose. This is a number because it is defined in the schema as such
+        }
+      );
+      console.log("Likes +1");
+      res.redirect(`/post/${comment.post}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
   deleteComment: async (req, res) => {
     try {
       const comment = await Comment.findById({ _id: req.params.id }); 

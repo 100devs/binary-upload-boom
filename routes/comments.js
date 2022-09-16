@@ -6,6 +6,9 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth"); //This is so 
 //Comments Routes - simplified for now
 router.post("/createComment/:id", commentsController.createComment); 
 
+//adding comment likes
+router.put("/likeComment/:id", commentsController.likeComment);
+
 router.delete("/deleteComment/:id", commentsController.deleteComment);
 
 module.exports = router;

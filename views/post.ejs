@@ -45,9 +45,21 @@
         <li class="col-6 justify-content-between mt-5">
           <h3><%= comments[i].comment%></h3>
           <!-- <h1><%= comments[i]._id%></h1> -->
+
+          <!-- adding comment likes -->
+          <form class="col-1" action="/comment/likeComment/<%= comments[i]._id %>?_method=PUT" method="POST">
+            <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          </form>
+          <h6 class="col-3">Likes: <%= comments[i].likes %></h6>
+
+
+          <!-- adding comment likes above -->
+
+          <!-- adding comment deletes below -->
           <form action="/comment/deleteComment/<%= comments[i]._id %>?_method=DELETE" method="POST" class="col-3"> 
             <button class="btn btn-primary fa fa-trash" type="submit"></button>
           </form>
+          <!-- adding comment deletes above -->
         </li>
       <% } %>
     </ul>

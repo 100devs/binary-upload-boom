@@ -23,7 +23,8 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      //.populate populates the createdBy (that's a mongoose type objectId with a ref to User) with the actual content of user with the saved objectId
+      //.populate fills createdBy (mongoose type objectId with a ref to User) with the actual content of user (using the saved objectId)
+      //can't use lean() with populate, since it doesn't work on pojos
       const comments = await Comment.find({post: req.params.id}).sort({createdAt: "desc"}).populate('createdBy');
       res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {

@@ -22,6 +22,25 @@
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
         <%}%>
+        <div class="py-5">
+          <h2>Comments:</h2>
+          <div class="row justify-content-center py-3">
+            <ul>
+              <% comments.forEach(comment => {%>
+                <li class="col-6 justify-content-between">
+                  <%= comment.comment %>
+                </li>
+              <% }) %>
+            </ul>
+          </div>
+          <form action="/comment/createComment/<%= post.id %>" method="POST">
+            <div class="mb-3">
+                <label for="comment" class="form-label">New Comment:</label>
+                <input type="text" class="form-control" id="comment" name="comment">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
       </div>
     </div>
     <div class="col-3 mt-5">

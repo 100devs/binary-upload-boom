@@ -1,16 +1,3 @@
-
-Henderson Sargeant
-
-Adrian Carr/The Crazy Horse#9867
-
-Reza Morin-Dayani
-
-Christiana Ukoli/ CU_Discord#6517
-
-Kevin Solon
-
-Delisha Cogdell
-
 # Install
 
 `npm install`

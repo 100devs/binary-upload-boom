@@ -6,8 +6,10 @@ const Comment = require('../models/Comment');
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id });
-      res.render("profile.ejs", { posts: posts, user: req.user });
+      const id = req.params.id;
+      const userProfile = await User.findById(id);
+      const posts = await Post.find({ user: id});
+      res.render("profile.ejs", { posts: posts, user: req.user, userProfile: userProfile });
     } catch (err) {
       console.log(err);
     }

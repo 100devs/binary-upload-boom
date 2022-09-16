@@ -28,8 +28,8 @@
       <p><%= post.caption %></p>
     </div>
 
-    <!-- post.comments gives us an array of comments -->
-
+    <!-- Add form for creating comments on Post -->
+    <!-- Form action POSTs to /createComment/${post.id} route -->
     <form 
     class="col-1"
     action="/post/createComment/<%= post.id %>"

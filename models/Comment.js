@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// create Comment Schema
 const CommentSchema = new mongoose.Schema({
   title: {
     type: String,

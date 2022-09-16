@@ -14,6 +14,8 @@ router.put("/likePost/:id", postsController.likePost);
 
 router.delete("/deletePost/:id", postsController.deletePost);
 
+//Added route for creating a comment.
+//Added here because comments are added via Post page.
 router.post('/createComment/:id', commentsController.createComment);
 
 module.exports = router;

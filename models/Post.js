@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+// pull in Comment Schema to add comments array,
+// which is an array of Comments
 const Comment = require("./Comment");
 
 const PostSchema = new mongoose.Schema({

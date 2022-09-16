@@ -1,21 +1,23 @@
 <%- include('partials/headerSignedIn') -%>
   <div class="container mb-4">
     <h2 class="text-center my-4">Let's see some kitties.</h2>
-    <div class="card-group">
-          <% for(var i=0; i<posts.length; i++) {%>
-              <div class="card bg-light mx-3 col-md-3">
-                <img class="card-img-top" src="<%= posts[i].image%>">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    <%= posts[i].title %>
-                  </h5>
-                  <p class="card-text">
-                    <%= posts[i].caption %>
-                  </p>
-                  <a href="/post/<%= posts[i]._id%>" class="btn btn-primary">See Kitty</a>
-                </div>
-              </div>
-          <% } %>
+    <div class="card-deck d-flex flex-wrap justify-content-evenly">
+      <% for(var i=0; i<posts.length; i++) {%>
+        <div class="card bg-light m-3" style="min-width:150px; max-width:350px;">
+          <img class="card-img-top" src="<%= posts[i].image%>">
+          <div class="card-body">
+            <h6 class="card-subtitle text-muted">Owner <%= posts[i].userName %>
+            </h6>
+            <h5 class="card-title">
+              <%= posts[i].title %>
+            </h5>
+            <p class="card-text">
+              <%= posts[i].caption %>
+            </p>
+            <a href="/post/<%= posts[i]._id%>" class="btn btn-primary">See Kitty</a>
+          </div>
+        </div>
+        <% } %>
     </div>
   </div>
-    <%- include('partials/footer') -%>
+  <%- include('partials/footer') -%>

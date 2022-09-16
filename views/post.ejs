@@ -5,30 +5,59 @@
         <div class="card m-3">
           <img class="card-top" src='<%= post.image%>'>
           <div class="card-body">
-            <h2 class="card-title"><%= post.title %></h2>
-            <p class="card-text"><%= post.caption %></p>
+            <h2 class="card-title">
+              <%= post.title %>
+            </h2>
+            <p class="card-text">
+              <%= post.caption %>
+            </p>
           </div>
           <div class="card-footer d-flex justify-content-between align-items-center">
             <form class="" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
               <button class="btn btn-primary fa fa-cat" type="submit"></button>
             </form>
             <p class="card-text text-muted mb-0">Pets: <%= post.likes %>
+            </p>
             <%if(post.user==user.id){ %>
-              <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="d-flex justify-content-end">
+              <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST"
+                class="d-flex justify-content-end">
                 <button class="btn btn-primary fa fa-trash" type="submit"></button>
               </form>
               <%}%>
           </div>
         </div>
-        <div class='col-md-6'>
-          <h5 class="mx-3">Comments:</h5>
-        </div>
-      
-    </div>
-    <div class="container d-flex justify-content-between align-items-center my-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
-    </div>
-  </div>
+      </div>
+      <div class="col-md-6 my-4">
+        <h5>Comments:</h5>
+        <div class="card-group flex-column">
+          <% comment.forEach(comment=> { %>
+            <div class="card my-2 p-3">
+              <h6 class="card-subtitle text-muted">
+                <%= comment.userName %> says:
+              </h6>
+              <p class="card-text">
+                <%= comment.comment %>
+              </p>
+            </div>
+            <% }) %>
+              <div class="card my-2 p-3">
+                <h5 class="card-title">Add a Comment:</h5>
+                <form action="/comment/createComment/<%= post.id %>" method="POST">
+                  <div class="form-group card-text px-3">
+                    <label for="comment" class="form-label">Comment:</label>
+                    <input type="text" class="form-control" id="comment" name="comment">
+                  </div>
+                  <button type="submit" class="btn btn-primary mx-3 mt-3">Submit</button>
+                </form>
+              </div>
 
-  <%- include('partials/footer') -%>
+        </div>
+
+      </div>
+      <div class="container d-flex justify-content-between align-items-center my-5">
+        <a class="btn btn-primary" href="/profile">Return to Profile</a>
+        <a class="btn btn-primary" href="/feed">Return to Feed</a>
+      </div>
+    </div>
+
+    <%- include('partials/footer') -%>

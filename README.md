@@ -25,3 +25,4 @@
 3. Allowed comments to be added to posts, and comments have their own likes and deletes
 4. Made it so that you cannot spam like a picture, just like or unlike it (change needs to be implemented on comments still)
 5. Made user available everywhere in ejs with locals to link to the proper user page in the header
+6. commented code line by line

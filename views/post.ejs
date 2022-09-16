@@ -31,6 +31,23 @@
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
+    <!-- add a comment form -->
+    <form action="/comments/addComment/<%= post.id %>" method="POST">
+      <div class="mb-3">
+          <label for="comment" class="form-label">Comment</label>
+          <input type="text" class="form-control" id="comment" name="comment">
+      </div>
+      <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+    </form>
+    <!-- comment -->
+    <%console.log(comment,"-----------------")%>
+   <% for(let i=0; i<comment.length; i++){%>
+      <div>
+        <p><%= comment[i].comment %></p>
+      </div>
+
+    <%}%>
+
   </div>
 </div>
 

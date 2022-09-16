@@ -81,8 +81,9 @@ module.exports = {
         { _id: req.params.id },
         { $push: {
           comments: {
-            comment: req.body.comment,
-            user: req.user.userName
+            message: req.body.comment,
+            userName: req.user.userName,
+            user: req.user.id,
           }}
         }
       );

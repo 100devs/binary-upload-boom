@@ -43,8 +43,15 @@
       <div class="comments">
         <% post.comments.forEach(comment => { %>
           <div class="comment">
-            <p class="comment-text"><%= comment.comment %></p>
-            <span class="comment-username"><%= comment.user %></span>
+            <p class="comment-text"><%= comment.message %></p>
+            <span class="comment-username"><%= comment.userName %></span>
+
+            <% for (const reply of comment.replies) { %>
+                <div class="comment">
+                    <p class="comment-text"><%= reply.message %></p>
+                    <span class="comment-username"><%= reply.userName %></span>
+                </div>
+            <% } %>
           </div>
         <% }) %>
       </div>

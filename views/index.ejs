@@ -10,6 +10,27 @@
             <a href="/login" class="col-3 btn btn-primary"> Login</a>
             <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
         </div>
+
+        <div>
+            <h2 class="container text-center my-5">Here's a sneak peek of our kitties:</h2>
+
+            <div class="card-group justify-content-center">
+                <% for(var i=(posts.length - 4); i<posts.length; i++) {%>
+                    <div class="card bg-light col-md-3 m-2 p-0 indexCard">
+                        <img class="card-img-top" src="<%= posts[i].image%>">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= posts[i].title %>
+                            </h5>
+                            <p class="card-text">
+                                <%= posts[i].caption %>
+                            </p>
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
+
+        </div>
     </main>
 
 

@@ -2,3 +2,10 @@
     width: 150px;
     height: auto;
 }
+
+@media screen and (min-width: 576px) {
+    .indexCard {
+        min-width: 225px;
+        max-width: 400px;
+    }
+}

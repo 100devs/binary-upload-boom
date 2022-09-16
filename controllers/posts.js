@@ -28,8 +28,10 @@ module.exports = {
   },
   createComment: async (req, res) => {
     try {
-        await Post.findOneAndUpdate(
-          { _id: req.params.id },
+        await Comment.create(
+          comments: req.body.comment,
+          post: req.params.id,
+          user: req.user.id,},
           {
             comments: req.body.comments,
           }

@@ -28,6 +28,7 @@
       <p><%= post.caption %></p>
     </div>
 
+    <!-- post.comments gives us array of comments -->
     <div class="container">
       <div class="row justify-content-center mt-5">
         <ul class="row list-unstyled">
@@ -43,18 +44,12 @@
           <% } %>
           </ul>
 
-          <form
-          class="col-1"
-          action="/post/createComment/<%= post.id %>"
-          method="POST"
-        >
+          <form class="col-1" action="/post/createComment/<%= post.id %>"method="POST">
                     <label for="title">title</label>
                     <input type="text" name="title" id="title" placeholder="add title here">
                     <label for="body">body</label>
                     <input type="text" name="body" id="body" placeholder="add comment here">
-          <button class="btn btn-primary" type="submit" >
-                        post comment
-                    </button>
+          <button class="btn btn-primary" type="submit">post comment</button>
         </form>
       </div>
     </div> 

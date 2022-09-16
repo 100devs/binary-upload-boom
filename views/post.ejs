@@ -24,9 +24,43 @@
         <%}%>
       </div>
     </div>
+
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+
+    <div class="mt-5">
+      <h2>Add a comment</h2>
+      <form action="/comment/createComment/<%= post._id %>" method="POST">
+        <div class="mb-3">
+            <label for="comment" class="form-label">Comment</label>
+            <input type="text" class="form-control" id="comment" name="comment">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <% if(comments.length !== 0) {%>
+      <div class="container my-5">
+        <h3>Comments</h3>
+        <% comments.forEach(comment => {%>
+          <div class="row border-bottom justify-content-between my-4">
+            <div class="col">
+              <span><%= comment.user.userName %></span>
+              <p><%= comment.comment %></p>
+            </div>
+            <div class="col-1">
+              <%if(comment.user._id == user.id){ %>
+                <form action="/comment/deleteComment/<%= comment._id %>?_method=DELETE" method="POST" class="col">
+                  <button class="btn btn-secondary fa fa-trash" type="submit"></button>
+                </form>
+                <%}%>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+    
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

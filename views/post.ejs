@@ -34,4 +34,23 @@
   </div>
 </div>
 
+<div>
+  <form action="/comments/createComment/<%= post._id %>" method="POST">
+    <div class="mb-3">
+        <label for="comment" class="form-label">Add Comment</label>
+        <input type="text" class="form-control" id="comment" name="comment">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <!-- Comments Section -->
+  <h4>Comments</h4>
+  <ul class="row list-unstyled">
+    <% for(var i=0; i<comments.length; i++) {%>
+      <li class="col-6 justify-content-between mt-5">
+        <p><%= comments[i].comment %></p>
+      </li>
+    <% } %>
+    </ul>
+</div>
+
 <%- include('partials/footer') -%>

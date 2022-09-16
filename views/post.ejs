@@ -28,11 +28,21 @@
       <p><%= post.caption %></p>
     </div>
 
+    <div class="col-6">
+      <ul class="row list-unstyled">
+      <% for(let i=0; i<comments.length; i++) {%>
+        <li class="col-6 justify-content-between mt-5">
+          <%= comments[i].comment%>
+        </li>
+      <% } %>
+      </ul> 
+    </div>  
+
     <div class="mt-5">
       <h2>Add a comment</h2>
-      <form action="/comment/createComment" method="POST">
+      <form action="/comment/createComment/<%=post._id%>" method="POST">
         <div class="mb-3">
-            <label for="comment" class="form-label">Write a Comment</label>
+            <label for="comment" class="form-label">Comment</label>
             <input type="text" class="form-control" id="comment" name="comment">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>

@@ -16,8 +16,8 @@ module.exports = {
     try {
       const user = await User.find({ _id: req.params.id });
       const posts = await Post.find({ user: req.params.id });
-      console.log('user:', user);
-      console.log('posts', posts);
+      if (req.user._id.toString() === user[0]._id.toString())
+        res.redirect('/profile');
       res.render('publicProfile.ejs', {
         posts: posts,
         username: user[0].userName,

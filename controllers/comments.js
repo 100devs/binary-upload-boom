@@ -6,11 +6,10 @@ const Post = require("../models/Post");
 module.exports = {
   createComment: async (req, res) => {
     try {
-
       // creates a new comment
       const comment = await Comment.create({
         title: req.body.title,
-        comment: req.body.body,
+        body: req.body.body,
       });
 
       //add the id of the comment to the array in the post document

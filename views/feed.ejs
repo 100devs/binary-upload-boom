@@ -7,6 +7,8 @@
             <a href="/post/<%= posts[i]._id%>">
               <img class="img-fluid" src="<%= posts[i].image%>">
             </a>
+            <p><%= posts[i].title %></p>
+            <a href="#"><%= posts[i].user.userName%></a>
           </li>
         <% } %>
         </ul>

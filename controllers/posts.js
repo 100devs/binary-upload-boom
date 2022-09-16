@@ -26,9 +26,9 @@ module.exports = {
       res.render("post.ejs", { post: post, user: req.user });
     } catch (err) {
       console.log(err);
-    }
+    } 
   },
-  createPost: async (req, res) => {
+  createPost: async (req, res) => { 
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);

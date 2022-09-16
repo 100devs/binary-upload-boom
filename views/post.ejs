@@ -37,13 +37,13 @@
     <!-- Comments here -->
     <ul>
       <% for(let i = 0; i < comments.length; i++)  { %> 
-          <li><a href=""><%= commentUsers[i].userName %> </a><%= comments[i].comment %> </li>
+          <li><a href="/profile/<%= commentUsers[i].id %> "><%= commentUsers[i].userName %> </a><%= comments[i].comment %> </li>
       <% } %> 
     </ul>
 
 
     <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
+      <a class="btn btn-primary" href="/profile/<%= user.id %> ">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
   </div>

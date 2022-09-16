@@ -23,11 +23,13 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      console.log(post);
-      const user = await User.findById(post.user);
-      console.log(user);
+      const userPost = await User.findById(post.user);
       const comments = await Comment.find({post: req.params.id});
-      res.render("post.ejs", { user: user, post: post, comments: comments});
+      const commentUsers = [];
+      for(let i = 0; i < comments.length; i++) {
+        commentUsers.push(await User.findById(comments[i].user));
+      }
+      res.render("post.ejs", { user: userPost, post: post, comments: comments, commentUsers: commentUsers});
     } catch (err) {
       console.log(err);
     }

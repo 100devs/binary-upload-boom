@@ -31,7 +31,7 @@ module.exports = {
       for(let i = 0; i < comments.length; i++) {
         commentUsers.push(await User.findById(comments[i].user));
       }
-      res.render("post.ejs", { user: userPost, post: post, comments: comments, commentUsers: commentUsers});
+      res.render("post.ejs", { user: userPost, post: post, comments: comments, commentUsers: commentUsers, loggedUser: req.user});
     } catch (err) {
       console.log(err);
     }

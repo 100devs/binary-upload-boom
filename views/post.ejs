@@ -27,6 +27,28 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+
+    <div class="mt-5">
+      <h2>Add a post</h2>
+      <form action="/comment/createComment/<%= post._id%>" method="POST">
+        <textarea placeholder="Enter a comment" name="commentsText"> </textarea>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <ul>
+
+      <% comments.forEach (el => { %>
+        <li class="col-6 justify-content-between mt-5"></li>
+          <div>
+
+            <p><%= el.comment %></p>
+            <span><%= el.userName %></span>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

@@ -8,7 +8,7 @@
               <img class="img-fluid" src="<%= posts[i].image%>">
             </a>
             <p><%= posts[i].title %></p>
-            <a href="#"><%= posts[i].user.userName%></a>
+            <a href="/publicProfile/<%=posts[i].user._id%>"><%= posts[i].user.userName%></a>
           </li>
         <% } %>
         </ul>

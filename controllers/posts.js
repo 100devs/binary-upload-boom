@@ -1,5 +1,6 @@
 const cloudinary = require('../middleware/cloudinary');
 const Post = require('../models/Post');
+const User = require('../models/User');
 const Comment = require('../models/Comment');
 
 module.exports = {
@@ -11,11 +12,25 @@ module.exports = {
       console.log(err);
     }
   },
+  getPublicProfile: async (req, res) => {
+    try {
+      const user = await User.find({ _id: req.params.id });
+      const posts = await Post.find({ user: req.params.id });
+      console.log('user:', user);
+      console.log('posts', posts);
+      res.render('publicProfile.ejs', {
+        posts: posts,
+        username: user[0].userName,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find()
         .sort({ createdAt: 'desc' })
-        .populate({ path: 'user', select: 'userName -_id' })
+        .populate({ path: 'user', select: 'userName' })
         .lean();
       res.render('feed.ejs', { posts: posts });
     } catch (err) {
@@ -24,7 +39,12 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
+      const post = await Post.findById(req.params.id).populate({
+        path: 'user',
+        select: 'userName',
+      });
+      console.log('post', post.user._id);
+      console.log('req.user', req.user._id);
       const comments = await Comment.find({ post: post.id }).lean();
       res.render('post.ejs', {
         post: post,

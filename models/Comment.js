@@ -5,25 +5,13 @@ const CommentSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	image: {
+	comment: {
 		type: String,
 		required: true,
 	},
-	cloudinaryId: {
-		type: String,
-		required: true,
-	},
-	caption: {
-		type: String,
-		required: true,
-	},
-	likes: {
-		type: Number,
-		required: true,
-	},
-	user: {
+	post: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: "User",
+		ref: "Post",
 	},
 	createdAt: {
 		type: Date,

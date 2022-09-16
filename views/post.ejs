@@ -44,7 +44,7 @@
 
         <li class="col-6 justify-content-between mt-5">
           <%= comments[i].comment%>
-          Comment Id: <%= comments[i].id%>
+          Comment Id: <%= comments[i]._id%>
 
           <%if(comments[i].user == user.id){ %>
             <form
@@ -63,7 +63,6 @@
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
   </div>
-  <script><%console.log(comments[0]._id) %></script>
 </div>
 
 <%- include('partials/footer') -%>

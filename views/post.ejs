@@ -22,6 +22,26 @@
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
         <%}%>
+
+        <h3>Comments</h3>
+        <ul>
+          <% for(var i=0; i<comment.length; i++) {%>
+            <li>
+              <%= comment[i].comment%>
+            </li>
+          <% } %>
+        </ul>
+        
+        <div class="mt-5">
+          <h2>Add a comment</h2>
+          <form action="/post/createComment/<%= post.id %>?_method=POST" enctype="multipart/form-data" method="POST">
+            <div class="mb-3">
+              <label for="comment" class="form-label">Comment</label>
+              <textarea class="form-control" id="comment" name="comment"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" value="submit">Submit</button>
+          </form>
+        </div>
       </div>
     </div>
     <div class="col-3 mt-5">

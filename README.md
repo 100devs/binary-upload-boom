@@ -1,8 +1,6 @@
 # Only Meows
 Show my your kitties. Only Meows is an social media inspired app to share your cats, no dogs allowed. You can see everyone's cats on your feed, give pets and share comments on other photos, and add your own!
 
-# 
-
 # Install
 
 `npm install`

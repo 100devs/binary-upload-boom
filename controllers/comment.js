@@ -12,7 +12,7 @@ module.exports = {
 			console.log("Comment has been added!");
 			res.redirect("/post/" + req.params.id);
 		} catch (err) {
-			console.log(err + " is this it?");
+			console.log(err);
 		}
 	},
 	likeComment: async (req, res) => {
@@ -23,8 +23,11 @@ module.exports = {
 					$inc: { likes: 1 },
 				}
 			);
+
+			const comment = await Comment.findById(req.params.id);
 			console.log("Likes +1");
-			res.redirect(`/post/${Comment.findById({ _id: req.params.id }).user}`);
+			console.log(comment.postid);
+			res.redirect(`/post/${comment.postid}`);
 		} catch (err) {
 			console.log(err);
 		}

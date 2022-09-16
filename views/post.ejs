@@ -41,10 +41,10 @@
             <% for(var i=0; i< comment.length; i++) {%>
               <li class="col-6 justify-content-between mt-5">
                 <%= comment[i].comment %>
-                  <form class="col-1" action="/comment/likeComment/<%= comment.id %>?_method=PUT" method="POST">
+                  <form class="col-1" action="/comment/likeComment/<%= comment[i]._id %>?_method=PUT" method="POST">
                     <button class="btn btn-primary fa fa-heart" type="submit"></button>
                   </form>
-                  <h3 class="col-3">Likes: <%= comment.likes %>
+                  <h3 class="col-3">Likes: <%= comment[i].likes %>
                   </h3>
               </li>
               <% } %>

@@ -1,11 +1,11 @@
 const Comment = require("../models/Comment");
 
 module.exports = {
-  createPost: async (req, res) => {
+  createComment: async (req, res) => {
     try {
       await Comment.create({
         title: req.body.title,
-        comment: req.body.caption,
+        comment: req.body.body,
         post: req.params.id,
       });
       console.log("Comment has been added!");
@@ -13,5 +13,5 @@ module.exports = {
     } catch (err) {
       console.log(err);
     }
-  }
+  },
 };

@@ -1,0 +1,10 @@
+# GitHub App/Action Create Issue Branch: https://github.com/robvanderleek/create-issue-branch
+
+gitSafeReplacementChar: '-'
+branchName: 'issue-${issue.number}/${issue.title,}' # `,` for all lowercase
+
+branches:
+  - label: question
+    skip: true
+
+commentMessage: 'Branch [`${branchName}`](${repository.html_url}/tree/${branchName}) created for issue #${issue.number}.'

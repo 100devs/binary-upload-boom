@@ -31,7 +31,7 @@
     <div>
       <!-- comments go here -->
       <% for (let i = 0; i < comments.length; i++) { %>
-        <span><%= comments[i].name %> on </span>
+        <span><%= comments[i].user.userName %> on </span>
         <span><%= comments[i].createdAt.getFullYear() + "-" + comments[i].createdAt.getMonth() + "-" + comments[i].createdAt.getDay() %>: </span>
         <p><%= comments[i].comment %></p>
       <% } %>

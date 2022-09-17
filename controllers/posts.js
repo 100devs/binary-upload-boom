@@ -22,7 +22,7 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      const comments = await Comments.find({ post: req.params.id })
+      const comments = await Comments.find({ postId: req.params.id })
         .sort({ createdAt: "desc" })
         .lean();
       res.render("post.ejs", {
@@ -36,7 +36,9 @@ module.exports = {
   },
   createPost: async (req, res) => {
     try {
+      console.log(cloudinary.config());
       // Upload image to cloudinary
+
       const result = await cloudinary.uploader.upload(req.file.path);
 
       await Post.create({

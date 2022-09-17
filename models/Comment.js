@@ -5,9 +5,13 @@ const CommentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  post: {
+  postId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Post",
+  },
+  likes: {
+    type: Number,
+    required: true,
   },
   createdAt: {
     type: Date,

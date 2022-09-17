@@ -42,7 +42,8 @@
     <ul>
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="col-6 justify-content-between mt-5"></li>
-        <%= comments[i].comment%>
+        <%= comments[i].user%>: "<%= comments[i].comment%>" (<%= comments[i].createdAt%>)
+        
                   </li>
       <% } %>
     </ul>

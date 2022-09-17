@@ -1,0 +1,20 @@
+<div style="border: 1px solid black; margin-left: <%= depth * .5 %>rem">
+  <li class="col-6 justify-content-between mt-5">
+    <%= comment.text %>
+  </li>
+
+  <!-- Add comment to comment -->
+  <details class="mt-5">
+    <summary>Add a comment</summary>
+    <form action="/comments/createComment/<%= postId %>/<%= comment.id %>" method="POST">
+      <div class="mb-3">
+          <label for="text" class="form-label">Comment</label>
+          <input type="text" class="form-control" id="text" name="text">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </details>
+  <% for (const subComment of comment.comments || []) { %>
+    <%- include('comment', { postId, comment: subComment, depth: depth + 1 }) -%>
+  <% } %>
+</div>

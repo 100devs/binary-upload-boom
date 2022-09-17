@@ -9,9 +9,9 @@ const CommentSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    user: {
+    post: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'Post',
     },
     createdAt: {
         type: Date,
@@ -19,4 +19,4 @@ const CommentSchema = new mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model('Comments', CommentSchema)
+module.exports = mongoose.model('Comment', CommentSchema)

@@ -2,12 +2,10 @@ const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 
 module.exports = {
-  getHome: async (req, res) => { //changed getProfile to getHome
+  getProfile: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.user.id });
-      const url = await req.originalUrl;
-      res.render("home.ejs", { posts: posts, user: req.user, url: url }); //changed from profile.ejs to home.ejs //changes req.user to req.email
-
+      res.render("home.ejs", { posts: posts, user: req.user }); //changed from profile.ejs to home.ejs
     } catch (err) {
       console.log(err);
     }
@@ -15,8 +13,7 @@ module.exports = {
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      const url = await req.originalUrl;
-      res.render("feed.ejs", { posts: posts, url: url});
+      res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
     }
@@ -24,35 +21,26 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      const url = await req.originalUrl;
-      res.render("post.ejs", { post: post, user: req.user, url: url }); //changes req.user to req.email
+      res.render("post.ejs", { post: post, user: req.user });
     } catch (err) {
       console.log(err);
     }
   },
   createPost: async (req, res) => {
     try {
+
       // Upload image to cloudinary
-      
       const result = await cloudinary.uploader.upload(req.file.path);
-      const pattern = await cloudinary.uploader
-      .upload(req.file.path, 
-        { eager: [
-          { width: 400, height: 300, crop: "pad" }, 
-          { width: 260, height: 200, crop: "crop", gravity: "north"} ]})
-      /* .then(result=> result ); */
-     
-      await Post.create({
-        team: req.body.team,
-        player: req.body.player,
-        position: req.body.position,
-        notes: req.body.notes,
+      
+       await Post.create({
+        title: req.body.title,
+        image: result.secure_url,
+        cloudinaryId: result.public_id,
+        caption: req.body.caption,
+        likes: 0,
         user: req.user.id,
-        image: pattern.eager[0].secure_url,
-        cloudinaryId: result.public_id
       });
       console.log("Post has been added!");
-      console.log(pattern)
       res.redirect("/home"); //changed from profile to home
     } catch (err) {
       console.log(err);
@@ -81,9 +69,9 @@ module.exports = {
       // Delete post from db
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
-      res.redirect("/feed"); //changed from profile to feed
+      res.redirect("/home"); //changed from profile to hone
     } catch (err) {
-      res.redirect("/feed"); //changed from profile to home
+      res.redirect("/home"); //changed from profile to hone
     }
   },
 };

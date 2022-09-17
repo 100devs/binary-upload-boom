@@ -1,13 +1,20 @@
 <%- include('partials/headers/header-menu') -%>
-
- <div class="row mt-5">
+<div class="container">
+  <div class="row mt-5">
       <div class="col-6">
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
-          <div class="mt-5">
+          <ul class="list-my-leagues">  
+            <li class="item-my-leagues add-league" data-toggle="modal" data-target="#add-data">
+              <a href="#" data-toggle="tooltip" data-placement="top" title="Click to Add"  >
+                <i class="fa-solid fa-circle-plus fa-2xl"></i>
+              </a>
+            </li>
+          </ul>
+          <!-- <div class="mt-5">
             <h2>Add a post</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
@@ -24,7 +31,7 @@
               </div>
               <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
             </form>
-          </div>
+          </div> -->
       </div>
       <div class="col-6">
         <ul class="row list-unstyled">
@@ -42,28 +49,6 @@
       </div>  
     </div>
   </div>
-
+</div>
 <%- include('partials/mod') -%>
 <%- include('partials/footer') -%>
-
-
-  <!-- <main class="container-home">
-    <section class="container-main-home">
-      <section class="section-my-home section-my-leagues">
-        <h2>new data</h2>
-            <ul class="list-my-leagues">  
-              <li class="item-my-leagues add-league" data-toggle="modal" data-target="#add-data">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Click to Add"  >
-                  <i class="fa-solid fa-circle-plus fa-2xl"></i>
-                </a>
-              </li>
-            </ul>
-          </section>
-          <section class="section-my-home section-my-players">
-            <h2>your data</h2>
-          </section>
-        <div class="row justify-content-center mt-5">
-          <a class="item-my-leagues" href="/feed">Return to Feed</a>
-        </div>  
-      </section>
-  </main> -->

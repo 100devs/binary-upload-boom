@@ -4,7 +4,7 @@ const User = require("../models/User");
 
 exports.getLogin = (req, res) => {
   if (req.user) {
-    return res.redirect("/profile");
+    return res.redirect("/home"); //changed profile to home
   }
   res.render("login", {
     title: "Login",
@@ -39,7 +39,7 @@ exports.postLogin = (req, res, next) => {
         return next(err);
       }
       req.flash("success", { msg: "Success! You are logged in." });
-      res.redirect(req.session.returnTo || "/home"); //changed from profile to hone
+      res.redirect(req.session.returnTo || "/home"); //changed from profile to home
     });
   })(req, res, next);
 };
@@ -58,7 +58,7 @@ exports.logout = (req, res) => {
 
 exports.getSignup = (req, res) => {
   if (req.user) {
-    return res.redirect("/home");//changed from profile to hone
+    return res.redirect("/home");//changed from profile to home
   }
   res.render("signup", {
     title: "Create Account",
@@ -84,14 +84,16 @@ exports.postSignup = (req, res, next) => {
     gmail_remove_dots: false,
   });
 
+  let username = req.body.email.split('').filter((el,i,a) => i < a.indexOf('@')).join('');
+
   const user = new User({
-    userName: req.body.userName,
+    userName: username, //changed red.body.user to email
     email: req.body.email,
     password: req.body.password,
   });
 
   User.findOne(
-    { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
+    { $or: [{ email: req.body.email }, { userName: username }] }, //changes red.body.user to email
     (err, existingUser) => {
       if (err) {
         return next(err);
@@ -99,6 +101,7 @@ exports.postSignup = (req, res, next) => {
       if (existingUser) {
         req.flash("errors", {
           msg: "Account with that email address or username already exists.",
+          /* msg: "Account with that email address already exists.", */
         });
         return res.redirect("../signup");
       }

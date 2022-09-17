@@ -1,15 +1,35 @@
 <%- include('partials/headers/header-menu') -%>
-  <div class="container">
-    <div class="row justify-content-center mt-5">
-      <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
+  <main class="container">
+    <section class="container-feed">
+      <section class="section-feed">
+        <section class="section-list-feed">
+        <ul class="list-feed">
+          <% for(var i=0; i<posts.length; i++) {%>
+            <li class="item-list-feed">
+              <div class="card">
+                <a href="/post/<%= posts[i]._id%>">
+                  <img src="<%= posts[i].image%>" class="card-img-top" alt="...">
+                </a>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"> 
+                    <h5 class="card-title"><%= posts[i].player%></h5>
+                  </li>
+                  <li class="list-group-item"><%= posts[i].team%></li>
+                  <li class="list-group-item"><%= posts[i].position%></li>
+                </ul>
+                <div class="card-body">
+                  <p class="card-text"><%= posts[i].notes%></p>
+                </div>
+                <div class="card-body">
+                  <a href="#"><i class="fa-regular fa-trash-can"></i></a>
+                </div>
+              </div>
+            </li>
+            </li>
+          <% } %>
         </ul>
-    </div>
-  </div>  
+      </section>
+      </section>
+    </section>
+  </main>  
 <%- include('partials/footer') -%>

@@ -12,7 +12,7 @@
                         <div class="section-each-input-signup section-each-input-login-signup">
                           <label for="exampleInputEmail1" class="form-label">Email</label>
                           <input type="email" class="form-input" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
-                         <!--  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                       <!--  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                         </div>
                         <div class="section-each-input-signup section-each-input-login-signup">
                           <label for="password" class="form-label">Password</label>
@@ -27,8 +27,7 @@
                       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
                         <span class="alert"><%= el.msg %></span>
                         <% }) %> <% } %>
-                        <% if (locals.messages.info) { %> <%
-                          messages.info.forEach( el => { %>
+                      <% if (locals.messages.info) { %> <% messages.info.forEach( el => { %>
                           <span class="alert"><%= el.msg %></span>
                           <% }) %> <% } %>
                     </section>

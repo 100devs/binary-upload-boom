@@ -1,7 +1,5 @@
 const Comment = require("../models/Comment");
 
-// missing ??
-
 module.exports = {
   createComment: async (req, res) => {
     try {
@@ -18,14 +16,14 @@ module.exports = {
   },
   deleteComment: async (req, res) => {
     try {
-      const postId = await Comment.findById({ _id: req.params.redirect });
-      await Comment.remove({ _id: req.params.id  });
+      const comment = await Comment.findById({_id: req.params.id });
+      await Comment.remove({ _id: req.params.id });
       console.log("Deleted comment");
       // TODO: Figure out how to redirect to post itself
-      res.redirect( "/post/" + postId);
+      res.redirect(`/post/${comment.post}`); 
     } catch (err) {
       console.log("your deleteComment route sucks");
-      res.redirect("/post/" + postId);
+      //res.redirect("/post/" + comment.post);
     }
   },
 };

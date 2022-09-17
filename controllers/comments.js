@@ -7,7 +7,7 @@ module.exports = {
 		try {
 			//create a new comment
 			const comment = await Comment.create({
-				comment: req.params.comment,
+				comment: req.body.comment,
 			});
 
 			//add the id of the comment to the array in the post document

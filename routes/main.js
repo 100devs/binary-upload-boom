@@ -1,13 +1,17 @@
 const express = require("express");
 const router = express.Router();
+
+// Controllers
 const authController = require("../controllers/auth");
 const homeController = require("../controllers/home");
 const postsController = require("../controllers/posts");
+
+// Auth
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Main Routes - simplified for now
-router.get("/", homeController.getIndex);
-router.get("/profile", ensureAuth, postsController.getProfile);
+router.get("/", homeController.getIndex); // login and sign up home page
+router.get("/profile", ensureAuth, postsController.getProfile); 
 router.get("/feed", ensureAuth, postsController.getFeed);
 router.get("/login", authController.getLogin);
 router.post("/login", authController.postLogin);

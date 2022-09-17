@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -26,8 +27,10 @@ module.exports = {
     try {
       // retrieve specific post in db based on the post id
       const post = await Post.findById(req.params.id);
+      // retrieve comments tied to the specific post
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
       // render template and pass in the specific post data and user data
-      res.render("post.ejs", { post: post, user: req.user });
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
     }

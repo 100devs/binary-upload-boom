@@ -14,6 +14,7 @@
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
         <%if(post.user == user.id){ %>
+          
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
           method="POST"

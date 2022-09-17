@@ -75,6 +75,7 @@ body {
     color: white;
     font-family: 'Jaldi';
     font-size: 1.6rem;
+    
     /* line-height: 2.5rem; */
     /* border: 1px solid yellow; */
 }
@@ -308,17 +309,16 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
     width: 100%;
-    border: 1px solid red;
+    /* border: 1px solid blue; */
 }
 
 .section-each-input-login-signup{
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
-    font-size: 1.2rem;
-    text-transform: lowercase;
-    color: #E1A750;
-    height: 35%;
+    /* border: 1px solid greenyellow; */
+    min-height: 25%;
     width: 100%;
 }
 
@@ -326,6 +326,7 @@ body {
     display: flex;
     align-self: center;
     width: 85%;
+    min-height: 1.5rem;
     border-style: outset;
     border: 1px solid black;
     border-radius: 5px;
@@ -342,8 +343,21 @@ body {
     /* border: 1px solid red; */
 }
 
-.form-label {
+.flogin-signup-text {
+    font-size: 1.2rem;
+    text-transform: lowercase;
+    color: #E1A750;
     width: 85%;
+}
+
+.alert-msg {
+    font-size: 1rem;
+    text-transform: lowercase;
+    color: white;
+    border: 1px solid purple;
+    height: fit-content;
+    width: fit-content;
+    padding-top: 0.2rem;
 }
 
 .form-input:active, .form-input:focus {
@@ -355,11 +369,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 3rem;
+    border: 1px solid yellow;
 }
 
 .login-signup-submit-btn {
     width: 15%;
-    height: 100%;
+    height: 70%;
     font-size: 25px;
     color: #000;;
     background: #E1A750;
@@ -372,16 +388,16 @@ body {
     cursor: pointer;
 }
 
-.container-alert {
+/* .container-alert {
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 2rem;
     color: white;
     font-size: 15px;
-    padding-left: 8%;
+    padding-left: 1%;
     border: 1px solid purple;
-}
+} */
 
 /* LOGIN PAGE ///////////////////////////*/
 
@@ -419,7 +435,9 @@ body {
 
 
 .section-signup-form {
-    height: 65%;
+    height: 85%;
+    padding-bottom: 2rem;
+    border: 1px solid red;
 }
 
 .section-each-input-signup{
@@ -442,7 +460,7 @@ body {
     max-width: 99vw;
     min-height: 80vh;
     margin-top: 10vh;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .container-main-home {
@@ -451,7 +469,7 @@ body {
     justify-content: space-evenly;
     min-height: 75vh;
     min-width: 100%;
-    border: 1px solid wheat;
+    /* border: 1px solid wheat; */
 }
 
 .pinned-home {
@@ -464,7 +482,7 @@ body {
     justify-content: space-between;
     min-height: 10rem;
     width: 100%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .list-my-leagues {
@@ -535,10 +553,13 @@ body {
 .modal-content {
     font-size: 1.5rem;
     background: #302f2d;
+   /*  background: #181818; */
     color: white; 
+    text-shadow: 0px 1px 1px rgba(0,0,0,0.6);
     border-radius: 5px;
     border: 1px solid #E1A750;
     font-family: 'Jaldi', sans-serif;
+    caret-color: #E1A750;
 }
 
 .modal-content .close {
@@ -570,11 +591,15 @@ body {
     color: black;
 }
 
+.win-loss-input {
+    width: 30%;
+}
+
 .modal-body  .submit {
     color:#302f2d;
     background: #E1A750;
     border: #302f2d;
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 
@@ -601,7 +626,7 @@ body {
     justify-content: center;
     min-height: 75vh;
     min-width: 100%;
-    border: 1px solid magenta;
+    /* border: 1px solid magenta; */
 }
 
 .section-list-feed {
@@ -610,34 +635,64 @@ body {
     justify-content: space-evenly;
     align-content: center; 
     width: 85%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .list-feed {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    /* align-content: space-around; */
     align-content: stretch;
-    /* gap: 1px 2px; */
-    /* border: 2px solid greenyellow; */
     gap: 1.5rem;
+    /* border: 1px solid greenyellow; */
 }
 
 .item-list-feed {
-    /* margin: 0 .2rem 1rem 0; */
-    /* margin-bottom: 1rem;
-    margin-right: 1rem; */
     width: 23.35%;
     height: 28rem;
-    border: 1px solid red;
+    /* border-radius: 2px; */
 }
 .card {
     width: 100%;
     height: 28rem;
+    font-family: 'Jaldi', sans-serif;
+    font-weight: bold;
     /* border: 1px solid fuchsia; */
+    border: 1px solid #E1A750;
+    overflow: hidden;
 }
 
-.fa-trash-can {
+.card .img-feed {
+    background: #302f2d;
+    
+}
+
+.card ul li, .card div {
+    background: white;
+    color: #302f2d;
+    /* border: 2px solid #E1A750; */
+   /*  border: 1px solid red; */
+    
+}
+
+.card-body-notes {
+    /* border: 1px solid fuchsia; */
+    overflow-y: scroll;
+    height: 70%;
+}
+.card-body-btn {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #E1A750;
+}
+
+.card-body-btn i{
     color: #E1A750;
+}
+
+/* PROFILE ///////////////////////////*/
+
+.section-main-profile {
+    color: white;
+    font-family: 'Jaldi';
 }

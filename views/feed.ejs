@@ -4,32 +4,36 @@
       <section class="section-feed">
         <section class="section-list-feed">
         <ul class="list-feed">
-          <% for(var i=0; i<posts.length; i++) {%>
+          <% posts.forEach(el => { %>
+            <% if(el.user == user.id) { %>
             <li class="item-list-feed">
               <div class="card">
-                <a href="/post/<%= posts[i]._id%>">
-                  <img src="<%= posts[i].image%>" class="card-img-top" alt="...">
-                </a>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item"> 
-                    <h5 class="card-title"><%= posts[i].player%></h5>
+                  <img src="<%= el.image%>" class="card-img-top" alt="...">
+                <ul class="list-group list-group-flush list-card-feed">
+                  <li class="list-group-item item-list-card"> 
+                    <%= el.player%>
                   </li>
-                  <li class="list-group-item"><%= posts[i].team%></li>
-                  <li class="list-group-item"><%= posts[i].position%></li>
+                  <li class="list-group-item item-list-card"> <%= el.team%></li>
+                  <li class="list-group-item item-list-card"><%= el.position%></li>
+                  <li class="list-group-item item-list-card"> 
+                    <%= el.win %>-<%= el.loss%> | <%= (Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3) %>%
+                  </li>
                 </ul>
-                <div class="card-body">
-                  <p class="card-text"><%= posts[i].notes%></p>
+                <div class="card-body card-body-notes">
+                  <p class="card-text"><%= el.notes%></p>
                 </div>
-                <div class="card-body">
-                  <a href="#"><i class="fa-regular fa-trash-can"></i></a>
+                <div class="card-body card-body-btn">
+                  <a href="#"><i class="fa-regular fa-trash-can fa-lg"></i></a> <!-- delete request -->
+                  <a href="/post/<%= el._id%>"> <i class="fa-regular fa-pen-to-square fa-lg"></i></a> <!-- modal for editing -->
                 </div>
               </div>
             </li>
             </li>
-          <% } %>
+          <% }}) %>
         </ul>
       </section>
       </section>
     </section>
   </main>  
-<%- include('partials/footer') -%>
+
+  <%- include('partials/footer') -%>

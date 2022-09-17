@@ -22,6 +22,14 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  win: {
+    type: String,
+    required: true,
+  },
+  loss: {
+    type: String,
+    required: true,
+  },
   notes: {
     type: String,
     required: false,

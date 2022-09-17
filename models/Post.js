@@ -7,8 +7,14 @@ const PostSchema = new mongoose.Schema({
     required: true,
   },
   image: {
-    type: String,
-    required: true,
+    feed: {
+      type: String,
+      required: false,
+    },
+    profile: {
+      type: String,
+      required: false,
+    }
   },
   cloudinaryId: {
     type: String,

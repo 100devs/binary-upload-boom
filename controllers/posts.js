@@ -5,8 +5,9 @@ module.exports = {
   getHome: async (req, res) => { //changed getProfile to getHome
     try {
       const posts = await Post.find({ user: req.user.id });
+      const post = await Post.findById(req.params.id);
       const url = await req.originalUrl;
-      res.render("home.ejs", { posts: posts, user: req.user, url: url }); //changed from profile.ejs to home.ejs //changes req.user to req.email
+      res.render("home.ejs", { posts: posts, user: req.user, post: post, url: url }); //changed from profile.ejs to home.ejs //changes req.user to req.email
 
     } catch (err) {
       console.log(err);
@@ -44,15 +45,19 @@ module.exports = {
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
+
+      /* const result = await cloudinary.uploader.upload(req.file.path); */
+
       
-      const result = await cloudinary.uploader.upload(req.file.path);
-      const pattern = await cloudinary.uploader
+       const pattern = await cloudinary.uploader
       .upload(req.file.path, 
         { eager: [
           { width: 400, height: 300, crop: "pad" }, 
-          { width: 260, height: 200, crop: "crop", gravity: "north"} ]})
-      /* .then(result=> result ); */
-     
+          { width: 116, height: 116, crop: "pad"}, ]}) 
+
+      /* let img = cloudinary.image("LUDO/prof_dhezb9.jpg", {height: 300, width: 400, crop: "pad"}) */
+      /* let img_default = "https://res.cloudinary.com/dprkasf7b/image/upload/c_pad,h_300,w_400/v1663434846/LUDO/prof_dhezb9.jpg" */
+
       await Post.create({
         team: req.body.team,
         player: req.body.player,
@@ -61,8 +66,11 @@ module.exports = {
         loss: req.body.loss,
         notes: req.body.notes,
         user: req.user.id,
-        image: pattern.eager[0].secure_url,
-        cloudinaryId: result.public_id
+        image: {
+          feed: pattern.eager[0].secure_url,
+          profile: pattern.eager[1].secure_url
+        },
+        cloudinaryId: pattern.public_id
       });
       console.log("Post has been added!");
       res.redirect("/home"); //changed from profile to home

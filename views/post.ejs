@@ -1,11 +1,16 @@
 <%- include('partials/headers/header-menu') -%>
-<div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-6">
-      <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
-        <form
+
+<main class="container">
+  <section class="container-section-post">
+    <section class="section-profile-post">
+      <section class="nav-profile-post">
+        <img class="img-fluid" src="<%= post.image.profile %>" />
+        <h2><%= post.player %></h2>
+      </section>
+     
+      <section class="section-table-post">
+        <%if(post.user == user.id){ %>
+          <form
           class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
@@ -13,8 +18,6 @@
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
-          
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
           method="POST"
@@ -23,7 +26,7 @@
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
         <%}%>
-      </div>
+      </section>
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
@@ -31,8 +34,8 @@
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
-    </div>
-  </div>
-</div>
+    </section>
+  </section>
+</main>
 
 <%- include('partials/footer') -%>

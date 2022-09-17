@@ -343,7 +343,7 @@ body {
     /* border: 1px solid red; */
 }
 
-.flogin-signup-text {
+.login-signup-text {
     font-size: 1.2rem;
     text-transform: lowercase;
     color: #E1A750;
@@ -370,7 +370,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 3rem;
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
 }
 
 .login-signup-submit-btn {
@@ -437,7 +437,7 @@ body {
 .section-signup-form {
     height: 85%;
     padding-bottom: 2rem;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .section-each-input-signup{
@@ -519,6 +519,11 @@ body {
 }
 
 .recently-added-list {
+    display: flex;
+    flex-flow: nowrap row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
     padding-left: 1rem;
 }
 .add-league {
@@ -695,4 +700,22 @@ body {
 .section-main-profile {
     color: white;
     font-family: 'Jaldi';
+}
+
+
+/* POST ///////////////////////////*/
+
+.container-section-post {
+    max-width: 90vw;
+}
+
+.section-profile-post {
+    border: 1px solid red;
+    margin-top: 20vh;
+    /* margin-top: 20vh;
+    width: 100%; */
+}
+
+.nav-profile-post {
+    border: 1px solid greenyellow;
 }

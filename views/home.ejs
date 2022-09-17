@@ -14,9 +14,14 @@
           <li class="recently-added-item">
             <section class="recently-added-container">
               <ul class="list-my-leagues recently-added-list">
-                <li class="item-my-leagues add-league"></li>
-                <li class="item-my-leagues add-league"></li>
-                <li class="item-my-leagues add-league"></li>
+                <% posts.forEach(el => { %>
+                  <% if(el.user == user.id) { %>
+                <li class="item-my-leagues add-league">
+                 <a href="/post/<%= el._id%>">
+                  <%= el.player %>
+                </a>
+                <% }}) %>
+                </li>
               </ul>
             </section>
           </li>

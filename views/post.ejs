@@ -31,6 +31,27 @@
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
+    <div class="mt-5">
+      <h2>Leave a comment</h2>
+      <form action="/comment/createComment/<%=post.id%>" method="POST">
+        <div class="mb-3">
+            <label for="comment" class="form-label">Comment</label>
+            <input type="text" class="form-control" id="comment" name="comment">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <div><!--Comments Container-->
+      <ul>
+        <% for(let i=0; i<comments.length; i++) {%>
+          <li>
+            <p><%= comments[i].content %></p>
+            <h5><%= comments[i].user %></h5>
+            <time><%= comments[i].createdAt %></time>
+          </li>
+        <% } %>
+      </ul>
+    </div>
   </div>
 </div>
 

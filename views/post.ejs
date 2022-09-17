@@ -1,10 +1,16 @@
 <%- include('partials/header') -%>
+
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
+
       <h2><%= post.title %></h2>
+      
       <img class="img-fluid" src="<%= post.image%>" />
+
       <div class="row justify-content-between">
+
+        <!-- to like a post -->
         <form
           class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"
@@ -12,18 +18,27 @@
         >
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
+
+        <!-- show number of likes -->
         <h3 class="col-3">Likes: <%= post.likes %></h3>
+
+        <!-- to delete a post - Check if post belongs to logged user -->
         <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
+
+          <form
+            action="/post/deletePost/<%= post.id %>?_method=DELETE"
+            method="POST"
+            class="col-3"
+          >
+            <button class="btn btn-primary fa fa-trash" type="submit"></button>
+
+          </form>
+
         <%}%>
       </div>
+
     </div>
+
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
@@ -31,6 +46,48 @@
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
+
+
+    <h2>Add a comment</h2>
+
+    <form action="/post/createComment/<%= post.id %>" method="POST">
+      <div class="mb-3">
+          <label for="comment" class="form-label">Comment</label>
+          <input type="text" class="form-control" id="comment" name="comment">
+      </div>
+
+      <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+    </form>
+
+
+    <h2>Comments</h2>
+    <ul>
+      <% for(var i=0; i<comment.length; i++) {%>
+        <li class="">
+          <%= comment[i].comment%>
+
+          <!-- to delete a comment - Check if post belongs to logged user or user who posted comment -->
+          <%if(post.user == user.id || comment[i].user == user.id ){ %>
+
+            <form
+              action="/post/deleteComment/<%= post.id %>/<%= comment[i].id %>?_method=DELETE"
+              method="POST"
+              class="col-3"
+            > 
+              <button class="btn btn-primary fa fa-trash" type="submit"></button>
+
+            </form>
+
+          <%}%>
+
+
+
+        </li>
+      <% } %>
+      
+    </ul>
+
+
   </div>
 </div>
 

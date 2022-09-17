@@ -16,4 +16,16 @@ module.exports = {
       console.log(err);
     }
   },
+  deleteComment: async (req, res) => {
+    try {
+      const postId = await Comment.findById({ _id: req.params.redirect });
+      await Comment.remove({ _id: req.params.id  });
+      console.log("Deleted comment");
+      // TODO: Figure out how to redirect to post itself
+      res.redirect( "/post/" + postId);
+    } catch (err) {
+      console.log("your deleteComment route sucks");
+      res.redirect("/post/" + postId);
+    }
+  },
 };

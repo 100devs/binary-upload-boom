@@ -29,8 +29,10 @@
     </div>
 
     <div class="mt-5">
-      <h2>Add a Comment</h2>
-      <form action="/comments/createComment" method="POST">
+      <h2>Add a comment</h2>
+      <!-- form action was missing the specific post to bind the comments to -->
+      <form action="/comments/createComment/<%=post._id%>" method="POST">
+
         <div class="mb-3">
           <label for="comment" class="form-label">Comment</label>
           <textarea class="form-control" id="caption" name="comment"></textarea>
@@ -43,11 +45,13 @@
       <ul class="row list-unstyled">
         <% for(var i=0; i<comment.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
-            <%=comment[i].id%>
+            <!-- look to the model & pull the comment off from the comment property -->
+            <%=comment[i].comment%>  
           </li>
         <% } %>
         </ul>
     </div>
+
 
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>

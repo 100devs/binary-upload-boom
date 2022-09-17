@@ -2,7 +2,7 @@ const Comment = require("../models/Comment");
 
 createComment: async (req, res) => {
     try {
-      // console.log(req.params.id)
+      // console.log(req.params.id) if not working
       await Comment.create({
 
         Comment: req.body.comment,

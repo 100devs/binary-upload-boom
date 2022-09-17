@@ -1,6 +1,7 @@
 const multer = require("multer");
 const path = require("path");
 
+// check to see if upload file extentions are valid
 module.exports = multer({
   storage: multer.diskStorage({}),
   fileFilter: (req, file, cb) => {

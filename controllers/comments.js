@@ -7,7 +7,7 @@ module.exports = {
       let post = await Post.findById(req.params.id).lean()
 
       await Comment.create({
-        comment: req.body.text,
+        text: req.body.text,
         commenter: req.user.id,
         post: req.params.id
       });

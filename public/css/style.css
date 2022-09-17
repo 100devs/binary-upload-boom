@@ -343,7 +343,11 @@ body {
     /* border: 1px solid red; */
 }
 
+<<<<<<< HEAD
 .login-signup-text {
+=======
+.flogin-signup-text {
+>>>>>>> origin
     font-size: 1.2rem;
     text-transform: lowercase;
     color: #E1A750;
@@ -370,7 +374,11 @@ body {
     justify-content: center;
     align-items: center;
     height: 3rem;
+<<<<<<< HEAD
     /* border: 1px solid yellow; */
+=======
+    border: 1px solid yellow;
+>>>>>>> origin
 }
 
 .login-signup-submit-btn {
@@ -437,7 +445,11 @@ body {
 .section-signup-form {
     height: 85%;
     padding-bottom: 2rem;
+<<<<<<< HEAD
     /* border: 1px solid red; */
+=======
+    border: 1px solid red;
+>>>>>>> origin
 }
 
 .section-each-input-signup{
@@ -700,6 +712,7 @@ body {
 .section-main-profile {
     color: white;
     font-family: 'Jaldi';
+<<<<<<< HEAD
 }
 
 
@@ -718,4 +731,6 @@ body {
 
 .nav-profile-post {
     border: 1px solid greenyellow;
+=======
+>>>>>>> origin
 }

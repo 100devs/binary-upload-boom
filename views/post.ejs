@@ -18,6 +18,11 @@
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
+<<<<<<< HEAD
+=======
+        <%if(post.user == user.id){ %>
+          
+>>>>>>> origin
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
           method="POST"

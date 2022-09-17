@@ -8,7 +8,11 @@
             <% if(el.user == user.id) { %>
             <li class="item-list-feed">
               <div class="card">
+<<<<<<< HEAD
                   <img src="<%= el.image.feed%>" class="card-img-top" alt="...">
+=======
+                  <img src="<%= el.image%>" class="card-img-top" alt="...">
+>>>>>>> origin
                 <ul class="list-group list-group-flush list-card-feed">
                   <li class="list-group-item item-list-card"> 
                     <%= el.player%>
@@ -16,7 +20,11 @@
                   <li class="list-group-item item-list-card"> <%= el.team%></li>
                   <li class="list-group-item item-list-card"><%= el.position%></li>
                   <li class="list-group-item item-list-card"> 
+<<<<<<< HEAD
                     <%= el.win %>-<%= el.loss%> | <%= `.${(Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3).toString().split('.')[1]}` %>%
+=======
+                    <%= el.win %>-<%= el.loss%> | <%= (Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3) %>%
+>>>>>>> origin
                   </li>
                 </ul>
                 <div class="card-body card-body-notes">

@@ -26,23 +26,6 @@ module.exports = {
       console.log(err);
     }
   },
-  createComment: async (req, res) => {
-    try {
-        await Comment.create(
-          comments: req.body.comment,
-          post: req.params.id,
-          user: req.user.id,},
-          {
-            comments: req.body.comments,
-          }
-        ,
-      );
-      console.log("Comment has been added!");
-      res.redirect(`/post/${req.params.id}`);
-    } catch (err) {
-      console.log(err);
-    }
-  },
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
@@ -54,7 +37,6 @@ module.exports = {
         cloudinaryId: result.public_id,
         caption: req.body.caption,
         likes: 0,
-        comments: "No Comments Yet",
         user: req.user.id,
       });
       console.log("Post has been added!");

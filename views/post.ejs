@@ -26,12 +26,24 @@
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
-      <form action="/comment/createComment/<%= post.id %>?_method=PUT" method="POST">
+      <!-- Comments form -->
+      <form action="/post/createComment/<%= post.id %>" method="POST">
         <label for="comments" class="form-label">Comment</label>
         <input type="text" class="form-control" placeholder="add compliment" id="comments" name="comments">
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
-      <p><%= post.comments %></p>
+      <div class="container">
+        <div class="row justify-content-center mt-5">
+          <ul class="row list-unstyled">
+            <% for(var i=0; i<post.comments.length; i++) {%>
+              <li class="col-6 justify-content-between mt-5">
+                <p>
+                  <%= post.comments[i].comment%>
+                </p>
+              </li>
+            <% } %>
+          </ul>
+  
     </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>

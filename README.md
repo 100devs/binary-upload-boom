@@ -1,5 +1,6 @@
 # Install
 
+`npm init`
 `npm install`
 
 ---

@@ -12,24 +12,36 @@
                         <div class="modal-body">
                           <form action="/post/createPost" enctype="multipart/form-data" method="POST">
                             <div class="mb-3">
-                                <label  for="team" class="form-label">Team</label>
-                                <input type="text" class="form-control form-control-sm" id="team" name="team" placeholder="Team"> 
-                            </div>
-                            <div class="mb-3">
                               <label for="player" class="form-label">Player</label>
                              <input type="text" class="form-control form-control-sm" id="player" name="player"  placeholder="Player">
+                            </div>
+                            <div class="mb-3">
+                                <label  for="team" class="form-label">Team</label>
+                                <input type="text" class="form-control form-control-sm" id="team" name="team" placeholder="Team"> 
                             </div>
                             <div class="mb-3">
                                 <label for="position" class="form-label">Position</label>
                                 <select class="form-select form-select-sm" id="position" name="position" >
                                   <option selected>Select</option>
-                                  <option>1-PG</option>
-                                  <option>2-SG</option>
-                                  <option>3-SF</option>
-                                  <option>4-PF</option>
-                                  <option>5-C</option>
+                                  <option>PG</option>
+                                  <option>SG</option>
+                                  <option>SF</option>
+                                  <option>PF</option>
+                                  <option>C</option>
                                 </select>
                               </div>
+                              <div class="mb-3">
+                                <div class="row">
+                                  <div class="col">
+                                    <label for="win" class="form-label">Win</label>
+                                    <input type="text" class="form-control win-loss-input" id="win" name="win" placeholder="">
+                                  </div>
+                                  <div class="col">
+                                    <label for="loss" class="form-label">Loss</label>
+                                    <input type="text" class="form-control win-loss-input" id="loss" name="loss"  placeholder="">
+                                  </div>
+                                </div>
+                            </div>
                               <div class="mb-3">
                                 <label for="imgUpload" class="form-label">Image</label>
                                 <input type="file" class="form-control form-control-sm" id="imageUpload" name="file">

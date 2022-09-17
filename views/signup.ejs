@@ -13,24 +13,30 @@
                           <label for="exampleInputEmail1" class="form-label">Email</label>
                           <input type="email" class="form-input" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
                        <!--  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
+                        <% if (el.msg.includes('email')) { %>
+                          <span class="alert-msg"><%= el.msg %></span>
+                        <% } %>
+                        <% }) %> <% } %>
                         </div>
                         <div class="section-each-input-signup section-each-input-login-signup">
-                          <label for="password" class="form-label">Password</label>
+                          <label for="password" class="form-label login-signup-text">Password</label>
                           <input type="password" class="form-input" id="password" name="password">
+                          <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
+                            <% if (el.msg.includes('Password')) { %>
+                              <span class="alert-msg"><%= el.msg %></span>
+                            <% } else { %>
+                              <br>
+                            <% }}) %> <% } %>
                         </div>
                         <div class="section-each-input-signup section-each-input-login-signup">
-                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <label for="confirmPassword" class="form-label login-signup-text">Confirm Password</label>
                             <input type="password" class="form-input" id="confirmPassword" name="confirmPassword">
+                            
                           </div>
                       </section>
-                    <section class="container-alert">
-                      <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
-                        <span class="alert"><%= el.msg %></span>
-                        <% }) %> <% } %>
-                      <% if (locals.messages.info) { %> <% messages.info.forEach( el => { %>
-                          <span class="alert"><%= el.msg %></span>
-                          <% }) %> <% } %>
-                    </section>
+                    <!-- <section class="container-alert">
+                    </section> -->
                     <section class="container-btn">
                       <button type="submit" class="login-signup-submit-btn">GO</button>
                     </section>
@@ -40,3 +46,9 @@
     </main>
 
 <%- include('partials/footer') -%>
+
+
+<!-- <% if (locals.messages.info) { %> <% messages.info.forEach( el => { %>
+  <span class="alert"><%= el.msg %></span>
+  <% console.log(el)%> 
+  <% }) %> <% } %> -->

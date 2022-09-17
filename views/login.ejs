@@ -7,7 +7,7 @@
       <form action="/login" method="POST">
         <section class="section-login-form section-login-signup-form">
             <section class="section-each-input-login section-each-input-login-signup" >
-              <label for="exampleInputEmail1" class="form-label"
+              <label for="exampleInputEmail1" class="form-label login-signup-text"
               >Email
             </label> 
             <input
@@ -18,7 +18,7 @@
               name="email"/>
             </section>
             <section class="section-each-input-login section-each-input-login-signup">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <label for="exampleInputPassword1" class="form-label login-signup-text">Password</label>
               <input
                 type="password"
                 class="form-input"
@@ -28,11 +28,11 @@
         </section>
         <section class="container-alert">
           <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
-            <span class="alert"><%= el.msg %></span>
+            <span class="alert-msg"><%= el.msg %></span>
             <% }) %> <% } %>
             <% if (locals.messages.info) { %> <%
               messages.info.forEach( el => { %>
-              <span class="alert"><%= el.msg %></span>
+              <span class="alert-msg"><%= el.msg %></span>
               <% }) %> <% } %>
         </section>
         <section class="container-btn">

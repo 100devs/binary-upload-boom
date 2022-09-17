@@ -12,11 +12,22 @@ module.exports = {
       console.log(err);
     }
   },
+  getProfile: async (req, res) => { //changed getProfile to getHome
+    try {
+      const posts = await Post.find({ user: req.user.id });
+      const url = await req.originalUrl;
+      res.render("profile.ejs", { posts: posts, user: req.user, url: url }); //changed from profile.ejs to home.ejs //changes req.user to req.email
+
+    } catch (err) {
+      console.log(err);
+    }
+  },
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      const post = await Post.findById(req.params.id);
       const url = await req.originalUrl;
-      res.render("feed.ejs", { posts: posts, url: url});
+      res.render("feed.ejs", { posts: posts, user: req.user, post: post, url: url});
     } catch (err) {
       console.log(err);
     }
@@ -46,13 +57,14 @@ module.exports = {
         team: req.body.team,
         player: req.body.player,
         position: req.body.position,
+        win: req.body.win,
+        loss: req.body.loss,
         notes: req.body.notes,
         user: req.user.id,
         image: pattern.eager[0].secure_url,
         cloudinaryId: result.public_id
       });
       console.log("Post has been added!");
-      console.log(pattern)
       res.redirect("/home"); //changed from profile to home
     } catch (err) {
       console.log(err);

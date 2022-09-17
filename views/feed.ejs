@@ -1,9 +1,10 @@
 <%- include('partials/header') -%>
-<div class="container" style="border: 1px solid green;">
-    <div class="mt-5 d-flex align-items-center justify-content-center" style="border: 1px solid red;">
+<%- include('partials/nav') -%>
+<div class="container">
+    <div class="mt-5 mb-5 d-flex flex-wrap gap-3 flex-row align-items-center justify-content-center">
             <% for(var i=0; i<posts.length; i++) {%>
-                <div style="border: 1px solid yellow;">
-                    <a href="/post/<%= posts[i]._id%>"><img class="rounded" src="<%= posts[i].image%>"></a>
+                <div class="feed">
+                    <a href="/post/<%= posts[i]._id%>"><img class="img-fluid rounded" src="<%= posts[i].image%>"></a>
                 </div>
             <% } %>
         </ul>

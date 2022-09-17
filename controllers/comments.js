@@ -8,7 +8,7 @@ module.exports = {
         likes: 0,
         post: req.params.id,
       });
-      console.log("Commend has been added");
+      console.log("Comment has been added");
       res.redirect("/post/" + req.params.id)
     } catch (err) {
       console.log(err);
@@ -19,11 +19,10 @@ module.exports = {
       const comment = await Comment.findById({_id: req.params.id });
       await Comment.remove({ _id: req.params.id });
       console.log("Deleted comment");
-      // TODO: Figure out how to redirect to post itself
+
       res.redirect(`/post/${comment.post}`); 
     } catch (err) {
-      console.log("your deleteComment route sucks");
-      //res.redirect("/post/" + comment.post);
+      console.log("your deleteComment route doesn't work");
     }
   },
 };

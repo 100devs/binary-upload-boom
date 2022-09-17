@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
 
 const CommentSchema = new mongoose.Schema({
-
+  userName: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
   comment: {
     type: String,
     required: true,

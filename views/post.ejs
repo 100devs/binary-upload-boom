@@ -45,6 +45,7 @@
       <ul class="row list-unstyled">
         <% for(var i=0; i<comment.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
+            <span class="block"><%=comment[i].userName%></span>
             <!-- look to the model & pull the comment off from the comment property -->
             <%=comment[i].comment%>  
           </li>

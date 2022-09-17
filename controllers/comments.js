@@ -6,6 +6,7 @@ createComment: async (req, res) => {
     try {
       // const post = await Post.findById(req.params.id);
       await Comment.create({
+        userName: req.userName,
         comment: req.body.comment,
         post: req.params.id,
         likes: 0,

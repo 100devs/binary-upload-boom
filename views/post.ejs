@@ -48,6 +48,15 @@
             <p><%= comments[i].content %></p>
             <h5><%= comments[i].user %></h5>
             <time><%= comments[i].createdAt %></time>
+            <%if(comments[i].user == user.id){ %>
+              <form
+                action="/comment/deleteComment/<%=comments[i]._id%>?_method=DELETE"
+                method="POST"
+                class="col-3"
+              >
+                <button class="btn btn-primary fa fa-trash" type="submit"></button>
+              </form>
+              <% } %>
           </li>
         <% } %>
       </ul>

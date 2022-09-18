@@ -1,10 +1,13 @@
+// brigngsin cloudinary and the post model / schema
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
+      // stores all posts made by profile user in variable
       const posts = await Post.find({ user: req.user.id });
+      // renders page with posts data
       res.render("profile.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
@@ -12,6 +15,7 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
+      // Stores all posts recently created and cuts out unecessary returned object data
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
       res.render("feed.ejs", { posts: posts });
     } catch (err) {
@@ -20,6 +24,7 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
+      //Just retrieving that specific post by ID 
       const post = await Post.findById(req.params.id);
       res.render("post.ejs", { post: post, user: req.user });
     } catch (err) {
@@ -30,7 +35,7 @@ module.exports = {
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
-
+      // Uses data from inputs to create new post
       await Post.create({
         title: req.body.title,
         image: result.secure_url,
@@ -40,6 +45,7 @@ module.exports = {
         user: req.user.id,
       });
       console.log("Post has been added!");
+      // redirects to profile page with new post
       res.redirect("/profile");
     } catch (err) {
       console.log(err);
@@ -47,6 +53,7 @@ module.exports = {
   },
   likePost: async (req, res) => {
     try {
+      // finds the post in database by its id and increments likes by one
       await Post.findOneAndUpdate(
         { _id: req.params.id },
         {

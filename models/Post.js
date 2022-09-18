@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+
+// Organized way of structuring data from creating posts; includes datatypes for stored titles, images etc.
 const PostSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -31,4 +33,5 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
+// "Post" connects to the actual collection in our DB, PostScema is the name of the above schema
 module.exports = mongoose.model("Post", PostSchema);

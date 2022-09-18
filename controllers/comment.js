@@ -18,10 +18,9 @@ module.exports = {
     }
   },
   likeComment: async (req, res) => {
-    console.log(req.body)
     try {
       await Comment.findOneAndUpdate(
-        { _id: req.body.id },
+        { _id: req.body.commentID },
         {
           $inc: { likes: 1 },
         }

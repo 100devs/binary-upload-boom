@@ -28,7 +28,7 @@
       <p><%= post.caption %></p>
     </div>
     <div class="addComment">
-      <form action="/comment/createComment/<%= post.id %>" method="POST">
+      <form action="/comment/createComment/<%= post._id %>" method="POST">
         <div class="mb-3">
             <label for="comment" class="form-label">Comment</label>
             <input type="text" class="form-control" id="comment" name="comment">
@@ -40,7 +40,19 @@
     <div class="comments">
       <ul>
         <% comments.forEach(e=> { %>
-          <li><%= e.comment %></li>
+          <li>
+            <span class="commenter"><%= e.user.userName %></span>
+            <span class="comment"><%= e.comment %></span>
+            <span class="likes"><%= e.likes %></span>
+            <span class="likeComment"><form
+              class="col-1"
+              action="/comment/likeComment/<%= post._id %>?_method=PUT"
+              method="POST"
+            >
+              <input type="hidden" name="commentID" value="<%= e._id %>">
+              <button class="btn btn-primary fa fa-heart" type="submit"></button>
+            </form></span>
+          </li>
         <% }) %>
       </ul>
     </div>

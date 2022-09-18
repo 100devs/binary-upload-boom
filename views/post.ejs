@@ -29,7 +29,7 @@
 <!---This is where comments will be dropped in-->
       <ul>
         <% comments.forEach(comment =>{ %>
-          <li> <%= comment.madeBy %> : <%= userList[comment.madeBy] %>:<%= comment.body %></li>
+          <li><%= userList[comment.madeBy] %>:<%= comment.body %></li>
         <% });%>
       </ul>
     </div>

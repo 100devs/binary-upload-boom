@@ -24,9 +24,18 @@ module.exports = {
     try {
       const post = await Post.findById(req.params.id);
       const comment = await Comment.find({postID: req.params.id}).lean();
-      let userList = await Promise.all(comment.map(async com => {
+      let userArr = await Promise.all(comment.map(async com => {
         return {[com.madeBy] : (await User.findById(com.madeBy)).userName};
       }))
+      console.log(userArr)
+      let userList = {}
+      userArr.forEach( pair => {
+        let keys = Object.keys(pair);
+        console.log(keys)
+        for (let key in keys){
+          userList[keys[key]] = pair[keys[key]];
+        }
+      })
       console.log(userList)
       res.render("post.ejs", { post: post, user: req.user, comments: comment, userList: userList});
     } catch (err) {

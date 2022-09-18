@@ -38,9 +38,19 @@
       </form>
     </div>
     <ul>
+      <!-- TODO add: username  and delete button -->
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
-          <%= comments[i].comment%>
+          <span> <%= User comments[i].createdBy%> says: "<%= comments[i].comment%>" </span>
+          <!--If comment was created by current user, then show delete button-->
+          <br> <%if(comments[i].createdById == user.id) {%>
+          <form
+          action="/comment/deleteComment/ <%= post.id %>/<%= comments[i].id %>?_method=DELETE"
+          method="POST"
+        >
+          <button class="btn btn-outline-danger" type="submit">DELETE</button>
+        </form>
+        <%}%>
         </li>
       <% } %>
     </ul>

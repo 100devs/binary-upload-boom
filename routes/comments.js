@@ -8,7 +8,7 @@ router.post("/createComment/:id", commentController.createComment);
 
 router.put("/likeComment/:id", commentController.likeComment);
 
-router.delete("/deleteComment/:id", commentController.deleteComment);
-
+router.delete("/deleteComment/:postid/:commentid", commentController.deleteComment);
+// parameters in path come from the req.params in our controller
 
 module.exports = router;

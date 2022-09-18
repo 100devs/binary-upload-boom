@@ -3,8 +3,10 @@ const Comment = require("../models/Comment");
 module.exports = {
 createComment: async (req, res) => {
     try {
+      
       await Comment.create({
         userName: req.user.userName,
+        createdById: req.user.id,
         comment: req.body.comment,
         post: req.params.id,
         likes: 0,
@@ -34,9 +36,10 @@ createComment: async (req, res) => {
   },
   deleteComment: async (req, res) => {
     try {
-      await Comment.deleteOne({ _id: req.params.id });
+      await Comment.deleteOne({ _id: req.params.commentid });
       console.log("Deleted Comment");
-      res.redirect(`/post/${post._id}`); // does not redirect to proper post page without fail
+      // passing two params which are found in our router
+      res.redirect(`/post/${req.params.postid}`);
     } catch (err) {
       res.redirect("/profile");
     }

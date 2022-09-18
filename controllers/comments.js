@@ -25,7 +25,6 @@ let commentID = combinedIds[0]
 let postId = combinedIds[1]
 let userId = combinedIds[2]
 
-        console.log("f")
       await Comment.findOneAndUpdate(
         { _id: commentID },
         {
@@ -34,7 +33,7 @@ let userId = combinedIds[2]
     
       );
       console.log("Likes +1");
-      console.log(userId)
+      console.log(userId) // current logged in user 
       res.redirect("/post/"+postId);
     } catch (err) {
       console.log(err);

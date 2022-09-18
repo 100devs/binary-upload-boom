@@ -48,7 +48,7 @@
       <!-- loop through and display all the comments pertaining to the post -->
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
-          <%= comments[i].comment%>
+          <%= comments[i].user%> says: <%= comments[i].comment%>
         </li>
       <% } %>
     </ul>

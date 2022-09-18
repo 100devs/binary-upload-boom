@@ -2,8 +2,8 @@
 module.exports = {
   // function checks to see if user is authenticated
   ensureAuth: function (req, res, next) {
-    console.log(req.user) // displays user object model
-    console.log(req.session) // displays session object model
+    // console.log(req.user) // displays user object model
+    // console.log(req.session) // displays session object model
     // if user is authenticated
     if (req.isAuthenticated()) {
       // proceed to the next step

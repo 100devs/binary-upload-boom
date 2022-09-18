@@ -10,10 +10,13 @@ const CommentSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  // grab the post byreferencing the post schema
+  // grab the post by referencing the post schema
   post: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Post",
+  },
+  user: {
+    type: String,
   },
   createdAt: {
     type: Date,

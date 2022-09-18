@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -18,10 +19,13 @@ module.exports = {
       console.log(err);
     }
   },
+  // include comments per post
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+
+      res.render("post.ejs", { post: post, comments: comments, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -29,6 +33,7 @@ module.exports = {
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
+      
       const result = await cloudinary.uploader.upload(req.file.path);
 
       await Post.create({
@@ -37,6 +42,7 @@ module.exports = {
         cloudinaryId: result.public_id,
         caption: req.body.caption,
         likes: 0,
+        likedBy: [],
         user: req.user.id,
       });
       console.log("Post has been added!");
@@ -45,15 +51,33 @@ module.exports = {
       console.log(err);
     }
   },
+  // need to prevent the same user from liking a post more than once
+  // add a property to the post model for likedBy. 
+  // check condition before find one and update.
+  // if user is in likedBy array, likes: -1 and remove user from array. if user is not in array, likes: 1 and add user to array.
   likePost: async (req, res) => {
     try {
-      await Post.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
+      const post = await Post.find({_id: req.params.id})
+      // console.log(post);
+        if (post[0].likedBy.includes(req.user.id)){
+          await Post.findOneAndUpdate(
+            { _id: req.params.id },
+            {
+              $inc: { likes: -1 },
+              $pull: {likedBy: req.user.id}
+            }
+          );
+          console.log("Likes -1");
+        } else {
+          await Post.findOneAndUpdate(
+            { _id: req.params.id },
+            {
+              $inc: { likes: +1 },
+              $push: {likedBy: req.user.id}
+            }
+          );
+          console.log("Likes +1");
         }
-      );
-      console.log("Likes +1");
       res.redirect(`/post/${req.params.id}`);
     } catch (err) {
       console.log(err);

@@ -1,0 +1,68 @@
+/* CSS LAYOUT */
+
+/*
+NAV
+MAIN .index (80vh)
+FOOTER (5vh)
+*/
+
+/* NAV */
+.navbar-brand {
+    margin-left: 1rem;
+}
+nav div a{
+    color: #fff;
+}
+nav div a.nav-link{
+    transition: color 1s;
+}
+nav div a.nav-link:hover {
+    border-radius: 2em;
+    color: #e8cd00;
+    background: radial-gradient( #00420e, rgba(0, 0, 0, 0) 80%);
+}
+
+/* MAIN */
+main.index{
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+    main.index div.interact{
+        display: flex;
+        justify-content: space-evenly;
+    }
+    div.interact a{
+        background-color: #198754;
+        transition: all .6s;
+    }
+    div.interact a:hover, footer a:hover{
+        border-radius: 2em;
+        color: #212529 ;
+        background-color: #ffc107;
+        font-style: italic;
+        font-weight: 600;
+    }
+
+
+img:hover {
+    transform: scale(2.5);
+}
+
+/* Footer */
+footer{
+    height: 5vh;
+    text-align: center;
+}
+    footer a{
+        color: #198754;
+        font-size: .8rem;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all .6s;
+    }
+    footer a:hover{
+        padding: .8em 1em;
+
+    }

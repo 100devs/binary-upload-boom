@@ -1,20 +1,20 @@
 const mongoose = require("mongoose");
 const { none } = require("../middleware/multer");
 
-const PostSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
+const CommentSchema = new mongoose.Schema({
+  post: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Post",
   },
   image: {
     type: String,
-    require: true,
+    require: false,
   },
   cloudinaryId: {
     type: String,
-    require: true,
+    require: false,
   },
-  caption: {
+  comment: {
     type: String,
     required: true,
   },
@@ -24,11 +24,8 @@ const PostSchema = new mongoose.Schema({
   },
   likedBy: {
     type: Array,
-    required: true,
+    required: false,
   },
-  // comments: {
-
-  // }
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -39,4 +36,4 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Comment", CommentSchema);

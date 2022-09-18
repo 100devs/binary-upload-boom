@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const cloudinary = require("cloudinary");
+const dotenv = require("dotenv").config({ path: "./config/.env" });
 
 const connectDB = async () => {
   try {
@@ -15,5 +17,10 @@ const connectDB = async () => {
     process.exit(1);
   }
 };
+cloudinary.config({ 
+  cloud_name: 'wo1vin', 
+  api_key: dotenv.API_KEY,
+  api_secret: dotenv.API_SECRET
+});
 
 module.exports = connectDB;

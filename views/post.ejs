@@ -7,15 +7,28 @@
           <h2>
             <%= post.title %>
           </h2>
-          <p>
-            <%= post.caption %>
-          </p>
         </div>
         <div class="flex-fill">
+
           <ul>
+
+            <li class="mt-3 border-bottom">
+              <% for (let i = 0; i < users.length; i++) { %>
+                <% if (String(users[i]._id) == post.user) { %>
+                  <span class="fw-bold"> <%= users[i].userName %>: </span>
+                <% } %>
+              <% } %>
+              <span><%= post.caption %></span>
+            </li>
+            
             <% for (let i=0; i < comments.length; i++) {%>
               <li class="mt-3 border-bottom">
-                <%= comments[i].comment %>
+                <% for (let j = 0; j < users.length; j++) { %>
+                  <% if (String(users[j]._id) === comments[i].user) { %>
+                    <span class="fw-bold"> <%= users[j].userName %>:</span>
+                  <% } %>
+                <% } %>
+                <span> <%= comments[i].comment %> </span>
               </li>
               <% } %>
           </ul>

@@ -117,7 +117,7 @@ body {
 
 .dropdown-menu {
     background: #302f2d;
-    /* border: 1px solid #E1A750; */
+    border: 1px solid #E1A750;
     /* width: fit-content; */
     /* padding: 0.2rem; */
 }

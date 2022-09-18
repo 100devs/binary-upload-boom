@@ -18,7 +18,7 @@
                   <% if(el.user == user.id) { %>
                 <li class="item-my-leagues add-league">
                  <a href="/post/<%= el._id%>">
-                  <%= el.player %>
+                  <%= el.player.toUpperCase() %>
                 </a>
                 <% }}) %>
                 </li>

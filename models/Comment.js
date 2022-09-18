@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
 
 const CommentSchema = new mongoose.Schema({
-  commentText: {
+  post: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Post",
+  },
+    commentText: { 
     type: String,
     required: true,
   },
@@ -10,14 +14,14 @@ const CommentSchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
+  submittedBy: {
+    type: String,
+    required: true,
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-  },
-  postId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Post",
-  },
+  }, //to read the user id
   createdAt: {
     type: Date,
     default: Date.now,

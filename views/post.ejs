@@ -2,8 +2,8 @@
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
-      <h2><%= user.name %> </h2>
       <h2><%= post.title %></h2>
+      <h2>by<a href="/profile/:id"><%= user.userName %></a> </h2>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
         <form class="col-1" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
@@ -35,6 +35,7 @@
         <%/* <!--get posts from our server db pulling from our controller-->
                   <!--controller works with view, view doesnt communicate with others--> */%>
         <li class="col-6 justify-content-between mt-5">
+          <p><%= comments[i].userName %> </p>
           <h4><%= comments[i].comment%></h4>
           <% if(comments[i].user == user.id){ %>
           <div class="row justify-content-between">

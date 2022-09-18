@@ -8,7 +8,7 @@
             <% if(el.user == user.id) { %>
             <li class="item-list-feed">
               <div class="card">
-                  <img src="<%= el.image%>" class="card-img-top" alt="...">
+                  <img src="<%= el.image.feed%>" class="card-img-top" alt="...">
                 <ul class="list-group list-group-flush list-card-feed">
                   <li class="list-group-item item-list-card"> 
                     <%= el.player%>
@@ -16,7 +16,7 @@
                   <li class="list-group-item item-list-card"> <%= el.team%></li>
                   <li class="list-group-item item-list-card"><%= el.position%></li>
                   <li class="list-group-item item-list-card"> 
-                    <%= el.win %>-<%= el.loss%> | <%= (Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3) %>%
+                    <%= el.win %>-<%= el.loss%> | <%= `.${(Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3).toString().split('.')[1]}` %>%
                   </li>
                 </ul>
                 <div class="card-body card-body-notes">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="card-body card-body-btn">
                   <a href="#"><i class="fa-regular fa-trash-can fa-lg"></i></a> <!-- delete request -->
-                  <a href="/post/<%= el._id%>"> <i class="fa-regular fa-pen-to-square fa-lg"></i></a> <!-- modal for editing -->
+                  <a href="/post/<%= el._id%>"> <i class="fa-regular fa-pen-to-square fa-lg"></i></a> 
                 </div>
               </div>
             </li>

@@ -4,7 +4,7 @@
     <section class="container-main-home">
       <section class="section-my-home section-my-leagues">
         <h2>add stats</h2>
-        <ul class="list-my-leagues">  
+        <ul class="list-my-leagues list-add-recently">  
           <li class="item-my-leagues add-league" data-toggle="modal" data-target="#add-data">
             <a href="#">
               <i class="fa-solid fa-circle-plus fa-2xl"></i>
@@ -14,9 +14,14 @@
           <li class="recently-added-item">
             <section class="recently-added-container">
               <ul class="list-my-leagues recently-added-list">
-                <li class="item-my-leagues add-league"></li>
-                <li class="item-my-leagues add-league"></li>
-                <li class="item-my-leagues add-league"></li>
+                <% posts.forEach(el => { %>
+                  <% if(el.user == user.id) { %>
+                <li class="item-my-leagues add-league">
+                 <a href="/post/<%= el._id%>">
+                  <%= el.player.toUpperCase() %>
+                </a>
+                <% }}) %>
+                </li>
               </ul>
             </section>
           </li>
@@ -24,7 +29,7 @@
       </section>
       <section class="section-my-home section-my-leagues">
         <h2>pinned</h2>
-        <ul class="list-my-leagues">
+        <ul class="list-my-leagues list-pinned">
           <li class="item-my-leagues add-league"></li>
           <li class="item-my-leagues add-league"></li>
           <li class="item-my-leagues add-league"></li>

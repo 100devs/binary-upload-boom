@@ -1,38 +1,113 @@
 <%- include('partials/headers/header-menu') -%>
-<div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-6">
-      <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
-        <form
-          class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
-          method="POST"
-        >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
-        </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
-          
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
-        <%}%>
-      </div>
+
+<main class="container container-post">
+  <section class="container-section-post">
+    <section class="section-profile-post">
+      <%if(post.user == user.id){ %>
+      <section class="nav-profile-post">
+        <img class="img-fluid" src="<%= post.image.profile %>" />
+        <section class="section-column-post"> 
+          <section class="section-row-post"> 
+            <section class="section-second-column-post"> 
+              <section class="section-each-extra-post">
+                <h1><%= post.player %></h1>
+              </section>
+              <section class="section-each-extra-post">
+                <h2><%= post.team %></h2>
+               <!--  <span >team</span> -->
+              </section>
+            </section>
+            <section class="section-icons-post">
+              <form
+              class="col-1"
+              action="/post/likePost/<%= post.id %>?_method=PUT"
+              method="POST"
+            >
+              <button class="btn" type="submit">
+                <i class="fa-regular fa-pen-to-square fa-xl"></i>
+              </button>
+            </form>
+            <!-- USED TO BE THE LIKE BUTTON - CHANGE TO EDIT  -->
+            <form
+              action="/post/deletePost/<%= post.id %>?_method=DELETE"
+              method="POST"
+              class="col-1"
+            >
+              <button class="btn" type="submit">
+                <i class="fa-regular fa-trash-can fa-xl"></i>
+              </button>
+            </form>
+            <form
+            class="col-1"
+            action="/post/likePost/<%= post.id %>?_method=PUT"
+            method="POST"
+          >
+            <button class="btn" type="submit">
+              <i class="fa-solid fa-thumbtack fa-xl"></i>
+            </button>
+          </form>
+           
+            </section>
+          </section>
+          <section class="section-person-post">
+            <section class="section-person-post-extra">
+              <section class="section-each-extra-post">
+                <h2><%= post.position %></h2>
+              <span >position</span>
+              </section>
+              <section class="section-each-extra-post">
+                <h2><%= %></h2>
+              <span >height</span>
+              </section>
+              <section class="section-each-extra-post">
+                <h2><%=  %></h2>
+              <span >weight</span>
+              </section>
+              <section class="section-each-extra-post">
+                <h2><%=  %></h2>
+              <span >age</span>
+              </section>
+            </section>
+        </section>
+        </section>
+        </section>
+        
+      </section>
+      <section class="section-table-post">
+        
+      </section>
+      <%}%>
     </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
-    </div>
-    <div class="col-6 mt-5">
+    <!-- <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
-    </div>
-  </div>
-</div>
+    </div> -->
+    </section>
+  </section>
+</main>
 
 <%- include('partials/footer') -%>
+
+<!-- ATTEMPT DIAGONAL LINE -->
+
+<!-- <section class="section-person-post-extra">
+  <div class="post">
+    <h3 class=""><%= post.player %></h3>
+  </div>
+  
+  <div class="div-post">
+    <h2 class="" >player</h2>
+   
+  </div>
+</section>
+<section class="section-person-post-extra">
+  
+  <div class="post">
+    <h3 class=""><%= post.team %></h3>
+  </div>
+  <div class="div-post">
+    <h2 class="" >team</h2>
+   
+  </div>
+  
+</section> -->

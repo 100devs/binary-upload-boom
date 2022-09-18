@@ -5,7 +5,7 @@ module.exports = {
   getProfile: async (req, res) => {
     try {
     // Explanation for below lines
-    // Post is from the model - find the userby their id
+    // Post is from the model - use the post model, look in the post collection, find the user by id. 
       const posts = await Post.find({ user: req.user.id });
       // Show that user's data on the profile.ejs page. It will pass their posts and user information through. 
       res.render("profile.ejs", { posts: posts, user: req.user });
@@ -55,19 +55,25 @@ module.exports = {
     }
   },
   likePost: async (req, res) => {
-    try {
-      await Post.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
+     try {
+        const user = await user.findOne({
+        _id: req.params.id,
+        }).lean()
+        if (user != user) {
+          await Post.findOneAndUpdate(
+            { _id: req.params.id },
+            {
+              $inc: { likes: 1 },
+            }
+          );
+          console.log("Likes +1");
+          res.redirect(`/post/${req.params.id}`);
+        } else {
+          res.render(`/post/${req.params.id}`)
         }
-      );
-      console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
-    } catch (err) {
+        } catch (err) {
       console.log(err);
-    }
-  },
+    }},
   deletePost: async (req, res) => {
     try {
       // Find post by id

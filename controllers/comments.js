@@ -14,5 +14,19 @@ module.exports = {
     } catch (err) {
       console.log(err);
     }
+  },
+  likeComment: async (req, res) => {
+    try {
+      await Comment.findOneAndUpdate(
+        { post: req.params.postId, _id: req.params.commentId },
+        {
+          $inc: { likes: 1 },
+        }
+      );
+      console.log("Likes +1");
+      res.redirect(`/post/${req.params.postId}`);
+    } catch (err) {
+      console.log(err);
+    }
   }
 };

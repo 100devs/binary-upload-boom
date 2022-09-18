@@ -29,9 +29,27 @@
     </div>
 
     <% for(var i=0; i < comment.length; i++) {%>
-      <li class="col-6 justify-content-between mt-5">
+    <div class="card mb-4">
+      <div class="card-body">
         <p><%= comment[i].comment %></p>
-      </li>
+        <div class="d-flex justify-content-between">
+          <div class="d-flex flex-row align-items-center">
+            <p class="small mb-0 ms-2">Martha</p>
+          </div>
+          <div class="d-flex flex-row align-items-center justify-content-between">
+            <p class="small text-muted mb-0">Upvote?</p>
+            <form
+              action="/comment/likeComment/<%= comment[i]._id %>/<%= post.id %>?_method=PUT"
+              method="POST"
+              class="col-3"
+            >
+              <button type="button far fa-thumbs-up mx-2 text-black" class="btn far fa-thumbs-up mx-2 text-black"></button>
+            </form>
+            <p class="small text-muted mb-0"><%= comment[i].likes %></p>
+          </div>
+        </div>
+      </div>
+    </div>
     <% } %>
 
     <form action="/comment/createComment/<%= post._id %>" method="POST">

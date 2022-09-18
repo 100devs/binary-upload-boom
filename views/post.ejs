@@ -50,7 +50,7 @@
             <time><%= comments[i].createdAt %></time>
             <%if(comments[i].user == user.id){ %>
               <form
-                action="/comment/deleteComment/<%=comments[i]._id%>?_method=DELETE"
+                action="/comment/deleteComment/<%=comments[i]._id%>/<%=post.id%>?_method=DELETE"
                 method="POST"
                 class="col-3"
               >

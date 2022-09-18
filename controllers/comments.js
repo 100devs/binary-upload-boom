@@ -35,7 +35,7 @@ module.exports = {
       // Delete comment from db
       await Comment.deleteOne({ _id: req.params.id });
       console.log("Deleted Comment");
-      res.redirect("/profile");
+      res.redirect(`/post/${req.params.originPost}`);
     } catch (err) {
       res.redirect("/profile");
     }

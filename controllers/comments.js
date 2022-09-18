@@ -19,7 +19,7 @@ module.exports = {
         likes: 0,
         user: req.user.id,
         submittedBy: req.user.userName,
-        createdAt: createdAt,
+        createdAt: Date.now(), //this has parenths for some reason. The person who made the rules really sucks.
       });
       console.log("Comment has been added!");
       res.redirect("/post/"+req.params.id);

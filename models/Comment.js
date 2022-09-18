@@ -24,7 +24,7 @@ const CommentSchema = new mongoose.Schema({
   }, //to read the user id
   createdAt: {
     type: Date,
-    default: Date.now,
+    default: Date.now, // function
   },
 });
 

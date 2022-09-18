@@ -48,8 +48,22 @@
           <ul class="row list-unstyled">
             <% for(var i=0; i<comments.length; i++) {%>
               <li class="col-12 justify-content-between mt-4 p-3 border border-light rounded">
-                <h6>
-                  <%= comments[i].comment %>
+
+                <div style="position: relative;">
+                  <form style="position: absolute;
+  bottom: 0;
+  left: 0;" href="#right-panel" action="/comment/likeComment/<%= post.id %>/<%= comments[i]._id %>?_method=PUT"
+                    method="POST">
+                    <button class="btn btn-outline-success rounded fa fa-thumbs-up" type="submit">
+                      <%= comments[i].likes %>
+                    </button>
+                  </form>
+
+                </div>
+                <h6 class="mt-3">
+                  <%= comments[i].comment %> Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse omnis
+                    perspiciatis, aperiam modi harum cumque molestias minima error quasi nihil. Aliquam eveniet magnam
+                    ipsum fuga quibusdam dolores sint reprehenderit harum!
                 </h6>
                 <small class="d-flex justify-content-end">
                   By: <%= comments[i].user.userName %>
@@ -59,8 +73,6 @@
                     day: 'numeric' })%> -- <%= comments[i].createdAt.toLocaleTimeString([], { hour: '2-digit' ,
                       minute: '2-digit' })%>
                 </small>
-
-
               </li>
               <% } %>
           </ul>

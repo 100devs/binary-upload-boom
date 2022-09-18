@@ -15,15 +15,15 @@ module.exports = {
       console.log(err);
     }
   },
-  getComment: async (req, res) => {
-    try {
-      const post = await Post.findById(req.params.id);
-      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
-      res.render("post.ejs", { post: post, user: req.user, comments: comments });
-    } catch (err) {
-      console.log(err);
-    }
-  },
+  // getComment: async (req, res) => {
+  //   try {
+  //     const post = await Post.findById(req.params.id);
+  //     const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+  //     res.render("post.ejs", { post: post, user: req.user, comments: comments });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // },
 //   deletePost: async (req, res) => {
 //     try {
 //       // Find post by id

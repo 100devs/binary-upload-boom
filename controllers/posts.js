@@ -43,8 +43,6 @@ module.exports = {
         path: 'user',
         select: 'userName',
       });
-      console.log('post', post.user._id);
-      console.log('req.user', req.user._id);
       const comments = await Comment.find({ post: post.id }).lean();
       res.render('post.ejs', {
         post: post,

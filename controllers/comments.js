@@ -1,5 +1,4 @@
-
-const Comment = require("../models/Comment")
+const Comment = require("../models/Comment");
 
 module.exports = {
   createComment: async (req, res) => {
@@ -7,28 +6,27 @@ module.exports = {
       await Comment.create({
         post: req.params.id,
         comment: req.body.comment,
-        likes: 0
+        likes: 0,
       });
       console.log("Comment has been added!");
       res.redirect(`/post/${req.params.id}`);
-    } 
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
   },
   likeComment: async (req, res) => {
     try {
       await Comment.findOneAndUpdate(
-        { post: req.params.id },
+        { _id: req.params.id },
         {
           $inc: { likes: 1 },
         }
       );
-      console.log("Coment req.params.id" + req.params.id);
-      console.log("Coment ID " + req.params.id);
+      const comment = await Comment.findOne({ _id: req.params.id });
+      res.redirect(`/post/${comment.post}`);
       res.redirect(`/post/${req.params.id}`);
     } catch (err) {
       console.log(err);
     }
-  }
-}
+  },
+};

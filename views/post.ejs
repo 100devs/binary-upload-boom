@@ -31,12 +31,22 @@
             <form
               action="/post/deletePost/<%= post.id %>?_method=DELETE"
               method="POST"
-              class="col-3"
+              class="col-1"
             >
               <button class="btn" type="submit">
                 <i class="fa-regular fa-trash-can fa-xl"></i>
               </button>
             </form>
+            <form
+            class="col-1"
+            action="/post/likePost/<%= post.id %>?_method=PUT"
+            method="POST"
+          >
+            <button class="btn" type="submit">
+              <i class="fa-solid fa-thumbtack fa-xl"></i>
+            </button>
+          </form>
+           
             </section>
           </section>
           <section class="section-person-post">

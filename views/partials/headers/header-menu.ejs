@@ -67,18 +67,26 @@
                     </li>
                     <li> 
                       <% if (url === '/feed') { %>
-                      <a href="/feed" class="underline-menu">stats</a>
+                      <a href="/feed" class="underline-menu">players</a>
                     
                      <% }  else { %> 
-                      <a href="/feed" class="no-underline">stats</a>
+                      <a href="/feed" class="no-underline">players</a>
                     <% } %>
                     </li>
                     <li> 
-                      <% if (url === '/highlights') { %>
-                      <a href="/#" class="underline-menu">highlights</a>
+                      <% if (url === '/feed/teams') { %>
+                      <a href="/#" class="underline-menu">teams</a>
                     
                      <% }  else { %> 
-                      <a href="/#" class="no-underline">highlights</a>
+                      <a href="/#" class="no-underline">teams</a>
+                    <% } %>
+                    </li>
+                    <li> 
+                      <% if (url === '/feed/leagues') { %>
+                      <a href="/#" class="underline-menu">leagues</a>
+                    
+                     <% }  else { %> 
+                      <a href="/#" class="no-underline">leagues</a>
                     <% } %>
                     </li>
                     <li>
@@ -86,22 +94,23 @@
                     </li>
                 </ul>
                 
-                <section class="container-nav-profile">
-                    <div class="dropdown">
-                        <button class="btn btn-sm btn-profile" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-bars"></i>
-                        </button>
-                        
-                        <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton1">
-                          <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                          <li><a class="dropdown-item" href="/settings">Settings</a></li>
-                          <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                        </ul>
-                        <!-- <% console.log(url)%> -->
-                        
-                      </div>
-                </section>
+                
             </section>
+            <section class="container-nav-profile">
+              <div class="dropdown">
+                  <button class="btn btn-sm btn-profile" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa-solid fa-bars"></i>
+                  </button>
+                  
+                  <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                    <li><a class="dropdown-item" href="/settings">Settings</a></li>
+                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                  </ul>
+                  <!-- <% console.log(url)%> -->
+                  
+                </div>
+          </section>
           </nav>
     </header>
 </body>

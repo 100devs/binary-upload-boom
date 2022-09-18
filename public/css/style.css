@@ -23,7 +23,7 @@ body {
     font-size: 3.5rem;
     line-height: 85px;
     text-decoration: none;
-    width: fit-content;
+    width: 20%;
     color: #FFFFFF;
    
 }
@@ -70,19 +70,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    width: 85%;
+    width: 50%;
     height: 100%;
     color: white;
     font-family: 'Jaldi';
     font-size: 1.6rem;
-    
+    gap: 1rem;
     /* line-height: 2.5rem; */
     /* border: 1px solid yellow; */
 }
 
 .container-list-menu > li {
-    width:fit-content;
-    padding: 0 1rem;
+    width: 20%;
+  /*  border: 1px solid red; */
 }
 
 .container-list-menu li .underline-menu {
@@ -95,14 +95,10 @@ body {
 }
 
 .container-nav-profile {
-   /*  border: 1px solid red; */
+    /* border: 1px solid red; */
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     width: 10%;
-}
-
-.search-icon i {
-    font-size: 1rem;
 }
 
 .search-icon i:hover {
@@ -121,7 +117,7 @@ body {
 
 .dropdown-menu {
     background: #302f2d;
-    border: 1px solid #E1A750;
+    /* border: 1px solid #E1A750; */
     /* width: fit-content; */
     /* padding: 0.2rem; */
 }
@@ -485,6 +481,17 @@ body {
     /* border: 1px solid black; */
 }
 
+.list-add-recently {
+    /* border: 1px solid fuchsia; */
+    width: 100%;
+    overflow-x: scroll;
+}
+
+.section-my-leagues {
+    max-width: 90vw;
+    /* border: 1px solid black; */
+}
+
 .list-my-leagues {
     display: flex;
     justify-content: flex-start;
@@ -525,8 +532,11 @@ body {
     align-items: center;
     gap: 1rem;
     padding-left: 1rem;
+   /*  border: 1px solid red; */
 }
 .add-league {
+    width: 15%;
+    min-width: 12rem;
     border: 1px dashed #E1A750;
 }
 
@@ -745,7 +755,7 @@ body {
 
 .section-row-post {
     display: flex;
-    width: 100%;
+    width: 95%;
     height: 70%;
     
     /* border: 1px solid blue; */

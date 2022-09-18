@@ -26,6 +26,12 @@
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
+<!---This is where comments will be dropped in-->
+      <ul>
+        <% comments.forEach(comment =>{ %>
+          <li> <%= comment.madeBy %> : <%= userList[comment.madeBy] %>:<%= comment.body %></li>
+        <% });%>
+      </ul>
     </div>
     <div class="col-3 mt-5">
       <form 

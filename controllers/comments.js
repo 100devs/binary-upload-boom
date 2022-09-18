@@ -14,4 +14,7 @@ module.exports = {
       res.redirect("/post/"+req.params.id);
     }
   },
+  getComments: async (req,res)=> {
+
+  },
 };

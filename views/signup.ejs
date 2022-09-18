@@ -1,33 +1,38 @@
 <%- include('partials/header') -%>
-    <main class="signup container">
-        <div class="row justify-content-center">
-          <section class="col-6">
-            <h2>Sign up</h2>
-            <!-- display error messages -->
-            <% if (locals.messages.errors) { %>
-              <% messages.errors.forEach( el => { %>
-                <div class="alert alert-danger"><%= el.msg %></div>
-              <% }) %>    
-            <% } %>
-            <% if (locals.messages.info) { %>
-              <% messages.info.forEach( el => { %>
-                <div class="alert alert-info"><%= el.msg %></div>
-              <% }) %>    
-            <% } %>
-            <!--form-->
-            <form action="/signup" method="POST">
-              <div class="mb-1">
-                <input type="text" class="form-control mb-1" id="userName" name="userName" placeholder="Username">
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Email address">
-                <div id="emailHelp" class="form-text mb-1">We never share your email with anyone.
-                </div>
-                <input type="password" class="form-control mb-1" id="password" name="password" placeholder="Password">
-                <input type="password" class="form-control mb-1" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form>
-          </section>
+<nav class="navbar sticky-top navbar-expand-lg bg-dark navbar-dark">
+  <div class="container-fluid">
+      <a class="navbar-brand mb-0 h1" href="/">The Art Lounge</a>
+  </div>
+</nav>
+<main class="signup container">
+  <div class="row justify-content-center">
+    <section class="col-6">
+      <h2 class="mb-3">Sign up</h2>
+      <!-- display error messages -->
+      <% if (locals.messages.errors) { %>
+        <% messages.errors.forEach( el => { %>
+          <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %>    
+      <% } %>
+      <% if (locals.messages.info) { %>
+        <% messages.info.forEach( el => { %>
+          <div class="alert alert-info"><%= el.msg %></div>
+        <% }) %>    
+      <% } %>
+      <!--form-->
+      <form action="/signup" method="POST">
+        <div class="mb-1">
+          <input type="text" class="form-control mb-1" id="userName" name="userName" placeholder="Username">
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Email address">
+          <div id="emailHelp" class="form-text mb-1">We never share your email with anyone.
+          </div>
+          <input type="password" class="form-control mb-1" id="password" name="password" placeholder="Password">
+          <input type="password" class="form-control mb-1" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
+          <button type="submit" class="btn btn-primary">Submit</button>
         </div>
-    </main>
+      </form>
+    </section>
+  </div>
+</main>
 
 <%- include('partials/footer') -%>

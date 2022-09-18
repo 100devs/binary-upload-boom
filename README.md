@@ -23,5 +23,5 @@
 
 # Optimizations
 
-- If the user has not signed in: `nav{ display: none; }`
+- If the user has not signed in, don't show the nav. ✅
 - Add icon next to "Log out"

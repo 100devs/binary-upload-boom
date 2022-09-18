@@ -1,8 +1,13 @@
 <%- include('partials/header') -%>
-
-<main class="container">
+<nav class="navbar sticky-top navbar-expand-lg bg-dark navbar-dark">
+  <div class="container-fluid">
+      <a class="navbar-brand mb-0 h1" href="/">The Art Lounge</a>
+  </div>
+</nav>
+<main class="login container">
   <div class="row justify-content-center">
-    <section class="col-6 mt-5">
+    <section class="col-6">
+      <h2 class="mb-3">Sign in</h2>
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
       <div class="alert alert-danger"><%= el.msg %></div>
       <% }) %> <% } %> <% if (locals.messages.info) { %> <%

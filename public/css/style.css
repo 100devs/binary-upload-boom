@@ -25,6 +25,7 @@ nav div a{
     font-size: .9rem;
 }
 nav div a.nav-link{
+    padding: .7rem .5rem .3rem .5rem;
     transition: color 1s;
 }
 nav div a.nav-link:hover {
@@ -34,7 +35,8 @@ nav div a.nav-link:hover {
 }
 
 /* MAIN - index */
-main.index, main.signup{
+
+main.index, main.signup, main.login{
     height: 83vh;
     display: flex;
     flex-direction: column;
@@ -58,9 +60,7 @@ main.index, main.signup{
     }
 
 /* MAIN - signup */
-h2{
-    text-align: left;
-}
+
 
 /* MAIN - profile */
     main.profile img{

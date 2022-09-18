@@ -19,18 +19,23 @@ module.exports = {
   },
     likeComment: async (req, res) => {
     try {
+
+let combinedIds = req.params.id.split("&")
+let commentID = combinedIds[0]
+let postId = combinedIds[1]
+let userId = combinedIds[2]
+
         console.log("f")
       await Comment.findOneAndUpdate(
-        { _id: req.params.id },
+        { _id: commentID },
         {
           $inc: { likes: 1 },
         }
     
       );
       console.log("Likes +1");
-      console.log(req.post)
-      res.redirect("/feed");
-     // res.redirect("/post/"+req.params.id);
+      console.log(userId)
+      res.redirect("/post/"+postId);
     } catch (err) {
       console.log(err);
     }

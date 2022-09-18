@@ -47,7 +47,7 @@
           <%= comments[i].comment%>
           <form
           class="col-1"
-          action="/comment/likeComment/<%= comments[i]._id %>?_method=PUT"
+          action="/comment/likeComment/<%= comments[i]._id %>&<%=post.id%>&<%= user.id  %>?_method=PUT"
           method="POST"
         >
         <button class="btn btn-primary fa fa-heart" type="submit"></button>

@@ -18,3 +18,10 @@
 # Run
 
 `npm start`
+
+---
+
+# Optimizations
+
+- If the user has not signed in: `nav{ display: none; }`
+- Add icon next to "Log out"

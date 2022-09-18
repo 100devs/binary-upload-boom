@@ -1,17 +1,28 @@
+/* html,body{
+    background: rgb(0,0,0);
+background: radial-gradient(circle, rgba(0,0,0,1) 39%, rgb(54, 54, 54) 100%);
+    color: whitesmoke;
+} */
+h2{
+    text-align: center;
+}
+h5{
+    font-size: 1rem;
+}
 /* CSS LAYOUT */
 
 /*
 NAV
-MAIN .index (80vh)
-FOOTER (5vh)
+MAIN .index(83vh) .profile 
+FOOTER (8vh)
 */
-
 /* NAV */
 .navbar-brand {
     margin-left: 1rem;
 }
 nav div a{
     color: #fff;
+    font-size: .9rem;
 }
 nav div a.nav-link{
     transition: color 1s;
@@ -22,9 +33,9 @@ nav div a.nav-link:hover {
     background: radial-gradient( #00420e, rgba(0, 0, 0, 0) 80%);
 }
 
-/* MAIN */
-main.index{
-    height: 80vh;
+/* MAIN - index */
+main.index, main.signup{
+    height: 83vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,11 +44,12 @@ main.index{
         display: flex;
         justify-content: space-evenly;
     }
-    div.interact a{
+    div.interact a, form button.btn{
         background-color: #198754;
+        color: #fff;
         transition: all .6s;
     }
-    div.interact a:hover, footer a:hover{
+    div.interact a:hover, footer a:hover,button.btn:hover{
         border-radius: 2em;
         color: #212529 ;
         background-color: #ffc107;
@@ -45,14 +57,47 @@ main.index{
         font-weight: 600;
     }
 
-
-img:hover {
-    transform: scale(2.5);
+/* MAIN - signup */
+h2{
+    text-align: left;
 }
 
+/* MAIN - profile */
+    main.profile img{
+        border: 1px solid #000;
+        transition: all 1s ease;
+    }
+    main.profile img:hover{
+        transform: scale(2.5);
+    }
+/* MAIN - post */
+main.post>div.row>img{
+    max-height: 75vh;
+    width: auto;
+    margin: 1em 0;
+    padding: 0;
+    object-fit: contain;
+    border: 1px solid rgba(0, 0, 0, 0.602);
+}
+    main.post>div.row>img:hover{
+        object-fit: contain;
+    }
+main.post form{
+    margin: 0;
+    display: inline;
+}
+    main.post form.col-1 button{
+        font-size: 1.5rem;
+    }
+main.post section.comments p{
+    margin: .5em 0 0 0;
+}
 /* Footer */
 footer{
-    height: 5vh;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
     footer a{

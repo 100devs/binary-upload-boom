@@ -8,7 +8,7 @@ module.exports = {
       //future implementation
       // Upload image to cloudinary
       // const result = await cloudinary.uploader.upload(req.file.path);
-
+      console.log(req.user)
       await Comment.create({
         comment: req.body.comment,
         post: req.params.id,
@@ -16,7 +16,7 @@ module.exports = {
         // cloudinaryId: result.public_id,
         likes: 0,
         // likedBy: [],
-        user: req.user.id,
+        user: req.user.userName,
       });
       console.log("Comment has been added!");
       res.redirect(`/post/${req.params.id}`);

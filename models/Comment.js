@@ -6,14 +6,14 @@ const CommentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Post",
   },
-  image: {
-    type: String,
-    require: false,
-  },
-  cloudinaryId: {
-    type: String,
-    require: false,
-  },
+  // image: {
+  //   type: String,
+  //   require: false,
+  // },
+  // cloudinaryId: {
+  //   type: String,
+  //   require: false,
+  // },
   comment: {
     type: String,
     required: true,
@@ -24,7 +24,7 @@ const CommentSchema = new mongoose.Schema({
   },
   likedBy: {
     type: Array,
-    required: false,
+    required: true,
   },
   user: {
     type: String,

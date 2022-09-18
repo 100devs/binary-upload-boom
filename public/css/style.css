@@ -3,7 +3,7 @@
 background: radial-gradient(circle, rgba(0,0,0,1) 39%, rgb(54, 54, 54) 100%);
     color: whitesmoke;
 } */
-h2{
+h2, h3, h4{
     text-align: center;
 }
 h5{
@@ -59,10 +59,13 @@ main.index, main.signup, main.login{
         font-weight: 600;
     }
 
-/* MAIN - signup */
-
-
 /* MAIN - profile */
+main.profile h3{
+    font-size: 1.2rem;
+}
+main.profile p{
+    text-align: center;
+}
     main.profile img{
         border: 1px solid #000;
         transition: all 1s ease;
@@ -82,13 +85,29 @@ main.post>div.row>img{
     main.post>div.row>img:hover{
         object-fit: contain;
     }
+main.post h3{
+    text-align: left;
+}
+main.post div.postData i, section.comments i{
+    color: #198754;
+}
+main.post div.postData span.likes, section.comments span.likes{
+    margin-left: .5em;
+}
 main.post form{
     margin: 0;
     display: inline;
 }
     main.post form.col-1 button{
-        font-size: 1.5rem;
+        font-size: 1rem;
+        line-height: 1.5;
     }
+main.post h4{
+    font-size: 1.1rem;
+}
+main.post section.comments ul li div{
+    display: inline;
+}
 main.post section.comments p{
     margin: .5em 0 0 0;
 }

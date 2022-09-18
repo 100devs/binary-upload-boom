@@ -8,10 +8,11 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 router.post("/createComment/:id", commentsController.createComment);
 
-// future implementation
-// router.post("/createPost", upload.single("file"), postsController.createPost);
-// router.get("/:id", ensureAuth, postsController.getPost);
-// router.put("/likePost/:id", postsController.likePost);
-// router.delete("/deletePost/:id", postsController.deletePost);
+// id == post id
+router.put("/likeComment/:id/", commentsController.likeComment);
 
+// future implementation
+// router.get("/:id", ensureAuth, postsController.getPost);
+// router.post("/createPost", upload.single("file"), postsController.createPost);
+//router.delete("/deleteComment/:id", commentsController.deleteComment);
 module.exports = router;

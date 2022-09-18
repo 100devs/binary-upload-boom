@@ -43,6 +43,7 @@ module.exports = {
         caption: req.body.caption,
         likes: 0,
         likedBy: [],
+        comments: [],
         user: req.user.id,
       });
       console.log("Post has been added!");

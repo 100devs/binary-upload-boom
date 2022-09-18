@@ -23,16 +23,16 @@ module.exports = {
       console.log(err);
     }
   },
-  getProfile: async (req, res) => { //changed getProfile to getHome
+ /*  getSettings: async (req, res) => { //changed getProfile to getHome
     try {
       const posts = await Post.find({ user: req.user.id });
       const url = await req.originalUrl;
-      res.render("profile.ejs", { posts: posts, user: req.user, url: url }); //changed from profile.ejs to home.ejs //changes req.user to req.email
+      res.render("settings.ejs", { posts: posts, user: req.user, url: url }); //changed from profile.ejs to home.ejs //changes req.user to req.email
 
     } catch (err) {
       console.log(err);
     }
-  },
+  }, */
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();

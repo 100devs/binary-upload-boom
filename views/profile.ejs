@@ -1,9 +1,89 @@
 <%- include('partials/headers/header-menu') -%>
 
-<main class="container">
-  <section class="section-main-profile">
-    <p><strong>User Name</strong>: <%= user.userName %></p>
-    <p><strong>Email</strong>: <%= user.email %></p>
+<main class="container profile-main-container">
+  <section class="profile-section-container">
+    <ul class="profile-first-list">
+      <li class="profile-item">
+        <h2 class=""><%= user.userName %></h2>
+        <span class="profile-tags">username</span>
+      </li>
+      <li class="profile-item">
+        <h2><%= user.email %> </h2>
+        <span class="profile-tags">email</span>
+      </li>
+    </ul>
+    <ul class="profile-second-list">
+      <li class="profile-item">
+          <ul class="profile-third-list">
+            <li >
+            <% if (user.leagues.length > 0) { %>
+              <% user.leagues.forEach(el => { %>
+                <h2><%= el.leagueName %></h2>
+            <% })} else { %>
+                <h2> N/A </h2>
+            </li>
+            <% } %>
+            <li class="profile-item-form-button">
+              <span class="profile-tags" > my leagues</span>
+              <form
+                class=""
+                action=""
+                method="POST"
+              >
+                <button class="btn profile-btns" type="submit">
+                  add league
+                  <i class="fa-solid fa-circle-plus fa-lg"></i>
+                </button>
+              </form>
+              <form
+              class=""
+                  action=""
+                  method="POST"
+                >
+                <button class="btn  profile-btns" type="submit">
+                  remove league
+                  <i class="fa-solid fa-circle-minus fa-lg"></i>
+                </button>
+               </form>
+            </li>
+          </ul>
+      </li>
+      <li class="profile-item">
+          <ul class="profile-third-list">
+            <li>
+            <% if (user.teams.length > 0) { %>
+              <% user.teams.forEach(el => { %>
+                <h2><%= el.teamName %></h2>
+            <% })} else { %>
+                <h2> N/A </h2>
+            </li>
+            <% } %>
+            <li class="profile-item-form-button">
+              <span class="profile-tags"> my teams</span>
+              <form
+              class=""
+                  action=""
+                  method="POST"
+                >
+                <button class="btn  profile-btns" type="submit">
+                  add team
+                  <i class="fa-solid fa-circle-plus fa-lg"></i>
+                </button>
+               </form>
+               <form
+              class=""
+                  action=""
+                  method="POST"
+                >
+                <button class="btn  profile-btns" type="submit">
+                  remove team
+                  <i class="fa-solid fa-circle-minus fa-lg"></i>
+                </button>
+               </form>
+            </li>
+          </ul>
+      </li>
+    </ul>
   </section>
 </main>
 <%- include('partials/footer') -%>

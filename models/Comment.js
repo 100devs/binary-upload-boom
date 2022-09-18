@@ -13,6 +13,14 @@ const CommentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Post", //here we are referencing our "User" model from our User schema
   },
+  createdBy:{
+    type: String,
+    ref: "User",
+  },
+  createdById:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   createdAt: {
     type: Date,
     default: Date.now,

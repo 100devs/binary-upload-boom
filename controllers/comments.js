@@ -21,7 +21,7 @@ module.exports = {
       const comment = await Comment.findOneAndUpdate( 
         { _id: req.params.id },
         {
-          $inc: { likes: 1 }, //$inc is a increment thing included with mongo/mongoose. This is a number because it is defined in the schema as such
+          $inc: { likes: 1 }, 
         }
       );
       console.log("Likes +1");

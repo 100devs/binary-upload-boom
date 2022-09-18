@@ -63,7 +63,7 @@ module.exports = {
       .upload(req.file.path, 
         { eager: [
           { width: 400, height: 300, crop: "pad" }, 
-          { width: 116, height: 116, crop: "pad"}, ]}) 
+          { width: 220, height: 220, crop: "pad"}, ]}) 
 
       /* let img = cloudinary.image("LUDO/prof_dhezb9.jpg", {height: 300, width: 400, crop: "pad"}) */
       /* let img_default = "https://res.cloudinary.com/dprkasf7b/image/upload/c_pad,h_300,w_400/v1663434846/LUDO/prof_dhezb9.jpg" */
@@ -104,8 +104,10 @@ module.exports = {
   },
   deletePost: async (req, res) => {
     try {
+      
       // Find post by id
       let post = await Post.findById({ _id: req.params.id });
+
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db

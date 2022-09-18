@@ -16,6 +16,7 @@ router.get("/logout", authController.logout);
 router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
 
+/* router.delete("/deletePost/:id", postsController.deletePost); */
 //added
 /* router.delete("home/deletePost/:id", postsController.deletePost); */
 

@@ -4,6 +4,8 @@
     <div class="col-6">
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
+
+      <!-- Add Likes and Trash Can for Posts -->
       <div class="row justify-content-between">
         <form
           class="col-1"
@@ -40,13 +42,40 @@
       </form>
     </div>
 
-    <ul class="row list-unstyled">
-      <% for(var i=0; i<comments.length; i++) {%>
-        <li class="col-6 justify-content-between mt-5">
-          <%= comments[i].comment %> 
-        </li>
-      <% } %>
-      </ul>
+    <!-- Render Users Comments -->
+    <div class="mt-5">
+      <h3>Comments</h3>
+      <ul class="row list-unstyled">
+        <% for(var i=0; i<comments.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            User: <%=user.userName%> Commented: "<%=comments[i].comment %>" 
+          </li>
+            <!-- Add Likes for Comments-->
+          <div class="row justify-content-between">
+            <form
+             class="col-1"
+              action="/comment/likeComment/<%=post.id %>/<%=comments[i]._id %>?_method=PUT"
+              method="POST"
+            >
+              <button class="btn btn-primary fa fa-heart" type="submit"> <%=comments[i].likes%></button>
+           </form>
+            
+
+            <!-- Add Trash Can for the comments -->
+             <%if(comments[i].user == user.id){ %>
+              <form
+                action="/comment/deleteComment/<%=post.id %>/<%=comments[i]._id %>?_method=DELETE"
+                method="POST"
+                class="col-1"
+                >
+                <button class="btn btn-solid fa fa-trash" type="submit" style="color: red; font-size: 32px;"></button>
+              </form>
+            <%}%> 
+          </div>
+
+        <% } %>
+        </ul>
+    </div>
 
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>

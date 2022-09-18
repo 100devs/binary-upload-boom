@@ -25,6 +25,7 @@ module.exports = {
       const post = await Post.findById(req.params.id);
       //.populate fills createdBy (mongoose type objectId with a ref to User) with the actual content of user (using the saved objectId)
       //can't use lean() with populate, since it doesn't work on pojos
+      /* const comments = post.comments */
       const comments = await Comment.find({post: req.params.id}).sort({createdAt: "desc"}).populate('createdBy');
       res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
@@ -72,6 +73,8 @@ module.exports = {
       await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db
       await Post.remove({ _id: req.params.id });
+      //delete all comments in that post
+      await Comment.deleteMany({post: req.params.id})
       console.log("Deleted Post");
       res.redirect("/profile");
     } catch (err) {

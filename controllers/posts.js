@@ -29,11 +29,8 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
-      // "Post" on the below line references the post model - go into the post collection, find the post by the id.
       const post = await Post.findById(req.params.id);
-      // For finding comments with the current post id/property of the post the user ison.
-      const comments = await comments.find({post: req.params.id}).sort({createdAt: "desc" }).lean();
-      // "render" - show our post page. The post and user are also passing elements from the database to the view so the view can use them. 
+      const comments = await Comments.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
       res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);

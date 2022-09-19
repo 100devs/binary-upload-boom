@@ -62,7 +62,7 @@ module.exports = {
   deletePost: async (req, res) => {
     try {
       // Find post by id
-      let post = await Post.findById({ _id: req.params.id });
+      // let post = await Post.findById({ _id: req.params.id }); // <---dont need this line. this is for checking to see that the post is there. 
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db

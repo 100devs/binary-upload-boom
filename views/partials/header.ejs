@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Binary Upload Boom</title>
+    <title><%= title %></title>
     <link
       rel="icon"
       type="image/png"
@@ -26,11 +26,18 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-    <header class="container">
-      <div class="text-center">
-        <h1 class=""><a href="/profile">Binary Upload Boom</a></h1>
-        <span>The #100Devs Social Network</span>
-      </div>
-    </header>
-  </body>
-</html>
+		<header class="d-flex justify-content-center py-3 border-bottom">
+			<ul class="nav nav-pills">
+				<li class="nav-item">
+					<a href="/" class="nav-link <% if (page === 'index') { %> active <% } %>">Home</a>
+				</li>
+				<li class="nav-item"><a href="/feed" class="nav-link<% if (page === 'feed') { %> active <% } %>">Feed</a></li>
+				<% if (loggedIn) { %>
+					<li class="nav-item"><a href="/profile" class="nav-link<% if (page === 'profile') { %> active <% } %>">Profile</a></li>
+					<li class="nav-item"><a href="/logout" class="nav-link">Log out</a></li>
+				<% } else { %>
+					<li class="nav-item"><a href="/login" class="nav-link<% if (page === 'login') { %> active <% } %>">Log In</a></li>
+					<li class="nav-item"><a href="/signup" class="nav-link<% if (page === 'signup') { %> active <% } %>">Sign Up</a></li>
+				<% } %>
+			</ul>
+		</header>

@@ -7,6 +7,8 @@ const MongoStore = require("connect-mongo")(session);
 const methodOverride = require("method-override");
 const flash = require("express-flash");
 const logger = require("morgan");
+
+const { isLoggedIn } = require('./middleware/auth');
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
@@ -39,7 +41,7 @@ app.use(methodOverride("_method"));
 // Setup Sessions - stored in MongoDB
 app.use(
   session({
-    secret: "keyboard cat",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
@@ -51,6 +53,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Use flash messages for errors, info, ect...
+app.use(isLoggedIn);
 app.use(flash());
 
 //Setup Routes For Which The Server Is Listening

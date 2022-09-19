@@ -1,9 +1,20 @@
+# Notes
+
+## OG app
+- GIF are not accepted media for upload?
+
+
+
+
+
+
+
+
 auth
 profiles
 feeds
 posts (delete,like)
 comments
-
 
 
 edits?

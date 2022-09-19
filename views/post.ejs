@@ -14,11 +14,8 @@
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
         <%if(post.user == user.id){ %> <!-- Does person who made post = person logged in? Is it the users post? If so, display trash-->
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE" 
-          method="POST"
-          class="col-3"
-        > <!-----in the action we are appending the _method=DELETE for METHOD OVERRIDE (same for put)-->
+        <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-3"> 
+          <!-----in the action we are appending the _method=DELETE for METHOD OVERRIDE (same for put)-->
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
         <%}%>
@@ -41,24 +38,26 @@
     </div>
 
     <ul>
+      <!--TODO Add: username and delete button -->
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
-          <h3><%= comments[i].comment%></h3>
-          <!-- <h1><%= comments[i]._id%></h1> -->
+          <h5>Comment by <%= comments[i].createdBy%>:</h5>
+          <h3>"<%= comments[i].comment%>"</h3>
+         
 
           <!-- adding comment likes -->
           <form class="col-1" action="/comment/likeComment/<%= comments[i]._id %>?_method=PUT" method="POST">
             <button class="btn btn-primary fa fa-heart" type="submit"></button>
           </form>
           <h6 class="col-3">Likes: <%= comments[i].likes %></h6>
-
-
           <!-- adding comment likes above -->
 
           <!-- adding comment deletes below -->
-          <form action="/comment/deleteComment/<%= comments[i]._id %>?_method=DELETE" method="POST" class="col-3"> 
-            <button class="btn btn-primary fa fa-trash" type="submit"></button>
+          <%if(comments[i].createdById == user.id){ %>
+          <form action="/comment/deleteComment/<%= comments[i]._id %>?_method=DELETE" method="POST" > 
+            <button class="btn btn-outline-danger" type="submit">Delete</button>
           </form>
+          <%}%>
           <!-- adding comment deletes above -->
         </li>
       <% } %>

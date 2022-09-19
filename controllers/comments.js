@@ -36,7 +36,7 @@ module.exports = {
   },
   deleteComment: async (req, res) => {
     try {
-      const comment = await Comment.findById({ _id: req.params.id }); 
+      const comment = await Comment.findById({ _id: req.params.id }); //the .id is our choice, could do commentId (and be sure to specify in EJS and also put it in the router path)
       await Comment.deleteOne({ _id: req.params.id }); 
       console.log("Deleted Comment");
       console.log(comment)

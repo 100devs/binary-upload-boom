@@ -7,6 +7,11 @@ li {
     list-style-position: outside;
 }
 
+.feed-img{
+    width: 292px;
+    height: 292px
+}
+
 .fa-trash{
     color: rgb(237, 105, 94);
     background: inherit;
@@ -15,4 +20,9 @@ li {
 .fa-trash:hover{
     color: white !important;
     background: rgb(237, 105, 94) !important;
+}
+
+header.container{
+    max-width: 100%;
+    padding: 0;
 }

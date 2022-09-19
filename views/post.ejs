@@ -2,9 +2,13 @@
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
+
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
+
       <div class="row justify-content-between">
+        <!-- *METHOD OVERRIDE* '?_method=PUT' allows to override the form POST request to make a PUT request -->
+        <!-- Allows you to not have to use a fetch request via client side -->
         <form
           class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"
@@ -12,8 +16,12 @@
         >
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
+
         <h3 class="col-3">Likes: <%= post.likes %></h3>
+
+        <!-- IF the post was created by the User, it will display the delete form/button -->
         <%if(post.user == user.id){ %>
+        <!-- *METHOD OVERRIDE* '?_method=DELETE ' allows to override the form POST request to make a DELETE request -->
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
           method="POST"
@@ -22,16 +30,59 @@
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
         <%}%>
+
       </div>
     </div>
+    
+    <!-- Inserts the Poster's username and the caption of the post -->
     <div class="col-3 mt-5">
-      <p><%= user.userName %></p>
-      <p><%= post.caption %></p>
+      <p>Posted by: <%= user.userName %></p>
+      <p>Caption: <%= post.caption %></p>
     </div>
+
+    <!-- Form to add a new comment -->
+    <div class="">
+      <h2>Add Comments</h2>
+      <form
+          action="/comment/createComment/<%= post.id%>"
+          method="POST"
+      >
+          <input type="text" name="comment" id="comment">
+          <button class="btn btn-primary" type="submit">Add Comment</button>
+      </form>
+    </div>
+    
+    <!-- Loops through all post comments and lists them as li's-->
+    <ul>
+      <% for(var i=0; i<comments.length; i++) {%>
+        <li class=" justify-content-between mt-5">
+          <!-- Post comments -->
+          <%= comments[i].comment %> - <%= comments[i].userName %>
+
+          <!-- Post like btn -->
+          <form action="/comment/likeComment/<%= comments[i]._id %>?_method=PUT" 
+          method="POST"
+          >
+            <button class="btn btn-secondary" type="submit"><%= comments[i].likes %></button>
+          </form>
+
+          <!-- Post delete btn -->
+          <form
+          action="/comment/deleteComment/<%= comments[i]._id %>?_method=DELETE"
+          method="POST"
+          >
+            <button class="btn btn-secondary fa fa-trash" type="submit"></button>
+          </form>
+
+        </li>
+      <% } %>
+    </ul>
+
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
+
   </div>
 </div>
 

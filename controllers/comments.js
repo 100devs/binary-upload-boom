@@ -14,4 +14,13 @@ module.exports = {
       console.log(err);
     }
   },
+  addLike: async (req,res)=>{
+    try{
+      //how to verify unique user like?
+      
+
+    }catch(err){
+      console.log(err);
+    }
+  }
 };

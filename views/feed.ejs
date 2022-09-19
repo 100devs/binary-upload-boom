@@ -1,11 +1,17 @@
 <%- include('partials/header') -%>
   <div class="container">
     <div class="row justify-content-center mt-5">
-      <ul class="row list-unstyled">
+      <ul class=" list-unstyled h-100 justify-content-center align-items-center ">
+        
         <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
+          <li class="col-4 mx-auto card">
+            <a href="/post/<%= posts[i]._id%>" class="card-body">
               <img class="img-fluid" src="<%= posts[i].image%>">
+              <h2><%= posts[i].title %></h2>
+              <p><%= posts[i].caption %></p>
+              <% comments.filter(element => element.post == posts[i]._id).forEach(function (comment) { %>
+                <p><%= comment.comment %></p>
+              <% }) %>
             </a>
           </li>
         <% } %>

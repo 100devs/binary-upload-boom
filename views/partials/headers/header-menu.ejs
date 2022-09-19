@@ -103,9 +103,12 @@
                   </button>
                   
                   <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                    
+                    <li><a class="dropdown-item" href="/profile/<%= user._id%>">Profile</a></li>
+                   
                     <li><a class="dropdown-item" href="/settings">Settings</a></li>
                     <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                    
                   </ul>
                   <!-- <% console.log(url)%> -->
                   

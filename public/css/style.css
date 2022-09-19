@@ -748,7 +748,7 @@ body {
     height: 20vh;
 }
 
-.profile-item h2 {
+.profile-names {
     font-size: 2rem;
     text-transform: uppercase;
 }
@@ -770,6 +770,10 @@ body {
     padding: 0.5rem;
    text-transform: lowercase;
    color: #E1A750;
+}
+
+.profile-headings {
+    font-size: 1.5rem;
 }
 
 .profile-item-form-button {
@@ -960,6 +964,25 @@ body {
     margin-top: 2rem;
 }
 
+
+table {
+    border:1px solid #b3adad;
+    border-collapse:collapse;
+    padding:5px;
+}
+table th {
+    border:1px solid #b3adad;
+    padding:5px;
+    background: #f0f0f0;
+    color: #313030;
+}
+table td {
+    border:1px solid #b3adad;
+    text-align:center;
+    padding:5px;
+    background: #ffffff;
+    color: #313030;
+}
 
 
 

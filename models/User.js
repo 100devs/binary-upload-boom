@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
     teamName: {
       type: String, 
       unique: false,
-      default: 'big ballers' }, 
+     }, 
     sport: {
       type: String, 
       unique: false },

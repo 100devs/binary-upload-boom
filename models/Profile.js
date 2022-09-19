@@ -64,14 +64,6 @@ const ProfileSchema = new mongoose.Schema({
               teams: Number,
               required: false,
         }],
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
-        },
-        createdAt: {
-            type: Date,
-            default: Date.now,
-          },
     }
 });
 

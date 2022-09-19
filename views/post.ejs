@@ -27,11 +27,69 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+
+    <div class="mt-5">
+      <h2>Add a comment</h2>
+      <form action="/comment/createComment/<%= post._id%>" method="POST">
+        <div class="mb-3">
+            <label for="comment" class="form-label">Comment</label>
+            <input type="text" class="form-control" id="comment" name="comment">
+        </div>
+        <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+      </form>
+    </div>
+
+    <ul>
+      <% for(let i=0; i < comments.length; i++) {%>
+        <li class="col-6 justify-content-between mt-3">
+          <%= comments[i].comment%>
+          <div class="row justify-content-start">
+            <form
+              class="col-1"
+              action="/comment/likeComment/<%= comments[i]._id %>?_method=PUT"
+              method="POST"
+            >
+              <button class="btn btn-primary fa fa-thumbs-up" type="submit"></button>
+            </form>
+            <%if(post.user == user.id){ %>
+                <button 
+                  type="button" class="btn btn-primary fa fa-trash col-1 ms-2" data-bs-id='<%= comments[i]._id %>' data-bs-toggle="modal" data-bs-target="#popupConfirmDelete">
+                </button>
+              </form>
+            <%}%>
+            <span class="col-3">Likes: <%= comments[i].likes %></span>
+          </div>
+        </li>
+        <hr>
+      <% } %>
+    </ul>
+
+    <!-- Confirm Delete Modal -->
+    <div class="modal fade" id="popupConfirmDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="popupConfirmDeleteLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="popupConfirmDeleteLabel">Confirm Delete</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you wish to delete this comment?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="popup-delete-comment btn btn-primary">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Modal -->
+
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
   </div>
 </div>
+<script src="../js/main.js"></script>
 
 <%- include('partials/footer') -%>

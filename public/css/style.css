@@ -1,8 +1,18 @@
 ul {
-    padding-left: 1rem;
+    padding-left: 0rem;
 }
 
 li {
     list-style-type: none;
     list-style-position: outside;
+}
+
+.fa-trash{
+    color: rgb(237, 105, 94);
+    background: inherit;
+    border: none;
+}
+.fa-trash:hover{
+    color: white !important;
+    background: rgb(237, 105, 94) !important;
 }

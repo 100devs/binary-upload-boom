@@ -41,6 +41,18 @@
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
           <%= comments[i].comment%>
+          <%console.log("/comments/likeComment/"+comments[i]._id)%>
+          <div class="row justify-content-between">
+            <form class="col-1" action="/comment/likeComment/<%= comments[i]._id %>?_method=PUT" method="POST">
+              <button class="btn btn-primary fa fa-heart" type="submit"></button>
+            </form>
+            <h3 class="col-3">Likes: <%= comments[i].likes %></h3>
+            <%if(post.user == user.id){ %>
+              <form action="/comment/deleteComment/<%= comments[i]._id %>?_method=DELETE" method="POST" class="col-3">
+                <button class="btn btn-primary fa fa-trash" type="submit"></button>
+              </form>
+            <%}%>
+          </div>
         </li>
       <% } %>
     </ul>

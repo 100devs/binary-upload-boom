@@ -7,7 +7,7 @@
       <div class="row justify-content-between">
         <form
           class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
+          action="/post/likePost/<%= post._id %>?_method=PUT"
           method="POST"
         >
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
@@ -15,7 +15,7 @@
         <h3 class="col-3">Likes: <%= post.likes %></h3>
         <%if(post.user == user.id){ %>
         <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
+          action="/post/deletePost/<%= post._id %>?_method=DELETE"
           method="POST"
           class="col-3"
         >
@@ -27,31 +27,32 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
-    <div class="addComment">
-      <form action="/comment/createComment/<%= post._id %>" method="POST">
-        <div class="mb-3">
-            <label for="comment" class="form-label">Comment</label>
-            <input type="text" class="form-control" id="comment" name="comment">
+    <form class="row" action="/comment/createComment/<%= post._id %>" method="POST">
+        <div class="col form-floating">
+          <input type="text" class="form-control" id="comment" name="comment" placeholder="Cool!">
+          <label for="comment">Comment</label>
         </div>
-        <button type="submit" class="btn btn-primary">Submit Comment</button>
-      </form>
-    </div>
+        <button type="submit" class="col-3 btn btn-primary">Submit Comment</button>
+    </form>
     <% if (comments.length > 0) {%>
-    <div class="comments">
-      <ul>
+    <div class="comments mt-2">
+      <ul class="list-unstyled container">
         <% comments.forEach(e=> { %>
-          <li>
-            <span class="commenter"><%= e.user.userName %></span>
-            <span class="comment"><%= e.comment %></span>
-            <span class="likes"><%= e.likes %></span>
-            <span class="likeComment"><form
-              class="col-1"
-              action="/comment/likeComment/<%= post._id %>?_method=PUT"
-              method="POST"
-            >
-              <input type="hidden" name="commentID" value="<%= e._id %>">
-              <button class="btn btn-primary fa fa-heart" type="submit"></button>
-            </form></span>
+          <li class="row my-1">
+            <div class="badge text-muted bg-light col col-2">
+              <p class="commenter"><strong class="h5"><%= e.user.userName %></strong></p>
+              <em class="small">@ <%= new Intl.DateTimeFormat("en" , {
+                timeStyle: "short", dateStyle: "short"
+              }).format(e.createdAt) %></em>
+            </div>
+            <p class="col comment"><%= e.comment %></p>
+            <div class="col col-auto">
+              <form action="/comment/likeComment/<%= post._id %>?_method=PUT" method="POST">
+                <span class="likes"><%= e.likes %></span>
+                <input type="hidden" name="commentID" value="<%= e._id %>">
+                <button class="btn btn-primary fa fa-heart" type="submit"></button>
+              </form>
+            </div>
           </li>
         <% }) %>
       </ul>

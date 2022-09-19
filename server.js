@@ -9,8 +9,8 @@ const flash = require("express-flash");               // imports the flash packa
 const logger = require("morgan");                     // imports the morgan package, which allows http request logging
 const connectDB = require("./config/database");       // imports the DB connection configuration from the config/database file
 const mainRoutes = require("./routes/main");          // imports the main routes from the routes/main file 
-const postRoutes = require("./routes/posts");         // imports the post routes from the routes/post file
-
+const postRoutes = require("./routes/posts");         // imports the post routes from the routes/posts file
+const commentRoutes = require("./routes/comments");   // imports the comments routes from the routes/comments file
 //Use .env file in config folder to keep all sensitive information secure 
 require("dotenv").config({ path: "./config/.env" });
 
@@ -56,6 +56,7 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
+app.use("/comment", commentRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {

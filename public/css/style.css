@@ -6,7 +6,16 @@ li {
     list-style-type: none;
     list-style-position: outside;
 }
-
+a{
+    font-family: 'Reem Kufi Fun', sans-serif;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    font-size: 1.5em;
+}
+a:hover{
+    color: #A0BCC2;
+}
 .feed-img{
     width: 292px;
     height: 292px

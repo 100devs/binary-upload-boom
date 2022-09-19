@@ -27,23 +27,27 @@
 		<div class="mt-5">
 			<h2>My posts</h2>
 			<div class="row">
-<div class="mb-4 mb-lg-0 col-lg">
-			<% for(var i=0; i<posts.length; i += 2) {%>
-				<a href="/post/<%= posts[i]._id%>">
-					<img class="w-100 shadow-1-strong rounded mb-4" src="<%= posts[i].image%>">
-				</a>
-			<% } %>
-		</div>
-					<div class="mb-4 mb-lg-0 col-lg">
-			<% for(var i=1; i<posts.length; i += 2) {%>
-				<a href="/post/<%= posts[i]._id%>">
-					<img class="w-100 shadow-1-strong rounded mb-4" src="<%= posts[i].image%>">
-				</a>
-			<% } %>
-		</div>
+				<% let len = posts.length %>
+				<% let middle = len ? len / 2 : 0 %>
+
+					<% for(let i=0; i<len; i++) {%>
+				<div class="mb-4 mb-lg-0 col-lg">
+						<% if(posts[i].image) { %>
+						<a href="/post/<%= posts[i]._id%>">
+							<img class="w-100 shadow-1-strong rounded mb-4" src="<%= posts[i].image%>">
+						</a>
+						<% } else { %>
+						<p class="post wf-100">
+							<span class="postTitle"><%= posts[i].title %></span>
+							<span class="postCaption"><%= posts[i].caption %></span>
+							<button type="button" class="btn btn-primary">Edit</button>
+						</p>
+						<% } %>
+							</div>
+					<% } %>
 			</div>
-			
-		</div>  
+
+		</div>
   </div>
 </div>
 <%- include('partials/footer') -%>

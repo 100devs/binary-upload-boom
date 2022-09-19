@@ -36,17 +36,16 @@ module.exports = {
             console.log(err);
         }
     },
-};
-// deleteComment: async(req, res) => {
-//     try {
-//         // Find comment by post id
-//         let comment = await Post.findById({ _id: req.params.id });
 
-//         // Delete post from db
-//         await comment.remove({ _id: req.params.id });
-//         console.log("Deleted Comment");
-//         res.redirect("/post/" + req.params.id);
-//     } catch (err) {
-//         res.redirect("/post/" + req.params.id);
-//     }
-// },
+    // deleteComment: async(req, res) => {
+    //     try {
+    //         // Find comment by id
+    //         let comment = await comment.findById({ _id: req.params.id });
+    //         await Comment.remove({ _id: req.params.id });
+    //         console.log("Deleted Comment");
+    //         res.redirect("/post/" + req.params.id);
+    //     } catch (err) {
+    //         res.redirect("/post/" + req.params.id);
+    //     }
+    // },
+};

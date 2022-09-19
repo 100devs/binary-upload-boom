@@ -2,10 +2,12 @@ const cloudinary = require('../middleware/cloudinary');
 const Post = require('../models/Post');
 const User = require('../models/User');
 const Comment = require('../models/Comment');
+const Profile = require("../models/Profile");
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
+      const profile = await Profile.find({user: req.user.id})
       const posts = await Post.find({ user: req.user.id });
       const user = await User.findOne({ _id: req.user.id })
         .populate({
@@ -14,7 +16,7 @@ module.exports = {
         })
         .populate({ path: 'followers', select: '_id userName' });
       console.log(user);
-      res.render('profile.ejs', { posts: posts, user: user });
+      res.render('profile.ejs', { posts: posts, user: user , profile:profile});
     } catch (err) {
       console.log(err);
     }
@@ -115,6 +117,36 @@ module.exports = {
       res.redirect('/profile');
     } catch (err) {
       res.redirect('/profile');
+    }
+  },
+  createProfilePic: async (req, res) => {
+    try {
+      const result = await cloudinary.uploader.upload(req.file.path);
+      await Profile.create({
+        image: result.secure_url,
+        cloudinaryId: result.public_id,
+        user: req.user.id,
+      });
+      console.log("Profile pic has been updated!");
+      res.redirect("/profile");
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  updateProfilePic: async (req, res) => {
+    try {
+      const profile = await Profile.find({user: req.user.id})
+      if(profile.length > 0) await cloudinary.uploader.destroy(profile[0].cloudinaryId);
+      const result = await cloudinary.uploader.upload(req.file.path);
+      await Profile.findOneAndUpdate({user: req.user.id},{
+        image: result.secure_url,
+        cloudinaryId: result.public_id,
+        user: req.user.id,
+      });
+      console.log("Profile pic has been updated!");
+      res.redirect("/profile");
+    } catch (err) {
+      console.log(err);
     }
   },
 };

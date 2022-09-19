@@ -30,3 +30,11 @@
   .hit-voting {
     cursor: pointer;
   }
+
+  a, a:hover,a:visited, a:focus {
+    text-decoration:none;
+}
+
+.profile-comment-likes {
+  gap:50px;
+}

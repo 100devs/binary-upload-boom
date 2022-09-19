@@ -7,10 +7,11 @@ module.exports = {
       await Comment.create({
         comment: req.body.comment,
         likes: 0,
-        post: req.params.id,
+        post: req.params.postId,
+        user: req.params.userName
       });
       console.log("Comment has been added!");
-      res.redirect("/post/" + req.params.id);
+      res.redirect("/post/" + req.params.postId);
     } catch (err) {
       console.log(err);
     }

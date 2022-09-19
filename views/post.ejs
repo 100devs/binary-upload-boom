@@ -1,67 +1,65 @@
 <%- include('partials/header') -%>
-<div class="container">
+<div class="container padding-bottom-xl">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
-      <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
-        <form
-          class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
-          method="POST"
-        >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
-        </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
-        <%}%>
       </div>
     </div>
     <div class="col-3 mt-5">
+      <h2><%= post.title %></h2>
       <p><%= post.caption %></p>
-    </div>
-
-    <% for(var i=0; i < comment.length; i++) {%>
-    <div class="card mb-4">
-      <div class="card-body">
-        <p><%= comment[i].comment %></p>
-        <div class="d-flex justify-content-between">
-          <div class="d-flex flex-row align-items-center">
-            <p class="small mb-0 ms-2">Martha</p>
-          </div>
-          <div class="d-flex flex-row align-items-center justify-content-between">
-            <p class="small text-muted mb-0">Upvote?</p>
-            <form
-              action="/comment/likeComment/<%= comment[i]._id %>/<%= post.id %>?_method=PUT"
-              method="POST"
-              class="col-3"
-            >
-              <button type="button far fa-thumbs-up mx-2 text-black" class="btn far fa-thumbs-up mx-2 text-black"></button>
-            </form>
-            <p class="small text-muted mb-0"><%= comment[i].likes %></p>
+      <% for(var i=0; i < comment.length; i++) {%>
+        <div class="card mb-4">
+          <div class="card-body">
+            <p><%= comment[i].comment %></p>
+            <div class="d-flex justify-content-between">
+              <div class="d-flex flex-row align-items-center">
+                <p class="small mb-0 ms-2"><%= comment[i].user %></p>
+              </div>
+              <div class="d-flex flex-row align-items-center justify-content-around">
+                <form
+                  action="/comment/likeComment/<%= comment[i]._id %>/<%= post.id %>?_method=PUT"
+                  method="POST"
+                  class="col-3"
+                >
+                  <button type="button far fa-thumbs-up mx-2 text-black" class="btn far fa-thumbs-up mx-2 text-black"></button>
+                </form>
+                <p class="small text-muted mb-0"><%= comment[i].likes %></p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+        <% } %>
+
+        <div class="profile-comment-likes d-flex justify-content-between gx-5">
+
+            <form
+            class="col-1"
+            action="/post/likePost/<%= post.id %>?_method=PUT"
+            method="POST"
+          >
+              <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          </form>
+          <h3 class="col-3">Likes: <%= post.likes %></h3>
+          <%if(post.user == user.id){ %>
+          <form
+            action="/post/deletePost/<%= post.id %>?_method=DELETE"
+            method="POST"
+            class="col-3"
+          >
+            <button class="btn btn-primary fa fa-trash" type="submit"></button>
+          </form>
+          <%}%>
+        </div>
+        <form action="/comment/createComment/<%= post._id %>/<%= user.userName %>" method="POST">
+          <div class="mb-3">
+              <label for="comment" class="form-label">Comment</label>
+              <input type="text" class="form-control" id="comment" name="comment">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
-    <% } %>
-
-    <form action="/comment/createComment/<%= post._id %>" method="POST">
-      <div class="mb-3">
-          <label for="comment" class="form-label">Comment</label>
-          <input type="text" class="form-control" id="comment" name="comment">
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-
-
-
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

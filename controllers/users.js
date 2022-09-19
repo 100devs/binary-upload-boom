@@ -1,17 +1,23 @@
-const User = require("../models/User");
+const User = require('../models/User');
 
 module.exports = {
   followUser: async (req, res) => {
     try {
       const userToFollow = await User.findOne({ _id: req.params.id });
+      const user = await User.findOne({ _id: req.user._id });
       await User.findOneAndUpdate(
         { _id: req.user._id },
         {
           $addToSet: { following: userToFollow },
         }
       );
-      const user = await User.findOne({ _id: req.user._id });
-      res.redirect('back')
+      await User.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          $addToSet: { followers: userToFollow },
+        }
+      );
+      res.redirect('back');
     } catch (err) {
       console.log(err);
     }
@@ -19,13 +25,20 @@ module.exports = {
   unfollowUser: async (req, res) => {
     try {
       const userToFollow = await User.findOne({ _id: req.params.id });
+      const user = await User.findOne({ _id: req.user._id });
       await User.findOneAndUpdate(
         { _id: req.user._id },
         {
           $pull: { following: userToFollow._id },
         }
       );
-      res.redirect('back')
+      await User.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          $pull: { followers: userToFollow._id },
+        }
+      );
+      res.redirect('back');
     } catch (err) {
       console.log(err);
     }

@@ -2,9 +2,7 @@
 <div class="container">
   <div class="row mt-5">
     <div class="col-6">
-      <div>
-        <p><strong>User Name</strong>: <%= username %></p>
-      </div>
+      <div><%- include('partials/userDetails') -%></div>
       <% if (!following.includes(id)) { %>
       <form
         class="col-1"
@@ -54,6 +52,7 @@
         >
       </div>
     </div>
+    <%- include('partials/following') -%> <%- include('partials/followers') -%>
   </div>
 </div>
 <%- include('partials/footer') -%>

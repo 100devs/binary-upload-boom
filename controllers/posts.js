@@ -7,10 +7,13 @@ module.exports = {
   getProfile: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.user.id });
-      const user = await User.findOne({ _id: req.user.id }).populate({
-        path: 'following',
-        select: '_id userName',
-      });
+      const user = await User.findOne({ _id: req.user.id })
+        .populate({
+          path: 'following',
+          select: '_id userName',
+        })
+        .populate({ path: 'followers', select: '_id userName' });
+      console.log(user);
       res.render('profile.ejs', { posts: posts, user: user });
     } catch (err) {
       console.log(err);
@@ -18,16 +21,23 @@ module.exports = {
   },
   getPublicProfile: async (req, res) => {
     try {
-      const user = await User.find({ _id: req.params.id });
+      const user = await User.findOne({ _id: req.params.id })
+        .populate({
+          path: 'following',
+          select: '_id userName',
+        })
+        .populate({ path: 'followers', select: '_id userName' });
       const following = req.user.following;
       const posts = await Post.find({ user: req.params.id });
-      if (req.user._id.toString() === user[0]._id.toString())
+      console.log(user);
+      if (req.user._id.toString() === user._id.toString())
         res.redirect('/profile');
       res.render('publicProfile.ejs', {
         posts: posts,
-        username: user[0].userName,
-        id: user[0]._id,
+        username: user.userName,
+        id: user._id,
         following: following,
+        user: user,
       });
     } catch (err) {
       console.log(err);

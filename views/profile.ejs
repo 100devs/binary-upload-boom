@@ -3,8 +3,7 @@
   <div class="row mt-5">
     <div class="col-6">
       <div>
-        <p><strong>User Name</strong>: <%= user.userName %></p>
-        <p><strong>Email</strong>: <%= user.email %></p>
+        <%- include('partials/userDetails') -%>
         <a
           href="/logout"
           class="col-3 btn btn-primary"
@@ -87,16 +86,7 @@
         >
       </div>
     </div>
-    <div class="col-6">
-      <h2>Following</h2>
-      <% for (var i=0; i < user.following.length; i++) {%>
-      <li class="col-6 justify-content-between mt-5">
-        <a href="/publicProfile/<%= user.following[i]._id %>">
-          <span><%= user.following[i].userName %></span>
-        </a>
-      </li>
-      <% } %>
-    </div>
+    <%- include('partials/following') -%> <%- include('partials/followers') -%>
   </div>
 </div>
 <%- include('partials/footer') -%>

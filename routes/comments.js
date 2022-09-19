@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-//const postsController = require("../controllers/posts");
-const commentsController = ("../controllers/comments");
+
+const commentsController = require("../controllers/comments");
+//const commentController = ("../controllers/comments");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 

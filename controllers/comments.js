@@ -1,6 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
-const Comments = require("../models/Comments");
+const Comment = require("../models/Comments")
 
 
 module.exports = {
@@ -32,20 +32,17 @@ module.exports = {
       // "Post" on the below line references the post model - go into the post collection, find the post by the id.
       const post = await Post.findById(req.params.id);
       // For finding comments with the current post id/property of the post the user ison.
-      const comments = await comments.find({post: req.params.id}).sort({createdAt: "desc" }).lean();
+      const comments = await Comment.find({post: req.params.id}).sort({createdAt: "desc" }).lean();
       // "render" - show our post page. The post and user are also passing elements from the database to the view so the view can use them. 
       res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
     }
   },
-  createPost: async (req, res) => {
+  createComment: async (req, res) => {
     try {
-      // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
-
       await Post.create({
-        title: req.body.title,
+        comment: req.body.comment,
         image: result.secure_url,
         cloudinaryId: result.public_id,
         caption: req.body.caption,

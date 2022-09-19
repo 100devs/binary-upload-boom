@@ -49,7 +49,13 @@ module.exports = {
         .sort({ createdAt: 'desc' })
         .populate({ path: 'user', select: 'userName' })
         .lean();
-      res.render('feed.ejs', { posts: posts });
+      const likes = await Post
+        .aggregate([
+          {$match: {user: req.user._id}},
+          {$group: {_id: "$user", total: {$sum: "$likes"}}}
+        ])
+      console.log("total number of likes: ", likes[0].total)
+      res.render('feed.ejs', { posts: posts, likes: likes });
     } catch (err) {
       console.log(err);
     }

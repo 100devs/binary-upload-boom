@@ -17,6 +17,15 @@ module.exports = {
       console.log(err);
     }
   },
+  deleteComment: async (req, res) => {
+    try {
+      await Comment.deleteOne({_id: req.params.commentId})
+      console.log('Comment deleted')
+      res.redirect(`/post/${req.params.id}`)
+    } catch (err) {
+      console.log(err)
+    }
+  },
   //For later??????
   
 //   likePost: async (req, res) => {

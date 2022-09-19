@@ -34,12 +34,20 @@
       </form>
 
       <ul class="row list-unstyled mt-4">
-        <% for (let comment of comments) {%>
+        <% for (let comment of comments) { %>
           <li class="list-group-flush">
-            <%= comment.comment %>
+            <%= comment.createdBy %> says: <%= comment.comment %>
           </li>
+          <% if (user.id == comment.createdById) { %>
+            <form
+            action="/comment/deleteComment/<%=post.id%>/<%= comment._id %>?_method=DELETE"
+            method="POST"
+            class="col-3">
+            <button class="btn btn-outline-danger fa fa-trash" type="submit"></button>
+          </form>
+          <% } %>
         <% } %>
-        </ul>
+      </ul>
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>

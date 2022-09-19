@@ -27,6 +27,28 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+
+    <!-- comments -->
+    <div class="mt-5">
+      <form action="/comment/createComment/<%=post.id%>" method="POST">
+        <div class="mb-3">
+          <label for="comment" class="form-label">Comment</label>
+          <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <div class="mt-5">
+      <ul class="row">
+        <% for(var i=0; i<comments.length; i++) {%>
+          <li class="justify-content-between">
+            <%=comments[i].user%>:<%=comments[i].comment%>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+    <!-- comments -->
+
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

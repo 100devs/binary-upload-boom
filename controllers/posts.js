@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const User = require('../models/User');
 
 module.exports = {
   getHome: async (req, res) => { //changed getProfile to getHome
@@ -13,26 +14,29 @@ module.exports = {
       console.log(err);
     }
   },
-  getProfile: async (req, res) => { //changed getProfile to getHome
+  /* getProfile: async (req, res) => { //changed getProfile to getHome
     try {
       const posts = await Post.find({ user: req.user.id });
+      const profile = User.findById(req.params.id);
       const url = await req.originalUrl;
-      res.render("profile.ejs", { posts: posts, user: req.user, url: url }); //changed from profile.ejs to home.ejs //changes req.user to req.email
+      console.log(profile.id)
+      console.log()
+      res.render("profile.ejs", { posts: posts, user: req.user, profile: profile, url: url }); //changed from profile.ejs to home.ejs //changes req.user to req.email
 
     } catch (err) {
       console.log(err);
     }
-  },
-  getProfile: async (req, res) => { //changed getProfile to getHome
+  }, */
+ /*  getSettings: async (req, res) => { //changed getProfile to getHome
     try {
       const posts = await Post.find({ user: req.user.id });
       const url = await req.originalUrl;
-      res.render("profile.ejs", { posts: posts, user: req.user, url: url }); //changed from profile.ejs to home.ejs //changes req.user to req.email
+      res.render("settings.ejs", { posts: posts, user: req.user, url: url }); //changed from profile.ejs to home.ejs //changes req.user to req.email
 
     } catch (err) {
       console.log(err);
     }
-  },
+  }, */
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
@@ -47,6 +51,7 @@ module.exports = {
     try {
       const post = await Post.findById(req.params.id);
       const url = await req.originalUrl;
+      /* console.log(post) */
       res.render("post.ejs", { post: post, user: req.user, url: url }); //changes req.user to req.email
     } catch (err) {
       console.log(err);

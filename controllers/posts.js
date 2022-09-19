@@ -7,7 +7,11 @@ module.exports = {
   getProfile: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.user.id });
-      res.render('profile.ejs', { posts: posts, user: req.user });
+      const user = await User.findOne({ _id: req.user.id }).populate({
+        path: 'following',
+        select: '_id userName',
+      });
+      res.render('profile.ejs', { posts: posts, user: user });
     } catch (err) {
       console.log(err);
     }
@@ -15,12 +19,15 @@ module.exports = {
   getPublicProfile: async (req, res) => {
     try {
       const user = await User.find({ _id: req.params.id });
+      const following = req.user.following;
       const posts = await Post.find({ user: req.params.id });
       if (req.user._id.toString() === user[0]._id.toString())
         res.redirect('/profile');
       res.render('publicProfile.ejs', {
         posts: posts,
         username: user[0].userName,
+        id: user[0]._id,
+        following: following,
       });
     } catch (err) {
       console.log(err);

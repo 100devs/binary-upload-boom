@@ -10,17 +10,15 @@
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          <button class="btn btn-primary fa fa-thumbs-up" type="submit"></button>
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
         <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
+          <form class="col-3">
+            <button 
+              type="button" class="btn btn-primary fa fa-trash" data-bs-id='<%= post.id %>' data-bs-what="post" data-bs-toggle="modal" data-bs-target="#popupConfirmDelete">
+            </button>
+          </form>
         <%}%>
       </div>
     </div>
@@ -53,7 +51,7 @@
             </form>
             <%if(post.user == user.id){ %>
                 <button 
-                  type="button" class="btn btn-primary fa fa-trash col-1 ms-2" data-bs-id='<%= comments[i]._id %>' data-bs-toggle="modal" data-bs-target="#popupConfirmDelete">
+                  type="button" class="btn btn-primary fa fa-trash col-1 ms-2" data-bs-id='<%= comments[i]._id %>' data-bs-what="comment" data-bs-toggle="modal" data-bs-target="#popupConfirmDelete">
                 </button>
               </form>
             <%}%>
@@ -73,11 +71,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p>Are you sure you wish to delete this comment?</p>
+            <p>Are you sure you wish to delete this <span id="item-to-delete"></span>?</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="popup-delete-comment btn btn-primary">Delete</button>
+            <button type="button" class="popup-delete-item btn btn-primary">Delete</button>
           </div>
         </div>
       </div>

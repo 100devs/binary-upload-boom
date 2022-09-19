@@ -66,13 +66,18 @@ module.exports = {
     try {
       // Find post by id
       let post = await Post.findById({ _id: req.params.id });
+      let comments = await Comment.find({ post: req.params.id });
+      console.log("THIS MANY COMMENTS: ", comments);
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);
+      // Delete associated comments
+      await Comment.deleteMany({ post: req.params.id });
       // Delete post from db
       await Post.remove({ _id: req.params.id });
-      console.log("Deleted Post");
-      res.redirect("/profile");
+      console.log("Deleted Post serverside");
+      res.json("Deleted Post");
     } catch (err) {
+      console.log("ERROR in deletePost", err);
       res.redirect("/profile");
     }
   },

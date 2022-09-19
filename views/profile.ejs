@@ -10,6 +10,21 @@
           >Logout</a
         >
       </div>
+          <!-- adding pic -->
+          <img src="<%= profile[0] == undefined ? 'https://images.dog.ceo/breeds/shiba/shiba-13.jpg' : profile[0].image%>" alt="">
+          <!-- adding pic -->
+          <!-- profile picture upload-->
+          <div class="mt-5">
+            <h2>Change profile picture</h2>
+            <form action="<%= profile[0] == undefined ? '/post/createProfilePic?_method=POST' : '/post/createProfilePic?_method=PUT' %>" enctype="multipart/form-data" method="POST">
+              <div class="mb-3">
+                  <label for="file" class="form-label"></label>
+                  <input type="file" class="form-control" name="file" required>
+              </div>
+              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+            </form>
+        </div>
+        <!-- end profile picture -->
       <div class="mt-5">
         <h2>Add a post</h2>
         <form

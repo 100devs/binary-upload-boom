@@ -41,7 +41,6 @@
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
           <%= comments[i].comment%>
-          <%console.log("/comments/likeComment/"+comments[i]._id)%>
           <div class="row justify-content-between">
             <form class="col-1" action="/comment/likeComment/<%= comments[i]._id %>?_method=PUT" method="POST">
               <button class="btn btn-primary fa fa-heart" type="submit"></button>

@@ -4,12 +4,12 @@
       <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
+            <a href="/post/<%= posts[i]._id%>"> <!-- grab the post property and id to return the post; so when you click on the link it will take you directly to the post; the /post/ is the name we want to have for the route on top. it can be named anything-->
+              <img class="img-fluid" src="<%= posts[i].image%>"> <!--get the post and in the post the image for that post and the src will return the link for the image stored under 'image' in the databse (since we are stroing them elsewhere and not directly)-->
             </a>
           </li>
         <% } %>
         </ul>
     </div>
   </div>  
-<%- include('partials/footer') -%>
+<%- include('partials/footer') -%> <!-- in the partials folder you can add ejs files that every ejs will have. so the header and footer and just add this short to all the ejs files-->

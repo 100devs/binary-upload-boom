@@ -28,7 +28,7 @@
         <!-- audio player/editor -->
         <figure>
           <audio controls="controls">
-            <source src="<%= profile[0].profileSong == undefined ? 'https://docs.google.com/uc?export=download&id=0B-klwLEjaXWcZHR5SmJJWEwtYnc' : profile[0].profileSong %>">
+            <source src="<%= profile[0] == undefined ? 'https://docs.google.com/uc?export=download&id=0B-klwLEjaXWcZHR5SmJJWEwtYnc' : profile[0].profileSong %>">
           </audio>
         </figure>
         <div class="mt-5">

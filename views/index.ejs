@@ -1,5 +1,20 @@
 <%- include('partials/header') -%>
 
+<div class="hero min-h-screen bg-base-200">
+    <div class="hero-content flex-col lg:flex-row-reverse">
+      <div class="text-center lg:text-left">
+        <h1 class="text-5xl font-bold">Welcome to Pictogram</h1>
+        <p class="py-6">Login or create an account</p>
+      </div>
+      <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <div class="card-body">
+            <a href="/login" class="col-3 btn btn-primary"> Login</a>
+            <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <main class="container">
     <div class="row justify-content-around mt-5">
         <a href="/login" class="col-3 btn btn-primary"> Login</a>

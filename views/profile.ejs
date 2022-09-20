@@ -1,14 +1,42 @@
 <%- include('partials/header') -%>
+
+<div class="container-fluid mr-2.5" style="display: flex; justify-content: end">
+  <a href="/profile">
+    <h1><%= user.userName %></h1>
+  </a>
+</div>
+<div style="display: flex; justify-content: center">
+  <div tabindex="0" class="collapse collapse-plus bg-accent rounded-box"> 
+    <div class="collapse-title text-xl font-medium" style="color: white">
+      Add a post
+    </div>
+    <div class="collapse-content" style="color: white"> 
+      <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </div>
+        <div class="mb-3">
+          <label for="caption" class="form-label">Caption</label>
+          <textarea class="form-control" id="caption" name="caption"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="imgUpload" class="form-label">Image</label>
+          <input type="file" class="form-control" id="imageUpload" name="file">
+        </div>
+        <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
 <div class="container">
   <div class="row mt-5">
       <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-          </div>
           <div class="mt-5">
-            <h2>Add a post</h2>
+            <summary>
+              <h2>Add a post</h2>
+            </summary>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
                   <label for="title" class="form-label">Title</label>

@@ -25,6 +25,23 @@
             </form>
         </div>
         <!-- end profile picture -->
+        <!-- audio player/editor -->
+        <figure>
+          <audio controls="controls">
+            <source src="<%= profile[0].profileSong == undefined ? 'https://docs.google.com/uc?export=download&id=0B-klwLEjaXWcZHR5SmJJWEwtYnc' : profile[0].profileSong %>">
+          </audio>
+        </figure>
+        <div class="mt-5">
+          <h2>Change profile music</h2>
+          <form action="<%= profile[0] == undefined ? '/post/createProfileSong?_method=POST' : '/post/createProfileSong?_method=PUT' %>" enctype="multipart/form-data" method="POST">
+            <div class="mb-3">
+                <label for="file" class="form-label"></label>
+                <input type="file" class="form-control" name="file" required>
+            </div>
+            <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+          </form>
+        </div>
+         <!-- end audio player/editor -->
       <div class="mt-5">
         <h2>Add a post</h2>
         <form

@@ -34,13 +34,6 @@
           <input name="comment" type="text-area">
           <button class="btn btn-primary" type="submit">Submit</button>
         </form>
-        <!-- <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form> -->
       </div>
     </div>
     <div class="col-3 mt-5">
@@ -50,7 +43,23 @@
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
+    <div>
+      <ul>
+        <% comments.forEach(comment => {%>
+          <li>
+            <p><%= comment.comment %></p>
+            <%if (comment.user == user.id){ %>
+                <form 
+                  action="/comment/deleteComment/<%= comment._id %>.<%= post.id %>?_method=DELETE"
+                  method="POST"
+                >
+                  <button class="btn btn-primary fa fa-trash" type="submit"></button>
+                </form>
+            <%}%>
+          </li>
+        <%})%>
+      </ul>
+    </div>
   </div>
 </div>
-
 <%- include('partials/footer') -%>

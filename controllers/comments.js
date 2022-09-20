@@ -3,17 +3,6 @@ const Post = require("../models/Post");
 
 
 module.exports = {
-    getComments: async (req, res) => {
-        try {
-            const post = await Post.findById(req.params.id);
-            const comments = await Comment.find({ post: post });
-
-            res.resder("post.ejs", { comments: comments });
-        } catch (err) {
-            console.log(err);
-        }
-    },
-
     createComment: async (req, res) => {
         try {
             const post = await Post.findById(req.params.id);
@@ -27,6 +16,16 @@ module.exports = {
               res.redirect(`/post/${req.params.id}`);
         } catch (err) {
             console.log(err);
+        }
+    },
+
+    deleteComment: async (req, res) => {
+        try {
+            await Comment.remove({ _id: req.params.commentId.slice(0, req.params.commentId.indexOf(".")) });
+            res.redirect(`/post/${req.params.commentId.slice(req.params.commentId.indexOf(".")+1)}`);
+        } catch (err) {
+            console.log(err);
+            res.redirect(`/post/${req.params.commentId.slice(req.params.commentId.indexOf(".")+1)}`);
         }
     }
 }

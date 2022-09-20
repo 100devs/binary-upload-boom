@@ -21,7 +21,7 @@
 
 # Features
 - [ ] CSS Styling - Chavis
-- [ ] Implement delete comment functionality - Jonathan
+- [X] Implement delete comment functionality - Jonathan
 - [ ] Add profile pic to user profiles - Ryan
 - [ ] Allow users to follow other users - John
 - [ ] show username and number of likes on feed page - Nic
@@ -36,5 +36,5 @@
 :computer: [Github](https://github.com/johnmal-dev/)
 
 **:point_right: Jonathan Mani**
-:e-mail: [email@email.com](mailto:email@email.com)
-:computer: [Github](https://github.com/profile/)
+:e-mail: [email@email.com](mailto:social.chapters@simplelogin.com)
+:computer: [Github](https://github.com/jonathanmani/)

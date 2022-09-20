@@ -49,6 +49,7 @@
                   method="POST">
                   <button class="btn btn-primary fa fa-heart" type="text" disabled></button>
                 </form>
+                
                 <h6 class="col-6">Likes: <%= comment[i].likes %></h6><%
                 }else{%>
                 <form class="col-1" action="/comments/likeComment/<%= comment[i]._id %>/<%=post._id%>?_method=PUT"
@@ -56,6 +57,7 @@
                   <button class="btn btn-primary fa fa-heart" type="submit"></button>
                 </form>
                 <h6 class="col-6">Likes: <%= comment[i].likes %></h6><%}%>
+                
                 <%if(comment[i].user==user.id){ %>
                   <form action="/comments/deleteComment/<%= comment[i]._id %>/<%=post._id%>?_method=DELETE" method="POST"
                     class="col-3">

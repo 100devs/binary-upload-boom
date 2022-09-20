@@ -10,11 +10,20 @@
       <h3>Create new post</h3>
       <form action="/post/createPost" enctype="multipart/form-data" method="POST">
         <div class="mb-3">
+          <!--title-->
           <input type="text" class="form-control" id="title" name="title" placeholder="Title">
-          <textarea class="form-control" id="caption" name="caption" placeholder="Caption"></textarea>
-          <input type="file" class="form-control" id="imageUpload" name="file">
+          <!--description-->
+          <textarea class="form-control" id="description" name="description" placeholder="Description"></textarea>
+          <!--medium-->
+          <input type="text" class="form-control" id="medium" name="medium" placeholder="Medium">
+          <!--location created-->
+          <input type="text" class="form-control" id="location" name="location" placeholder="Location created">
+          <!--file-->
+          <input type="file" class="form-control" id="image" name="file">
+          <!--date created-->
+          <input type="date" class="form-control" id="dateCreated" name="dateCreated">
         </div>
-        <button type="submit" class="btn">Upload</button>
+        <button type="submit" class="btn">Submit</button>
       </form>
     </section>
     <!--section for activity feed (likes, comments)-->

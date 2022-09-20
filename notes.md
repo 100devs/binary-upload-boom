@@ -1,14 +1,23 @@
 # Notes
 
 ## OG app
-- GIF are not accepted media for upload?
+- GIF are not accepted media for upload? *Fixed in middleware/multer config.
+- Likes are not an option in the feed.
+- Bootstrap loaded fr header 
+
+## Edits
+Post Likes are not scoped to unique user. (Comment likes tbd)
+_Approach_
+    - Need array in schema
+    - when like is updated, check if user id is in array. If not, push user id into array and increment like. If yes, remove user id from array and decrement like.
+    - Format "user has liked" and "user has not liked" differently.
 
 
-
-
-
-
-
+## About Mongoose 
+Mongoose/Mongo console error logs are some of the clearest there are. 
+- $push will add the given object to field whether it exists or not
+- Unlike updateOne() , findOneAndUpdate gives you back the updated document.
+- The [$pullAll operator](https://www.mongodb.com/docs/manual/reference/operator/update/pullAll/) removes all instances of the specified values from an existing array. Unlike the $pull operator that removes elements by specifying a query, $pullAll removes elements that match the listed values.
 
 auth
 profiles

@@ -10,7 +10,9 @@
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          <button class="btn" type="submit">
+            <img class="icon notLiked" src="/imgs/notLiked.png" alt="not filled heart">
+          </button>
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
         <%if(post.user == user.id){ %>

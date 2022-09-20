@@ -1,6 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
+const { postLogin } = require("./auth");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -49,14 +50,31 @@ module.exports = {
   },
   likePost: async (req, res) => {
     try {
-      await Post.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
-        }
-      );
-      console.log("Likes +1");
+      //check if userid is in the array for that post, = already liked it
+      let chosenPost = await Post.findOne(
+        {_id: req.params.id, usersWhoLiked: req.user.id });
+      if (chosenPost){
+        await Post.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+            $inc: { likes: -1 },
+            $pullAll: { 'usersWhoLiked': [req.user.id] } 
+          }
+        );
+        console.log("Likes-1 and user from array");
+        
+      } else {
+        await Post.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+            $inc: { likes: 1 },
+            $addToSet: { 'usersWhoLiked': req.user.id } 
+          }
+        );
+        console.log("Likes +1");
+      }
       res.redirect(`/post/${req.params.id}`);
+
     } catch (err) {
       console.log(err);
     }

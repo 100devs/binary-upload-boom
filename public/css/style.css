@@ -1,0 +1,6 @@
+
+/* some patching before transition away from bootstrap */
+.icon {
+    width: 2rem;
+    height: 2rem;
+}

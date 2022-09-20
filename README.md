@@ -42,6 +42,7 @@ Building on the OG codebase as follows.
 - Clickable hashtags.
 - Posts that can be bookmarked (although also could repurpose likes).
 - Let users apply filters and edits to their image on upload (the more standard Instagram function). _Cloudinary functionality._
+- Let users tag each other in posts and comments. Outcome: show comments and posts tagged to you in specific section of your profile. Same behavior for other users' profiles for their tags/mentions.
 
 ## Learnings
 With each update, my workflow has generally been in Model => Controller => View order as well. 

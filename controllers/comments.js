@@ -12,7 +12,7 @@ module.exports = {
             console.log("Comment has been added!");
             res.redirect(`/post/${req.params.id}`);
         } catch (err) {
-            console.log(err);
+            console.log(err); 
         }
     },
     deleteComment: async (req, res) => {

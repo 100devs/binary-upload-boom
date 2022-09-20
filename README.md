@@ -1,10 +1,10 @@
 # Social App
-Social app clone to wander through the MVC. Not the most original layout thus far and Bootstrapped, but will be trying some different things after functionality is in.
+Social app clone to wander through the MVC. Not the most original layout thus far and Bootstrapped, but will be trying some different things after functionality is in. Forked from 100devs.
 
 Includes user authentication, post/comment attribution, unique likes, etc.
 
 ## Progress
-Building on the OG codebase.
+Building on the OG codebase as follows.
 
 ---
 **Unique likes per user** (although you can still like your own posts) + **Comments with attribution**
@@ -16,7 +16,7 @@ Building on the OG codebase.
 
 ![likes_from_feed](https://user-images.githubusercontent.com/102257735/191158522-98a35f24-3e4f-4a7d-bf07-a521637fe140.jpg)
 
-**DONE**
+**Done**
 - Update multer config to accept GIFs.
 - Post Likes are not scoped to unique user. _Approach:_
     - Need array in schema

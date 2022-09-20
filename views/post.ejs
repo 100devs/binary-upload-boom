@@ -4,6 +4,7 @@
     <div class="col-6">
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
+      <!-- Like and Delete -->
       <div class="row justify-content-between">
         <form
           class="col-1"
@@ -22,6 +23,24 @@
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
         <%}%>
+      </div>
+      <!-- Comments -->
+      <div class="row justify-content-between">
+          <form
+            class="col-1"
+            action="/comment/createComment/<%= post.id %>"
+            method="POST"
+          >
+          <input name="comment" type="text-area">
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+        <!-- <form
+          action="/post/deletePost/<%= post.id %>?_method=DELETE"
+          method="POST"
+          class="col-3"
+        >
+          <button class="btn btn-primary fa fa-trash" type="submit"></button>
+        </form> -->
       </div>
     </div>
     <div class="col-3 mt-5">

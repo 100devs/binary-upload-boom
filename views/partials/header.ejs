@@ -42,7 +42,7 @@
                     <a class="nav-link active" aria-current="page" href="/feed">Feed</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/profile">Profile</a>
+                    <a class="nav-link" href="/profile/<%= user._id %>">Profile</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="/logout">Logout</a>
@@ -50,7 +50,7 @@
                   <li class="nav-item dropdown">
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <li><a class="dropdown-item" href="/feed">Feed</a></li>
-                      <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                      <li><a class="dropdown-item" href="/profile/<%= user._id %>">Profile</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" href="/logout">Logout</a></li>
                     </ul>

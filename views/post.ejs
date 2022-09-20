@@ -21,7 +21,7 @@
             <li class="mt-1 pb-2 border-bottom">
               <% for (let i = 0; i < users.length; i++) { %>
                 <% if (String(users[i]._id) == post.user) { %>
-                  <span class="fw-bold"> <%= users[i].userName %>: </span>
+                  <a class="fw-bold text-reset text-decoration-none" href="/profile/<%= users[i]._id %>""> <%= users[i].userName %> </a>
                 <% } %>
               <% } %>
               <span><%= post.caption %></span>
@@ -31,7 +31,7 @@
               <li class="mt-1">
                 <% for (let j = 0; j < users.length; j++) { %>
                   <% if (String(users[j]._id) === comments[i].user) { %>
-                    <span class="fw-bold"> <%= users[j].userName %>:</span>
+                    <a class="fw-bold text-reset text-decoration-none" href="/profile/<%= users[j]._id %>""> <%= users[j].userName %> </a>
                   <% } %>
                 <% } %>
                 <span> <%= comments[i].comment %> </span>

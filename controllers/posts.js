@@ -4,27 +4,24 @@ const Comment = require("../models/Comment");
 const User = require("../models/User")
 
 module.exports = {
-  getProfile: async (req, res) => {
-    try {
-      const posts = await Post.find({ user: req.user.id });
-      res.render("profile.ejs", { posts: posts, user: req.user });
-    } catch (err) {
-      console.log(err);
-    }
-  },
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      res.render("feed.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
     }
   },
   getPost: async (req, res) => {
     try {
+      const commentsUsers = []
       const post = await Post.findById(req.params.id);
+      commentsUsers.push(post.user)  // Push the poster's ID into the array
       const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
-      const users = await User.find().lean();
+      for (let comment of comments) {
+        commentsUsers.push(comment.user) // Iterate through comments and pushing all user IDs into the array
+      }
+      const users = await User.find({_id: commentsUsers}).lean();
       res.render("post.ejs", { post: post, user: req.user, comments: comments, users: users });
     } catch (err) {
       console.log(err);

@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const User = require("../models/User");
 const Comment = require("../models/Comment");
 const { postLogin } = require("./auth");
 
@@ -23,8 +24,31 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
+      const author = await User.findById(post.user);
+
       const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
-      res.render("post.ejs", { post: post, user: req.user, comments: comments });
+
+      //prob not the most efficient approach
+      //essentially tacking on the username outside the db
+      for (const comment of comments){
+        const writer = await User.findById(comment.user);
+        comment.writer = writer.userName;
+        console.log(writer.userName)
+      }
+
+      console.log(comments)
+    
+      //if req.user has liked this post, return a mark
+      const likedByViewer = post.usersWhoLiked.includes(req.user.id)
+      //returns a boolean
+
+      res.render("post.ejs", { 
+        post: post, 
+        author: author,
+        user: req.user, 
+        likedByViewer,
+        comments: comments 
+      });
     } catch (err) {
       console.log(err);
     }

@@ -1,6 +1,28 @@
 
 /* some patching before transition away from bootstrap */
+
+/**visual diff **/
+.emph {
+    font-weight:bold;
+}
+
+
+/**Layout**/
 .icon {
     width: 2rem;
     height: 2rem;
+}
+
+.Post__container {
+    border: 1px solid lightgray;
+}
+
+.container__flag {
+    border: 1px solid red;
+    display: flex;
+
+}
+
+ul {
+    list-style: none;
 }

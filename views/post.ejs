@@ -1,55 +1,63 @@
 <%- include('partials/header') -%>
 <div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-6">
+  <div class="row mt-5 container__flag">
+    <div class="col-6 Post__container">
       <h2><%= post.title %></h2>
+      <span class="col">By: <%= author.userName %></span>
       <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
+      <div class="row align-items-center">
         <form
-          class="col-1"
+          class="col"
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
           <button class="btn" type="submit">
-            <img class="icon notLiked" src="/imgs/notLiked.png" alt="not filled heart">
+              <img 
+                class="icon notLiked" 
+                src='<%= likedByViewer ? "/imgs/liked.png" : "/imgs/notLiked.png" %>'
+                alt="not filled heart"
+              >
+            <span><%= likedByViewer ? "You and " : "" %><%= post.likes %> liked this</span>
           </button>
         </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
         <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
-        <%}%>
+          <form
+            action="/post/deletePost/<%= post.id %>?_method=DELETE"
+            method="POST"
+            class="col-3"
+          >
+            <button class="btn btn-primary fa fa-trash" type="submit"></button>
+          </form>
+          <%}%>
+      </div>
+      <div class="d-flex">
+        <p><%= post.caption %></p>
       </div>
     </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
+    <div class="col mt-2">
+      <ul>
+        <% for(var i=0; i<comments.length; i++) {%>
+          <li class="justify-content-between mt-4" id="<%=comments[i]._id %>">
+            <span class="emph"><%= comments[i].writer%></span>
+            <span><%= comments[i].comment%></span>
+          </li>
+        <% } %>
+      </ul>
     </div>
-    <div class="mt-5">
-      <h2>Add a comment</h2>
-      <form action="/comment/createComment/<%=post._id%>" method="POST">
-        <div class="mb-3">
-            <label for="comment" class="form-label">Comment</label>
-            <input type="text" class="form-control" id="comment" name="comment">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
-    <ul>
-      <% for(var i=0; i<comments.length; i++) {%>
-        <li class="col-6 justify-content-between mt-5" id="<%=comments[i]._id %>">
-          <%= comments[i].comment%>
-        </li>
-      <% } %>
-    </ul>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
-    </div>
+  </div>
+  <div class="mt-5">
+    <h2>Add a comment</h2>
+    <form action="/comment/createComment/<%=post._id%>" method="POST">
+      <div class="mb-3">
+          <label for="comment" class="form-label">Comment</label>
+          <input type="text" class="form-control" placeholder="Type comment..." id="comment" name="comment">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <div class="col-6 mt-5">
+    <a class="btn btn-primary" href="/profile">Return to Profile</a>
+    <a class="btn btn-primary" href="/feed">Return to Feed</a>
   </div>
 </div>
 

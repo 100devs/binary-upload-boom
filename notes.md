@@ -2,16 +2,10 @@
 
 ## OG app
 - GIF are not accepted media for upload? *Fixed in middleware/multer config.
-- Likes are not an option in the feed.
 - Bootstrap loaded fr header 
-
-## Edits
-Post Likes are not scoped to unique user. (Comment likes tbd)
-_Approach_
-    - Need array in schema
-    - when like is updated, check if user id is in array. If not, push user id into array and increment like. If yes, remove user id from array and decrement like.
-    - Format "user has liked" and "user has not liked" differently.
-
+- No Likes possible from feed
+- Not unique likes
+- No likes of comments
 
 ## About Mongoose 
 Mongoose/Mongo console error logs are some of the clearest there are. 

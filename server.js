@@ -31,8 +31,8 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//Logging
-app.use(logger("dev"));
+//Logging too noisy
+// app.use(logger("dev"));
 
 //Use forms for put / delete
 app.use(methodOverride("_method"));

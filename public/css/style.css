@@ -63,15 +63,19 @@ main.index, main.signup, main.login{
 main.profile h3{
     font-size: 1.2rem;
 }
+/* main.profile input .form-control:focus {
+    border-color: #198754 !important;
+    box-shadow: 0 0 0 0.25rem #198754a0;
+} */
 main.profile p{
     text-align: center;
 }
-    main.profile img{
+    main.profile img, main.feed img{
         border: 1px solid #000;
         transition: all 1s ease;
     }
-    main.profile img:hover{
-        transform: scale(2.5);
+    main.profile img:hover, main.feed img:hover{
+        transform: scale(2);
     }
 /* MAIN - post */
 main.post>div.row>img{
@@ -88,29 +92,88 @@ main.post>div.row>img{
 main.post h3{
     text-align: left;
 }
-main.post div.postData i, section.comments i{
-    color: #198754;
+main.post section.postData div.postHead{
+    margin: 0 0 1em 0;
 }
-main.post div.postData span.likes, section.comments span.likes{
-    margin-left: .5em;
+main.post section.postData p.desc{
+    margin: 0;
 }
-main.post form{
+main.post section.postData p.author{
     margin: 0;
     display: inline;
 }
-    main.post form.col-1 button{
+main.post section.postData h5{
+    margin: .4em 0 0 0;
+    font-size: .9rem;
+    font-weight: 600;
+}
+main.post section.postData span{
+    font-weight: 300;
+}    
+main.post section.postData span.likes{
+    display: inline;
+}
+main.post section.postData i, section.comments i{
+    color: #198754;
+}
+main.post section.postData span.likes, section.comments span.likes{
+    margin-left: .5em;
+}
+main.post form.addComment{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+    main.post div.postBtns{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        font-family: var(--bs-font-sans-serif);
+    }
+    main.post form.col {
+        margin: .2em 0 0 0.25em;
+
+        flex: none;
+    }
+    main.post form.col-1 button, main.post form.col button{
         font-size: 1rem;
         line-height: 1.5;
     }
 main.post h4{
     font-size: 1.1rem;
 }
-main.post section.comments ul li div{
-    display: inline;
+main.post section.comments{
+    border-top: 3px dotted #19875487;
+}
+main.post section.comments > h4{
+    padding: 1.5em 0 .5em 0;
+    font-weight: 600;
+}
+main.post section.comments ul li.card {
+    margin-top: .45em;
+    border: none;
+    flex-direction: row;
+    border-bottom: 2px solid #198754;
+    background-color: #57807029;
+}
+main.post section.comments .col-11, main.post section.comments .col-3{
+    padding: calc(var(--bs-gutter-x)/ 2);
+}
+main.post section.comments .col-1{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 main.post section.comments p{
-    margin: .5em 0 0 0;
+    margin: 0;
 }
+main.post section.comments div.row.divider{
+    height: 2px solid #198754;
+    /* width: 1; */
+}
+/*Main - feed */
+
 /* Footer */
 footer{
     height: 8vh;

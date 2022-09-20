@@ -48,6 +48,10 @@ const PostSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  pinned: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 module.exports = mongoose.model("Post", PostSchema);

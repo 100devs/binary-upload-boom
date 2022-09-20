@@ -24,6 +24,11 @@ Building on the OG codebase.
 - Make it possible to respond to comments - possibly format differently.
 - Make it visually acceptable (and consider deviating wildly from Instagram design).
 
+**Stretch goals**
+- Try a very different visual approach. Need to decide on mobile and desktop experience.
+- Let users apply filters and format variations (skins/themes) to images in their entire feed (selective class).
+- Let users apply filters and edits to their image on upload (the more standard Instagram function). _Cloudinary functionality._
+
 ## Setup 
 **Install**
 

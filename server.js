@@ -12,6 +12,11 @@ const { isLoggedIn } = require('./middleware/auth');
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
+const commentRoutes = require("./routes/comments");
+
+
+const PORT = process.env.PORT || 2121
+const SESSION_SECRET = process.env.SESSION_SECRET || 'yoursecretsession';
 
 //Use .env file in config folder
 require("dotenv").config();
@@ -42,8 +47,9 @@ app.use(methodOverride("_method"));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
+//	  cookie: { maxAge: process.env.COOKIE_DURATION || 60*60*24 }, // 1h
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
@@ -56,11 +62,17 @@ app.use(passport.session());
 app.use(isLoggedIn);
 app.use(flash());
 
+
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
+app.use("/comment", commentRoutes);
+
+app.use('*',(res,req,next) => {
+    res.locals.user = req.user;
+})
 
 //Server Running
-app.listen(process.env.PORT, () => {
-  console.log("Server is running, you better catch it!");
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}, you better catch it!`);
 });

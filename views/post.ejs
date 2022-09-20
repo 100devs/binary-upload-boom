@@ -2,6 +2,7 @@
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
+       <!-- Post Section -->
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
@@ -12,6 +13,7 @@
         >
           <button class="btn btn-dark fa fa-heart" type="submit"></button>
         </form>
+         <!-- Likes Display -->
         <h3 class="col-3">Likes: <%= post.likes %></h3>
         <%if(post.user == user.id){ %>
         <form
@@ -24,9 +26,11 @@
         <%}%>
       </div>
     </div>
+     <!-- Caption-->
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+     <!-- Comment Form Section -->
       <div class="mt-5">
         <h2>Add a Comment</h2>
         <form action="/comment/createComment/<%= post._id%>" method="POST">
@@ -36,18 +40,32 @@
           </div>
           <button type="submit" class="btn btn-dark">Submit</button>
         </form>
+        
       </div>
+      <!-- Display Comments-->
     </div>
     <ul class="list-group-flush">
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="list-group-item">
-          <%= comments[i].createdBy %>:  <%= comments[i].comment%>
-        </li>
-      <% } %>
+           <!-- Comment Username: Comment -->
+          <%= comments[i].createdBy %>:  <%= comments[i].comment%> 
+          <!-- If the user is logged in, should see a trash can for their own comment -->
+          <br>
+          <%if(comments[i].createdById == user.id) { %>
+          <form
+          action="/comment/deleteComment/<%=post._id%>/<%= comments[i]._id %>?_method=DELETE"
+          method="POST"
+        >
+          <button class="btn btn-dark fa fa-trash" type="submit"></button>
+        </form>
+        <%}%>
+      </li>
+    <% } %>
       </ul>
+     <!-- Return Navigation -->
     <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
+      <a class="btn btn-dark" href="/profile">Return to Profile</a>
+      <a class="btn btn-dark" href="/feed">Return to Feed</a>
     </div>
   </div>
 </div>

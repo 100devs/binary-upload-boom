@@ -1,4 +1,5 @@
 const Comment = require("../models/Comments")
+const User = require("../models/User");
 
 
 module.exports = {
@@ -18,14 +19,13 @@ module.exports = {
       console.log(err);
     }
   },
-  deleteComments:  async (req, res) => {
-    try{
-      // deleteOne is a mongoose method. Could also do findbyID and Delete
-      await Comment.deleteOne({_id: req.params.commentId})
-      console.log("Comment was deleted");
+  deleteComment: async (req, res) => {
+    try {
+      await Comment.deleteOne({ _id: req.params.commentid })
+      console.log("comment removed")
       res.redirect("/post/"+req.params.postid);
-    } catch (err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
   }
 };

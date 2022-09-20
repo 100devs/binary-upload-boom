@@ -37,6 +37,8 @@ Building on the OG codebase as follows.
 **Stretch goals**
 - Try a very different visual approach. Need to decide on mobile and desktop experience.
 - Let users apply filters and format variations (skins/themes) to images in their entire feed (selective class).
+- Clickable hashtags.
+- Posts that can be bookmarked (although also could repurpose likes).
 - Let users apply filters and edits to their image on upload (the more standard Instagram function). _Cloudinary functionality._
 
 ## Learnings

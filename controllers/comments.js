@@ -21,21 +21,17 @@ module.exports = {
   },
 
     deleteComment: async (req, res) => {
-    // try {
+     try {
+   let comment = await Comment.findById({ _id: req.body.id });
 
-      console.log(req.params);
-      console.log(req.body);
-    //   let comment = await Comment.findById({ _id: req.params.id });
-
-
-    //   await Comment.remove({ _id: req.params.id });
-    //   console.log("Deleted Post");
-    // } catch (err) {
-    //   console.log(err);
-    //   req.flash('error', { msg: 'Your comment could not be deleted.' })
-    // } finally {
-    //   res.redirect(`/post/${req.body.post}`);
-    // }
+       await Comment.remove({ _id: req.body.id });
+       console.log("Deleted Post");
+     } catch (err) {
+      console.log(err);
+      req.flash('error', { msg: 'Your comment could not be deleted.' })
+    } finally {
+      res.redirect(`/post/${req.body.post}`);
+    }
 
   },
 

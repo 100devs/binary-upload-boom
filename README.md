@@ -9,12 +9,12 @@ Building on the OG codebase.
 ---
 **Unique likes per user** (although you can still like your own posts) + **Comments with attribution**
 
-![unique_likes](https://user-images.githubusercontent.com/102257735/191148698-8ee8d7ec-30e7-48e1-ab4d-d2ce36cbfaa9.png)
+![unique_likes](https://user-images.githubusercontent.com/102257735/191158487-f0a942d3-9889-4070-aee0-a7b38bfd5ac2.jpg)
 
 ---
 **Like posts from the feed**
-![likes_from_feed](https://user-images.githubusercontent.com/102257735/191158045-f596a384-080c-432d-9b8a-4a8e12440174.png)
 
+![likes_from_feed](https://user-images.githubusercontent.com/102257735/191158522-98a35f24-3e4f-4a7d-bf07-a521637fe140.jpg)
 
 **DONE**
 - Update multer config to accept GIFs.
@@ -24,8 +24,8 @@ Building on the OG codebase.
 - Format "user has liked" and "user has not liked" differently.
 - Each comment has user attribution.
 - Make it possible to like a post from the feed view: 
-  - Troubleshooting: The same conditionals and even others that worked previously/elsewhere (getPost) was not working for getFeed. Source: .lean() was stripping out some matching logic from the docs being returned. Once removed, conditionals worked partially.
-  - Proceeding with the working logic (.includes), but leaving comments for future test (controllers/posts.js, for getFeed()).
+  - Troubleshooting: The same conditionals and even others that worked previously/elsewhere (getPost) was not working for getFeed. Turns out that .lean() was stripping out some aspect of the doc that was preventing matching logic. Once removed, the previous conditional worked.
+  - Proceeding with the working logic (.includes), but leaving comments (postsController.getFeed) for future testing as the reasons for failure for those are still TBD.
 
 **On deck**
 - Make it possible to like comments.

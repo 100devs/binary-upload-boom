@@ -18,7 +18,7 @@ Building on the OG codebase as follows.
 
 **Done**
 - Update multer config to accept GIFs.
-- Post Likes are not scoped to unique user. _Approach:_
+- Post Likes are now unique users. _Approach:_
     - Need array in schema
     - when like is updated, check if user id is in array. If not, push user id into array and increment like. If yes, remove user id from array and decrement like.
 - Format "user has liked" and "user has not liked" differently.

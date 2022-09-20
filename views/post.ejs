@@ -28,7 +28,7 @@
       <p><%= post.caption %></p>
     </div>
     <div>
-      <h2>Add a post</h2>
+      <h2>Add a comment</h2>
         <form action="/comment/createComment/<%=post._id%>"method="POST">
           <div class="mb-3">
             <label for="title" class="form-label">comment</label>
@@ -37,9 +37,10 @@
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
-    <ul>
+
+    <ul style="margin-top: 50px;">
       <% for(var i=0; i<comments.length; i++) {%>
-        <li><%= comments[i].comment %></li>
+        <li style="margin-top: 10px;"><%= comments[i].comment %></li>
       <% } %>
     </ul>
 

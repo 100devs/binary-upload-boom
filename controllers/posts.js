@@ -13,6 +13,7 @@ module.exports = {
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      console.log(posts)
       res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
@@ -38,6 +39,7 @@ module.exports = {
         caption: req.body.caption,
         likes: 0,
         user: req.user.id,
+        userName: req.user.userName
       });
       console.log("Post has been added!");
       res.redirect("/profile");

@@ -1,0 +1,76 @@
+body{
+    height: 100%;
+    width: 100%;
+    background-image: url('/imgs/brickWall.jpeg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    color: white;
+}
+header{
+    border-bottom: 3px solid goldenrod;
+    position: fixed;
+    width: 100% !important;
+    padding: 0% 2%;
+    background-color: white;
+    opacity: .85;
+    color: black
+}
+.row{
+    padding-top: 8%;
+}
+h1{
+    font-family: 'Dosis', sans-serif;
+}
+h1 > a {
+    text-decoration: none;
+    color: goldenrod;
+}
+h1 > a:hover {
+    text-decoration: none;
+    color: black;
+}
+#headerContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+#logContainer{
+    display: flex;
+    justify-content: center;
+}
+#loginContainer{
+    flex-direction: column;
+    justify-content: center;
+    width: 30%;
+    margin-top: 10%;
+}
+.btn {
+    background-color: goldenrod;
+    border-color: black;
+}
+.btn:hover {
+    color: white;
+    background-color: black;
+    border-color: goldenrod;
+}
+#loginBtn, #signUpBtn{
+    width: 95%;
+    margin: 3%;
+}
+#inputContainer{
+    width: 100%;
+}
+#feedContainer{
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 50%;
+    color: black;
+}
+#postList{
+    width: 100%;
+    border: 2px solid grey;
+    border-radius: 8px;
+    background-color: white;
+}

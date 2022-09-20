@@ -13,6 +13,14 @@ const ProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  profileSong: {
+    type: String,
+    require: true,
+  },
+  songCloudinaryId: {
+    type: String,
+    require: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

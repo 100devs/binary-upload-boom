@@ -22,10 +22,13 @@ module.exports = {
 
     deleteComment: async (req, res) => {
      try {
+
+
    let comment = await Comment.findById({ _id: req.body.id });
 
        await Comment.remove({ _id: req.body.id });
        console.log("Deleted Post");
+             req.flash('success', { msg: 'Your comment has been deleted.' })
      } catch (err) {
       console.log(err);
       req.flash('error', { msg: 'Your comment could not be deleted.' })
@@ -34,6 +37,30 @@ module.exports = {
     }
 
   },
+    likeComment: async (req, res) => {
+    try {
+
+			const comment = await Comment.findById(req.params.id);
+			const poster = comment.user; // You have an id here, no the name and the like info of the user
+			const commenter = req.body.commenter;
+			if (commenter === poster) {
+				throw new Error("You can't like your own comment!");
+			} else if (comment.likedUsers.includes(commenter)) {
+				throw new Error('You have already liked this comment.');
+			} else {
+				comment.likedUsers.push(commenter);
+				comment.likes += 1;
+				await comment.save();
+			}
+			console.log("Likes +1");
+    } catch (err) {
+      console.log(err);
+			req.flash('error', { msg: err.message });
+    } finally {
+			res.redirect(`/post/${req.body.post}`);
+		}
+  },
+
 
 
 

@@ -8,7 +8,7 @@ const methodOverride = require("method-override");
 const flash = require("express-flash");
 const logger = require("morgan");
 
-const { isLoggedIn } = require('./middleware/auth');
+const { isLoggedIn,ensureAuth } = require('./middleware/auth');
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
@@ -66,7 +66,7 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
-app.use("/comment", commentRoutes);
+app.use("/comment",ensureAuth, commentRoutes);
 
 app.use('*',(res,req) => {
     if(req.user) res.locals.user = req.user;

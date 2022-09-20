@@ -36,7 +36,7 @@ module.exports = {
       let comment = await Comment.findById({ _id: req.params.id });
       
       // Delete post from db
-      await Post.remove({ _id: req.params.id });
+      await Comment.remove({ _id: req.params.id });
       console.log("Deleted Post");
       res.redirect("/profile");
     } catch (err) {

@@ -1,3 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+html,
+body,
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.logo-image {
+  max-width: 300px;
+  width: 100%;
+}
+
 .profile-pic-container {
   width: 200px;
   height: 200px;
@@ -9,4 +28,10 @@
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.btn {
+  min-width: 200px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }

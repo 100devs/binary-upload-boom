@@ -4,8 +4,6 @@ const commentSchema = new mongoose.Schema({
     comment: {
         type: String,
         require: true,
-        minlen: 10,
-        unique: false,
     },
     postId: {
         type: mongoose.Types.ObjectId,

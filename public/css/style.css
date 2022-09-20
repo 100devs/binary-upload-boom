@@ -17,3 +17,12 @@ p.post {
   min-width: 30px;
   flex: 0 0 30%;
 }
+
+.comment-title {
+    display: flex;
+    align-items: baseline;
+}
+
+.comment-title span {
+    font-size: 12px;
+}

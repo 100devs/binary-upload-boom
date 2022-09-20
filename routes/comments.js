@@ -6,6 +6,9 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Post Routes - simplified for now
 
+router.post("/editComment" , commentsController.editComment);
 router.post("/createComment" , commentsController.createComment);
+router.delete("/deleteComment" , commentsController.deleteComment);
+router.post("/deleteComment" , commentsController.deleteComment);
 
 module.exports = router;

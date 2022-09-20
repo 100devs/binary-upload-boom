@@ -47,31 +47,79 @@
       <img class="img-fluid" src="<%= post.image%>" />
     </div>
     <div class="col-md">
-      <div class="border p-3 mb-3"><h3><%= post.user.userName %>:</h3> <%= post.caption %></div>	
+      <div class="border p-3 mb-3"><h3><%= post.user.userName %>:</h3> <%= post.caption %></div>
 				<% for(var i=0; i<comments.length; i += 3) {%>
-					<div class="border p-3 mb-3"><h3><%= comments[i].user.userName %>:</h3> <%= comments[i].comment %></div>
+					<div class="border p-3 mb-3"><h3><%= comments[i].user.userName %>:</h3><span><a href="#!" class="link-muted commentModify" data-bs-toggle="modal"
+                               data-bs-target="#myModal"
+                               data-bs-id="<%= comments[i].id %>"><i class="fas fa-pencil-alt ms-2"></i></a>
+</span><span>
+
+
+  <%if(comments[i].user.id == user.id){ %>
+        <form action="/comment/deleteComment/<%= comments[i].id %>" method="post"class="col-3" >
+          <button class="btn btn-primary fa fa-trash" type="submit"></button>
+        </form>
+        <%}%>
+
+</span>
+
+          <p><%= comments[i].comment %></p>
+          </div>
+
+
+
           <% } %>
-			<div class="row mt-5">
-				<div class="col">
+			<div class="row mt-5 justify-content-around">
         <% if (post.user.id !== user.id) { %>
-                <button type="button" class="btn btn-primary mx-auto d-block mt-5" data-bs-toggle="modal" data-bs-target="#modalForm">
+                <button type="button" class="btn btn-primary col-3" data-bs-toggle="modal" data-bs-target="#modalForm">
             Add a comment
         </button>
 
       <% } else { %>
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
+      <a class="btn btn-primary col-3" href="/profile">Return to Profile</a>
    <% } %>
 
 
-			</div>
-			<div class="col">
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
+      <a class="btn btn-primary col-3" href="/feed">Return to Feed</a>
     </div>
     </div></div>
   </div>
   </div>
 
  <!-- Click on Modal Button -->
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modify my comment</h4>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+                        <form action="/comment/editComment" method="post" id="commentForm">
+            <div class="modal-body">
+                                <label class="form-label" for="comment">Your comment</label>
+                                <input type="hidden" class="form-control" id="post" name="post" value="<%= post.id %>" />
+                                <input type="hidden" class="form-control" id="user" name="user" value="<%= user.id %>" />
+                      <textarea class="form-control col-xs-12" rows="7" cols="50" name="comment" id="commentArea"></textarea>
+                            <div class="modal-footer d-block">
+                            </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-warning float-end">Submit</button>
+
+            </div>
+                        </form>
+
+        </div>
+    </div>
+</div>
 
         <!-- Modal -->
         <div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -82,7 +130,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="/comment/createComment" method="post">
+                        <form action="/comment/createComment" method="post" id="formComment">
                             <div class="mb-3">
                                 <label class="form-label" for="comment">Your comment</label>
                                 <input type="hidden" class="form-control" id="post" name="post" value="<%= post.id %>" />
@@ -100,4 +148,5 @@
         </div>
 
 
-<%- include('partials/footer') -%>
+
+<%- include('partials/footer', {script: '/js/post.js'}) %>

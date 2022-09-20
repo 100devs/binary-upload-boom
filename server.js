@@ -68,8 +68,8 @@ app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 app.use("/comment", commentRoutes);
 
-app.use('*',(res,req,next) => {
-    res.locals.user = req.user;
+app.use('*',(res,req) => {
+    if(req.user) res.locals.user = req.user;
 })
 
 //Server Running

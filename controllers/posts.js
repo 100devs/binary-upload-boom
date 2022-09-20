@@ -22,24 +22,55 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
-      let comments2 = await
-      Comment.aggregate( [
-        {
-          $lookup:
+      //const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+      let comments = await Comment.aggregate(
+        [
+          //Find all the posts with a post value that matches the postID of the post we are currently looking at
           {
-            from: "users",
-            localField: "user",
-            foreignField: "_id",
-            as: "userInfo"
+            $match: {
+              $expr: {
+                $eq: ['$post', { $toObjectId: req.params.id } ]
+              }
+            }
+          },
+          //Grab the users collection, compare the user field on the comments collection to the _id field on the users collection. Return the entire document from the users collection if the id's match. Name that new field userInfo on the comment document.
+          {
+            $lookup:  {
+              from: "users",
+              localField: "user",
+              foreignField: "_id",
+              as: "userInfo"
+            }
+          },
+          //Flaten the userInfo field so it is not an array.
+          {
+            $unwind: "$userInfo"
+          },
+          //Add a field to the comment document that holds the userName from inside the userInfo field added above.
+          {
+            $addFields: {
+              "userName": "$userInfo.userName",
+            }
+          },
+          //Show only the relevant fields to a comment, so we aren't passing things like our hashed user password to the client
+          {
+            $project: {
+              comment: 1,
+              userName: 1,
+              createdAt: 1
+            }
+          },
+          //Show oldest comments first
+          {
+            $sort: {
+              createdAt: 1,
+            }
           }
-        }
-      ])
-      // .exec((err, users) => {
-      //   comments2 = users;
-      //   console.log(comments2);
-      // })
-      res.render("post.ejs", { post: post, user: req.user, comments: comments, comments2: comments2 });
+        ]
+      )
+      //Log the retrieved comments to the console
+      await console.log(comments);
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
     }

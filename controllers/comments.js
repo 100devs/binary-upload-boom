@@ -17,7 +17,7 @@ module.exports = {
       } catch (err) {
         console.log(err);
         req.flash('error', { msg: 'Your comment could not be added.' })
-    } fiinally {
+    } finally {
     res.redirect(`/post/${req.body.post}`);
     }
   }

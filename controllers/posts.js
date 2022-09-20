@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary"); // Cloudinary for image storage and fetching
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   // Get profile page
@@ -26,7 +27,8 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id); // Find post with uri id
-      res.render("post.ejs", { post: post, user: req.user }); // Render the post
+      const comments = await Comment.find({post:post._id});
+      res.render("post.ejs", { post: post, comments:comments, user: req.user }); // Render the post
     } catch (err) {
       console.log(err);
     }

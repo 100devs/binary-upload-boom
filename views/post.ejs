@@ -1,17 +1,16 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row justify-content-center mt-3">
-    <div>
-      <h2><%= post.title %></h2>
-      <span><%= post.user.userName %></span>
-      <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
+
+<div style="display: flex; justify-content: center">
+  <div class="card w-96 bg-base-100 shadow-xl" style="width: 70%">
+    <figure><img src="<%= post.image%>" /></figure>
+    <div class="card-body">
+      <div class="mb-3" style="display: flex; justify-content: space-between">
         <form
           class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          <button class="fa fa-heart" type="submit"></button>
         </form>
         <span class="col-3">Likes: <%= post.likes %></span>
         <%if(post.user == user.id){ %>
@@ -24,33 +23,32 @@
         </form>
         <%}%>
       </div>
-    </div>
-    <div>
+      <h2 class="card-title"><%= post.title %></h2>
+      <span class="badge"><%= post.user.userName %></span>
       <p><%= post.caption %></p>
-    </div>
-  </div>
-</div>
+      
+      <!-- Add comment -->
+      <div class="mt-5">
+        <h2 class="font-bold mb-1">Add a comment</h2>
+        <form action="/comments/createComment/<%= post.id %>" method="POST">
+          <div class="mb-3">
+              <textarea type="text" class="form-control input input-bordered" id="text" name="text" placeholder="Leave a comment" style="width: 100%"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
 
-<!-- Add comment -->
-<div class="mt-5">
-  <h2>Add a comment</h2>
-  <form action="/comments/createComment/<%= post.id %>" method="POST">
-    <div class="mb-3">
-        <label for="text" class="form-label">Comment</label>
-        <input type="text" class="form-control" id="text" name="text">
+      <!-- Show comment -->
+      <div class="container">
+        <div class="row justify-content-center mt-5">
+          <ul class="row list-unstyled">
+            <% for(var i=0; i<comments.length; i++) {%>
+              <%- include('partials/comment', { postId: post.id, comment: comments[i], depth: 0 }) -%>
+            <% } %>
+            </ul>
+        </div>
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>
-
-<!-- Show comment -->
-<div class="container">
-  <div class="row justify-content-center mt-5">
-    <ul class="row list-unstyled">
-      <% for(var i=0; i<comments.length; i++) {%>
-        <%- include('partials/comment', { postId: post.id, comment: comments[i], depth: 0 }) -%>
-      <% } %>
-      </ul>
   </div>
 </div>
 

@@ -1,7 +1,7 @@
 <%- include('partials/header') -%>
 <div style="display: flex; flex-direction: column; align-items: center">
   <% for(var i=0; i<posts.length; i++) {%>
-    <div class="card w-96 glass mb-2.5">
+    <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mb-3.5">
       <figure>
         <a href="/post/<%= posts[i]._id%>">
           <img class="img-fluid" src="<%= posts[i].image%>">

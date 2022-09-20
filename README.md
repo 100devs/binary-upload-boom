@@ -30,6 +30,7 @@ Building on the OG codebase as follows.
 
 **On deck**
 - Make it possible to like comments.
+- Change 'like' back to SVGs.
 - Make it possible to sort posts in feed by recency, popularity (number of likes), personal favorites (liked by viewer), etc.
 - Make it possible for commenter to delete their own comments.
 - Make it possible to respond to comments - possibly format differently.

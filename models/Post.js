@@ -31,6 +31,12 @@ const PostSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  // array of comments for each post that is created
+  // each comment is an object with a comment and likes property
+  // an array is used because there can be multiple comments for each post
+  comments: [{
+    type: mongoose.Schema.Types.ObjectId, ref: 'Comment'
+  }]
 });
 
 // "Post" connects to the actual collection in our DB, PostScema is the name of the above schema

@@ -6,10 +6,12 @@ Includes user authentication, post/comment attribution, unique likes, etc.
 ## Progress
 Building on the OG codebase.
 
+---
 **Unique likes per user** (although you can still like your own posts) + **Comments with attribution**
 
 ![unique_likes](https://user-images.githubusercontent.com/102257735/191148698-8ee8d7ec-30e7-48e1-ab4d-d2ce36cbfaa9.png)
 
+---
 **Like posts from the feed**
 ![likes_from_feed](https://user-images.githubusercontent.com/102257735/191158045-f596a384-080c-432d-9b8a-4a8e12440174.png)
 
@@ -45,13 +47,9 @@ With each update, my workflow has generally been in Model => Controller => View 
 
 ## Setup 
 **Install**
-
 `npm install`
 
----
-
 **Things to add**
-
 - Create a `.env` file in config folder and add the following as `key = value`
   - PORT = 2121 (can be any port example: 3000)
   - DB_STRING = `your database URI`
@@ -59,8 +57,5 @@ With each update, my workflow has generally been in Model => Controller => View 
   - API_KEY = `your cloudinary api key`
   - API_SECRET = `your cloudinary api secret`
 
----
-
 **Run**
-
 `npm start`

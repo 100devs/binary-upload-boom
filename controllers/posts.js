@@ -1,13 +1,17 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 const Comment = require("../models/Comment")
+const Profile = require("../models/Profile")
 module.exports = {
   getProfile: async (req, res) => {
     try {
       //find all the post for the user using the unique user id using the mongo find method Which uses the model that knows the collection name
       const posts = await Post.find({ user: req.user.id });
+      //need to make a varible to hold the user info from req
+      const profile = await Profile.find({user:req.user.id})
       //render that users profile page with all the found post and passing the requests userID
-      res.render("profile.ejs", { posts: posts, user: req.user });
+      console.log(profile)
+      res.render("profile.ejs", { posts: posts, profile: profile, user:req.user.id });
       //catch error and log the error if there is one
     } catch (err) {
       console.log(err);
@@ -30,7 +34,7 @@ module.exports = {
       //find post in the database using the id tag of the unique post
       const post = await Post.findById(req.params.id);
       //finding all comments for this post
-      const comments = await Comment.find({post: req.params.id}).sort({createdAt: "desc"}).lean()
+      const comments = await Comment.find({post: req.params.id}).sort({createdAt: "asc"}).lean()
       //render the ejs and passing it the post data
       res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
@@ -39,11 +43,13 @@ module.exports = {
   },
   //request to create post
   createPost: async (req, res) => {
+    console.log("test to see if createpost is working")
     try {
       // Upload image to cloudinary and telling cloudinary exactly where to grab it store the results from cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
       //add post information to the database using the Post Model 
       //console.log(result)
+      
       await Post.create({
         //getting the title from the form request
         title: req.body.title,

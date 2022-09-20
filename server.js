@@ -15,6 +15,8 @@ const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
 //sets where our comment route is stored
 const commentRoutes = require("./routes/comment")
+const friendRoutes = require("./routes/friendFinder")
+const profileRoutes = require("./routes/profile")
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
 
@@ -61,6 +63,8 @@ app.use(flash());
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 app.use("/comment", commentRoutes);
+app.use("/friendRoutes", friendRoutes);
+app.use("/profile", profileRoutes);
 //Server Running
 //listening for all the requests 
 

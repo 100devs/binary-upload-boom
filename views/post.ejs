@@ -25,19 +25,39 @@
       <p><%= post.caption %></p>
     </div>
 
-    <!-- //comment input form  -->
+
+
     <form action="/comment/createComment/<%=post._id%>"  method="POST">
       <div class="mb-3">
         <label for="comment" class="form-label">Comment</label>
         <textarea type="text" class="form-control" id="comment" name="comment"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+      <button type="submit" class="btn btn-primary" value="Upload">
+        Submit
+      </button>
     </form>
+   <% if (comments.createdByName == user.userName ){%> 
+    <form action="/comment/deleteComment/<%= post.id %>?_method=DELETE"
+       method="POST"
+       class="col-3">
+       
+       <button class="btn btn-primary fa fa-trash" type="submit"></button>
+     </form>
+    <% } %>
 
     <ul> 
       <% for(var i=0; i < comments.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
-          <%= comments[i].comment %>       
+         <span style="color:blue;font-size: 25px;"><%= comments[i].createdByName %>  :</span>   
+          <%= comments[i].comment %> 
+          <% if (comments[i].createdByName == user.userName ){%> 
+            <form action="/comment/deleteComment/<%=post.id%>/<%=comments[i]._id %>?_method=DELETE"
+               method="POST"
+               class="col-3">
+               
+               <button class="btn btn-outline-danger" type="submit">DELETE</button>
+             </form>
+            <% } %>
               <% if (comments[i].userIds.includes(user.id) == false ) { %>
                     <form class="col-1" action="/comment/likeComment/<%= comments[i]._id %>&<%=post.id%>&<%= user.id  %>?_method=PUT" method="POST">
                       <!-- //using method override to change forms POST method to PUT -->

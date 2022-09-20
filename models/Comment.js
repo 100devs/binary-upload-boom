@@ -14,6 +14,16 @@ const CommentSchema = new mongoose.Schema({
     type: Array,
     require: false,
   },
+  createdByName:{
+    type: String,
+    ref: "user"
+  },
+  createdById: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  },
+
+  
   post: {
     //grabbing the user id using the User Schema Moongoose will atomatically name the collection name the models name with an s so "Posts"
     type: mongoose.Schema.Types.ObjectId,

@@ -1,17 +1,71 @@
 <!-- //reuseable ejs header in the partials folder -->
 <%- include('partials/header') -%>
 <div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
-          <div>
-            <!-- display user's name -->
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-            <!-- display user's email    -->
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-          </div>
+  <form action="/profile/profileCreate" enctype="multipart/form-data" method="POST">
+    <div class="row mt-5">
+        <div>
+      
+              <!-- display user's name -->
+                <p><strong>User Name</strong>: <%= user.userName %></p>
+              <!-- display user's email    -->
+                <p><strong>Email</strong>: <%= user.email %></p>
+                <p><strong>Dog's name:</p>
+                
+                <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+            </div>
+
+            <div> 
+              <label for="dogName" class="dogName">Dog's Name</label>
+              <textarea class="form-control" id="dogName" name="dogName"><% profile.dogName %> </textarea>  
+            </div>
+            <!-- user about me section -->
+            <div> 
+              <label for="areaCode" class="areaCode">Area Code</label>
+              <textarea class="form-control" id="areaCode" name="areaCode">01040
+              </textarea>  
+            </div>
+            
+            <div class="mb-3">
+              <label for="imgUpload" class="form-label">Profile Image</label>
+              <!-- //input file type passing in our image file -->
+              <input type="file" class="form-control" id="imageUpload" name="file">
+            </div>
+
+            <div>
+            <label for="userAbout" class="form-label">Activies and Interest</label>
+              <textarea class="form-control" id="userAbout" name="userAbout">
+                userAboutMe 
+              </textarea>  
+            </div>
+            <!-- users activities insterests maybe have a few drop downs or even have a bunch of checkmark options like hiking, walking, training, interested in group training, looking to find friends, intersted in play date, swimming -->
+            <div> 
+              <label for="userActivies" class="form-label">Activies and Interest</label>
+              <textarea class="form-control" id="userActivies" name="userActivies">
+                userActivies   
+              </textarea>  
+            </div>
+            
+            
+          <!-- more about dog ~ details Size drop down menu, with small med large x-large -->
+          <div> <p>Dog size</p>
+              <textarea class="form-control" id="dogSize" name="dogSize">
+                dogSize  
+              </textarea>  
+            </div>
+            
+            <!-- Dog Stle -->
+            <div> <p>Dog play style</p>
+              <textarea class="form-control" id="playStyle" name="playStyle">
+                playStyle  
+              </textarea>  
+            </div>
+            <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+   </div>
+  </form>
+
+          
           <div class="mt-5">
-            <h2>Add a post</h2>
+            <h2>Add photos to your Feed</h2>
             <!-- form to sumbit a new post request with the route post/createPost-->
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
@@ -31,6 +85,8 @@
             </form>
           </div>
       </div>
+
+
       <!-- //this section displays all the users past posts -->
       <div class="col-6">
         <ul class="row list-unstyled">
@@ -49,8 +105,6 @@
           <a class="btn btn-primary" href="/feed">Return to Feed</a>
         </div>  
       </div>  
-    </div>
-  </div>
 </div>
 <!-- //this is the reusable ejs foot -->
 <%- include('partials/footer') -%>

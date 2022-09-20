@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 //setting up the post schema 
-const PostSchema = new mongoose.Schema({
-  title: {
+const ProfileSchema = new mongoose.Schema({
+  userAbout: {
     type: String,
     required: true,
   },
-  image: {
+  imageProfile: {
     type: String,
     require: true,
   },
@@ -13,12 +13,19 @@ const PostSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  caption: {
+  dogName: {
+    type: String, 
+    required: true,
+  },
+  userActivies: {
     type: String,
     required: true,
   },
-  likes: {
-    //setting like to interger so that we can increment it later using the mongo methos $inc
+  dogSize: {
+    type: String,
+    required: true,
+  },
+  areaCode:{
     type: Number,
     required: true,
   },
@@ -36,7 +43,7 @@ const PostSchema = new mongoose.Schema({
 //creating a model Post using the postSchema     
 //Moongoose will atomatically name the collection name the models name with an "s" so "Posts"
  
-module.exports = mongoose.model("Post", PostSchema,);
+module.exports = mongoose.model("Profile", ProfileSchema,);
 
 
 //mongoose custom name example

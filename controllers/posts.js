@@ -2,12 +2,12 @@ const cloudinary = require('../middleware/cloudinary');
 const Post = require('../models/Post');
 const User = require('../models/User');
 const Comment = require('../models/Comment');
-const Profile = require("../models/Profile");
+const Profile = require('../models/Profile');
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const profile = await Profile.find({user: req.user.id})
+      const profile = await Profile.find({ user: req.user.id });
       const posts = await Post.find({ user: req.user.id });
       const user = await User.findOne({ _id: req.user.id })
         .populate({
@@ -16,14 +16,14 @@ module.exports = {
         })
         .populate({ path: 'followers', select: '_id userName' });
       console.log(user);
-      res.render('profile.ejs', { posts: posts, user: user , profile:profile});
+      res.render('profile.ejs', { posts: posts, user: user, profile: profile });
     } catch (err) {
       console.log(err);
     }
   },
   getPublicProfile: async (req, res) => {
     try {
-      const user = await User.findOne({ _id: req.params.id })
+      const user = await User.findOne({ _id: req.params.id });
       const profile = await Profile.findOne({ user: req.params.id })
         .populate({
           path: 'following',
@@ -41,7 +41,7 @@ module.exports = {
         id: user._id,
         following: following,
         user: user,
-        song: profile && profile.profileSong ? profile.profileSong : null
+        song: profile && profile.profileSong ? profile.profileSong : null,
       });
     } catch (err) {
       console.log(err);
@@ -53,12 +53,12 @@ module.exports = {
         .sort({ createdAt: 'desc' })
         .populate({ path: 'user', select: 'userName' })
         .lean();
-      const likes = await Post
-        .aggregate([
-          {$match: {user: req.user._id}},
-          {$group: {_id: "$user", total: {$sum: "$likes"}}}
-        ])
-      console.log("total number of likes: ", likes[0].total)
+      const likes = await Post.aggregate([
+        { $match: { user: req.user._id } },
+        { $group: { _id: '$user', total: { $sum: '$likes' } } },
+      ]);
+      console.log('total number of likes: ', likes[0].total);
+      console.log(posts);
       res.render('feed.ejs', { posts: posts, likes: likes });
     } catch (err) {
       console.log(err);
@@ -135,58 +135,68 @@ module.exports = {
         cloudinaryId: result.public_id,
         user: req.user.id,
       });
-      console.log("Profile pic has been updated!");
-      res.redirect("/profile");
+      console.log('Profile pic has been updated!');
+      res.redirect('/profile');
     } catch (err) {
       console.log(err);
     }
   },
   updateProfilePic: async (req, res) => {
     try {
-      const profile = await Profile.find({user: req.user.id})
-      if(profile.length > 0) await cloudinary.uploader.destroy(profile[0].cloudinaryId);
+      const profile = await Profile.find({ user: req.user.id });
+      if (profile.length > 0)
+        await cloudinary.uploader.destroy(profile[0].cloudinaryId);
       const result = await cloudinary.uploader.upload(req.file.path);
-      await Profile.findOneAndUpdate({user: req.user.id},{
-        image: result.secure_url,
-        cloudinaryId: result.public_id,
-        user: req.user.id,
-      });
-      console.log("Profile pic has been updated!");
-      res.redirect("/profile");
+      await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        {
+          image: result.secure_url,
+          cloudinaryId: result.public_id,
+          user: req.user.id,
+        }
+      );
+      console.log('Profile pic has been updated!');
+      res.redirect('/profile');
     } catch (err) {
       console.log(err);
     }
   },
   createProfileSong: async (req, res) => {
     try {
-      const result = await cloudinary.uploader.upload(req.file.path,
-        { resource_type: "video"});
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        resource_type: 'video',
+      });
       await Profile.create({
         profileSong: result.secure_url,
         songCloudinaryId: result.public_id,
         user: req.user.id,
       });
-    
-      console.log("Profile song has been set!");
-      res.redirect("/profile");
+
+      console.log('Profile song has been set!');
+      res.redirect('/profile');
     } catch (err) {
       console.log(err);
     }
   },
   updateProfileSong: async (req, res) => {
     try {
-      const profile = await Profile.find({user: req.user.id})
-      if(profile.length > 0) await cloudinary.uploader.destroy(profile[0].songCloudinaryId);
-      const result = await cloudinary.uploader.upload(req.file.path,
-        { resource_type: "video"});
-      await Profile.findOneAndUpdate({user: req.user.id},{
-        profileSong: result.secure_url,
-        songCloudinaryId: result.public_id,
+      const profile = await Profile.find({ user: req.user.id });
+      if (profile.length > 0)
+        await cloudinary.uploader.destroy(profile[0].songCloudinaryId);
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        resource_type: 'video',
       });
-      console.log("Profile song has been updated!");
-      res.redirect("/profile");
+      await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        {
+          profileSong: result.secure_url,
+          songCloudinaryId: result.public_id,
+        }
+      );
+      console.log('Profile song has been updated!');
+      res.redirect('/profile');
     } catch (err) {
       console.log(err);
     }
-  }
+  },
 };

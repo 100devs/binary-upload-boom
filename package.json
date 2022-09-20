@@ -27,5 +27,14 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "validator": "^13.6.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidHenry-Dev/binary-upload-boom-comments.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DavidHenry-Dev/binary-upload-boom-comments/issues"
+  },
+  "homepage": "https://github.com/DavidHenry-Dev/binary-upload-boom-comments#readme",
+  "devDependencies": {}
 }

@@ -29,6 +29,10 @@ const PostSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  commentIds: {
+    type: Array,
+    default: []
+  }
 });
 
 module.exports = mongoose.model("Post", PostSchema);

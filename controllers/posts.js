@@ -23,7 +23,7 @@ module.exports = {
     try {
       const post = await Post.findById(req.params.id); //Finds post object in post db using _id
       const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean()
-      res.render("post.ejs", { post: post, user: req.user, comments: comments }); //renders post.ejs with post of user
+      res.render("post.ejs", { post: post, user: req.user, comments: req.params.userName, comments: comments }); //renders post.ejs with post of user
     } catch (err) { //Errors
       console.log(err);
     }

@@ -6,6 +6,8 @@ module.exports = {
       await Comment.create({ //creates post
         comment: req.body.comment, //Gets comment from body
         post: req.params.id, //Gets post from params.id
+        user: req.user.id, //Gets Id of user
+        userName: req.user.userName //Gets userName
       });
       console.log("Comment has been added!"); //Console.log
       res.redirect("/post/"+req.params.id); //redirects to /post

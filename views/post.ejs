@@ -40,7 +40,9 @@
     <ul>
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
-          <%= comments[i].comment%>
+          <%= comments2[i].userInfo[0].userName %>
+          <%= comments2[i].comment %>
+          
         </li>
       <% } %>
     </ul>

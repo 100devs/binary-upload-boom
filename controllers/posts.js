@@ -23,7 +23,23 @@ module.exports = {
     try {
       const post = await Post.findById(req.params.id);
       const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
-      res.render("post.ejs", { post: post, user: req.user, comments: comments });
+      let comments2 = await
+      Comment.aggregate( [
+        {
+          $lookup:
+          {
+            from: "users",
+            localField: "user",
+            foreignField: "_id",
+            as: "userInfo"
+          }
+        }
+      ])
+      // .exec((err, users) => {
+      //   comments2 = users;
+      //   console.log(comments2);
+      // })
+      res.render("post.ejs", { post: post, user: req.user, comments: comments, comments2: comments2 });
     } catch (err) {
       console.log(err);
     }

@@ -38,13 +38,13 @@
         </form>
       </div>
     </div>
-    <ul>
+    <ul class="list-group-flush">
       <% for(var i=0; i<comments.length; i++) {%>
-        <li class="col-6 justify-content-between mt-5">
-          <%= comments[i].comment%>
+        <li class="list-group-item">
+          <%= comments[i].createdBy %>:  <%= comments[i].comment%>
         </li>
       <% } %>
-    </ul>
+      </ul>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

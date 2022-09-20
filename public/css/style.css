@@ -1,3 +1,4 @@
+/* Layout Styling */
 .navbar{
     display: flex;
     flex-direction: row;
@@ -9,10 +10,23 @@ ul {
     text-decoration: none;
     list-style: none;
 }
+.list-group-flush{
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-bottom: none;
+    border-top: none;
+}
+
+/* General Styling */
 .header-nav{
     font-size: 2rem;
     margin-right: 20px;
 }
 .btn {
     margin: 10px 10px 10px 10px;
+}
+img {
+    height: 400px;
+    width: 400px;
 }

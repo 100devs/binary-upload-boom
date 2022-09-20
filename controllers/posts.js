@@ -30,7 +30,7 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      const comments = await Comments.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+      const comments = await Comments.find({post: req.params.id}).sort({ createdAt: "asc" }).lean();
       res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
@@ -40,7 +40,6 @@ module.exports = {
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
-
       await Post.create({
         title: req.body.title,
         image: result.secure_url,

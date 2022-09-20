@@ -24,7 +24,7 @@
 - [ ] Implement delete comment functionality
 - [ ] Add profile pic to user profiles - Ryan
 - [ ] Allow users to follow other users - John
-- [ ] show username and number of likes on feed page
+- [ ] show username and number of likes on feed page - Nic
 - [ ] Allow photos to be public/private
 - [ ] implement like functionality for individual comments - Nic
 - [ ] add music widget to profiles - Sabrina

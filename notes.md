@@ -12,6 +12,10 @@ Mongoose/Mongo console error logs are some of the clearest there are.
 - $push will add the given object to field whether it exists or not
 - Unlike updateOne() , findOneAndUpdate gives you back the updated document.
 - The [$pullAll operator](https://www.mongodb.com/docs/manual/reference/operator/update/pullAll/) removes all instances of the specified values from an existing array. Unlike the $pull operator that removes elements by specifying a query, $pullAll removes elements that match the listed values.
+- When put in an if condition, findOne() can convert to false when it doesn't match any document. As find() returns a cursor object and never returns null, will convert to true when put in an if condition.
+    - findOne() - if query matches, first document is returned, otherwise null.
+    - find() - no matter the number of documents matched, a cursor is returned, never null.
+
 
 auth
 profiles

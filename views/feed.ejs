@@ -7,9 +7,26 @@
             <a href="/post/<%= posts[i]._id%>">
               <img class="img-fluid" src="<%= posts[i].image%>">
             </a>
+            <div class="row align-items-center">
+              <form
+                class="col"
+                action="/post/likePostFromFeed/<%= posts[i]._id %>?_method=PUT"
+                method="POST"
+              >
+                <button class="btn" type="submit">
+                    <img 
+                      class="icon" 
+                      src='<%= posts[i].likedByViewer ? "/imgs/liked.png" : "/imgs/notLiked.png" %>'
+                      alt="not filled heart"
+                    >
+                  <span><%= posts[i].likedByViewer ? "You and " : "" %><%= posts[i].likes %> liked this</span>
+                </button>
+              </form>
+            </div>
           </li>
         <% } %>
         </ul>
     </div>
   </div>  
 <%- include('partials/footer') -%>
+

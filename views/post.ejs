@@ -13,7 +13,7 @@
         >
           <button class="btn" type="submit">
               <img 
-                class="icon notLiked" 
+                class="icon" 
                 src='<%= likedByViewer ? "/imgs/liked.png" : "/imgs/notLiked.png" %>'
                 alt="not filled heart"
               >
@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="col mt-2">
-      <ul>
+      <ul class="list-unstyled">
         <% for(var i=0; i<comments.length; i++) {%>
           <li class="justify-content-between mt-4" id="<%=comments[i]._id %>">
             <span class="emph"><%= comments[i].writer%></span>

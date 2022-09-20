@@ -3,6 +3,7 @@ const Post = require("../models/Post");
 const User = require("../models/User");
 const Comment = require("../models/Comment");
 const { postLogin } = require("./auth");
+const e = require("express");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -15,10 +16,18 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean(); //only return useful parts. faster response
-
+      const posts = await Post.find().sort({ createdAt: "desc" }) 
+      //.lean() strips down some extras but also meant the conditional for usersWhoLiked below did not work. So removed here. 
       
-
+      //tacking on a like boolean outside the db
+      for (const post of posts){
+        if (post.usersWhoLiked.includes(req.user.id)){
+          post.likedByViewer = true;
+        }
+        //below not working - why this one continues to fail is unknown
+        // let chosenPost = await Post.findOne({_id: req.params.id, usersWhoLiked: req.user.id })
+        // console.log(`chosen post: ${chosenPost}`)
+      }
       res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
@@ -28,7 +37,6 @@ module.exports = {
     try {
       const post = await Post.findById(req.params.id);
       const author = await User.findById(post.user);
-
       const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
 
       //prob not the most efficient approach
@@ -36,11 +44,8 @@ module.exports = {
       for (const comment of comments){
         const writer = await User.findById(comment.user);
         comment.writer = writer.userName;
-        console.log(writer.userName)
       }
 
-      console.log(comments)
-    
       //if req.user has liked this post, return a mark
       const likedByViewer = post.usersWhoLiked.includes(req.user.id)
       //returns a boolean
@@ -68,9 +73,42 @@ module.exports = {
         caption: req.body.caption,
         likes: 0,
         user: req.user.id,
+        usersWhoLiked: [] //needs a default, else disaster
       });
       console.log("Post has been added!");
       res.redirect("/profile");
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  likePostFromFeed: async (req, res) => {
+  //essentially the same as likePost but redirects back to feed
+    try {
+      //check if userid is in the array for that post, = already liked it
+      let chosenPost = await Post.findOne(
+        {_id: req.params.id, usersWhoLiked: req.user.id });
+      if (chosenPost){
+        await Post.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+            $inc: { likes: -1 },
+            $pullAll: { 'usersWhoLiked': [req.user.id] } 
+          }
+        );
+        console.log("Likes-1 and user from array");
+        
+      } else {
+        await Post.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+            $inc: { likes: 1 },
+            $addToSet: { 'usersWhoLiked': req.user.id } 
+          }
+        );
+        console.log("Likes +1");
+      }
+      res.redirect(`/feed`);
+
     } catch (err) {
       console.log(err);
     }

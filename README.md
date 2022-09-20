@@ -25,7 +25,7 @@
 - [ ] Add profile pic to user profiles - Ryan
 - [ ] Allow users to follow other users - John
 - [ ] show username and number of likes on feed page - Nic
-- [ ] Allow photos to be public/private
+- [ ] Allow photos to be public/private - Jonathan
 - [ ] implement like functionality for individual comments - Nic
 - [ ] add music widget to profiles - Sabrina
 

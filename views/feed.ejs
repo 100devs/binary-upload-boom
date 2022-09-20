@@ -19,7 +19,15 @@
                       src='<%= posts[i].likedByViewer ? "/imgs/liked.png" : "/imgs/notLiked.png" %>'
                       alt="not filled heart"
                     >
-                  <span><%= posts[i].likedByViewer ? "You and " : "" %><%= posts[i].likes %> liked this</span>
+                    <% if (posts[i].likedByViewer){ %>
+                      <% if (posts[i].likes > 1){ %>
+                        <span>You and <%=posts[i].like - 1%> liked this</span>
+                      <% }else{ %>
+                        <span>You liked this</span>
+                      <% } %>
+                    <% } else { %>
+                      <span><%=posts[i].likes%> liked this</span>
+                    <% } %>
                 </button>
               </form>
             </div>

@@ -7,15 +7,15 @@ const CommentSchema = new mongoose.Schema({
   },
   likes: {
     type: Number,
-    required: true,
+    default: 0
   },
   post: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
   user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    type: Object,
+    required: true
   }
 },{timestamps:true});
 

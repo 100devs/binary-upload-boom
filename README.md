@@ -26,6 +26,7 @@ Building on the OG codebase as follows.
 - Make it possible to like a post from the feed view: 
   - Troubleshooting: The same conditionals and even others that worked previously/elsewhere (getPost) was not working for getFeed. Turns out that .lean() was stripping out some aspect of the doc that was preventing matching logic. Once removed, the previous conditional worked.
   - Proceeding with the working logic (.includes), but leaving comments (postsController.getFeed) for future testing as the reasons for failure for those are still TBD.
+- Make it possible to visit other users' profiles, which will not have add post options.
 
 **On deck**
 - Make it possible to like comments.

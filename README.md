@@ -30,6 +30,7 @@ Building on the OG codebase as follows.
 
 **On deck**
 - Make it possible to like comments.
+- Change 'like' back to SVGs.
 - Make it possible to sort posts in feed by recency, popularity (number of likes), personal favorites (liked by viewer), etc.
 - Make it possible for commenter to delete their own comments.
 - Make it possible to respond to comments - possibly format differently.
@@ -46,7 +47,9 @@ Building on the OG codebase as follows.
 With each update, my workflow has generally been in Model => Controller => View order as well. 
 - Keep test entries to a minimum since sometimes the schema has to change. 
 - Remember that new doc creation also needs to have a default value (even if empty) for new fields. Otherwise, next queries result in errors. Mongoose/Mongo and EJS handles falsy a little strangely (if field does not exist in the doc, all rendering fails, rather than proceeding with assumed "false").
-- Current methods iterate over the arrays and are inefficient - as evidenced by the delayed response to likes and redirections.
+
+Current methods iterate over the arrays and are inefficient - as evidenced by the delayed response to likes and redirections.
+- [Fun commentary from back in 2013](http://www.sarahmei.com/blog/2013/11/11/why-you-should-never-use-mongodb/) that seems highly relevant...
 
 ## Setup 
 **Install**

@@ -31,15 +31,15 @@
                 <% for (let i=0; i < comments.length; i++) {%>
                   <li class="mt-1 comments">
                     <div class="row">
-                      <div class="col-auto mx-2">
+                      <div class="col-4 mx-2">
                             <% for (let j = 0; j < users.length; j++) { %>
                               <% if (String(users[j]._id) === comments[i].user) { %>
                                 <a class="fw-bold text-reset text-decoration-none" href="/profile/<%= users[j]._id %>"> <%= users[j].userName %> </a>
                               <% } %>
                             <% } %>
                       </div>
-                      <div class="col-auto text-right">
-                        <span class="text-right small"> <%= timestamps[i] %> </span>
+                      <div class="col-7 justify-content-end">
+                          <span class="small float-end"> <%= timestamps[i] %> </span>
                       </div>
                     </div>
 

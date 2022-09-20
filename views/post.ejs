@@ -3,7 +3,7 @@
   <div class="row mt-5 container__flag">
     <div class="col-6 Post__container">
       <h2><%= post.title %></h2>
-      <span class="col">By: <%= author.userName %></span>
+      <span class="col">By: <a href="/<%= author._id%>/profile"><%= author.userName %></a></span>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row align-items-center">
         <form

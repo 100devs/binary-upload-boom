@@ -12,7 +12,8 @@ const UserSchema = new mongoose.Schema(
       unique: true 
     },
     password: String,
-  }
+  },
+  {timestamps: true } //too late
 );
 
 // Password hash middleware. encrypt

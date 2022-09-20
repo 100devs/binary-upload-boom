@@ -14,6 +14,25 @@ module.exports = {
       console.log(err);
     }
   },
+  getOtherUserProfile: async (req, res) => {
+    if (req.params.userid === req.user.id){
+      //go to main profile if own user
+      try {
+        const posts = await Post.find({ user: req.user.id });
+        res.render("profile.ejs", { posts: posts, user: req.user });
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      try {
+        const person = await User.findById(req.params.userid)
+        const posts = await Post.find({ user: req.params.userid });
+        res.render("profileOther.ejs", { posts: posts, user: person }); //user is not passing for some reason
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  },
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }) 

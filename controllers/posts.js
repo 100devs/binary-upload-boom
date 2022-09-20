@@ -23,7 +23,7 @@ module.exports = {
     try {
       const post = await Post.findById(req.params.id); // Grab a post with ID
       const comments = await Comment.find({postId: req.params.id}).sort({ createdAt: "asc" }).lean(); // Grab all comments with postId of req.params.id, sort in ascending order
-      res.render("post.ejs", { post: post, user: req.user, comments: comments }); // Render in 'post.ejs', post(variable in ejs): post(post id), user(variable in ejs): req.user, comments(variable name in ejs): comments(comments collection)
+      res.render("post.ejs", { post: post, user: req.user, comments: comments }); // Render in 'post.ejs', post(variable in ejs): post(const post), user(variable in ejs): req.user, comments(variable name in ejs): comments(const comments)
     } catch (err) {
       console.log(err);
     }
@@ -78,13 +78,37 @@ module.exports = {
   createComment: async (req, res) => {
     try {
       await Comment.create({
-        commentBy: req.user.id,
+        commentById: req.user.id,
+        commentByUser: req.user.userName,
         postId: req.params.id,
         comment: req.body.comment,
+        likes: 0,
       });
       console.log('Comment has been added');
       // res.redirect(`/post/${req.params.id}`);
       res.redirect('back'); // same as above
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  likeComment: async (req, res) => {
+    try {
+      const comments = await Comment.findOneAndUpdate(
+        { _id: req.params.id },
+        { $inc: {likes: 1} }
+      );
+      console.log('Comment liked');
+      res.redirect(`back`);
+    } catch (error) {
+      console.log(err);
+    }
+  },
+  deleteComment: async (req, res) => {
+    try {
+      let comments = await Comment.findById({ _id: req.params.id });
+      await Comment.remove({ _id: req.params.id });
+      console.log('Comment deleted');
+      res.redirect(`back`);
     } catch (err) {
       console.log(err);
     }

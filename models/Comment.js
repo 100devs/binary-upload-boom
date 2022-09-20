@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
 
 const CommentSchema = new mongoose.Schema({
-    commentBy: {
+    commentById: {
         type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    },
+    commentByUser: {
+        type: String,
         ref: 'User',
     },
     postId: {
@@ -12,6 +16,10 @@ const CommentSchema = new mongoose.Schema({
     comment: {
         type: String,
         require: true,
+    },
+    likes: {
+        type: Number,
+        default: 0,
     },
     createdAt: {
         type: Date,

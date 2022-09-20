@@ -3,6 +3,7 @@
   <div class="row justify-content-center mt-5">
     <div class="col-6">
        <!-- Post Section -->
+       <section class="post-group">
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
@@ -21,16 +22,20 @@
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
           method="POST"
           class="col-3"
-        >
+        ><div class="likes">
           <button class="btn btn-dark fa fa-trash" type="submit"></button>
         </form>
         <%}%>
       </div>
+        <div>
+          <p><%= post.caption %></p>
+        </div>
+      </section>
+      </div>
     </div>
-     <!-- Caption-->
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
-    </div>
+   <!-- Caption-->
+   
+    
      <!-- Comment Form Section -->
       <div class="mt-5">
         <h2>Add a Comment</h2>

@@ -28,6 +28,12 @@ ul {
     flex-direction: row;
     align-items: center;
 }
+.post-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 /* General Styling */
 .header-nav{

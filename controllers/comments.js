@@ -29,4 +29,15 @@ module.exports = {
       console.log(err);
     }
   },
+  deleteComment: async (req, res) => {
+    try {
+      const comment = await Comment.findOne({ _id: req.params.id });
+      await Comment.findOneAndDelete({_id: req.params.id})
+      console.log('Deleted Comment')
+      res.redirect(`/post/${comment.post}`)
+    }
+    catch(err) {
+      console.log(err)
+    }
+  }
 };

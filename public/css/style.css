@@ -9,7 +9,7 @@ li {
 .feed{
     background-color: #F9F3EE
 }
-.navbar{ 
+.navbar, .comments{ 
     background: linear-gradient(to bottom, #A0BCC2, #C4D7E0);
 }
 .navbar a{
@@ -40,4 +40,13 @@ li {
 header.container{
     max-width: 100%;
     padding: 0;
+}
+
+.comments {
+    border-radius: 8px;
+}
+
+hr {
+    margin: 2px 5px;
+    padding: 1px 0;
 }

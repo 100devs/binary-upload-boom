@@ -25,3 +25,7 @@
 
 - If the user has not signed in, don't show the nav. ✅
 - Add icon next to "Log out"
+- Expand past visual art ex. Music
+- Tag system, request critique.
+- Users can label themselves with tags
+- Users can send recommendations to one another (ex. "Ash thinks you should look at this artwork by Jon")

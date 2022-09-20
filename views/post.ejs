@@ -7,13 +7,22 @@
       <div class="row justify-content-between">
         <form
           class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
+          action="/post/likePost/<%= post._id %>/<%=user.userName%>?_method=PUT"
           method="POST"
         >
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
+<%if ( post.likes.length === 0 ){ %>
+  <h3 class="col-3">No one likes this :(</h3>
+  <%}else if(post.likes.length === 1 ){ %>
+  <h3 class="col-3"> <%= post.likes %> likes this</h3>
+  <%}else if(post.likes.length === 2 ){ %>
+    <h3 class="col-3"> <%= post.likes[0] %> and <%= post.likes[1] %> like this</h3> 
+    <%}else if(post.likes.length === 3 ){ %>
+      <h3 class="col-3"> <%= post.likes[0] %>, <%= post.likes[1] %> and <%= post.likes[1] %> like this</h3>
+      <%}else if(post.likes.length > 3 ){ %>
+        <h3 class="col-3"> <%= post.likes[0] %>, <%= post.likes[1] %> and <%=post.likes.length - 2 %> others like this</h3>
+  
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
           method="POST"
@@ -27,6 +36,37 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <div class="mt-5">
+      <h2>Add a comment</h2>
+      <form action="/comment/createComment/<%=post._id %>" method="POST">
+        <div class="mb-3">
+          <label for="comment" class="form-label">Comment</label>
+          <textarea class="form-control" id="comment" name="comment"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+      </form>
+    </div>
+</div>
+<div class="row justify-content-center mt-5">
+  <ul class="row list-unstyled">
+    <% for(var i=0; i<comments.length; i++) {%>
+      <li>
+       <span class="text-primary"> <%= comments[i].createdBy%>: </span>
+          <%= comments[i].comment%>
+         
+         <%if(comments[i].createdById == user.id){ %>
+          <form
+            action="/comment/deleteComment/<%= post.id %>/<%= comments[i]._id %>/<%= comments[i].createdById %>?_method=DELETE"
+            method="POST"
+          >
+            <button class="btn btn-outline-danger fa fa-trash" type="submit"></button>
+          </form>
+          <%}%>
+        </li>
+    <% } %>
+    </ul>
+</div>
+    <div class="mt-5">
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

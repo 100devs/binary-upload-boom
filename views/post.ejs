@@ -2,8 +2,8 @@
 
 <div class="container">
   <div class="row">
-    <% if (locals.messages.errors) { %>
-        <% messages.errors.forEach( el => { %>
+    <% if (locals.messages.error) { %>
+        <% messages.error.forEach( el => { %>
             <div class="alert alert-danger"><%= el.msg %></div>
         <% }) %>
     <% } %>
@@ -29,6 +29,7 @@
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
+					<input type="hidden" name="commenter" value="<%= user.id %>" />
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
        <% } %>
         </form>

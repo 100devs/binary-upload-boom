@@ -8,8 +8,6 @@ module.exports = {
       //future implementation
       // Upload image to cloudinary
       // const result = await cloudinary.uploader.upload(req.file.path);
-      console.log(req.user)
-      console.log(req.params)
 
       await Comment.create({
         post: req.params.id,
@@ -18,7 +16,7 @@ module.exports = {
         // cloudinaryId: result.public_id,
         likes: 0,
         likedBy: [],
-        user: req.user.userName,
+        user: req.user.id,
       });
       console.log("Comment has been added!");
       res.redirect(`/post/${req.params.id}`);
@@ -30,7 +28,8 @@ module.exports = {
     try {
       // find the specific comment of the post it's on
       const comment = await Comment.find({_id: req.params.id})
-      // console.log(comment);
+      // console.log(req.user)
+      // console.log(req.params)
         if (comment[0].likedBy.includes(req.user.id)){
           await Comment.findOneAndUpdate(
             { _id: req.params.id },
@@ -55,20 +54,28 @@ module.exports = {
       console.log(err);
     }
   },
-  // deletePost: async (req, res) => {
-  //   try {
-  //     // Find post by id
-  //     let post = await Post.findById({ _id: req.params.id });
-  //     // Delete image from cloudinary
-  //     await cloudinary.uploader.destroy(post.cloudinaryId);
-  //     // Delete post from db
-  //     await Post.remove({ _id: req.params.id });
-  //     console.log("Deleted Post");
-  //     res.redirect("/profile");
-  //   } catch (err) {
-  //     res.redirect("/profile");
-  //   }
-  // },
+  deleteComment: async (req, res) => {
+    try {
+      //future implementation:
+      // let post = await Post.findById({ _id: req.params.id });
+      // Delete image from cloudinary
+      // await cloudinary.uploader.destroy(post.cloudinaryId);
+
+      //req.params.id is the comment id
+      const comment = await Comment.find({_id: req.params.id})
+      // console.log(comment[0], req.user.id);
+
+      // check if the person who made the comment is the one deleting it
+      if (comment[0].user === req.user.id){
+        // Delete comment from db
+        await Comment.deleteOne({ _id: req.params.id });
+      }
+      console.log("Deleted Comment");
+      res.redirect(`/post/${comment[0].post}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
   // getProfile: async (req, res) => {
   //   try {
   //     const posts = await Post.find({ user: req.user.id });

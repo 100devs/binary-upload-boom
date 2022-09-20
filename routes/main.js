@@ -3,24 +3,26 @@ const router = express.Router();
 const authController = require("../controllers/auth");
 const indexController = require('../controllers/index');
 const postsController = require("../controllers/posts");
-const userController = require('../controllers/user');
+const feedController = require('../controllers/feed');
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
-//Main Routes - simplified for now
+//Main Routes 
 router.get("/", indexController.getIndex);
-router.get("/home", ensureAuth, postsController.getHome); //changed getProfile to getHome
-/* router.get("/profile", ensureAuth, userController.getProfile); */ //changed getProfile to getHome
-router.get("/feed", ensureAuth, postsController.getFeed);
+
+//Login and Signup
 router.get("/login", authController.getLogin);
 router.post("/login", authController.postLogin);
 router.get("/logout", authController.logout);
 router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
 
-/* router.post('/profile', ensureAuth, userController.updateUser); */
+//Home 
+router.get("/home", ensureAuth, postsController.getHome);
 
-/* router.delete("/deletePost/:id", postsController.deletePost); */
-//added
-/* router.delete("home/deletePost/:id", postsController.deletePost); */
+//Players / Teams / Leagues
+router.get("/players", ensureAuth, feedController.getPlayers);
+router.get("/teams", ensureAuth, feedController.getTeams);
+router.get("/leagues", ensureAuth, feedController.getLeagues);
+
 
 module.exports = router;

@@ -30,11 +30,11 @@ const ProfileSchema = new mongoose.Schema({
                 require: true,
               },
               win: {
-                type: String,
+                type: Number,
                 required: true,
               },
               loss: {
-                type: String,
+                type: Number,
                 required: true,
               },
               notes: {

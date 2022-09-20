@@ -1,15 +1,10 @@
-const cloudinary = require("../middleware/cloudinary");
 const Comment = require("../models/Comment");
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var ObjectId = Schema.ObjectId; //
 
 module.exports = {
 
   /* create a page to comment the post */
   createComment: async (req, res) => {
         try {
-
           const comment = {
             comment: req.body.comment,
             postId: req.body.post,
@@ -17,11 +12,13 @@ module.exports = {
           }
 
     		await Comment.create(comment);
-        req.flash('success', { msg: 'Success! You are logged in.' })
-       res.redirect(`/post/${req.body.post}`);
+        req.flash('success', { msg: 'Your comment was added.' })
 
       } catch (err) {
         console.log(err);
+        req.flash('error', { msg: 'Your comment could not be added.' })
+    } fiinally {
+    res.redirect(`/post/${req.body.post}`);
     }
   }
 

@@ -23,10 +23,8 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id).populate('user');
-
       // get comment for this post
       const comments = await Comment.find({'postId': req.params.id }).populate('user');
-      console.log(comments);
       res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
@@ -58,17 +56,25 @@ module.exports = {
   },
   likePost: async (req, res) => {
     try {
-      await Post.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
-        }
-      );
-      console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
+			const post = await Post.findById(req.params.id);
+			const poster = post.user;
+			const commenter = req.body.commenter;
+			if (commenter === poster) {
+				throw new Error("You can't like your own post!");
+			} else if (post.likedUsers.includes(commenter)) {
+				throw new Error('You have already liked this post.');
+			} else {
+				post.likedUsers.push(commenter);
+				post.likes += 1;
+				await post.save();
+			}
+			console.log("Likes +1");
     } catch (err) {
       console.log(err);
-    }
+			req.flash('error', { msg: err.message });
+    } finally {
+			res.redirect(`/post/${req.params.id}`);
+		}
   },
   editPost: async (req, res) => {
     try {

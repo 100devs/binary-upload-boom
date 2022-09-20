@@ -23,7 +23,7 @@
 		<h2><%= post.title %></h2>
     <div class="col-md">
 			<div class="row justify-content-between">
-        <%if(post.user.id !== user.id){ %>
+        <%if(post.user.id !== user.id && !post.likedUsers.includes(user.id)){ %>
          <form
           class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"

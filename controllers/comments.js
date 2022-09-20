@@ -21,16 +21,15 @@ module.exports = {
     }
   },
   likeComment: async (req, res) => {
-    console.log(req)
     try {
       await Comment.findOneAndUpdate(
-        { _id: req.params.id },
+        { _id: req.params.commentId },
         {
           $inc: { likes: 1 },
         }
       );
       console.log("Comment +1");
-      res.redirect("/profile");
+      res.redirect("/post/"+req.params.postId);
     } catch (err) {
       console.log(err);
     }
@@ -38,11 +37,11 @@ module.exports = {
   deleteComment: async (req, res) => {
     try {
       // Find post by id
-      let post = await Comment.findById({ _id: req.params.id });
+      let post = await Comment.findById({ _id: req.params.commentId });
       // Delete post from db
-      await Comment.remove({ _id: req.params.id });
+      await Comment.remove({ _id: req.params.commentId });
       console.log("Deleted Comment");
-      res.redirect("/profile");
+      res.redirect("/post/"+req.params.postId);
     } catch (err) {
       res.redirect("/profile");
     }

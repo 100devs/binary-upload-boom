@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/comment")
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -23,7 +24,8 @@ module.exports = {
       const post = await Post.findById(req.params.id); //req.params.id is the id of the post that is added to the url; below ex.
       //localhost:2121/post/65545eg1561vdgagdy -> so in this case req.params.id == 65545eg1561vdgagdy
       //the id in req.params.id is the :/id from routes-post page where you define the .get request as "/:id". if it was '/:unicorn' then it will need to be req.params.unicorn
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
     }

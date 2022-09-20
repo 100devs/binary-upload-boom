@@ -6,7 +6,13 @@
           <li class="col-6 justify-content-between mt-5">
             <a href="/post/<%= posts[i]._id%>">
               <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
+            </a> 
+          </li>
+          <li>
+            <span><%= posts[i].title %></span>
+          </li>
+          <li>
+            <span class="fa fa-heart"><%= posts[i].likes %></span>
           </li>
         <% } %>
         </ul>

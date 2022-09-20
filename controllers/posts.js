@@ -43,8 +43,7 @@ module.exports = {
         likes: 0,
         user: req.user.id,
       }
-
-	  if(req.file.path) {
+	  if(req.file) {
 		const result = await cloudinary.uploader.upload(req.file.path);
 		post['image'] = result.secure_url,
         post['cloudinaryId'] = result.public_id

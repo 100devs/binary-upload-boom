@@ -9,6 +9,9 @@ const UserSchema = new mongoose.Schema({ // mongoose.Schema is a constructor fun
   userName: { type: String, unique: true }, // userName is a property of the schema. It is a string and it must be unique.
   email: { type: String, unique: true }, // email is a property of the schema. It is a string and it must be unique.
   password: String, // password is a property of the schema. It is a string.
+  comments: [{
+    type: mongoose.Schema.Types.ObjectId, ref: 'Comment'
+  }]
 });
 
 // Password hash middleware.

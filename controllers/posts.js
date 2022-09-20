@@ -23,7 +23,20 @@ module.exports = {
       // Stores all posts recently created and cuts out unecessary returned object data
       //The sort method is used to sort the posts by the date they were created in descending order
       //lean specifically tells mongoose to return the plain javascript objects instead of mongoose documents
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean(); //waits for the promise to be resolved and then stores the posts in the posts variable
+      // const posts = await Post.find().sort({ createdAt: "desc" }).lean(); //waits for the promise to be resolved and then stores the posts in the posts variable
+      // const posts = await Post.find().populate('comments').sort({createdAt:"desc"}).lean().populate('users');
+      const posts = await Post.find().populate({
+    path: 'comments',
+    model: 'Comment',
+    populate: {
+      path: 'user',
+      model: 'User'
+    }
+  })
+      console.log(posts)
+      console.log(posts[0].comments[0].user.userName)
+      //gets all comments from the database and stores them in the comments variables
+      // const comments = await Comment.find().lean(); //waits for the promise to be resolved and then stores the comments in the comments variable
       res.render("feed.ejs", { posts: posts }); //after the promise is resolved the posts data is rendered to the feed page
     } catch (err) {
       console.log(err);

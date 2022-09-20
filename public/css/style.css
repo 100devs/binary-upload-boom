@@ -17,6 +17,17 @@ ul {
     border-bottom: none;
     border-top: none;
 }
+.likes{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px 10px 10px 10px;
+}
+.comment-section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 
 /* General Styling */
 .header-nav{
@@ -27,6 +38,9 @@ ul {
     margin: 10px 10px 10px 10px;
 }
 img {
-    height: 400px;
-    width: 400px;
+    height: 600px;
+    width: 600px;
+}
+.header{
+    width: 100%;
 }

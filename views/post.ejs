@@ -27,6 +27,29 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <div class="comments-container">
+      <ul class="comments">
+        <% comments.forEach(comment => { %>
+          <li class="comment">
+            <div class="content-container">
+              <p class="comment-text">
+                <%= comment.content %>
+              </p>
+            </div>
+            <div class="likes-container">
+              <%= comment.likes %>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+    <div class="add-comment-container">
+      <form action="/comment/createComment/<%=post.id%>" method="POST" class="add-comment-form">
+        <textarea cols="20" name="content" placeholder="Write a comment" class="add-comment-text">
+        </textarea>
+        <button type="submit" class="comment-button">Comment</button>
+      </form>
+    </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

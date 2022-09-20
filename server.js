@@ -1,18 +1,24 @@
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
+
+const mongoose = require("mongoose"); // DB and Model
+
+// User auth
 const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
-const methodOverride = require("method-override");
-const flash = require("express-flash");
-const logger = require("morgan");
-const connectDB = require("./config/database");
+const flash = require("express-flash"); // Flash messages for form errors
+
+const methodOverride = require("method-override"); // Form method override for form deletes and puts
+const logger = require("morgan"); // Logger
+
+const connectDB = require("./config/database"); // Connect to db
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
+const commentRoutes = require("./routes/comments");
 
 //Use .env file in config folder
-require("dotenv").config({ path: "./config/.env" });
+require("dotenv").config();
 
 // Passport config
 require("./config/passport")(passport);
@@ -56,6 +62,7 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
+app.use("/comment", commentRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {

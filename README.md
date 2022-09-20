@@ -6,7 +6,12 @@ Includes user authentication, post/comment attribution, unique likes, etc.
 ## Progress
 Building on the OG codebase.
 
+**Unique likes per user** (although you can still like your own posts) + **Comments with attribution**
+
 ![unique_likes](https://user-images.githubusercontent.com/102257735/191148698-8ee8d7ec-30e7-48e1-ab4d-d2ce36cbfaa9.png)
+
+**Like posts from the feed**
+![likes_from_feed](https://user-images.githubusercontent.com/102257735/191158045-f596a384-080c-432d-9b8a-4a8e12440174.png)
 
 
 **DONE**

@@ -9,5 +9,4 @@ router.post("/createComment/:id", commentsController.createComment);
 //ui missing
 router.put("/likeComment/:id", commentsController.addLike)
 
-
 module.exports = router;

@@ -49,9 +49,29 @@
     <div class="col mt-2">
       <ul class="list-unstyled">
         <% for(var i=0; i<comments.length; i++) {%>
-          <li class="justify-content-between mt-4" id="<%=comments[i]._id %>">
-            <span class="emph"><%= comments[i].writer%></span>
-            <span><%= comments[i].comment%></span>
+          <li class="row align-items-center mt-4" id="<%=comments[i]._id %>">
+            <div class="col">
+              <span class="emph"><%= comments[i].writer%></span>
+              <span><%= comments[i].comment%></span>
+            </div>
+            <div class="row align-items-center">
+              <form
+                class="col"  
+                action="/comment/likeComment/<%=comments[i]._id %>?_method=PUT"
+                method="POST"
+              >
+                <button class="btn" type="submit">
+                    <img 
+                      class="icon" 
+                      src='<%= comments[i].likedByViewer ? "/imgs/liked.png" : "/imgs/notLiked.png" %>'
+                      alt="not filled heart"
+                    >
+                      <% if (comments[i].likes > 1 || comments[i].likes && !comments[i].likedByViewer){ %>
+                        <span><%=comments[i].likes%></span>
+                      <% } %>
+                </button>
+              </form>
+            </div>
           </li>
         <% } %>
       </ul>

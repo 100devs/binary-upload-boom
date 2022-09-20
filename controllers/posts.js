@@ -56,13 +56,19 @@ module.exports = {
     try {
       const post = await Post.findById(req.params.id);
       const author = await User.findById(post.user);
-      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" })
+      // .lean();
+      //got rid of lean again bc I need the likedByViewer logic to work
 
       //prob not the most efficient approach
       //essentially tacking on the username outside the db
+      //including likes
       for (const comment of comments){
         const writer = await User.findById(comment.user);
         comment.writer = writer.userName;
+        if (comment.usersWhoLiked.includes(req.user.id)){
+          comment.likedByViewer = true;
+        }
       }
 
       //if req.user has liked this post, return a mark

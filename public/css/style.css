@@ -6,15 +6,21 @@ li {
     list-style-type: none;
     list-style-position: outside;
 }
-a{
+.feed{
+    background-color: #F9F3EE
+}
+.navbar{ 
+    background: linear-gradient(to bottom, #A0BCC2, #C4D7E0);
+}
+.navbar a{
     font-family: 'Reem Kufi Fun', sans-serif;
     text-decoration: none;
     color: black;
     font-weight: 500;
-    font-size: 1.5em;
+    font-size: 2em;
 }
-a:hover{
-    color: #A0BCC2;
+.navbar a:hover{
+    color: #748DA6;
 }
 .feed-img{
     width: 292px;

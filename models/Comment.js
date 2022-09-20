@@ -10,11 +10,11 @@ const CommentSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  userName: {
-    type:String,
-    required: true,
+  createdBy: {
+    type: String,
+    ref: "User",
   },
-  user: {
+  createdByID: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },

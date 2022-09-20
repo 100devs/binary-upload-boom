@@ -1,4 +1,5 @@
 const cloudinary = require("../middleware/cloudinary");
+const timestamp = require("../middleware/timestamp")
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 const User = require("../models/User")
@@ -18,11 +19,12 @@ module.exports = {
       const post = await Post.findById(req.params.id);
       commentsUsers.push(post.user)  // Push the poster's ID into the array
       const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+      const timestamps = comments.map(el => timestamp.postedTime(el.createdAt))
       for (let comment of comments) {
         commentsUsers.push(comment.user) // Iterate through comments and pushing all user IDs into the array
       }
       const users = await User.find({_id: commentsUsers}).lean();
-      res.render("post.ejs", { post: post, user: req.user, comments: comments, users: users });
+      res.render("post.ejs", { post: post, user: req.user, comments: comments, users: users, timestamps: timestamps });
     } catch (err) {
       console.log(err);
     }

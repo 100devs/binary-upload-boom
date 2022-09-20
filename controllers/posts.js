@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary"); // Import cloudinary
 const Post = require("../models/Post"); // Import Post model
+const Comment = require("../models/Comment"); // Import Comment model
 
 module.exports = { // Export functions
   getProfile: async (req, res) => { // Get profile page
@@ -21,7 +22,8 @@ module.exports = { // Export functions
   getPost: async (req, res) => { // Get post page
     try {
       const post = await Post.findById(req.params.id); // Find post by id
-      res.render("post.ejs", { post: post, user: req.user }); // Render post page
+      const comments = await Comment.find({ post: req.params.id }).sort({ createdAt: "desc" }).lean(); // Find comments by post id and sort by date and strip extra mongoose data
+      res.render("post.ejs", { post: post, user: req.user, comments: comments }); // Render post page
     } catch (err) { // If error
       console.log(err); // Log error
     }

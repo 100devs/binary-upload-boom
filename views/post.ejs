@@ -8,8 +8,7 @@
         <form
           class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"
-          method="POST"
-        >
+          method="POST">
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
@@ -17,8 +16,7 @@
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
           method="POST"
-          class="col-3"
-        >
+          class="col-3">
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
         <%}%>
@@ -33,5 +31,29 @@
     </div>
   </div>
 </div>
-
+<div>
+  <h5>Comments:</h5>
+    <div>
+          <% comment.forEach(comment=> { %>
+            <div>
+              </h6>
+              <%= Comments.userName %> says:
+              </h6>
+              <p class="card-text">
+                <%= Comments.comment %>
+              </p>
+            </div>
+            <% }) %>
+              <div>
+                <h5>Add a Comment:</h5>
+                <form action="/comments/createComment/<%= post.id %>" method="POST">
+                   <div class="mb-3">
+                     <label for="comment" class="form-label">Comment</label>
+                     <input type="text" class="form-control" id="comment" name="comment">
+                          <!-- <input type="hidden" name="post" value="<%= post._id %>"> -->
+                   </div>
+                   <button type="submit" class="btn btn-primary">Submit</button>
+                 </form>
+              </div>
+  </div>
 <%- include('partials/footer') -%>

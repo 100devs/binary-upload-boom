@@ -75,14 +75,25 @@ module.exports = {
   deletePost: async (req, res) => {
     try {
       // Find post by id
-      let post = await Post.findById({ _id: req.params.id });
+      let post = await Post.findById({ _id: req.params.id }).populate({ path: 'comments', populate: { path: 'comments', populate: { path: 'comments', populate: { path: 'comments', populate: { path: 'comments', populate: { path: 'comments', populate: { path: 'comments', populate: { path: 'comments', populate: { path: 'comments', populate: { path: 'comments' } } } } } } } } } });;
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db
-      await Post.remove({ _id: req.params.id });
+
+      const commentIds = []
+      const comments = post.comments
+      while (comments.length) {
+        const comment = comments.pop()
+        comments.push(...comment.comments)
+        commentIds.push(comment.id)
+      }
+      await Comment.deleteMany({ _id: { $in: commentIds } })
+      await Like.deleteMany({ post: req.params.id })
+      await Post.deleteOne({ _id: req.params.id });
       console.log("Deleted Post");
       res.redirect("/profile");
     } catch (err) {
+      console.error(err)
       res.redirect("/profile");
     }
   },

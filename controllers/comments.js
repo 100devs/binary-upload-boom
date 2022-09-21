@@ -38,18 +38,18 @@ module.exports = {
     try {
 			const comment = await Comment.findById(req.params.id);
 			const owner = comment.user; // You have an id here, no the name and the like info of the user
-			const liker = req.body.commenter;
+			const liker = req.body.liker;
 			if (liker === owner) {
 				throw new Error("You can't like your own post!");
 			} else if (comment.likedUsers.includes(liker)) {
-				const index = likedUsers.indexOf(liker);
-				likedUsers.splice(index, 1);
+				const index = comment.likedUsers.indexOf(liker);
+				comment.likedUsers.splice(index, 1);
 				comment.likes -= 1;
 				console.log("Likes -1");
 				await comment.save();
 			} else {
-				post.likedUsers.push(liker);
-				post.likes += 1;
+				comment.likedUsers.push(liker);
+				comment.likes += 1;
 				console.log("Likes +1");
 				await comment.save();
 			}	

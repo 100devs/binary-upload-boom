@@ -99,12 +99,12 @@ module.exports = {
     try {
 			const post = await Post.findById(req.params.id);
 			const owner = post.user;
-			const liker = req.body.commenter;
-			if (liker === poster) {
+			const liker = req.body.liker;
+			if (liker === owner) {
 				throw new Error("You can't like your own post!");
 			} else if (post.likedUsers.includes(liker)) {
-				const index = likedUsers.indexOf(liker);
-				likedUsers.splice(index, 1);
+				const index = post.likedUsers.indexOf(liker);
+				post.likedUsers.splice(index, 1);
 				post.likes -= 1;
 				console.log("Likes -1");
 				await post.save();

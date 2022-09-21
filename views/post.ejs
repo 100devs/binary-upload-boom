@@ -59,7 +59,7 @@
               <p class="user d-flex flex-row align-items-center commentText"><%= comments[i].comment %></p>
 							<div class="action d-flex justify-content-between mt-2 align-items-center">
 								<% if(comments[i].user.id === user.id) { %>
-									<a href="#!" class="link-muted commentModify" data-bs-toggle="modal" data-bs-target="#myModal" data-bs-id="<%= comments[i].id %>">
+									<a href="#!" class="link-muted editComment" data-bs-toggle="modal" data-bs-target="#myModal" data-bs-id="<%= comments[i].id %>">
 										<i class="fas fa-pencil-alt ms-2"></i>
 									</a>
 
@@ -95,7 +95,7 @@
           <% } %>
           <div class="row mt-5 justify-content-around">
             <% if (post.user.id !== user.id) { %>
-            <button type="button" class="btn btn-primary col-3" data-bs-toggle="modal" data-bs-target="#modalForm">
+            <button type="button" class="btn btn-primary col-3 addComment" data-bs-toggle="modal" data-bs-target="#myModal">
               Add a comment
             </button>
 

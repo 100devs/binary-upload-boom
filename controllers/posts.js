@@ -98,18 +98,22 @@ module.exports = {
 	  likePost: async (req, res) => {
     try {
 			const post = await Post.findById(req.params.id);
-			const poster = post.user;
-			const commenter = req.body.commenter;
-			if (commenter === poster) {
+			const owner = post.user;
+			const liker = req.body.commenter;
+			if (liker === poster) {
 				throw new Error("You can't like your own post!");
-			} else if (post.likedUsers.includes(commenter)) {
-				throw new Error('You have already liked this post.');
+			} else if (post.likedUsers.includes(liker)) {
+				const index = likedUsers.indexOf(liker);
+				likedUsers.splice(index, 1);
+				post.likes -= 1;
+				console.log("Likes -1");
+				await post.save();
 			} else {
-				post.likedUsers.push(commenter);
+				post.likedUsers.push(liker);
 				post.likes += 1;
+				console.log("Likes +1");
 				await post.save();
 			}
-			console.log("Likes +1");
     } catch (err) {
       console.log(err);
 			req.flash('error', { msg: err.message });

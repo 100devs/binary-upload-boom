@@ -22,37 +22,38 @@ module.exports = {
 
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id).populate('user');
-       // get comment for this post
-      const comments = await Comment.find({'postId': req.params.id }).populate('user');
-       res.render("post.ejs", { post: post, user: req.user, comments: comments });
+      const post = await Post.findById(req.params.id);
+      // get comment for this post
+      const comments = await Comment.find({'postId': req.params.id });
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
+			res.redirect("/feed");
     }
   },
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
-
-
-	  const post = {
-        title: req.body.title,
-        caption: req.body.caption,
-        likes: 0,
-        user: req.user.id,
-      }
-	  if(req.file) {
-		const result = await cloudinary.uploader.upload(req.file.path);
-		post['image'] = result.secure_url,
-        post['cloudinaryId'] = result.public_id
-	  }
-		await Post.create(post);
-
-      console.log("Post has been added!");
-      res.redirect("/profile");
+			const post = {
+				title: req.body.title,
+				caption: req.body.caption,
+				likes: 0,
+				user: req.user.id,
+			}
+			if(req.file) {
+				const result = await cloudinary.uploader.upload(req.file.path);
+				post['image'] = result.secure_url;
+				post['cloudinaryId'] = result.public_id;
+			}
+			await Post.create(post);
+			console.log("Post has been added!");	
+			req.flash('success', { msg: 'Your post has been created.' })	
     } catch (err) {
       console.log(err);
-    }
+			req.flash('error', { msg: 'Your post could not be created.' })
+    } finally {
+			res.redirect("/profile");
+		}
   },
   likePost: async (req, res) => {
     try {
@@ -101,14 +102,18 @@ module.exports = {
     try {
       // Find post by id
       let post = await Post.findById({ _id: req.params.id });
+			if (post.user != req.user.id) throw new Error("User mismatch");
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
-      res.redirect("/profile");
+			req.flash('success', { msg: 'Your post has been deleted.' })
     } catch (err) {
-      res.redirect("/profile");
-    }
+			console.log(err)
+			req.flash('error', { msg: 'Your post could not be deleted.' })
+    } finally {
+			res.redirect("/profile");
+		}
   },
 };

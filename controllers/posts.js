@@ -8,7 +8,6 @@ module.exports = {
       const allPosts = await Post.find({ user: req.user.id }).sort({ createdAt: "desc" });
 			const posts = allPosts.filter(post => post.image);
 			const drafts = allPosts.filter(post => !post.image);
-			console.log(posts, drafts)
       res.render("profile.ejs", { posts: posts, drafts: drafts, user: req.user });
     } catch (err) {
       console.log(err);

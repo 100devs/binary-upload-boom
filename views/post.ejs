@@ -26,7 +26,7 @@
         <div class="liked d-flex align-items-baseline">
           <h3 class="col-3">Likes: <%= post.likes %></h3>
           <%if(post.user.id !== user.id && !post.likedUsers.includes(user.id)){ %>
-						<form class="col-1" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
+						<form class="col-1" action="/post/likePost/<%= post.id %>?method=PUT" method="POST">
 							<input type="hidden" name="commenter" value="<%= user.id %>" />
 							<button class="btn btn-primary fa fa-heart" type="submit"></button>
 						</form>
@@ -34,81 +34,115 @@
         </div>
 
         <%if(post.user.id == user.id){ %>
-        <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-3">
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
-        <%}%>
+					<a 
+						href="#!"
+						class="link-muted text-danger" 
+						data-bs-toggle="modal" 
+						data-bs-target="#myModal"
+						data-formAction="/post/deletePost/<%=post.id %>?method=DELETE" 
+						data-modalTitle="Delete your post"
+						data-formContent="deleteForm"
+						data-deleteType="post"
+						data-submitButton="Delete post"
+					><i class="fas fa-trash"></i></a>
+        <% } %>
 			</div>
       <img class="img-fluid" src="<%= post.image%>" />
-      </div>
-      <div class="col-md">
-        <div class="card p-3 mb-2 border-primary">
-					<div class="d-flex justify-content-between align-items-center">
-							<h4 class="title"><%= post.user.userName%></h4> 
-							<small><%= post.createdAt.toLocaleDateString().slice(0,10) %></small>
-						</div>
-          <p class="user d-flex flex-row align-items-center commentText"><%= post.caption %></p>
-        </div>
-        <% for(var i=0; i<comments.length; i++) {%>
-            <div class="card p-3 mb-2">
-							<div class="d-flex justify-content-between align-items-center">
-								<h4 class="title"><%= comments[i].user.userName%></h4> 
-								<small><%= comments[i].createdAt.toLocaleDateString().slice(0,10) %></small>
-              </div>
-            	<!-- be sure to keep .commentText here -->
-              <p class="user d-flex flex-row align-items-center commentText"><%= comments[i].comment %></p>
-							<div class="action d-flex justify-content-between mt-2 align-items-center">
-								<% if(comments[i].user.id === user.id) { %>
-									<a href="#!" class="link-muted commentModify" data-bs-toggle="modal" data-bs-target="#myModal" data-bs-id="<%= comments[i].id %>">
-										<i class="fas fa-pencil-alt ms-2"></i>
-									</a>
-
-                  <div class="reply px-4">
-                    <a href="#!" class="link-muted text-danger" data-bs-toggle="modal" data-bs-target="#myModal" data-bs-id="<%= comments[i].id %>">
-                      <i class="fas fa-trash"></i>
-										</a>
-                  </div>
-
-                  <% } else { %>
-                    <%if(post.user.id !== user.id && !comments[i].likedUsers.includes(user.id)){ %>
-                      <form class="col-1" action="/comment/likeComment/<%= comments[i].id %>?_method=PUT" method="POST">
-                        <input type="hidden" name="commenter" value="<%= user.id %>" />
-                        <input type="hidden" name="post" value="<%= post.id %>" />
-                        <button class="btn btn-primary fa fa-heart" type="submit"></button>
-                      </form>
-                    <% } else { %>
-
-
-                     <span class="small alert-success">You liked this</span>
-
-                  <span class="reply px-4">
-                        <%= comments[i].likes %>  Like
-                  </span>
-
-                     <% } %>
-
-                  <% } %>
-
-                      </div>
-            </div>
-
-          <% } %>
-          <div class="row mt-5 justify-content-around">
-            <% if (post.user.id !== user.id) { %>
-            <button type="button" class="btn btn-primary col-3" data-bs-toggle="modal" data-bs-target="#modalForm">
-              Add a comment
-            </button>
-
-            <% } else { %>
-            <a class="btn btn-primary col-3" href="/profile">Return to Profile</a>
-            <% } %>
-            <a class="btn btn-primary col-3" href="/feed">Return to Feed</a>
-          </div>
-
-        </div>
-      </div>
     </div>
+    <div class="col-md">
+      <div class="card p-3 mb-2 border-primary">
+				<div class="d-flex justify-content-between align-items-center">
+					<h4 class="title"><%= post.user.userName%></h4> 
+					<small><%= post.createdAt.toLocaleDateString().slice(0,10) %></small>
+				</div>
+				<p class="user d-flex flex-row align-items-center commentText"><%= post.caption %></p>
+			</div>
+			<% for(var i=0; i<comments.length; i++) { %>
+				<div class="card p-3 mb-2">
+					<div class="d-flex justify-content-between align-items-center">
+						<h4 class="title"><%= comments[i].user.userName%></h4> 
+						<small><%= comments[i].createdAt.toLocaleDateString().slice(0,10) %></small>
+					</div>
+					<!-- be sure to keep .commentText here -->
+					<p class="user d-flex flex-row align-items-center commentText"><%= comments[i].comment %></p>
+					<div class="action d-flex justify-content-between mt-2 align-items-center">
+						<% if(comments[i].user.id === user.id) { %>
+							<a 
+								href="#!" 
+								class="link-muted commentModify" 
+								data-bs-toggle="modal" 
+								data-bs-target="#myModal" 
+								data-modalTitle="Edit your comment"
+								data-formContent = "commentForm"
+								data-submitButton = "Edit comment"
+								data-comment = <%= comments[i].comment %>
+								data-formAction = "/comment/editComment/<%= comments[i].id %>?method=PUT"
+							><i class="fas fa-pencil-alt ms-2"></i></a>
+							<div class="reply px-4">
+								<a 
+									href="#!" 
+									class="link-muted text-danger" 
+									data-bs-toggle="modal" 
+									data-bs-target="#myModal"
+									data-modalTitle="Delete your comment"
+									data-formContent="deleteForm"
+									data-deleteType="comment"
+									data-submitButton="Delete comment"
+									data-formAction="/comment/deleteComment/<%= comments[i].id %>?method=DELETE" 
+								><i class="fas fa-trash"></i></a>
+							</div>
 
-		<%- include('partials/modal') %>
+						<% } else { %>
+							<%if(post.user.id !== user.id && !comments[i].likedUsers.includes(user.id)){ %>
+								<form class="col-1" action="/comment/likeComment/<%= comments[i].id %>?method=PUT" method="POST">
+									<input type="hidden" name="commenter" value="<%= user.id %>" />
+									<input type="hidden" name="post" value="<%= post.id %>" />
+									<button class="btn btn-primary fa fa-heart" type="submit"></button>
+								</form>
+							<% } else { %>
+								<span class="small alert-success">You liked this</span>
+							<% } %>
+							<span class="reply px-4"><%= comments[i].likes %>  Like</span>
+						<% } %>
 
-    <%- include('partials/footer', {script: '/js/modal.js'}) %>
+					</div>
+				</div>
+			<% } %>
+      <div class="row mt-5 justify-content-around">
+        <% if (post.user.id !== user.id) { %>
+        	<button 
+						type="button" 
+						class="btn btn-primary col-3" 
+						data-bs-toggle="modal" 
+						data-bs-target="#modalForm"
+						data-modalTitle="Add a comment to the post"
+						data-formContent = "commentForm" 
+						data-submitButton="Add comment"
+						data-formAction="/comment/createComment"
+					>Add a comment</button>
+        <% } else { %>
+          <a class="btn btn-primary col-3" href="/profile">Return to Profile</a>
+        <% } %>
+        <a class="btn btn-primary col-3" href="/feed">Return to Feed</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div id = "commentForm">
+	<input type="hidden" id="post" name="post" value="<%= post.id %>" />
+	<input type="hidden" id="user" name="user" value="<%= user.id %>" />
+	<label class="form-label" for="comment">Your comment</label>
+	<textarea class="form-control col-xs-12" rows="7" cols="50" name="comment" id="commentArea"></textarea>
+</div>
+
+<div id="deleteForm">
+	<input type="hidden" id="post" name="post" value="<%= post.id %>" />
+	<p>Delete this <span id="deleteType"></span>? This action cannot be undone.</p>
+</div>
+
+<%- include('partials/modal') %>
+<%- include('partials/footer', {script: '/js/modal.js'}) %>

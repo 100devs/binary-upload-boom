@@ -1,31 +1,21 @@
-const exampleModal = document.getElementById("myModal");
-exampleModal.addEventListener("show.bs.modal", function(event) {
+const modal = document.getElementById("myModal");
 
-  const button = event.relatedTarget;
-  const form = document.querySelector("#commentForm")
-  const commentId = button.getAttribute("data-bs-id");
-// Extract info from data-bs-* attributes
-  const modalTitle = exampleModal.querySelector("#modalTitle");
-console.log(commentId)
-  const el = document.createElement("input");
-  el.type = 'hidden'
-  el.name = "id";
-  el.value = commentId
-  form.appendChild(el)
-  form.method = 'post';
+modal.addEventListener("show.bs.modal", function(event) {
+	const form = document.getElementById("modalForm");
+	const modalData = event.relatedTarget.dataset;
+	console.log(modalData)
 
-
-  if(button.classList.contains('text-danger')) { // for delete
-//  modalTitle.innerHTML = '';
-  modalTitle.textContent = "Delete this comment?";
-  // delete a group after confirmation
-  form.action = "/comment/deleteComment"
-  } else {
-      // For comment modification
-  const commentText = exampleModal.querySelector("#commentArea");
-  commentText.value = button.parentElement.previousElementSibling.textContent;
-  form.action = "/comment/editComment"
-}
-
+	form.action = modalData['formaction'];
+	document.getElementById('modalTitle').innerText = modalData['modaltitle'];
+	const formContent = document.getElementById(modalData['formcontent']);
+	document.getElementById('formContent').append(formContent);
+	document.getElementById('submitButton').innerText = modalData['submitbutton'];
+	if (modalData['comment']) {
+		console.log(document.getElementById('commentArea'), modalData['comment'])
+		document.getElementById('commentArea').value = modalData['comment'];
+	}
+	if (modalData['deletetype']) {
+		document.getElementById('deleteType').innerText = modalData['deletetype'];
+	} 
 });
 

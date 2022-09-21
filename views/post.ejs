@@ -34,7 +34,7 @@
           <p><%= comments[i].comment %></p>
           <%if(comments[i].user == user.id){ %>
             <form
-              action="/post/deleteComment/<%= comments[i]._id %>?_method=DELETE"
+              action="/comment/deleteComment/<%= comments[i]._id %>?_method=DELETE"
               method="POST"
               class="col-3"
             >

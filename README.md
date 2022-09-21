@@ -27,13 +27,14 @@ Building on the OG codebase as follows.
   - Troubleshooting: The same conditionals and even others that worked previously/elsewhere (getPost) was not working for getFeed. Turns out that .lean() was stripping out some aspect of the doc that was preventing matching logic. Once removed, the previous conditional worked.
   - Proceeding with the working logic (.includes), but leaving comments (postsController.getFeed) for future testing as the reasons for failure for those are still TBD.
 - Make it possible to visit other users' profiles, which will not have add post options.
-
-**On deck**
 - Make it possible to like comments.
 - Change 'like' back to SVGs.
+- Link commenter names to their profile pages.
+- Personalize the header with username greeting when logged in.
+
+**On deck**
 - Make it possible to sort posts in feed by recency, popularity (number of likes), personal favorites (liked by viewer), etc.
 - Make it possible for commenter to delete their own comments.
-- Make it possible to respond to comments - possibly format differently.
 - Make it visually acceptable (and consider deviating wildly from Instagram design).
 
 **Stretch goals**
@@ -52,6 +53,9 @@ With each update, my workflow has generally been in Model => Controller => View 
 
 Current methods iterate over the arrays and are inefficient - as evidenced by the delayed response to likes and redirections.
 - [Fun commentary from back in 2013](http://www.sarahmei.com/blog/2013/11/11/why-you-should-never-use-mongodb/) that seems highly relevant...
+
+For posterity: how to get the req.user part if you have a different front end setup (i.e., React rather than using EJS view engine) where you need to create the req body explicitly?
+- Advice/response received: A common approach is for the frontend to make a request to the backend to get the currently logged in user information, then store that in react state. Fancier approaches include the backend telling the frontend which user is currently loggedin on initial request, or including such information in a cookie so the react app can get the current logged in user without making an additional request.
 
 ## Setup 
 **Install**

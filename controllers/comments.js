@@ -1,5 +1,4 @@
 // const cloudinary = require("../middleware/cloudinary");
-const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 
 module.exports = {
@@ -9,7 +8,6 @@ module.exports = {
       // Upload image to cloudinary
       // const result = await cloudinary.uploader.upload(req.file.path);
       
-      // ISSUE: comment author shows logged in user, not real author
       await Comment.create({
         post: req.params.id,
         comment: req.body.comment,

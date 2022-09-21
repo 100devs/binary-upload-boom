@@ -34,7 +34,7 @@ module.exports = {
 
       // cUsers is an array of user objects
       const cUsers = await User.find({_id: cAuthId})
-      console.log(cUsers)
+      // console.log(cUsers)
       
       //console.log(post,comments);
       res.render("post.ejs", { post: post, author: author, comments: comments, cUsers: cUsers,user: req.user });

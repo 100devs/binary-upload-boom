@@ -5,8 +5,11 @@ const Comment = require("../models/Comment");
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id }).sort({'image':-1});
-      res.render("profile.ejs", { posts: posts, user: req.user });
+      const allPosts = await Post.find({ user: req.user.id }).sort({ createdAt: "desc" });
+			const posts = allPosts.filter(post => post.image);
+			const drafts = allPosts.filter(post => !post.image);
+			console.log(posts, drafts)
+      res.render("profile.ejs", { posts: posts, drafts: drafts, user: req.user });
     } catch (err) {
       console.log(err);
     }

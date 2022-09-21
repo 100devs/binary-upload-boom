@@ -1,0 +1,62 @@
+<!-- The Modal -->
+<div class="modal" id="myModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">Modify my comment</h4>
+
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+
+			<!-- Modal body -->
+			<form id="commentForm">
+				<div class="modal-body" id="modalTitle">
+					<label class="form-label" for="comment">Your comment</label>
+					<textarea class="form-control col-xs-12" rows="7" cols="50" name="comment" id="commentArea"></textarea>
+					<div class="modal-footer d-block">
+					</div>
+				</div>
+
+					<!-- don't get rewrited in the body -->
+					<input type="hidden" class="form-control" id="post" name="post" value="<%= post.id %>" />
+					<input type="hidden" class="form-control" id="user" name="user" value="<%= user.id %>" />
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-warning float-end">Submit</button>
+
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Add a comment to the post</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form action="/comment/createComment" method="post" id="formComment">
+					<div class="mb-3">
+						<label class="form-label" for="comment">Your comment</label>
+						<input type="hidden" class="form-control" id="post" name="post" value="<%= post.id %>" />
+						<input type="hidden" class="form-control" id="user" name="user" value="<%= user.id %>" />
+					</div>
+					<textarea class="form-control col-xs-12" rows="7" cols="50" name="comment"></textarea>
+					<div class="modal-footer d-block">
+						<p class="float-start"><a href="#">Cancel</a></p>
+						<button type="submit" class="btn btn-warning float-end">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -12,7 +12,7 @@ const CommentSchema = new mongoose.Schema({
   post: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Post",
-  },
+  },  
   createdBy: {
     type: String,
     ref: "User",
@@ -24,7 +24,7 @@ const CommentSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-  }
+  },
 });
 
 module.exports = mongoose.model("Comment", CommentSchema);

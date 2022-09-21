@@ -1,68 +1,92 @@
 <%- include('partials/header', {title: "Your Profile", page: 'profile'}) -%>
-<div class="container">
-	<div class="d-flex border justify-content-between p-3">
-			<p><strong>User Name</strong>: <%= user.userName %></p>
-			<p><strong>Email</strong>: <%= user.email %></p>
-			<a class="btn btn-primary" href="/feed">Return to Feed</a>
-	</div>
-	<div class="row row-cols-md-2">
-		<div class="mt-5">
-				<h2>Add a post</h2>
-				<form action="/post/createPost" enctype="multipart/form-data" method="POST">
-					<div class="mb-3">
-							<label for="title" class="form-label">Title</label>
-							<input type="text" class="form-control" id="title" name="title">
-					</div>
-					<div class="mb-3">
-						<label for="caption" class="form-label">Caption</label>
-						<textarea class="form-control" id="caption" name="caption"></textarea>
-					</div>
-					<div class="mb-3">
-						<label for="imgUpload" class="form-label">Image</label>
-						<input type="file" class="form-control" id="imageUpload" name="file">
-					</div>
-					<button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-				</form>
-    </div>
-		<div class="mt-5">
-			<h2>My posts</h2>
-			<div class="row">
-				<div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-					<% for(var i=0; i<posts.length; i += 2) {%>
-						<a href="/post/<%= posts[i]._id%>">
-							<img class="w-100 shadow-1-strong rounded mb-4" src="<%= posts[i].image%>">
-						</a>
-					<% } %>
-				</div>
-				<div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-					<% for(var i=1; i<posts.length; i += 2) {%>
-						<a href="/post/<%= posts[i]._id%>">
-							<img class="w-100 shadow-1-strong rounded mb-4" src="<%= posts[i].image%>">
-						</a>
-					<% } %>
-				</div>
-				<h2>My drafts</h2>
-				<div class="mb-4 mb-lg-0 col-lg">
-				<% for(let i=0; i<drafts.length; i += 2) {%>
-					<p class="post wf-100">
-						<span class="postTitle"><%= drafts[i].title %></span>
-						<span class="postCaption"><%= drafts[i].caption %></span>
-						<button type="button" class="btn btn-primary">Edit</button>
-					</p>
-					<% } %>
-				</div>
-				<div class="mb-4 mb-lg-0 col-lg">
-				<% for(let i=1; i<drafts.length; i += 2) {%>
-					<p class="post wf-100">
-						<span class="postTitle"><%= drafts[i].title %></span>
-						<span class="postCaption"><%= drafts[i].caption %></span>
-						<button type="button" class="btn btn-primary">Edit</button>
-					</p>
-					<% } %>
-				</div>
-			</div>
 
-		</div>
-  </div>
+<div class="d-flex border justify-content-between p-3">
+		<p><strong>User Name</strong>: <%= user.userName %></p>
+		<p><strong>Email</strong>: <%= user.email %></p>
+		<a 
+			class="btn btn-primary" 
+			href="#!"
+			data-bs-toggle="modal" 
+			data-bs-target="#myModal"
+			data-modalTitle="Add a new post"
+			data-formContent = "postForm" 
+			data-submitButton="Add post"
+			data-formAction="/post/createPost"
+			data-enctype="multipart/form-data"
+		>Add post</a>
 </div>
-<%- include('partials/footer') -%>
+<div class="row row-cols-md-2 mt-5">
+	<div class="mt-5">
+		<h2>My posts</h2>
+		<div class="row">
+			<div class="col-lg col-md-12 mb-4 mb-lg-0">
+				<% for(var i=0; i<posts.length; i += 2) {%>
+					<a href="/post/<%= posts[i]._id%>">
+						<img class="w-100 shadow-1-strong rounded mb-4" src="<%= posts[i].image%>">
+					</a>
+				<% } %>
+			</div>
+			<div class="col-lg col-md-12 mb-4 mb-lg-0">
+				<% for(var i=1; i<posts.length; i += 2) {%>
+					<a href="/post/<%= posts[i]._id%>">
+						<img class="w-100 shadow-1-strong rounded mb-4" src="<%= posts[i].image%>">
+					</a>
+				<% } %>
+			</div>
+		</div>
+	</div>
+	<div class="mt-5">
+		<h2>My drafts</h2>
+		<div id="drafts">
+			<% for(let i=0; i<drafts.length; i++) {%>
+				<div class="border p-3 mb-lg-0 mb-3">
+					<h4 class="postTitle"><%= drafts[i].title %></h4>
+					<p class="postCaption"><%= drafts[i].caption %></p>
+					<button 
+						type="button"
+						class="btn btn-primary" 
+						data-bs-toggle="modal" 
+						data-bs-target="#myModal"
+						data-modalTitle="Edit your post"
+						data-formContent = "postForm" 
+						data-submitButton="Edit post"
+						data-formAction="/post/editPost/<%=drafts[i].id %>?method=PUT"
+						data-title="<%= drafts[i].title %>"
+						data-caption="<%= drafts[i].caption %>"
+						data-enctype="multipart/form-data"
+					>Edit</button>
+					<button 
+							type="button"
+							class="btn btn-primary" 
+							data-bs-toggle="modal" 
+							data-bs-target="#myModal"
+							data-modalTitle="Delete your post"
+							data-formContent = "deleteForm" 
+							data-submitButton="Delete post"
+							data-deleteType="post"
+							data-formAction="/post/deletePost/<%=drafts[i].id %>?method=DELETE"
+						>Delete</button>
+				</div>
+			<% } %>
+		</div>
+	</div>
+</div>
+
+<div id="postForm" style="display:none">
+	<input type="hidden" id="user" name="user" value="<%= user.id %>" />
+	<div class="mb-3">
+		<label for="title" class="form-label">Title</label>
+		<input type="text" class="form-control" id="title" name="title">
+	</div>
+	<div class="mb-3">
+		<label for="caption" class="form-label">Caption</label>
+		<textarea class="form-control" id="caption" name="caption"></textarea>
+	</div>
+	<div class="mb-3">
+		<label for="imgUpload" class="form-label">Image</label>
+		<input type="file" class="form-control" id="imageUpload" name="file">
+	</div>
+</div>
+
+<%- include('partials/modal') %>
+<%- include('partials/footer', {script: '/js/modal.js'}) %>

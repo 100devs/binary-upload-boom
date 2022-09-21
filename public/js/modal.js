@@ -6,14 +6,20 @@ modal.addEventListener("show.bs.modal", function(event) {
 	console.log(modalData)
 
 	form.action = modalData['formaction'];
+	if (modalData['enctype']) form.enctype = modalData['enctype'];
 	document.getElementById('modalTitle').innerText = modalData['modaltitle'];
 	const formContent = document.getElementById(modalData['formcontent']);
 	formContent.style.display = "block";
 	document.getElementById('formContent').append(formContent);
 	document.getElementById('submitButton').innerText = modalData['submitbutton'];
 	if (modalData['comment']) {
-		console.log(document.getElementById('commentArea'), modalData['comment'])
 		document.getElementById('commentArea').value = modalData['comment'];
+	}
+	if (modalData['title']) {
+		document.getElementById('title').value = modalData['title'];
+	}
+		if (modalData['caption']) {
+		document.getElementById('caption').value = modalData['caption'];
 	}
 	if (modalData['deletetype']) {
 		document.getElementById('deleteType').innerText = modalData['deletetype'];

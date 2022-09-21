@@ -36,3 +36,11 @@ p.post {
 .rowComment .title {
   font-size: 1.25rem;
 }
+
+@media (min-width: 992px) {
+	#drafts {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+	}
+}

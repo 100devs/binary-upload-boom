@@ -63,11 +63,11 @@ module.exports = {
       }
       if ((await Like.deleteOne(obj)).deletedCount) {
         console.log("Likes -1");
-        return res.redirect(`/post/${req.params.id}`);  
+        return res.redirect('back');  
       }
       await Like.create(obj);
       console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
+      res.redirect('back');
     } catch (err) {
       console.log(err);
     }

@@ -57,9 +57,9 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
-app.use("/comment", commentRoutes);
+app.use("/comments", commentRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {
-	console.log("Server is running, you better catch it!");
+	console.log(`Server is running on PORT ${process.env.PORT}, you better catch it!`);
 });

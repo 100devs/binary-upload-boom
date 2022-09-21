@@ -32,3 +32,12 @@ modal.addEventListener("hide.bs.modal", function(event) {
 	formContent.style.display = "none";
 });
 
+
+function addModalTextArea(modalBody) {
+	
+	modalBody.innerHTML = '';
+	// add proper textara
+	modalBody.insertAdjacentHTML('afterbegin',
+		'<label class="form-label" for="comment">Your comment</label><textarea class="form-control col-xs-12" rows="7" cols="50" name="comment" id="commentArea"></textarea>');
+
+}

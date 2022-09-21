@@ -151,15 +151,16 @@ main.post section.comments > h4{
 }
 main.post section.comments ul li.card {
     margin-top: .45em;
+    padding-left: 1em;
     border: none;
     flex-direction: row;
     border-bottom: 2px solid #198754;
     background-color: #57807029;
 }
-main.post section.comments .col-11, main.post section.comments .col-3{
+main.post section.comments .col-10, main.post section.comments .col-2{
     padding: calc(var(--bs-gutter-x)/ 2);
 }
-main.post section.comments .col-1{
+main.post section.comments .col-2{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -172,7 +173,6 @@ main.post section.comments div.row.divider{
     height: 2px solid #198754;
     /* width: 1; */
 }
-/*Main - feed */
 
 /* Footer */
 footer{

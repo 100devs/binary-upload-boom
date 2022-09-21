@@ -19,6 +19,7 @@ require("./config/passport")(passport);
 
 //Connect To Database
 connectDB();
+app.set()
 
 //Using EJS for views
 app.set("view engine", "ejs");

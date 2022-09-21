@@ -1,6 +1,11 @@
 <div style="margin-left: <%= depth * .5 %>rem">
   <li class="col-6 justify-content-between mt-6">
-    <%= comment.text %>
+    <span class="badge">
+      <% comment.commenter %>
+    </span>
+    <p>
+      <%= comment.text %>
+    </p>
   </li>
 
   <!-- Add comment to comment -->

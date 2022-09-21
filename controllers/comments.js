@@ -22,10 +22,13 @@ module.exports = {
          await Comment.create({ 
              comment: req.body.comment,
              likes: 0,
-             user: req.user.id
+             user: req.user.id,
+            userName: req.user.userName,
+             post: req.params.id
+             
          });
         console.log("Comment has been added!");
-        res.redirect("/profile");
+        res.redirect(`/post/${req.params.id}`);
     } catch (err) {
       console.log(err);
     }
@@ -51,9 +54,9 @@ module.exports = {
       // Delete Comment from db
       await Comment.remove({ _id: req.params.id });
       console.log("Deleted Comment");
-      res.redirect("/profile");
+      res.redirect(`/post/${req.params.id}`);
     } catch (err) {
-      res.redirect("/profile");
+      res.redirect(`/post/${req.params.id}`);
     }
   },
 };

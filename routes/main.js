@@ -3,7 +3,7 @@ const router = express.Router();
 const authController = require("../controllers/auth");
 const homeController = require("../controllers/home");
 const postsController = require("../controllers/posts");
-const commentsController = require("../controllers/comments");
+
 
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
@@ -16,8 +16,6 @@ router.post("/login", authController.postLogin);
 router.get("/logout", authController.logout);
 router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
-router.post("/comments", commentsController.createPost);
-router.delete("/comments", commentsController.deleteComment);
 
 
 module.exports = router;

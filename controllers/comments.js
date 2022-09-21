@@ -1,9 +1,10 @@
-const Comment = require("../models/Comment")
+const Comment = require("../models/Comment");
+const Post = require("../models/Post");
 
 
 
 module.exports = {
-  createPost: async (req, res) => {
+  createComment: async (req, res) => {
     try {
       await Comment.create({
         comment: req.body.comment,
@@ -22,7 +23,7 @@ module.exports = {
       await Comment.remove({ _id: req.params.id });
       console.log("Deleted Comment");
       location.replace;
-      //res.redirect(`/post/${req.params.id}`);
+      res.redirect(`/post/${comment.post}`);
     } catch (err) {
       //res.redirect(`/post/${req.body.post}`);
       console.log("error")

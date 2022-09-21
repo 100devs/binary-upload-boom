@@ -28,25 +28,27 @@
       <p><%= post.caption %></p>
     </div>
 
-    <ul>
+    
 <div class="mt-5">
   <h2>Add a Comment</h2>
-  <form action="/comment/createComment/<%=post._id%>" method="POST"></form>
+  <form action="/comment/createComment/<%=post._id%>" method="POST">
   <div class="mb-3">
-    <label for="Comment" class="form-label Comment"></label>
+    <label for="Comment" class="form-label">Comment</label>
+    <input type="text" class="form-control" id="comment" name="comment">
   </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </div>
 
 
   <ul>
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
-          <%= comments[i].comments %> 
+        <h5>  <%= comments[i].comment%>  </h5>
         
-          <form
+          <form class="col-1"
           action="/comment/deleteComment/<%= comment.id %>?_method=DELETE"
           method="POST"
-          class="col-3"
           >
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>

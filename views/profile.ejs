@@ -1,46 +1,43 @@
 <%- include('partials/header') -%>
-<div class="">
-  <div class="">
-      <div class="">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="">Logout</a>
-          </div>
-          <div class="">
-            <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="">
-                  <label for="title" class="">Title</label>
-                  <input type="text" class="" id="title" name="title">
-              </div>
-              <div class="">
-                <label for="caption" class="">Caption</label>
-                <textarea class="" id="caption" name="caption"></textarea>
-              </div>
-              <div class="">
-                <label for="imgUpload" class="">Image</label>
-                <input type="file" class="" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="" value="Upload">Submit</button>
-            </form>
-          </div>
-      </div>
-      <div class="">
-        <ul class="">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
+  <main class="container mx-auto">
+    <div class="">
+      <div class="mb-12">
         <div class="">
-          <a class="" href="/feed">Return to Feed</a>
-        </div>  
-      </div>  
+          <h2 class="text-2xl font-bold text-blue-900 mb-6">Add a post</h2>
+          <form action="/post/createPost" enctype="multipart/form-data" method="POST" class="flex flex-col">
+            <div class="mb-6">
+              <label for="title" class="block mb-2">Title</label>
+              <input type="text" class="border border-gray-400 p-1 rounded-md w-full" id="title" name="title">
+            </div>
+            <div class="mb-6">
+              <label for="caption" class="block mb-2">Caption</label>
+              <textarea class="border border-gray-400 p-1 rounded-md w-full" rows="8" id="caption"
+                name="caption"></textarea>
+            </div>
+            <div class="mb-6">
+              <label for="imgUpload" class="block mb-2">Image</label>
+              <input type="file" class="border border-gray-400 p-1 rounded-md w-full" id="imageUpload" name="file">
+            </div>
+            <button type="submit" class="bg-orange-400 text-white hover:bg-orange-500 rounded-full px-12 py-3"
+              value="Upload">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div>
+        <h2 class="text-2xl font-bold text-blue-900 mb-6">My posts</h2>
+        <ul>
+          <% for(var i=0; i<posts.length; i++) {%>
+            <li>
+              <a href="/post/<%= posts[i]._id%>">
+                <img class="img-fluid" src="<%= posts[i].image%>">
+              </a>
+            </li>
+            <% } %>
+        </ul>
+        <div>
+          <a href="/feed">Return to Feed</a>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-<%- include('partials/footer') -%>
+  </main>
+  <%- include('partials/footer') -%>

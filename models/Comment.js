@@ -13,8 +13,12 @@ const CommentSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "Post",
 	},
-	user: {
+	userId: {
 		type: mongoose.Schema.Types.ObjectId,
+		ref: "User",
+	},
+	userName: {
+		type: mongoose.Schema.Types.String,
 		ref: "User",
 	},
 	createdAt: {

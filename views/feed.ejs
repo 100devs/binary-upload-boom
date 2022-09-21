@@ -1,15 +1,18 @@
 <%- include('partials/header') -%>
-  <div class="container">
-    <div class="row justify-content-center mt-5">
-      <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-    </div>
-  </div>
+<div class="container">
+	<div class="row justify-content-center mt-5">
+		<ul class="row list-unstyled">
+			<% if (posts.length === 0) { %>
+			<li>No posts :(</li>
+			<% } else { %> <% posts.forEach(post => { %>
+			<li class="col-6 justify-content-between mt-5">
+				<a href="/post/<%= post._id%>">
+					<h2><%= post.title %></h2>
+					<img class="img-fluid" src="<%= post.image%>" />
+				</a>
+			</li>
+			<% }) %> <% } %>
+		</ul>
+	</div>
+</div>
 <%- include('partials/footer') -%>

@@ -1,6 +1,7 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row justify-content-center mt-5">
+    
     <div class="col-6">
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
@@ -24,6 +25,7 @@
         <%}%>
       </div>
     </div>
+    
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
@@ -36,6 +38,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+      
     </div>
     <ul>
       <% for(var i=0; i<comments.length; i++) {%>
@@ -43,6 +46,15 @@
           <%= comments[i].comment%>
         </li>
       <% } %>
+      <!-- Comment likes button -->
+      <form
+          class="col-1"
+          action="/post/likeComment/<%= post.id %>?_method=PUT"
+          method="POST"
+        >
+          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+        </form>
+
     </ul>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>

@@ -18,3 +18,13 @@
 # Run
 
 `npm start`
+
+# Task list
+Build nav bar and footer partials
+Build html for home, admin, leaderboard, player profile pages
+Update models
+Update routes
+Update controllers
+Create submit match behavior
+
+

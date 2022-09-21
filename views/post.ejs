@@ -41,6 +41,7 @@
                   <%if(post.user==user.id){ %>
                     <form action="/comments/deleteComment/<%= comment[i].id %>?_method=PUT" method="POST" class="col-3">
                       <button class="btn btn-primary fa fa-trash" type="submit"></button>
+                      <input type="hidden" name="postid" value="<%= post.id %>">
                     </form>
                     <%}%>
                   <h3 class="col-3">Likes: <%= comment[i].likes %>

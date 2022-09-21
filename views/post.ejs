@@ -1,11 +1,15 @@
-<%- include('partials/header', {title: post.title, page: 'post'}) -%>
+<% title = (typeof(title) !== 'undefined') ? title : site.pages['posts'].title %>
+<% page = (typeof(page) !== 'undefined') ? page : site.pages['posts'].page %>
+
+
+<%- include('layouts/head') -%>
 
 <div class="row">
 	<h2><%= post.title %></h2>
 	<div class="col-md">
 		<div class="row justify-content-between">
-			<div class="liked d-flex align-items-baseline">
-				<h3 class="col-3">Likes: <%= post.likes %></h3>
+			<div class="liked d-flex align-items-baseline justify-content-between">
+				<h3>Likes: <%= post.likes %></h3>
 				<%if(post.user.id !== user.id && !post.likedUsers.includes(user.id)){ %>
 					<form class="col-1" action="/post/likePost/<%= post.id %>?method=PUT" method="POST">
 						<input type="hidden" name="commenter" value="<%= user.id %>" />
@@ -118,4 +122,4 @@
 </div>
 
 <%- include('partials/modal') %>
-<%- include('partials/footer', {script: '/js/modal.js'}) %>
+<%- include('layouts/foot', {script: '/js/modal.js'}) %>

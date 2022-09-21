@@ -1,3 +1,11 @@
+.wrapper {
+    min-height: calc(100vh - 60px);
+}
+
+footer {
+	height: 60px;
+}
+
 p.post {
     width: 100;
     display: flex;
@@ -49,3 +57,4 @@ p.post {
 		gap: 1rem;
 	}
 }
+

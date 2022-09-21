@@ -1,4 +1,8 @@
-<%- include('partials/header', {title: "Sign Up", page: 'signup'}) -%>
+<% title = (typeof(title) !== 'undefined') ? title : site.pages['signup'].title %>
+<% page = (typeof(page) !== 'undefined') ? page : site.pages['signup'].page %>
+
+
+<%- include('layouts/head') -%>
 
 <div class="row justify-content-center">
 		<section class="col-6">
@@ -35,4 +39,4 @@
 		</section>
 </div>
 
-<%- include('partials/footer') -%>
+<%- include('layouts/foot') -%>

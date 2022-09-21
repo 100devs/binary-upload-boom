@@ -18,6 +18,14 @@ const commentRoutes = require("./routes/comments");
 const PORT = process.env.PORT || 2121
 const SESSION_SECRET = process.env.SESSION_SECRET || 'yoursecretsession';
 
+// get site parameters for page/title and others
+const data = require('./config/site');
+
+const siteData = function (req, res, next) {
+		res.locals.site = data;
+		next();
+}
+
 //Use .env file in config folder
 require("dotenv").config();
 
@@ -60,6 +68,8 @@ app.use(passport.session());
 
 //Use flash messages for errors, info, ect...
 app.use(isLoggedIn);
+app.use(siteData);
+	
 app.use(flash());
 
 

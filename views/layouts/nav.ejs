@@ -1,0 +1,17 @@
+
+			<nav class="d-flex justify-content-center py-3 border-bottom mb-4">
+			<ul class="nav nav-pills">
+				<li class="nav-item">
+					<a href="/" class="nav-link <% if (page === 'home') { %> active <% } %>">Home</a>
+				</li>
+				<li class="nav-item"><a href="/feed" class="nav-link<% if (page === 'feed') { %> active <% } %>">Feed</a></li>
+				<% if (loggedIn) { %>
+					<li class="nav-item"><a href="/profile" class="nav-link<% if (page === 'profile') { %> active <% } %>">Profile</a></li>
+					<li class="nav-item"><a href="/logout" class="nav-link">Log out <span class="d-sm-none d-md-inline-block">(<%= user.userName %>)</span></a></li>
+				<% } else { %>
+					<li class="nav-item"><a href="/login" class="nav-link<% if (page === 'login') { %> active <% } %>">Log In</a></li>
+					<li class="nav-item"><a href="/signup" class="nav-link<% if (page === 'signup') { %> active <% } %>">Sign Up</a></li>
+				<% } %>
+			</ul>
+		</nav>
+<main class="container">

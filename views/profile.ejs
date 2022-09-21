@@ -1,4 +1,9 @@
-<%- include('partials/header', {title: "Your Profile", page: 'profile'}) -%>
+<% title = (typeof(title) !== 'undefined') ? title : site.pages['profile'].title %>
+<% page = (typeof(page) !== 'undefined') ? page : site.pages['profile'].page %>
+
+
+
+<%- include('layouts/head') -%>
 
 <div class="d-flex border justify-content-between p-3">
 		<p><strong>User Name</strong>: <%= user.userName %></p>
@@ -87,4 +92,4 @@
 </div>
 
 <%- include('partials/modal') %>
-<%- include('partials/footer', {script: '/js/modal.js'}) %>
+<%- include('layouts/foot', {script: '/js/modal.js'}) %>

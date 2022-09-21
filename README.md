@@ -18,3 +18,16 @@
 # Run
 
 `npm start`
+
+pseudo
+add a delete button to comments that will only be shown to loggedin user. 
+only a logged user can delete their comment
+
+TODO - create a route to handle the delete action
+adjust the schema; you need the id of the person that created the comment
+you need the username of the person that created the comment to show
+you need a controller to handle the delete method; the controller is where the logic
+happens. 
+a view to show the delete button, the view will have a loop that will compare the 
+id of the person that created the comment and the id of the logged in user before
+showing the button

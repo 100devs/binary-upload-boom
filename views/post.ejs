@@ -27,6 +27,50 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+
+    <div class="mt-5">
+        <h2>Add a comment</h2>
+        <form action="/comment/createComment/<%=post._id%>" method="POST">
+          <div class="mb-3">
+            <label for="comment" class="form-label">Comment</label>
+            <textarea class="form-control" id="comment" name="comment"></textarea>
+          </div>
+         
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <ul>
+        <% for(var i=0; i<comments.length; i++) {%> 
+          <!-- loop thru all the comments from the database and show it as a list  -->
+          <li class="col-6 justify-content-between mt-5">
+            User <%= comments[i].createdBy%> Says: <%= comments[i].comment%>
+            <!-- <h1><%= comments[i]._id%></h1> -->
+            <!-- shows each individual comment as a list. comment is the schema -->
+             <%if(comments[i].createdById == user.id){ %>
+            <form
+                  action="/comment/deleteComment/<%= post.id%>/<%= comments[i]._id%>?_method=DELETE"
+                  method="POST"
+                  class="col-3"
+                >
+                  <button class="btn btn-primary fa fa-trash" type="submit"></button>
+            </form>
+            <%}%>
+            <br>
+            <!-- add a loop for the likes to not show -->
+            <form
+              class="col-1"
+              action="/comment/likeComment/<%= post.id %>/<%= comments[i]._id %>?_method=PUT"
+              method="POST"
+            >
+              <button class="btn btn-primary fa fa-heart" type="submit"></button>
+            </form>
+            <h3 class="col-3">Likes: <%= comments[i].likes %></h3>
+            
+          </li>
+        <% } %>
+    </ul>
+
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

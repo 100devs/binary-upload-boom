@@ -1,4 +1,8 @@
-<%- include('partials/header', {title: "Binary Upload Boom", page: 'index'}) -%>
+<% title = (typeof(title) !== 'undefined') ? title : site.pages['empty'].title %>
+<% page = (typeof(page) !== 'undefined') ? page : site.pages['empty'].page %>
+
+
+<%- include('layouts/head') -%>
 
     <div class="row justify-content-around">
 			<% if (loggedIn) { %>
@@ -16,4 +20,4 @@
 </main>
     
 
-<%- include('partials/footer') -%>
+<%- include('layouts/foot') -%>

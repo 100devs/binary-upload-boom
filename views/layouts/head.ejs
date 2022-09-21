@@ -1,10 +1,14 @@
+<% var pageTitle = (typeof(page) !== 'undefined') ? page : 'empty' %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title %></title>
+    <title><%= (typeof(title) !== 'undefined') ? 
+		title :
+		site.pages[pageTitle].title
+		%></title>
     <link
       rel="icon"
       type="image/png"
@@ -27,21 +31,8 @@
   </head>
   <body>
 	<div class="wrapper">
-		<header class="d-flex justify-content-center py-3 border-bottom mb-4">
-			<ul class="nav nav-pills">
-				<li class="nav-item">
-					<a href="/" class="nav-link <% if (page === 'index') { %> active <% } %>">Home</a>
-				</li>
-				<li class="nav-item"><a href="/feed" class="nav-link<% if (page === 'feed') { %> active <% } %>">Feed</a></li>
-				<% if (loggedIn) { %>
-					<li class="nav-item"><a href="/profile" class="nav-link<% if (page === 'profile') { %> active <% } %>">Profile</a></li>
-					<li class="nav-item"><a href="/logout" class="nav-link">Log out <span class="d-sm-none d-md-block">(<%= user.userName %>)</span></a></li>
-				<% } else { %>
-					<li class="nav-item"><a href="/login" class="nav-link<% if (page === 'login') { %> active <% } %>">Log In</a></li>
-					<li class="nav-item"><a href="/signup" class="nav-link<% if (page === 'signup') { %> active <% } %>">Sign Up</a></li>
-				<% } %>
-			</ul>
-		</header>
+
+<%- include('nav') %>
 
 <main class="container">
 

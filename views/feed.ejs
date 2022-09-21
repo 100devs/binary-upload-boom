@@ -1,5 +1,8 @@
-<%- include('partials/header', {title: "Feed", page: 'feed'}) -%>
+<% title = (typeof(title) !== 'undefined') ? title : site.pages['feed'].title %>
+<% page = (typeof(page) !== 'undefined') ? page : site.pages['feed'].page %>
+
+<%- include('layouts/head') -%>
 
 <%- include('partials/feed') %>
 
-<%- include('partials/footer') -%>
+<%- include('layouts/foot') %>

@@ -22,49 +22,8 @@
         </div>
 
         <!-- Comment Section -->
-        <section id="commentSection">
-          <!-- Comments On Post -->
-          <h2>Comments</h2>
+        <%- include('partials/comments') -%>
 
-          <div id="userOutput">
-            <% for(var i=0; i<comments.length; i++) {%>
-              <div class="card mb-4">
-                <div class="card-body">
-                  <%= comments[i].comment%>
-
-                    <div class="d-flex justify-content-between">
-                      <div class="d-flex flex-row align-items-center">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(31).webp" alt="avatar" width="25"
-                          height="25" />
-                        <p class="small mb-0 ms-2">
-                          <%=user.userName%>
-                        </p>
-                      </div>
-
-                      <div class="d-flex flex-row align-items-center text-primary">
-                        <p class="small mb-0">Upvoted</p>
-                        <i class="fas fa-thumbs-up mx-2 fa-xs" style="margin-top: -0.16rem;"></i>
-                        <p class="small mb-0">2</p>
-                      </div>
-                    </div>
-                </div>
-              </div>
-              <% } %>
-          </div>
-
-          <!-- Form to add a comment -->
-          <div class="mt-5">
-            <h2>Add a Comment</h2>
-            <form action="/comment/createComment/<%= post._id%>" method="POST">
-              <div class="mb-3">
-                <label for="comment" class="form-label">Comment</label>
-                <input type="text" class="form-control" id="comment" name="comment">
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-          </div>
-
-        </section>
 
 
       </div>

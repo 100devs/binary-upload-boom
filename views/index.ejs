@@ -2,18 +2,17 @@
 
     <div class="row justify-content-around">
 			<% if (loggedIn) { %>
-				  <a href="/profile" class="col-3 btn btn-primary"> Your Profile</a>
-        <a href="/feed" class="col-3 btn btn-primary"> Feed</a>
+				<a href="/profile" class="col-3 btn btn-primary"> Your Profile</a>
+				<a href="/feed" class="col-3 btn btn-primary"> Feed</a>
+				<h2 class="mt-3">Your Posts</h2>
+				<div class="row mt-4">
+					<%- include('partials/feed') %>
+				</div>
 			<% } else { %>
         <a href="/login" class="col-3 btn btn-primary"> Login</a>
         <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
 			<% } %>
     </div>
-	<% if (typeof(posts) !== 'undefined' ) { %>
-	<div class="row mt-4">
-	<%- include('partials/feed') %>
-	</div>
-	<% } %>
 </main>
     
 

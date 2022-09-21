@@ -1,11 +1,13 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-4 col-md-4 mb-4 mb-lg-0">
+			<% const bp1 = Math.floor(posts.length / 3) - 1 %>
+			<% const bp2 = Math.floor(posts.length * 2 / 3) - 1 %>
 			<% for(var i=0; i<posts.length; i ++) {%>
 				<a href="/post/<%= posts[i]._id%>">
 					<img class="w-100 shadow-1-strong rounded mb-4" src="<%= posts[i].image%>">
 				</a>
-				<% if (i%2 == 0) { %>
+				<% if (i === bp1 || i === bp2) { %>
 					</div>
 					<div class="col-lg-4 col-md-4 mb-4 mb-lg-0">
 				<% } %>

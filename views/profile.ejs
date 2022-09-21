@@ -19,18 +19,16 @@
 	<div class="col-md">
 		<h2>My posts</h2>
 		<div class="row">
-			<div class="col-lg col-md-12 mb-4 mb-lg-0">
-				<% for(var i=0; i<posts.length; i += 2) {%>
+			<div class="col-lg mb-4 mb-lg-0">
+				<% const mid = Math.floor(posts.length / 2) %>
+				<% for(var i=0; i<posts.length; i ++) {%>
 					<a href="/post/<%= posts[i]._id%>">
 						<img class="w-100 shadow-1-strong rounded mb-4" src="<%= posts[i].image%>">
 					</a>
-				<% } %>
-			</div>
-			<div class="col-lg col-md-12 mb-4 mb-lg-0">
-				<% for(var i=1; i<posts.length; i += 2) {%>
-					<a href="/post/<%= posts[i]._id%>">
-						<img class="w-100 shadow-1-strong rounded mb-4" src="<%= posts[i].image%>">
-					</a>
+					<% if (i === mid) { %>
+						</div>
+						<div class="col-lg mb-4 mb-lg-0">
+					<% } %>
 				<% } %>
 			</div>
 		</div>

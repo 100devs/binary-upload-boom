@@ -5,20 +5,24 @@
 
 <%- include('layouts/head', { title: profileTitle }) -%>
 
-<div class="d-flex border justify-content-between p-3">
-		<p><strong>User Name</strong>: <%= user.userName %></p>
-		<p><strong>Email</strong>: <%= user.email %></p>
-		<a
-			class="btn btn-primary"
-			href="#!"
-			data-bs-toggle="modal"
-			data-bs-target="#myModal"
-			data-modalTitle="Add a new post"
-			data-formContent = "postForm"
-			data-submitButton="Add post"
-			data-formAction="/post/createPost"
-			data-enctype="multipart/form-data"
-		>Add post</a>
+<div class="d-flex border w-100 w-lg-50 align-items-center p-3">
+		<div>
+			<p><strong>User Name</strong>: <%= user.userName %></p>
+			<p><strong>Email</strong>: <%= user.email %></p>
+		</div>
+		<div class="ms-auto">
+			<a
+				class="btn btn-primary"
+				href="#!"
+				data-bs-toggle="modal"
+				data-bs-target="#myModal"
+				data-modalTitle="Add a new post"
+				data-formContent = "postForm"
+				data-submitButton="Add post"
+				data-formAction="/post/createPost"
+				data-enctype="multipart/form-data"
+			>Add post</a>
+		</div>
 </div>
 <div class="row mt-5">
 	<div class="col-md">

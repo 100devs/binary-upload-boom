@@ -1,29 +1,48 @@
-# Install
+# Introduction
+---
 
-`npm install`
+This project is a work in progress. 
+The Art Lounge aims to provide a space for people to post their art and design to receive constructive criticism, professional critiques, and general appreciation for the users' artwork to help them improve their skills. 
 
 ---
 
-# Things to add
+# Objectives
 
-- Create a `.env` file in config folder and add the following as `key = value`
+---
+
+# Who is this for?
+
+---
+
+# Packages/Dependenciea
+
+---
+
+# MVC Structure
+
+![The Art Lounge MVC Model](https://github.com/wo1vin/socialnetwork/blob/main/public/imgs/socialnetwork-mvc.png?raw=true)
+
+---
+
+# Dire Directions, Dear Developers
+
+- To install, use the command `npm install`
+- Create a `.env` file in config folder
+- Add it to `.gitignore` file if you plan to deploy or push to GitHub
+- Add the following as `key = value`:
   - PORT = 2121 (can be any port example: 3000)
   - DB_STRING = `your database URI`
   - CLOUD_NAME = `your cloudinary cloud name`
   - API_KEY = `your cloudinary api key`
   - API_SECRET = `your cloudinary api secret`
+- To run the program, use `npm start`
 
----
-
-# Run
-
-`npm start`
+Happy Coding!
 
 ---
 
 # Optimizations
 
-- If the user has not signed in, don't show the nav. ✅
 - Add icon next to "Log out"
 - Expand past visual art ex. Music
 - Tag system, request critique.

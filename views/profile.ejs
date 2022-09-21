@@ -25,7 +25,7 @@
 		<h2>My posts</h2>
 		<div class="row">
 			<div class="col-lg mb-4 mb-lg-0">
-				<% const mid = Math.floor(posts.length / 2) %>
+				<% const mid = posts.length > 2 ? Math.floor(posts.length / 2) : 1 %>
 				<% for(var i=0; i<posts.length; i ++) {%>
 					<a href="/post/<%= posts[i]._id%>">
 						<img class="w-100 shadow-1-strong rounded mb-4" src="<%= posts[i].image%>">
@@ -87,7 +87,7 @@
 	</div>
 	<div class="mb-3">
 		<label for="imgUpload" class="form-label">Image</label>
-		<input type="file" class="form-control" id="imageUpload" name="file">
+		<input type="file" class="form-control" id="imageUpload" name="file" />
 	</div>
 </div>
 

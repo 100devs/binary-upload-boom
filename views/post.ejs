@@ -3,34 +3,33 @@
 <div class="container">
   <div class="row">
     <% if (locals.messages.error) { %>
-    <% messages.error.forEach( el => { %>
-    <div class="alert alert-danger"><%= el.msg %></div>
-    <% }) %>
+			<% messages.error.forEach( el => { %>
+				<div class="alert alert-danger"><%= el.msg %></div>
+			<% }) %>
     <% } %>
-    <% if (locals.messages.success) { %>
-    <% messages.success.forEach( el => { %>
-    <div class="alert alert-success"><%= el.msg %></div>
-    <% }) %>
+			<% if (locals.messages.success) { %>
+			<% messages.success.forEach( el => { %>
+				<div class="alert alert-success"><%= el.msg %></div>
+			<% }) %>
     <% } %>
     <% if (locals.messages.info) { %>
-    <% messages.info.forEach( el => { %>
-    <div class="alert alert-info"><%= el.msg %></div>
-    <% }) %>
+			<% messages.info.forEach( el => { %>
+				<div class="alert alert-info"><%= el.msg %></div>
+			<% }) %>
     <% } %>
-
   </div>
+
   <div class="row">
     <h2><%= post.title %></h2>
     <div class="col-md">
       <div class="row justify-content-between">
         <div class="liked d-flex align-items-baseline">
           <h3 class="col-3">Likes: <%= post.likes %></h3>
-
           <%if(post.user.id !== user.id && !post.likedUsers.includes(user.id)){ %>
-          <form class="col-1" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
-            <input type="hidden" name="commenter" value="<%= user.id %>" />
-            <button class="btn btn-primary fa fa-heart" type="submit"></button>
-          </form>
+						<form class="col-1" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
+							<input type="hidden" name="commenter" value="<%= user.id %>" />
+							<button class="btn btn-primary fa fa-heart" type="submit"></button>
+						</form>
           <% } else {  %> <span class="small alert-success">You liked it</span> <% } %>
         </div>
 
@@ -43,35 +42,31 @@
       <img class="img-fluid" src="<%= post.image%>" />
       </div>
       <div class="col-md">
-        <div class="border p-3 mb-3">
-          <h3><%= post.user.userName %>:</h3> <%= post.caption %>
+        <div class="card p-3 mb-2 border-primary">
+					<div class="d-flex justify-content-between align-items-center">
+							<h4 class="title"><%= post.user.userName%></h4> 
+							<small><%= post.createdAt.toLocaleDateString().slice(0,10) %></small>
+						</div>
+          <p class="user d-flex flex-row align-items-center commentText"><%= post.caption %></p>
         </div>
         <% for(var i=0; i<comments.length; i++) {%>
-
-
-            <div class="row  d-flex justify-content-center">
-                    <div class="card p-3 mt-2">
-
-                        <div class="d-flex justify-content-between align-items-center">
-
-
-                          <span class="title">
-                            <%= comments[i].user.userName%>
-                          </span> <small> <%= comments[i].createdAt.toLocaleDateString().slice(0,10) %></small>
-                      </div>
-                                                            <!-- be sure to keep .commentText here -->
-                     <p  class="user d-flex flex-row align-items-center commentText"><%= comments[i].comment %></p>
-
-
-                      <div class="action d-flex justify-content-between mt-2 align-items-center">
-
-                  <% if(comments[i].user.id === user.id) { %>
-                             <a href="#!" class="link-muted commentModify" data-bs-toggle="modal" data-bs-target="#myModal" data-bs-id="<%= comments[i].id %>"><i class="fas fa-pencil-alt ms-2"></i></a>
+            <div class="card p-3 mb-2">
+							<div class="d-flex justify-content-between align-items-center">
+								<h4 class="title"><%= comments[i].user.userName%></h4> 
+								<small><%= comments[i].createdAt.toLocaleDateString().slice(0,10) %></small>
+              </div>
+            	<!-- be sure to keep .commentText here -->
+              <p class="user d-flex flex-row align-items-center commentText"><%= comments[i].comment %></p>
+							<div class="action d-flex justify-content-between mt-2 align-items-center">
+								<% if(comments[i].user.id === user.id) { %>
+									<a href="#!" class="link-muted commentModify" data-bs-toggle="modal" data-bs-target="#myModal" data-bs-id="<%= comments[i].id %>">
+										<i class="fas fa-pencil-alt ms-2"></i>
+									</a>
 
                   <div class="reply px-4">
                     <a href="#!" class="link-muted text-danger" data-bs-toggle="modal" data-bs-target="#myModal" data-bs-id="<%= comments[i].id %>">
-                      <i class="fas fa-trash">
-                      </i></a>
+                      <i class="fas fa-trash"></i>
+										</a>
                   </div>
 
                   <% } else { %>
@@ -95,16 +90,7 @@
                   <% } %>
 
                       </div>
-                    </div>
-          </div>
-
-
-
-
-
-
-
-
+            </div>
 
           <% } %>
           <div class="row mt-5 justify-content-around">
@@ -123,70 +109,6 @@
       </div>
     </div>
 
-    <!-- Click on Modal Button -->
-    <!-- The Modal -->
-    <div class="modal" id="myModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
+		<%- include('partials/modal') %>
 
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">Modify my comment</h4>
-
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-
-          <!-- Modal body -->
-          <form id="commentForm">
-            <div class="modal-body" id="modalTitle">
-              <label class="form-label" for="comment">Your comment</label>
-              <textarea class="form-control col-xs-12" rows="7" cols="50" name="comment" id="commentArea"></textarea>
-              <div class="modal-footer d-block">
-              </div>
-            </div>
-
-              <!-- don't get rewrited in the body -->
-              <input type="hidden" class="form-control" id="post" name="post" value="<%= post.id %>" />
-              <input type="hidden" class="form-control" id="user" name="user" value="<%= user.id %>" />
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-warning float-end">Submit</button>
-
-            </div>
-          </form>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add a comment to the post</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form action="/comment/createComment" method="post" id="formComment">
-              <div class="mb-3">
-                <label class="form-label" for="comment">Your comment</label>
-                <input type="hidden" class="form-control" id="post" name="post" value="<%= post.id %>" />
-                <input type="hidden" class="form-control" id="user" name="user" value="<%= user.id %>" />
-              </div>
-              <textarea class="form-control col-xs-12" rows="7" cols="50" name="comment"></textarea>
-              <div class="modal-footer d-block">
-                <p class="float-start"><a href="#">Cancel</a></p>
-                <button type="submit" class="btn btn-warning float-end">Submit</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-    <%- include('partials/footer', {script: '/js/post.js'}) %>
+    <%- include('partials/footer', {script: '/js/modal.js'}) %>

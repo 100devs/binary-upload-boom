@@ -1,10 +1,10 @@
-<div class="col-6">
-  <h2>Following</h2>
+<div class="text-center border-bottom pb-2 mb-2">
+  <h5>Following</h5>
   <% for (var i=0; i < user.following.length; i++) {%>
-  <li class="col-6 justify-content-between mt-5">
+  <div class="pb-2">
     <a href="/publicProfile/<%= user.following[i]._id %>">
       <span><%= user.following[i].userName %></span>
     </a>
-  </li>
+  </div>
   <% } %>
 </div>

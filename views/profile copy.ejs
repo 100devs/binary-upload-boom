@@ -1,0 +1,158 @@
+<%- include('partials/navbarHeader') -%>
+
+<div class="container">
+  <div class="row mt-5">
+    <!-- Profile Card -->
+    <div class="col-6">
+      <div class="card d-flex flex-row">
+        <!-- adding pic -->
+        <div class="profile-pic-container">
+          <img
+            class="profile-pic-image"
+            src="<%= profile[0] == undefined ? 'https://images.dog.ceo/breeds/shiba/shiba-13.jpg' : profile[0].image%>"
+            alt=""
+          />
+        </div>
+        <div><%- include('partials/userDetails') -%></div>
+      </div>
+      <!-- adding pic -->
+      <!-- profile picture upload-->
+      <div class="mt-5">
+        <h2>Change profile picture</h2>
+        <form
+          action="<%= profile[0] == undefined ? '/post/createProfilePic?_method=POST' : '/post/createProfilePic?_method=PUT' %>"
+          enctype="multipart/form-data"
+          method="POST"
+        >
+          <div class="mb-3">
+            <label
+              for="file"
+              class="form-label"
+            ></label>
+            <input
+              type="file"
+              class="form-control"
+              name="file"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            value="Upload"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+      <!-- end profile picture -->
+      <!-- audio player/editor -->
+      <figure>
+        <audio controls="controls">
+          <source
+            src="<%= profile[0] == undefined ? 'https://docs.google.com/uc?export=download&id=0B-klwLEjaXWcZHR5SmJJWEwtYnc' : profile[0].profileSong %>"
+          />
+        </audio>
+      </figure>
+      <div class="mt-5">
+        <h2>Change profile music</h2>
+        <form
+          action="<%= profile[0] == undefined ? '/post/createProfileSong?_method=POST' : '/post/createProfileSong?_method=PUT' %>"
+          enctype="multipart/form-data"
+          method="POST"
+        >
+          <div class="mb-3">
+            <label
+              for="file"
+              class="form-label"
+            ></label>
+            <input
+              type="file"
+              class="form-control"
+              name="file"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            value="Upload"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+      <!-- end audio player/editor -->
+      <div class="mt-5 bg-primary">
+        <h2>Add a post</h2>
+        <form
+          action="/post/createPost"
+          enctype="multipart/form-data"
+          method="POST"
+        >
+          <div class="mb-3">
+            <label
+              for="title"
+              class="form-label"
+              >Title</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              name="title"
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="caption"
+              class="form-label"
+              >Caption</label
+            >
+            <textarea
+              class="form-control"
+              id="caption"
+              name="caption"
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label
+              for="imgUpload"
+              class="form-label"
+              >Image</label
+            >
+            <input
+              type="file"
+              class="form-control"
+              id="imageUpload"
+              name="file"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            value="Upload"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="col-6">
+      <ul class="row list-unstyled">
+        <% for(var i=0; i < posts.length; i++) {%>
+        <li class="col-6 justify-content-between mt-5">
+          <a href="/post/<%= posts[i]._id %>">
+            <img
+              class="img-fluid"
+              src="<%= posts[i].image%>"
+            />
+          </a>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+    <%- include('partials/following') -%> <%- include('partials/followers') -%>
+  </div>
+</div>
+<%- include('partials/footer') -%>

@@ -7,7 +7,7 @@ const Profile = require('../models/Profile');
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const profile = await Profile.find({ user: req.user.id });
+      const profile = await Profile.findOne({ user: req.user.id });
       const posts = await Post.find({ user: req.user.id });
       const user = await User.findOne({ _id: req.user.id })
         .populate({
@@ -41,6 +41,7 @@ module.exports = {
         id: user._id,
         following: following,
         user: user,
+        profile: profile,
         song: profile && profile.profileSong ? profile.profileSong : null,
       });
     } catch (err) {

@@ -31,4 +31,8 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
+//"Post" will become plural
+//ox will be oxen
+//module.exports = mongoose.model("Post", PostSchema,'Custom appoint name here's);
+
 module.exports = mongoose.model("Post", PostSchema);

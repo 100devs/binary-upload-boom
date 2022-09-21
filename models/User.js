@@ -1,10 +1,12 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");  // secrete code for passwords used to identify users and passwords so we are able to keep people's info safe
 const mongoose = require("mongoose");
 
-const UserSchema = new mongoose.Schema({
+
+const UserSchema = new mongoose.Schema({    //add profile picture to user
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
   password: String,
+  
 });
 
 // Password hash middleware.

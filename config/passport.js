@@ -18,7 +18,7 @@ module.exports = function (passport) {
               "Your account was registered using a sign-in provider. To enable password login, sign in using a provider, and then set a password under your user profile.",
           });
         }
-        user.comparePassword(password, (err, isMatch) => {
+        user.comparePassword(password, (err, isMatch) => {  //comparing password with what user types with something in database and if it matches we login in or else message
           if (err) {
             return done(err);
           }

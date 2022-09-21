@@ -17,11 +17,24 @@ MAIN .index(83vh) .profile
 FOOTER (8vh)
 */
 /* NAV */
+nav.navbar{
+    line-height: 4em;
+}
+nav.navbar>div>a{
+    display: inherit;
+}
 .navbar-brand {
-    margin-left: 1rem;
+    margin: 0 .5rem 0 1rem;
+    font-family: 'Devonshire', cursive;
+    font-size: 2.25rem;
+}
+nav.navbar>div>a>img{
+    width: 1.75em;
+    height: 0.9em;
+    margin-left: 0.2em;
 }
 nav div a{
-    color: #fff;
+    color: rgb(0, 0, 0);
     font-size: .9rem;
 }
 nav div a.nav-link{
@@ -33,7 +46,9 @@ nav div a.nav-link:hover {
     color: #e8cd00;
     background: radial-gradient( #00420e, rgba(0, 0, 0, 0) 80%);
 }
-
+nav img{
+    height: 3em;
+}
 /* MAIN - index */
 
 main.index, main.signup, main.login{

@@ -24,6 +24,38 @@
           <%= post.caption %>
         </p>
       </div>
+
+      <!-- comments -->
+
+      <div class="container">
+        <div class="row justify-content-center mt-5">
+          <ul class="row list-unstyled">
+            <% for(var i=0; i< comment.length; i++) {%>
+              <% if (comment[i].deleted == false){ %>
+              <li class="col-6 justify-content-between mt-5">
+                <%= comment[i].comment %>
+                  <form class="col-1" action="/comments/likeComment/<%= comment[i].id %>?_method=PUT" method="POST">
+                    <button class="btn btn-primary fa fa-heart" type="submit"></button>
+                    <input type="hidden" name="postid" value="<%= post.id %>">
+                  </form>
+                  <%if(post.user==user.id){ %>
+                    <form action="/comments/deleteComment/<%= comment[i].id %>?_method=PUT" method="POST" class="col-3">
+                      <button class="btn btn-primary fa fa-trash" type="submit"></button>
+                    </form>
+                    <%}%>
+                  <h3 class="col-3">Likes: <%= comment[i].likes %>
+                  </h3>
+                  
+              </li>
+              <% } %>
+              <% } %>
+              
+          </ul>
+        </div>
+      </div>
+
+<!-- Comments Section -->
+      
       <div class="mt-5">
         <h2>Add a comment</h2>
         <form action="/comments/createComment/<%= post.id %>" method="POST">
@@ -35,22 +67,7 @@
         </form>
       </div>
 
-      <div class="container">
-        <div class="row justify-content-center mt-5">
-          <ul class="row list-unstyled">
-            <% for(var i=0; i< comment.length; i++) {%>
-              <li class="col-6 justify-content-between mt-5">
-                <%= comment[i].comment %>
-                  <form class="col-1" action="/comment/likeComment/<%= comment.id %>?_method=PUT" method="POST">
-                    <button class="btn btn-primary fa fa-heart" type="submit"></button>
-                  </form>
-                  <h3 class="col-3">Likes: <%= comment.likes %>
-                  </h3>
-              </li>
-              <% } %>
-          </ul>
-        </div>
-      </div>
+      
 
       <div class="col-6 mt-5">
         <a class="btn btn-primary" href="/profile">Return to Profile</a>

@@ -8,14 +8,15 @@ module.exports = {
       //future implementation
       // Upload image to cloudinary
       // const result = await cloudinary.uploader.upload(req.file.path);
-
+      
+      // ISSUE: comment author shows logged in user, not real author
       await Comment.create({
         post: req.params.id,
         comment: req.body.comment,
         // image: result.secure_url,
         // cloudinaryId: result.public_id,
         likes: 0,
-        likedBy: [],
+        // likedBy: [],
         user: req.user.id,
       });
       console.log("Comment has been added!");
@@ -28,8 +29,8 @@ module.exports = {
     try {
       // find the specific comment of the post it's on
       const comment = await Comment.find({_id: req.params.id})
-      // console.log(req.user)
-      // console.log(req.params)
+      console.log(req.user)
+      console.log(req.params)
         if (comment[0].likedBy.includes(req.user.id)){
           await Comment.findOneAndUpdate(
             { _id: req.params.id },

@@ -25,10 +25,19 @@ module.exports = {
     try {
       const post = await Post.findById(req.params.id);
       const author = await User.findById(post.user);
+      // comments is an array of comments per post
       const comments = await Comment.find({post: req.params.id}).sort({ dateUploaded: "desc" }).lean();
-      // console.log(post,comments);
-      res.render("post.ejs", { post: post, author: author, comments: comments, user: req.user });
-      console.log(post,author,comments);
+      const cAuthId = comments.map((x,i) => {
+        return x.user;
+      })
+      // console.log(cAuthId);
+
+      // cUsers is an array of user objects
+      const cUsers = await User.find({_id: cAuthId})
+      console.log(cUsers)
+      
+      //console.log(post,comments);
+      res.render("post.ejs", { post: post, author: author, comments: comments, cUsers: cUsers,user: req.user });
     } catch (err) {
       console.log(err);
     }

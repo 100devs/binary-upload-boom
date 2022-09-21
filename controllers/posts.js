@@ -58,9 +58,9 @@ module.exports = {
         { $match: { user: req.user._id } },
         { $group: { _id: '$user', total: { $sum: '$likes' } } },
       ]);
-      console.log('total number of likes: ', likes[0].total);
+      console.log('total number of likes: ', likes[0].total || 0);
       console.log(posts);
-      res.render('feed.ejs', { posts: posts, likes: likes });
+      res.render('feed.ejs', { posts: posts, likes: likes || 0 });
     } catch (err) {
       console.log(err);
     }

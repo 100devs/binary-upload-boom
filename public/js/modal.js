@@ -8,6 +8,7 @@ modal.addEventListener("show.bs.modal", function(event) {
 	form.action = modalData['formaction'];
 	document.getElementById('modalTitle').innerText = modalData['modaltitle'];
 	const formContent = document.getElementById(modalData['formcontent']);
+	formContent.style.display = "block";
 	document.getElementById('formContent').append(formContent);
 	document.getElementById('submitButton').innerText = modalData['submitbutton'];
 	if (modalData['comment']) {
@@ -17,5 +18,11 @@ modal.addEventListener("show.bs.modal", function(event) {
 	if (modalData['deletetype']) {
 		document.getElementById('deleteType').innerText = modalData['deletetype'];
 	} 
+});
+
+modal.addEventListener("hide.bs.modal", function(event) {
+	const modalData = event.relatedTarget.dataset;
+	const formContent = document.getElementById(modalData['formcontent']);
+	formContent.style.display = "none";
 });
 

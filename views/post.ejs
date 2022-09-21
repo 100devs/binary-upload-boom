@@ -114,7 +114,7 @@
 						type="button" 
 						class="btn btn-primary col-3" 
 						data-bs-toggle="modal" 
-						data-bs-target="#modalForm"
+						data-bs-target="#myModal"
 						data-modalTitle="Add a comment to the post"
 						data-formContent = "commentForm" 
 						data-submitButton="Add comment"
@@ -132,14 +132,14 @@
 
 
 
-<div id = "commentForm">
+<div id="commentForm" style="display:none">
 	<input type="hidden" id="post" name="post" value="<%= post.id %>" />
 	<input type="hidden" id="user" name="user" value="<%= user.id %>" />
 	<label class="form-label" for="comment">Your comment</label>
 	<textarea class="form-control col-xs-12" rows="7" cols="50" name="comment" id="commentArea"></textarea>
 </div>
 
-<div id="deleteForm">
+<div id="deleteForm" style="display:none">
 	<input type="hidden" id="post" name="post" value="<%= post.id %>" />
 	<p>Delete this <span id="deleteType"></span>? This action cannot be undone.</p>
 </div>

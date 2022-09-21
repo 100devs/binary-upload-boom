@@ -24,11 +24,17 @@
                                 <li class="list-group-item item-list-card">
                                     <%= el.position%>
                                 </li>
-                                <li class="list-group-item item-list-card">
-                                    <%= el.win %>-<%= el.loss%> | <%=
-                                                `.${(Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3).toString().split('.')[1]}`
-                                                %>%
-                                </li>
+                                <% if (el.win==='' || el.loss==='' ) {%>
+                                    <li class="list-group-item item-list-card">
+                                        0-0
+                                    </li>
+                                    <% } else { %>
+                                        <li class="list-group-item item-list-card">
+                                            <%= el.win %>-<%= el.loss%> | <%=
+                                                        `.${(Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3).toString().split('.')[1]}`
+                                                        %>%
+                                                        <% } %>
+                                        </li>
                             </ul>
                             <section class="card-body-notes">
                                 <p class="card-text">
@@ -37,13 +43,11 @@
                             </section>
                             <section class="card-body-btns">
                                 <a href="/post/<%= el._id%>"> <i class="fa-regular fa-pen-to-square fa-lg"></i></a>
-                                <form action="/feed/deletePost/<%= user.entries[0] %>?_method=DELETE" method="POST"
+                                <form action="/feed/deletePost/<%= el._id %>?_method=DELETE" method="POST"
                                     class="feed-delete-form">
-                                    <% console.log(posts) %>
-                                        <% console.log(post) %>
-                                            <button class="btn feed-delete-btn" type="submit">
-                                                <i class="fa-regular fa-trash-can fa-lg"></i>
-                                            </button>
+                                    <button class="btn feed-delete-btn" type="submit">
+                                        <i class="fa-regular fa-trash-can fa-lg"></i>
+                                    </button>
                                 </form>
                             </section>
                         </section>

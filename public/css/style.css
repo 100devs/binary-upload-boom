@@ -141,7 +141,7 @@ body {
     align-items: center;
     min-height: 95vh;
     min-width: 98vw;
-    /*  border: 1px solid red; */
+    /* border: 1px solid red; */
 }
 
 /* CONTAINER LANDING  ///////////////////////////*/
@@ -358,7 +358,7 @@ body {
     border: 1px solid purple;
     height: fit-content;
     width: fit-content;
-    padding-top: 0.2rem;
+    /* padding-top: 0.2rem; */
 }
 
 .form-input:active,
@@ -489,11 +489,6 @@ body {
     /* border: 1px solid black; */
 }
 
-.list-add-recently {
-    /* border: 1px solid fuchsia; */
-    width: 100%;
-    overflow-x: scroll;
-}
 
 .section-my-leagues {
     max-width: 90vw;
@@ -506,6 +501,16 @@ body {
     align-items: center;
     width: 100%;
     min-height: 10rem;
+    /* border: 1px solid fuchsia; */
+}
+
+.list-pinned {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding-top: 1rem;
+    gap: 1rem;
+    border-top: 1px solid #E1A750;
     /* border: 1px solid fuchsia; */
 }
 
@@ -727,6 +732,10 @@ body {
     height: 85%;
 }
 
+.card-text {
+    padding: 1rem;
+}
+
 .card-body-btns {
     display: flex;
     justify-content: center;
@@ -800,6 +809,12 @@ body {
     color: #E1A750;
 }
 
+.profile-list-item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+}
+
 .profile-headings {
     font-size: 1.5rem;
 }
@@ -820,6 +835,21 @@ body {
 }
 
 .profile-btns:hover {
+    color: #302f2d;
+    background: #E1A750;
+    ;
+}
+
+.profile-delete-btns {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: #E1A750;
+    border: 1px solid #E1A750;
+    font-family: 'Jaldi', sans-serif;
+}
+
+.profile-delete-btns:hover {
     color: #302f2d;
     background: #E1A750;
     ;
@@ -987,8 +1017,16 @@ body {
     gap: 0.2rem;
 }
 
-.section-icons-post i {
+.post-btn {
     color: #E1A750;
+}
+
+.pinned-btn {
+    color: #E1A750;
+}
+
+.unpinned-btn {
+    color: #D9D9D9;
 }
 
 .section-table-post {

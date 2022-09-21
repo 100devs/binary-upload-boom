@@ -18,24 +18,26 @@
                     <h2>
                       <%= post.team %>
                     </h2>
-                    <!--  <span >team</span> -->
                   </section>
                 </section>
                 <section class="section-icons-post">
                   <form class="col-1" action="/post/editPost/<%= post.id %>?_method=PUT" method="POST">
                     <button class="btn" type="submit">
-                      <i class="fa-regular fa-pen-to-square fa-xl"></i>
+                      <i class="fa-regular fa-pen-to-square fa-xl post-btn"></i>
                     </button>
                   </form>
-                  <!-- USED TO BE THE LIKE BUTTON - CHANGE TO EDIT  -->
                   <form class="col-1" action="/post/pinPost/<%= post.id %>?_method=PUT" method="POST">
                     <button class="btn" type="submit">
-                      <i class="fa-solid fa-thumbtack fa-xl"></i>
+                      <% if (post.pinned==true ) { %>
+                        <i class="fa-solid fa-thumbtack fa-xl pinned-btn"></i>
+                        <% } else { %>
+                          <i class="fa-solid fa-thumbtack fa-xl unpinned-btn"></i>
+                          <% } %>
                     </button>
                   </form>
                   <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-1">
                     <button class="btn" type="submit">
-                      <i class="fa-regular fa-trash-can fa-xl"></i>
+                      <i class="fa-regular fa-trash-can fa-xl post-btn"></i>
                     </button>
                   </form>
                 </section>
@@ -73,7 +75,9 @@
 
       </section>
       <section class="section-table-post">
-        <table>
+
+
+        <!--  <table>
           <thead>
             <tr>
               <th>Header 1</th>
@@ -209,8 +213,9 @@
               <td>&nbsp;</td>
               <td>&nbsp;</td>
             </tr>
-          </tbody>
-        </table>
+            </table>
+          </tbody> -->
+
       </section>
       <%}%>
         </div>

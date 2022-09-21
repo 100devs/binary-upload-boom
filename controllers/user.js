@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const Post = require("../models/Post");
 const User = require('../models/User');
 
@@ -7,45 +8,113 @@ module.exports = {
       // const posts = await Post.find({ user: req.user.id });
       const users = await User.findById(req.params.id)
       const url = await req.originalUrl;
-      res.render("profile.ejs", { /* posts: posts,  */user: req.user, users: users, url: url });
+      res.render("profile.ejs", { /* posts: posts,  */user: req.user, users: users, url: url, body: req.body, obj: req.body.leagues });
       /* console.log(users) */
     } catch (err) {
       console.log(err);
     }
   },
-  updateUser: async (req, res) => {
+  updateLeague: async (req, res) => {
     try {
-      /* const filter = { userName: 'bob' }; */
-      /* const filter = {
-          "_id": req.params.id,
-          "leagues.leagueName": req.params.id
-        };
-      const update = {
-          $push: {
-              "leagues.$[league].leagueName": 'seahawks'
-          }
-      };
-      const arrayFilter = {
-          arrayFilters: [
-              {
-                  'leagues.leagueName': leagueNameId
-              }
-          ]
-      }; */
-
+      await User.findOneAndUpdate(
+        { _id: req.user.id },
+        {
+          $push: { leagues: { 'league': req.body.name, 'sport': req.body.sport } }
+        },
+        {
+          new: true
+        }
+      )
       const url = await req.originalUrl;
-      /* console.log(req.user.id , 5)
-      console.log(req.params.id, 100) */
-      const users = await User.findOneAndUpdate(filter, update, arrayFilter, {
-        new: true
-      });
+
+      /* console.log(req.body) */
+
       console.log("CHANGED USER");
-      res.redirect(`/profile/{${req.params.id}`);
+      // res.render("profile.ejs", { /* posts: posts,  */user: req.user, url: url, body: req.body, obj: req.body.leagues });
+      res.redirect(`/profile/${req.params.id}`);
     } catch (err) {
       console.log(err);
     }
   },
-  deleteSomething: async (req, res) => {
+  updateTeam: async (req, res) => {
+    try {
+      await User.findOneAndUpdate(
+        { _id: req.user.id },
+        {
+          $push: { teams: { 'team': req.body.team, 'sport': req.body.sport } }
+        },
+        {
+          new: true
+        }
+      )
+      const url = await req.originalUrl;
+
+      /* console.log(req.body) */
+
+      console.log("CHANGED USER");
+      res.redirect(`/profile/${req.params.id}`);
+      // res.render("profile.ejs", { /* posts: posts,  */user: req.user, url: url, body: req.body, obj: req.body.leagues });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  deleteLeague: async (req, res) => {
+    try {
+
+      // Find post by id
+      //let post = await Post.findById({ _id: req.params.id });
+      /* const users = await User.find({ user: req.user.id }) */
+
+      //Delete post from db
+      //Delete post from DB array
+
+      /* const deleteLeagueFromUser = await User.updateOne(
+        { _id: req.user.id },
+        {
+          $pull: { 'leagues': { '_id': new ObjectId('name') } }
+        }
+      ) */
+      /* console.log(req.user.leagues) */
+      /* console.log(req.user.leagues['name'])
+      console.log(req.body) */
+
+      console.log(req.body.leagues)
+
+      console.log("Deleted something");
+      res.redirect(`/profile/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  deleteTeam: async (req, res) => {
+    try {
+
+      // Find post by id
+      //let post = await Post.findById({ _id: req.params.id });
+      /* const users = await User.find({ user: req.user.id }) */
+
+      //Delete post from db
+      //Delete post from DB array
+
+      const deleteLeagueFromUser = await User.updateOne(
+        { _id: req.user.id }, { teams: req.body.teams },
+        {
+          $pull: { 'team': req.body.team }
+        }
+      )
+      console.log(req.body.teams.params)
+
+
+      const user = await User.findById(req.params.id)
+      console.log(user)
+
+      console.log("Deleted something");
+      res.redirect(`/profile/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  /* deleteSomething: async (req, res) => {
     try {
 
       // Find post by id
@@ -60,5 +129,6 @@ module.exports = {
     } catch (err) {
       console.log(err);
     }
-  }
+  } */
 }
+

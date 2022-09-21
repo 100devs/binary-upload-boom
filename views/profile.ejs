@@ -9,7 +9,7 @@
           <div class="profile-pic-container">
             <img
               class="profile-pic-image"
-              src="<%= profile == undefined ? 'https://images.dog.ceo/breeds/shiba/shiba-13.jpg' : profile.image%>"
+              src="<%= profile == undefined  || profile.image == undefined ? 'https://images.dog.ceo/breeds/shiba/shiba-13.jpg' : profile.image%>"
               alt=""
             />
           </div>
@@ -24,7 +24,7 @@
         <figure class="mt-3">
           <audio controls="controls">
             <source
-              src="<%= !profile || profile.profileSong === undefined ? 'https://docs.google.com/uc?export=download&id=0B-klwLEjaXWcZHR5SmJJWEwtYnc' : profile.profileSong %>"
+              src="<%= profile == undefined || profile.profileSong == undefined ? 'https://docs.google.com/uc?export=download&id=0B-klwLEjaXWcZHR5SmJJWEwtYnc' : profile.profileSong %>"
             />
           </audio>
         </figure>
@@ -35,7 +35,7 @@
         <h4 class="profile-title">Change Profile Pic</h4>
         <form
           class="mx-2"
-          action="<%= profile == undefined ? '/post/createProfilePic?_method=POST' : '/post/createProfilePic?_method=PUT' %>"
+          action="<%= !profile ? '/post/createProfilePic?_method=POST' : '/post/createProfilePic?_method=PUT' %>"
           enctype="multipart/form-data"
           method="POST"
         >

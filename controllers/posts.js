@@ -145,7 +145,7 @@ module.exports = {
   updateProfilePic: async (req, res) => {
     try {
       const profile = await Profile.find({ user: req.user.id });
-      if (profile.length > 0)
+      if (profile.cloudinaryId)
         await cloudinary.uploader.destroy(profile[0].cloudinaryId);
       const result = await cloudinary.uploader.upload(req.file.path);
       await Profile.findOneAndUpdate(
@@ -181,9 +181,9 @@ module.exports = {
   },
   updateProfileSong: async (req, res) => {
     try {
-      const profile = await Profile.find({ user: req.user.id });
-      if (profile.length > 0)
-        await cloudinary.uploader.destroy(profile[0].songCloudinaryId);
+      const profile = await Profile.findOne({ user: req.user.id });
+      if (profile.songCloudinaryId)
+        await cloudinary.uploader.destroy(profile.songCloudinaryId);
       const result = await cloudinary.uploader.upload(req.file.path, {
         resource_type: 'video',
       });

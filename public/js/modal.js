@@ -3,46 +3,32 @@ exampleModal.addEventListener("show.bs.modal", function(event) {
 
   const button = event.relatedTarget;
   const form = document.querySelector("#commentForm")
-  const commentId = button.getAttribute("data-bs-id");
+  const hiddenId = button.getAttribute("data-bs-id");
+   const formAction = button.getAttribute("data-bs-action");
+   const formMethod = button.getAttribute("data-bs-method") || 'post';  
 // Extract info from data-bs-* attributes
   const modalBody = exampleModal.querySelector("#modalBody");
+  const hiddenIdInput = exampleModal.querySelector('input[name="id"]')
 
-  // check if hidden comment id is present 
-  const hiddenId = exampleModal.querySelector('input[name="id"]')
-  if(hiddenId !== null) {
-	  // change it value if found
-	  hiddenId.value = commentId
-  } else {	  
-  // add the current comment id to our form
-	  const el = document.createElement("input");
-	  el.type = 'hidden'
-	  el.name = "id";
-	  el.value = commentId
-	  form.appendChild(el)
-  }
+  // change the id value each time a modal is load
+	hiddenIdInput.value = hiddenId
 
-  form.method = 'post';
+	console.log(formMethod) 
+  form.method = formMethod;
+  form.action = formAction;
 
-
-  if(button.classList.contains('editComment')) { // for delete
-	addModalTextArea(modalBody)
+	console.log(formAction)
+	if(formAction === '/comment/deleteComment') {
+		modalBody.textContent = "Delete this comment?";		
+	} else {
+		addModalTextArea(modalBody)
+		
+		if(formAction === '/comment/editComment') {
 		// For comment modification
-  const commentText = exampleModal.querySelector("#commentArea");
-  commentText.value = button.parentElement.previousElementSibling.textContent;
-  form.action = "/comment/editComment"
-
-  } else if(button.classList.contains('addComment')) { // for creating a new comment
-	// clear the body
-	addModalTextArea(modalBody)
-	form.action = '/comment/createComment'
-  
-  } else {
-		modalBody.textContent = "Delete this comment?";
-		  // delete a group after confirmation
-  form.action = "/comment/deleteComment"
-
+			const commentText = exampleModal.querySelector("#commentArea");
+			commentText.value = button.parentElement.previousElementSibling.textContent;
+		}			
 	}
-
 });
 
 

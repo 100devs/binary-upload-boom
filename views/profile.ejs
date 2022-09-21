@@ -1,12 +1,12 @@
 <%- include('partials/header', {title: "Your Profile", page: 'profile'}) -%>
 <div class="container">
-	<div class="d-flex border justify-content-between p-3">
+	<div class="row row-cols-md-2 d-md-flex border justify-content-between p-3">
 			<p><strong>User Name</strong>: <%= user.userName %></p>
 			<p><strong>Email</strong>: <%= user.email %></p>
-			<a class="btn btn-primary" href="/feed">Return to Feed</a>
+		<!--	<a class="btn btn-primary d-md-none" href="/feed">Return to Feed</a> -->
 	</div>
 	<div class="row row-cols-md-2">
-		<div class="mt-5">
+		<div class="mt-5 postForm">
 				<h2>Add a post</h2>
 				<form action="/post/createPost" enctype="multipart/form-data" method="POST">
 					<div class="mb-3">
@@ -24,6 +24,8 @@
 					<button type="submit" class="btn btn-primary" value="Upload">Submit</button>
 				</form>
     </div>
+	</div>
+	<div class="row row-cols-md-2">
 		<div class="mt-5">
 			<h2>My posts</h2>
 			<div class="row">

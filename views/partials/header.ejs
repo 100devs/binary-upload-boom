@@ -34,7 +34,7 @@
 				<li class="nav-item"><a href="/feed" class="nav-link<% if (page === 'feed') { %> active <% } %>">Feed</a></li>
 				<% if (loggedIn) { %>
 					<li class="nav-item"><a href="/profile" class="nav-link<% if (page === 'profile') { %> active <% } %>">Profile</a></li>
-					<li class="nav-item"><a href="/logout" class="nav-link">Log out (<%= user.userName %>)</a></li>
+					<li class="nav-item"><a href="/logout" class="nav-link">Log out <span class="d-sm-none d-md-block">(<%= user.userName %>)</span></a></li>
 				<% } else { %>
 					<li class="nav-item"><a href="/login" class="nav-link<% if (page === 'login') { %> active <% } %>">Log In</a></li>
 					<li class="nav-item"><a href="/signup" class="nav-link<% if (page === 'signup') { %> active <% } %>">Sign Up</a></li>

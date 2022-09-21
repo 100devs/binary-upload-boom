@@ -15,8 +15,11 @@
 				<div class="modal-body" id="modalBody"></div>
 
 					<!-- don't get rewrited in the body -->
-					<input type="hidden" class="form-control" id="post" name="post" value="<%= post.id %>" />
-					<input type="hidden" class="form-control" id="user" name="user" value="<%= user.id %>" />
+					<input type="hidden" name="post" value="<%= post.id %>" />
+					<input type="hidden" name="user" value="<%= user.id %>" />
+					<!-- value will be update via js -->
+					<input type="hidden" name="id" />
+					
 
 				<!-- Modal footer -->
 				<div class="modal-footer">

@@ -39,11 +39,9 @@
                                 <a href="/post/<%= el._id%>"> <i class="fa-regular fa-pen-to-square fa-lg"></i></a>
                                 <form action="/feed/deletePost/<%= user.entries[0] %>?_method=DELETE" method="POST"
                                     class="feed-delete-form">
-                                    <% console.log(posts) %>
-                                        <% console.log(post) %>
-                                            <button class="btn feed-delete-btn" type="submit">
-                                                <i class="fa-regular fa-trash-can fa-lg"></i>
-                                            </button>
+                                    <button class="btn feed-delete-btn" type="submit">
+                                        <i class="fa-regular fa-trash-can fa-lg"></i>
+                                    </button>
                                 </form>
                             </section>
                         </section>

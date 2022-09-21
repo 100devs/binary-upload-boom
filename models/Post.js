@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const PostSchema = new mongoose.Schema({
   team: {
     type: String,
-    required: true,
+    required: false,
   },
   image: {
     feed: {
@@ -14,7 +14,8 @@ const PostSchema = new mongoose.Schema({
     profile: {
       type: String,
       required: false,
-    }
+    },
+    required: false
   },
   cloudinaryId: {
     type: String,
@@ -26,15 +27,17 @@ const PostSchema = new mongoose.Schema({
   },
   position: {
     type: String,
-    required: true,
+    required: false,
   },
   win: {
     type: String,
-    required: true,
+    required: false,
+    default: 0,
   },
   loss: {
     type: String,
-    required: true,
+    required: false,
+    default: 0,
   },
   notes: {
     type: String,

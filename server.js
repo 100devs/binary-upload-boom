@@ -14,7 +14,6 @@ const profileRoutes = require('./routes/profile');
 const feedRoutes = require('./routes/feed');
 const { application } = require("express");
 
-
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
 
@@ -62,8 +61,6 @@ app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 app.use("/profile", profileRoutes);
 app.use("/feed", feedRoutes);
-
-
 
 //Server Running
 app.listen(process.env.PORT, () => {

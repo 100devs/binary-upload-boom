@@ -4,6 +4,7 @@ const authController = require("../controllers/auth");
 const indexController = require('../controllers/index');
 const postsController = require("../controllers/posts");
 const feedController = require('../controllers/feed');
+/* const js = require('../public/js/index') */
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Main Routes 

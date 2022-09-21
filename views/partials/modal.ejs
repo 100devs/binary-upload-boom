@@ -1,61 +1,60 @@
- 
-                  <div class="modal fade" id="add-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLongTitle">Create Something</h5>
-                         <!--  <button type="button" data-dismiss="modal"> -->
-                            
-                            <i class="fa-solid fa-square-xmark close" data-dismiss="modal"></i>
-                         <!--  </button> -->
-                        </div>
-                        <div class="modal-body">
-                          <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-                            <div class="mb-3">
-                              <label for="player" class="form-label">Player</label>
-                             <input type="text" class="form-control form-control-sm" id="player" name="player"  placeholder="Player">
-                            </div>
-                            <div class="mb-3">
-                                <label  for="team" class="form-label">Team</label>
-                                <input type="text" class="form-control form-control-sm" id="team" name="team" placeholder="Team"> 
-                            </div>
-                            <div class="mb-3">
-                                <label for="position" class="form-label">Position</label>
-                                <select class="form-select form-select-sm" id="position" name="position" >
-                                  <option selected>Select</option>
-                                  <option>PG</option>
-                                  <option>SG</option>
-                                  <option>SF</option>
-                                  <option>PF</option>
-                                  <option>C</option>
-                                </select>
-                              </div>
-                              <div class="mb-3">
-                                <div class="row">
-                                  <div class="col">
-                                    <label for="win" class="form-label">Win</label>
-                                    <input type="text" class="form-control win-loss-input" id="win" name="win" placeholder="">
-                                  </div>
-                                  <div class="col">
-                                    <label for="loss" class="form-label">Loss</label>
-                                    <input type="text" class="form-control win-loss-input" id="loss" name="loss"  placeholder="">
-                                  </div>
-                                </div>
-                            </div>
-                              <div class="mb-3">
-                                <label for="imgUpload" class="form-label">Image</label>
-                                <input type="file" class="form-control form-control-sm" id="imageUpload" name="file">
-                              </div>
-                              <div class="mb-3">
-                                <label for="notes" class="form-label">Notes</label>
-                                <textarea class="form-control form-label-sm" id="notes" name="notes" ></textarea>
-                            </div>
-                             <div class="modal-footer">
-                                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                                <button type="submit" class="btn btn-primary submit" value="Upload">Submit</button>
-                            </div>
-                        </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+<div class="modal fade" id="add-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Create Something</h5>
+        <!--  <button type="button" data-dismiss="modal"> -->
+
+        <i class="fa-solid fa-square-xmark close" data-dismiss="modal"></i>
+        <!--  </button> -->
+      </div>
+      <div class="modal-body">
+        <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+          <div class="mb-3">
+            <label for="player" class="form-label">Player</label>
+            <input type="text" class="form-control form-control-sm" id="player" name="player" placeholder="Player">
+          </div>
+          <div class="mb-3">
+            <label for="team" class="form-label">Team</label>
+            <input type="text" class="form-control form-control-sm" id="team" name="team" placeholder="Team">
+          </div>
+          <div class="mb-3">
+            <label for="position" class="form-label">Position</label>
+            <select class="form-select form-select-sm" id="position" name="position">
+              <option selected>Select</option>
+              <option>PG</option>
+              <option>SG</option>
+              <option>SF</option>
+              <option>PF</option>
+              <option>C</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <div class="col">
+                <label for="win" class="form-label">Win</label>
+                <input type="text" class="form-control win-loss-input" id="win" name="win" placeholder="">
+              </div>
+              <div class="col">
+                <label for="loss" class="form-label">Loss</label>
+                <input type="text" class="form-control win-loss-input" id="loss" name="loss" placeholder="">
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="imgUpload" class="form-label">Image</label>
+            <input type="file" class="form-control form-control-sm" id="imageUpload" name="file">
+          </div>
+          <div class="mb-3">
+            <label for="notes" class="form-label">Notes</label>
+            <textarea class="form-control form-label-sm" id="notes" name="notes"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary submit" value="Upload">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,18 +4,6 @@ const User = require('../models/User');
 
 
 module.exports = {
-  // getFeed: async (req, res) => {
-  //   try {
-  //     const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-  //     /* const userPosts = await Post.find(req.user) */
-  //     const post = await Post.findById(req.params.id);
-  //     const url = await req.originalUrl;
-  //     /* console.log(userPosts) */
-  //     res.render("feed.ejs", { posts: posts, user: req.user, post: post, /* userPosts: userPosts, */ url: url });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // },
   getPlayers: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
@@ -70,11 +58,11 @@ module.exports = {
           $pull: { entries: post.id }
         }
       )
-
+      console.log(req.body)
       console.log("Deleted Post");
-      res.redirect("/feed"); //changed from profile to feed
+      res.redirect("/players"); //changed from profile to feed
     } catch (err) {
-      res.redirect("/feed"); //changed from profile to home
+      res.redirect("/players"); //changed from profile to home
     }
   },
 }

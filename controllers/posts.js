@@ -3,7 +3,7 @@ const Post = require("../models/Post");
 const User = require('../models/User');
 
 module.exports = {
-  getHome: async (req, res) => { //changed getProfile to getHome
+  getHome: async (req, res) => {
     try {
       //get all posts users id
       const posts = await Post.find({ user: req.user.id });
@@ -20,29 +20,6 @@ module.exports = {
       console.log(err);
     }
   },
-  /* getProfile: async (req, res) => { //changed getProfile to getHome
-    try {
-      const posts = await Post.find({ user: req.user.id });
-      const profile = User.findById(req.params.id);
-      const url = await req.originalUrl;
-      console.log(profile.id)
-      console.log()
-      res.render("profile.ejs", { posts: posts, user: req.user, profile: profile, url: url }); //changed from profile.ejs to home.ejs //changes req.user to req.email
-
-    } catch (err) {
-      console.log(err);
-    }
-  }, 
-  /* getFeed: async (req, res) => {
-    try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      const post = await Post.findById(req.params.id);
-      const url = await req.originalUrl;
-      res.render("feed.ejs", { posts: posts, user: req.user, post: post, url: url});
-    } catch (err) {
-      console.log(err);
-    }
-  }, */
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
@@ -87,6 +64,7 @@ module.exports = {
       });
 
       /* req.user.entries.push(newPost.id) */
+      console.log(req.body)
 
       const addIdToUser = await User.findOneAndUpdate(
         { _id: req.user.id },
@@ -104,15 +82,16 @@ module.exports = {
       console.log(err);
     }
   },
-  likePost: async (req, res) => {
+  pinPost: async (req, res) => {
     try {
       await Post.findOneAndUpdate(
         { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
-        }
+        [{
+          "$set": { "pinned": { "$eq": [false, "$pinned"] } }
+        }]
       );
-      console.log("Likes +1");
+
+      console.log("Toggle pinned");
       res.redirect(`/post/${req.params.id}`);
     } catch (err) {
       console.log(err);
@@ -138,9 +117,9 @@ module.exports = {
       )
 
       console.log("Deleted Post");
-      res.redirect("/feed"); //changed from profile to feed
+      res.redirect("/home");
     } catch (err) {
-      res.redirect("/feed"); //changed from profile to home
+      res.redirect("/home");
     }
   },
 };

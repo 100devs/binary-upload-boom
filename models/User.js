@@ -6,25 +6,14 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: String,
   entries: [],
-  leagues: [ { 
-    leagueName: {
-      type: String, 
-      unique: false },
-    sport: {
-        type: String, 
-        unique: false },
-    required: false,
-    }],
-  teams: [ { 
-    teamName: {
-      type: String, 
-      unique: false,
-     }, 
-    sport: {
-      type: String, 
-      unique: false },
-      required: false,
-    }],
+  leagues: {
+    type: Array,
+    "default": []
+  },
+  teams: {
+    type: Array,
+    "default": []
+  }
 });
 
 // Password hash middleware.

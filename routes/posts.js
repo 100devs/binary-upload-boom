@@ -9,7 +9,7 @@ router.get("/:id", ensureAuth, postsController.getPost);
 
 router.post("/createPost", upload.single("file"), postsController.createPost);
 
-router.put("/likePost/:id", postsController.likePost);
+router.put("/pinPost/:id", postsController.pinPost);
 
 router.delete("/deletePost/:id", postsController.deletePost);
 

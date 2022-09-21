@@ -1,5 +1,9 @@
-const siteData = {
+module.exports = {
 	pages: {
+		feed: {
+			title: 'Feed',
+			page: 'feed'
+		},
 		empty: {
 			title: "Binary upload Boom",
 			page: 'index'
@@ -7,10 +11,6 @@ const siteData = {
 		home: {
 			title: "Home",
 			page: 'index'
-		},
-		feed: {
-			title: 'Feed',
-			page: 'feed'
 		},
 		profile: {
 			title: 'Profile',
@@ -28,9 +28,6 @@ const siteData = {
 			title: 'Sign Up',
 			page: 'signup'
 		},
-		
 	}
-	
 }
 
-module.exports = siteData;

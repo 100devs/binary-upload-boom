@@ -1,8 +1,8 @@
-<% title = (typeof(title) !== 'undefined') ? title : site.pages['empty'].title %>
+<% let homeTitle = (typeof(title) !== 'undefined') ? title : site.pages['feed'].title %>
 <% page = (typeof(page) !== 'undefined') ? page : site.pages['empty'].page %>
 
 
-<%- include('layouts/head') -%>
+<%- include('layouts/head', { title: homeTitle }) -%>
 
     <div class="row justify-content-around">
 			<% if (loggedIn) { %>
@@ -18,6 +18,6 @@
 			<% } %>
     </div>
 </main>
-    
+
 
 <%- include('layouts/foot') -%>

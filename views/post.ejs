@@ -2,7 +2,7 @@
 <% page = (typeof(page) !== 'undefined') ? page : site.pages['posts'].page %>
 
 
-<%- include('layouts/head') -%>
+<%- include('layouts/head', { title: title}) -%>
 
 <div class="row">
 	<h2><%= post.title %></h2>
@@ -15,16 +15,19 @@
 						<input type="hidden" name="commenter" value="<%= user.id %>" />
 						<button class="btn btn-primary fa fa-heart" type="submit"></button>
 					</form>
-				<% } else {  %> <span class="small alert-success">You liked it</span> <% } %>
+				<% } %>
+				<%if(post.user.id !== user.id && post.likedUsers.includes(user.id)){ %>
+					 <span class="small alert-success">You liked it</span>
+				<% } %>
 			</div>
 
 			<%if(post.user.id == user.id){ %>
-				<a 
+				<a
 					href="#!"
-					class="link-muted text-danger" 
-					data-bs-toggle="modal" 
+					class="link-muted text-danger"
+					data-bs-toggle="modal"
 					data-bs-target="#myModal"
-					data-formAction="/post/deletePost/<%=post.id %>?method=DELETE" 
+					data-formAction="/post/deletePost/<%=post.id %>?method=DELETE"
 					data-modalTitle="Delete your post"
 					data-formContent="deleteForm"
 					data-deleteType="post"
@@ -37,7 +40,7 @@
 	<div class="col-md">
 		<div class="card p-3 mb-2 border-primary">
 			<div class="d-flex justify-content-between align-items-center">
-				<h4 class="title"><%= post.user.userName%></h4> 
+				<h4 class="title"><%= post.user.userName%></h4>
 				<small><%= post.createdAt.toLocaleDateString().slice(0,10) %></small>
 			</div>
 			<p class="user d-flex flex-row align-items-center commentText"><%= post.caption %></p>
@@ -45,18 +48,18 @@
 		<% for(var i=0; i<comments.length; i++) { %>
 			<div class="card p-3 mb-2">
 				<div class="d-flex justify-content-between align-items-center">
-					<h4 class="title"><%= comments[i].user.userName%></h4> 
+					<h4 class="title"><%= comments[i].user.userName%></h4>
 					<small><%= comments[i].createdAt.toLocaleDateString().slice(0,10) %></small>
 				</div>
 				<!-- be sure to keep .commentText here -->
 				<p class="user d-flex flex-row align-items-center commentText"><%= comments[i].comment %></p>
 				<div class="action d-flex justify-content-between mt-2 align-items-center">
 					<% if(comments[i].user.id === user.id) { %>
-						<a 
-							href="#!" 
-							class="link-muted commentModify" 
-							data-bs-toggle="modal" 
-							data-bs-target="#myModal" 
+						<a
+							href="#!"
+							class="link-muted commentModify"
+							data-bs-toggle="modal"
+							data-bs-target="#myModal"
 							data-modalTitle="Edit your comment"
 							data-formContent = "commentForm"
 							data-submitButton = "Edit comment"
@@ -64,16 +67,16 @@
 							data-formAction = "/comment/editComment/<%= comments[i].id %>?method=PUT"
 						><i class="fas fa-pencil-alt ms-2"></i></a>
 						<div class="reply px-4">
-							<a 
-								href="#!" 
-								class="link-muted text-danger" 
-								data-bs-toggle="modal" 
+							<a
+								href="#!"
+								class="link-muted text-danger"
+								data-bs-toggle="modal"
 								data-bs-target="#myModal"
 								data-modalTitle="Delete your comment"
 								data-formContent="deleteForm"
 								data-deleteType="comment"
 								data-submitButton="Delete comment"
-								data-formAction="/comment/deleteComment/<%= comments[i].id %>?method=DELETE" 
+								data-formAction="/comment/deleteComment/<%= comments[i].id %>?method=DELETE"
 							><i class="fas fa-trash"></i></a>
 						</div>
 
@@ -95,13 +98,13 @@
 		<% } %>
 		<div class="row mt-5 justify-content-around">
 			<% if (post.user.id !== user.id) { %>
-				<button 
-					type="button" 
-					class="btn btn-primary col-3" 
-					data-bs-toggle="modal" 
+				<button
+					type="button"
+					class="btn btn-primary col-3"
+					data-bs-toggle="modal"
 					data-bs-target="#myModal"
 					data-modalTitle="Add a comment to the post"
-					data-formContent = "commentForm" 
+					data-formContent = "commentForm"
 					data-submitButton="Add comment"
 					data-formAction="/comment/createComment"
 				>Add a comment</button>

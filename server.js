@@ -21,8 +21,9 @@ const SESSION_SECRET = process.env.SESSION_SECRET || 'yoursecretsession';
 // get site parameters for page/title and others
 const data = require('./config/site');
 
-const siteData = function (req, res, next) {
-		res.locals.site = data;
+const site = function (req, res, next) {
+    res.locals.title = null;
+    res.locals.site = data;
 		next();
 }
 
@@ -68,8 +69,9 @@ app.use(passport.session());
 
 //Use flash messages for errors, info, ect...
 app.use(isLoggedIn);
-app.use(siteData);
-	
+
+app.use(site);
+
 app.use(flash());
 
 

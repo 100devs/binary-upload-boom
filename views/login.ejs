@@ -1,7 +1,7 @@
 <% title = (typeof(title) !== 'undefined') ? title : site.pages['login'].title %>
 <% page = (typeof(page) !== 'undefined') ? page : site.pages['login'].page %>
 
-<%- include('layouts/head') -%>
+<%- include('layouts/head', { title: title }) -%>
 
   <div class="row justify-content-center">
     <section class="col-6">

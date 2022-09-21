@@ -4,8 +4,6 @@ const commentSchema = new mongoose.Schema({
     comment: {
         type: String,
         require: true,
-        minlen: 10,
-        unique: false,
     },
     postId: {
         type: mongoose.Types.ObjectId,
@@ -15,6 +13,15 @@ const commentSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "User",
     },
+  likes: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
+	likedUsers:  [{
+		type : mongoose.Types.ObjectId,
+		ref: 'User'
+	}],
     createdAt: {
         type: Date,
         default: Date.now,

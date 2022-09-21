@@ -6,7 +6,7 @@ module.exports = {
 
   editComment: async (req, res) => {
     try {
-      await Comment.findByIdAndUpdate(req.body.id,
+      await Comment.findByIdAndUpdate(req.params.id,
 			  { comment: req.body.comment}
       );
       console.log("Comment edited");
@@ -21,9 +21,9 @@ module.exports = {
 
     deleteComment: async (req, res) => {
      try {
-   		let comment = await Comment.findById({ _id: req.body.id });
+   		let comment = await Comment.findById({ _id: req.params.id }).lean();
 			if (comment.user != req.user.id) throw new Error("User mismatch");
-			await Comment.remove({ _id: req.body.id });
+			await Comment.findByIdAndDelete({ _id: req.params.id });
 			console.log("Deleted Post");
 			req.flash('success', { msg: 'Your comment has been deleted.' })
      } catch (err) {

@@ -8,7 +8,6 @@ module.exports = {
       const allPosts = await Post.find({ user: req.user.id }).sort({ createdAt: "desc" });
 			const posts = allPosts.filter(post => post.image);
 			const drafts = allPosts.filter(post => !post.image);
-			console.log(posts, drafts)
       res.render("profile.ejs", { posts: posts, drafts: drafts, user: req.user });
     } catch (err) {
       console.log(err);
@@ -58,7 +57,45 @@ module.exports = {
 			res.redirect("/profile");
 		}
   },
-  likePost: async (req, res) => {
+  editPost: async (req, res) => {
+    try {
+			const post = await Post.findById(req.params.id);
+			post.title = req.body.title;
+			post.caption = req.body.caption;
+			if(req.file) {
+				const result = await cloudinary.uploader.upload(req.file.path);
+				post['image'] = result.secure_url;
+				post['cloudinaryId'] = result.public_id;
+			}
+			await post.save();
+      console.log("Post edited");
+			req.flash('success', { msg: 'Your post has been edited.' });
+    } catch (err) {
+      console.log(err);
+			req.flash('error', { msg: 'Your post could not be edited.' });
+    } finally {
+			res.redirect("/profile");
+		}
+  },
+  deletePost: async (req, res) => {
+    try {
+      // Find post by id
+      let post = await Post.findById({ _id: req.params.id });
+			if (post.user != req.user.id) throw new Error("User mismatch");
+      // Delete image from cloudinary
+			if (post.cloudinaryId) await cloudinary.uploader.destroy(post.cloudinaryId);
+      // Delete post from db
+      await Post.remove({ _id: req.params.id });
+      console.log("Deleted Post");
+			req.flash('success', { msg: 'Your post has been deleted.' })
+    } catch (err) {
+			console.log(err)
+			req.flash('error', { msg: 'Your post could not be deleted.' })
+    } finally {
+			res.redirect("/profile");
+		}
+  },
+	  likePost: async (req, res) => {
     try {
 			const post = await Post.findById(req.params.id);
 			const poster = post.user;
@@ -78,45 +115,6 @@ module.exports = {
 			req.flash('error', { msg: err.message });
     } finally {
 			res.redirect(`/post/${req.params.id}`);
-		}
-  },
-  editPost: async (req, res) => {
-    try {
-		const result = await cloudinary.uploader.upload(req.file.path);
-
-      await Post.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: {
-			title: req.params.title,
-			caption: req.params.caption,
-			image: result.secure_url,
-			cloudinaryId: result.public_id,
-			  },
-        }
-      );
-      console.log("Post edited");
-      res.redirect(`/post/${req.params.id}`);
-    } catch (err) {
-      console.log(err);
-    }
-  },
-  deletePost: async (req, res) => {
-    try {
-      // Find post by id
-      let post = await Post.findById({ _id: req.params.id });
-			if (post.user != req.user.id) throw new Error("User mismatch");
-      // Delete image from cloudinary
-      await cloudinary.uploader.destroy(post.cloudinaryId);
-      // Delete post from db
-      await Post.remove({ _id: req.params.id });
-      console.log("Deleted Post");
-			req.flash('success', { msg: 'Your post has been deleted.' })
-    } catch (err) {
-			console.log(err)
-			req.flash('error', { msg: 'Your post could not be deleted.' })
-    } finally {
-			res.redirect("/profile");
 		}
   },
 };

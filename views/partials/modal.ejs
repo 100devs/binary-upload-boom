@@ -5,30 +5,24 @@
 
 			<!-- Modal Header -->
 			<div class="modal-header">
-				<h4 class="modal-title">Modify my comment</h4>
-
+				<h4 class="modal-title" id="modalTitle"></h4>
 				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 			</div>
 
 			<!-- Modal body -->
-			<form id="commentForm">
-				<div class="modal-body" id="modalBody"></div>
-
-					<!-- don't get rewrited in the body -->
-					<input type="hidden" name="post" value="<%= post.id %>" />
-					<input type="hidden" name="user" value="<%= user.id %>" />
-					<!-- value will be update via js -->
-					<input type="hidden" name="id" />
-					
-
+			<form id="modalForm" method="post">
+				<div class="modal-body" id="formContent"></div>
 				<!-- Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-warning float-end">Submit</button>
-
+					<button type="button" class="btn btn-info" data-bs-dismiss="modal">Cancel</button>
+					<button type="submit" class="btn btn-warning float-end" id="submitButton"></button>
 				</div>
 			</form>
-
 		</div>
 	</div>
+</div>
+
+
+<div id="deleteForm" style="display:none">
+	<p>Delete this <span id="deleteType"></span>? This action cannot be undone.</p>
 </div>

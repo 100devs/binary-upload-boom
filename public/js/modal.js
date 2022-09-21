@@ -1,34 +1,35 @@
-const exampleModal = document.getElementById("myModal");
-exampleModal.addEventListener("show.bs.modal", function(event) {
+const modal = document.getElementById("myModal");
 
-  const button = event.relatedTarget;
-  const form = document.querySelector("#commentForm")
-  const hiddenId = button.getAttribute("data-bs-id");
-   const formAction = button.getAttribute("data-bs-action");
-   const formMethod = button.getAttribute("data-bs-method") || 'post';  
-// Extract info from data-bs-* attributes
-  const modalBody = exampleModal.querySelector("#modalBody");
-  const hiddenIdInput = exampleModal.querySelector('input[name="id"]')
+modal.addEventListener("show.bs.modal", function(event) {
+	const form = document.getElementById("modalForm");
+	const modalData = event.relatedTarget.dataset;
+	console.log(modalData)
 
-  // change the id value each time a modal is load
-	hiddenIdInput.value = hiddenId
-
-	console.log(formMethod) 
-  form.method = formMethod;
-  form.action = formAction;
-
-	console.log(formAction)
-	if(formAction === '/comment/deleteComment') {
-		modalBody.textContent = "Delete this comment?";		
-	} else {
-		addModalTextArea(modalBody)
-		
-		if(formAction === '/comment/editComment') {
-		// For comment modification
-			const commentText = exampleModal.querySelector("#commentArea");
-			commentText.value = button.parentElement.previousElementSibling.textContent;
-		}			
+	form.action = modalData['formaction'];
+	if (modalData['enctype']) form.enctype = modalData['enctype'];
+	document.getElementById('modalTitle').innerText = modalData['modaltitle'];
+	const formContent = document.getElementById(modalData['formcontent']);
+	formContent.style.display = "block";
+	document.getElementById('formContent').append(formContent);
+	document.getElementById('submitButton').innerText = modalData['submitbutton'];
+	if (modalData['comment']) {
+		document.getElementById('commentArea').value = modalData['comment'];
 	}
+	if (modalData['title']) {
+		document.getElementById('title').value = modalData['title'];
+	}
+		if (modalData['caption']) {
+		document.getElementById('caption').value = modalData['caption'];
+	}
+	if (modalData['deletetype']) {
+		document.getElementById('deleteType').innerText = modalData['deletetype'];
+	} 
+});
+
+modal.addEventListener("hide.bs.modal", function(event) {
+	const modalData = event.relatedTarget.dataset;
+	const formContent = document.getElementById(modalData['formcontent']);
+	formContent.style.display = "none";
 });
 
 

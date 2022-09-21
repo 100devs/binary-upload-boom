@@ -1,11 +1,12 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
+const Like = require("../models/Like");
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id }).sort({ createdAt: "desc" });
+      const posts = await Post.find({ user: req.user.id }).populate('likes').sort({ createdAt: "desc" });
       res.render("profile.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
@@ -13,7 +14,7 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      const posts = await Post.find().populate('likes').sort({ createdAt: "desc" }).lean();
       res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
@@ -22,7 +23,8 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id)
-      .populate('user')  
+      .populate('user')
+      .populate('likes')  
       .populate({ path: 'comments', populate: { path: 'comments', populate: { path: 'comments', populate: { path: 'comments', populate: { path: 'comments', populate: { path: 'comments', populate: { path: 'comments', populate: { path: 'comments', populate: { path: 'comments', populate: { path: 'comments' } } } } } } } } } });
 
       const comments = post.comments
@@ -55,12 +57,15 @@ module.exports = {
   },
   likePost: async (req, res) => {
     try {
-      await Post.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
-        }
-      );
+      const obj = {
+        user: req.user.id,
+        post: req.params.id
+      }
+      if ((await Like.deleteOne(obj)).deletedCount) {
+        console.log("Likes -1");
+        return res.redirect(`/post/${req.params.id}`);  
+      }
+      await Like.create(obj);
       console.log("Likes +1");
       res.redirect(`/post/${req.params.id}`);
     } catch (err) {

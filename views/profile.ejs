@@ -21,7 +21,7 @@
           <label class="label">
             <span class="label-text">Caption</span>
           </label>
-          <textarea id="caption" name="caption" class="textarea textarea-bordered">Tell everyone about your post</textarea>
+          <textarea id="caption" name="caption" class="textarea textarea-bordered" placeholder="Tell everyone about your post"></textarea>
         </div>
         <div class="form-control">
           <label class="label">
@@ -45,6 +45,16 @@
           </a>
         </figure>
         <div class="card-body">
+          <div class="mb-3" style="display: flex; justify-content: space-between">
+            <form
+              class="col-1"
+              action="/post/likePost/<%= posts[i].id %>?_method=PUT"
+              method="POST"
+            >
+              <button class="fa fa-heart btn btn-primary btn-sm" type="submit" style="border: none; font-size: 2rem;"></button>
+            </form>
+            <span class="col-3">Likes: <%= posts[i].likes %></span>
+          </div>
           <h2 class="card-title"><%= posts[i].title %></h2>
           <p><%= posts[i].caption %></p>
           <div class="card-actions justify-end">

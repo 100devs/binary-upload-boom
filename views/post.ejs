@@ -3,6 +3,7 @@
   <div class="row justify-content-center mt-5">
     <div class="col-6">
       <h2><%= post.title %></h2>
+      <small><%= post.caption %></small>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
         <form
@@ -24,9 +25,45 @@
         <%}%>
       </div>
     </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
+    <div class="col-6 mt-5">
+      <%if(comments){%>
+      <div class="comment">
+        <ul>
+          <% comments.forEach(comment => { %>
+          <li class="col-6 justify-content-between">
+            <%= comment.comment %> <%if(comment.createdBy == user.id){ %>
+            <form
+              action="/comment/deleteComment/<%= comment._id %>?_method=DELETE"
+              method="POST"
+              class="col-1"
+            >
+              <button
+                class="btn btn-primary fa fa-trash"
+                type="submit"
+              ></button>
+            </form>
+            <%}%>
+          </li>
+
+          <hr />
+          <% }) %>
+        </ul>
+      </div>
+      <%}%>
+      <div class="col-6 mt-5">
+        <form action="/comment/<%-post._id%>" method="post">
+          <textarea
+            name="comment"
+            id="commment"
+            cols="30"
+            rows="3"
+            placeholder="Comment on this post."
+          ></textarea>
+          <input type="submit" value="Submit" class="btn btn-primary" />
+        </form>
+      </div>
     </div>
+
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

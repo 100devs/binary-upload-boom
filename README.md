@@ -1,6 +1,6 @@
 # 100Devs Binary Upload Boom Comments Project 
 
-## by [@labrocadabro](https://github.com/labrocadabro) and [@Angra974]https://github.com/Angra974)
+## by [@labrocadabro](https://github.com/labrocadabro) and [@Angra974](https://github.com/Angra974)
 
 Modifications:
 

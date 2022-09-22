@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -20,8 +21,9 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const post = await Post.findById(req.params.id); //finding the specific post with a given post id
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean(); //find all the comments that are pertaining to that specific post; req.params.id will show the current post id that I am currently on.
+      res.render("post.ejs", { post: post, user: req.user, comments: comments }); //key (variable from ejs), comments is what is actually being passed in.
     } catch (err) {
       console.log(err);
     }

@@ -8,7 +8,7 @@ module.exports = {
         likes: 0,
         post: req.params.id,
       });
-      console.log("Comment has been added!");
+      console.log("Here is the comment!");
       res.redirect("/post/"+req.params.id);
     } catch (err) {
       console.log(err);

@@ -22,9 +22,10 @@ const SESSION_SECRET = process.env.SESSION_SECRET || 'yoursecretsession';
 const data = require('./config/site');
 
 const site = function (req, res, next) {
-    res.locals.title = null;
+    res.locals.title = undefined;
+    res.locals.page = undefined;
     res.locals.site = data;
-		next();
+  	next();
 }
 
 //Use .env file in config folder

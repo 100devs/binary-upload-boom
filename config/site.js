@@ -22,7 +22,7 @@ module.exports = {
 		},
 		login: {
 			title: 'Log In',
-			page: 'singin'
+			page: 'login'
 		},
 		signup: {
 			title: 'Sign Up',

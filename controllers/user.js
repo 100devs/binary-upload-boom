@@ -19,7 +19,7 @@ module.exports = {
       await User.findOneAndUpdate(
         { _id: req.user.id },
         {
-          $push: { leagues: { 'league': req.body.name, 'sport': req.body.sport } }
+          $push: { leagues: { 'league': req.body.league, 'sport': req.body.sport } }
         },
         {
           new: true
@@ -67,18 +67,14 @@ module.exports = {
 
       //Delete post from db
       //Delete post from DB array
+      const user = await User.findById(req.params.id)
 
-      /* const deleteLeagueFromUser = await User.updateOne(
+      const deleteLeagueFromUser = await User.updateOne(
         { _id: req.user.id },
         {
-          $pull: { 'leagues': { '_id': new ObjectId('name') } }
+          $pull: { 'leagues': user.leagues.filter(el => el.league === req.body.league)[0] }
         }
-      ) */
-      /* console.log(req.user.leagues) */
-      /* console.log(req.user.leagues['name'])
-      console.log(req.body) */
-
-      console.log(req.body.leagues)
+      )
 
       console.log("Deleted something");
       res.redirect(`/profile/${req.params.id}`);
@@ -89,24 +85,15 @@ module.exports = {
   deleteTeam: async (req, res) => {
     try {
 
-      // Find post by id
-      //let post = await Post.findById({ _id: req.params.id });
-      /* const users = await User.find({ user: req.user.id }) */
+      // Find user by id
+      const user = await User.findById(req.params.id)
 
-      //Delete post from db
-      //Delete post from DB array
-
-      const deleteLeagueFromUser = await User.updateOne(
-        { _id: req.user.id }, { teams: req.body.teams },
+      const deleteTeamFromUser = await User.updateOne(
+        { _id: req.user.id },
         {
-          $pull: { 'team': req.body.team }
+          $pull: { 'teams': user.teams.filter(el => el.team === req.body.team)[0] }
         }
       )
-      console.log(req.body.teams.params)
-
-
-      const user = await User.findById(req.params.id)
-      console.log(user)
 
       console.log("Deleted something");
       res.redirect(`/profile/${req.params.id}`);

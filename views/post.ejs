@@ -46,14 +46,32 @@
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
       <ul class="list-unstyled">
-      <%comment.forEach(el => {%>
-        <li class="mt-5">
-          <span>
-            <%= el.comment%>
-          </span>
-          <a class="btn btn-primary btn-sm float-end" data-id="<%=el._id%>" href="/comment/deleteComment/<%=el._id%>/<%=post.id%>?_method=DELETE">Delete</a>
-        </li>
-        <%})%>
+      <%comment.forEach(comm => {%>
+        <%if(String(comm.userId) == user._id){%>
+          <li class="mt-5">
+            <span>
+              <%=user.userName%>:
+            </span>
+            <span>
+              <%= comm.comment%>
+            </span>
+            <a class="btn btn-primary btn-sm float-end" data-id="<%=comm._id%>" href="/comment/deleteComment/<%=comm._id%>/<%=post.id%>?_method=DELETE">Delete</a>
+          </li>
+        <%}else{%>
+          <%allUser.forEach(users => {%>
+            <%if(String(users._id) == comm.userId){%>
+              <li class="mt-5">
+                <span>
+                  <%=users.userName%>:
+                </span>
+                <span>
+                  <%= comm.comment%>
+                </span>
+              </li>
+            <%}%>
+          <%})%>
+        <%}%>      
+      <%})%>
       </ul>
     </div>
 

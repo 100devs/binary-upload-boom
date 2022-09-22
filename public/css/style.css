@@ -1,0 +1,73 @@
+.link-menu {
+    color: black;
+}
+
+.topbar-profile-photo {
+    width: 1.5em; 
+    height: 1.5em; 
+    position: relative;
+}
+
+.story-profile-photo {
+    width: 56px; 
+    height: 56px; 
+    position: relative; 
+    border-width: 2px !important;
+}
+
+.post-profile-photo {
+    width: 46px; 
+    height: 46px; 
+    position: relative; 
+    border-width: 2px !important;
+}
+
+.sidenav-profile-photo {
+    width: 56px; 
+    height: 56px; 
+    position: relative; 
+}
+
+.comment-box {
+    border-top: 1px solid lightgray;
+}
+
+.input-post {
+    outline: none;
+}
+
+.btn-ig {
+    background-color: transparent;
+    border: 0;
+    color: #007bff;
+    font-weight: 600;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    outline: none !important;
+}
+
+.btn-ig:hover,
+.btn-ig:focus {
+    background-color: transparent !important;
+    color: #007bff !important;
+}
+
+.profile-info {
+    font-size: 14px;
+}
+
+.profile-info-username {
+    display: block;
+    font-weight: 700;
+}
+
+.sugest-profile-photo {
+    width: 46px; 
+    height: 46px;  
+    position: relative;
+}
+
+.sugest-username {
+    font-size: 14px
+}

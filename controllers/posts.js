@@ -1,11 +1,13 @@
 const cloudinary = require("../middleware/cloudinary");
-const Post = require("../models/Post");
+const Post = require("../models/Post"); //  Post is the name of a mongoose model referencing a schema
+const Comment = require("../models/Comment");
+
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id });
-      res.render("profile.ejs", { posts: posts, user: req.user });
+      const posts = await Post.find({ user: req.user.id }); // find posts of user with specific id, ie user logged in.
+      res.render("profile.ejs", { posts: posts, user: req.user }); // passing data we retrieve from database about user's post, and send it down to view
     } catch (err) {
       console.log(err);
     }
@@ -21,7 +23,8 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({ post: req.params.id }).sort({ createdAt: "desc" }).lean(); // use comments model to find comments  collection and find all the comments with the post property of the post we're currently on and sort in desc order and use lean to get pure javascript object (pojo)
+      res.render("post.ejs", { post: post, user: req.user, comments:comments });
     } catch (err) {
       console.log(err);
     }

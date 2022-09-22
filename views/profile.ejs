@@ -8,7 +8,7 @@
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
           <div class="mt-5">
-            <h2>Add a post</h2>
+            <h2>Add a Post</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
                   <label for="title" class="form-label">Title</label>
@@ -36,6 +36,17 @@
           </li>
         <% } %>
         </ul>
+          <div class="mt-5">
+            <h2>Add a Comment</h2>
+            <form action="/comment/createComment/<%=posts._id%>" method="POST">
+              <div class="mb-3">
+                  <label for="comment" class="form-label">Title</label>
+                  <input type="text" class="form-control" id="comment" name="comment">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+      </div>
         <div class="row justify-content-center mt-5">
           <a class="btn btn-primary" href="/feed">Return to Feed</a>
         </div>  

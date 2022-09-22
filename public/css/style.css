@@ -1,0 +1,8 @@
+.commentUL {
+    list-style: none;
+}
+.commentLI{
+    border-radius: 25px;
+    border: 2px solid blue;
+    padding: 20px;
+}

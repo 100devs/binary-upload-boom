@@ -1,7 +1,7 @@
 {
-  "name": "binary-upload-boom",
+  "name": "book-bunny",
   "version": "1.0.0",
-  "description": "100Devs Social Network",
+  "description": "Book Management System",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
@@ -27,5 +27,13 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "validator": "^13.6.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeBaobab3/binary-upload-boom-DEMO.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LeBaobab3/binary-upload-boom-DEMO/issues"
+  },
+  "homepage": "https://github.com/LeBaobab3/binary-upload-boom-DEMO#readme"
 }

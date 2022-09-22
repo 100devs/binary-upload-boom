@@ -10,6 +10,7 @@ module.exports = {
         // grab the id from the URL, store it as "post".. current post we want the comment tied to
         post: req.params.id,
         user: req.user.id,
+        userName: req.user.userName,
       });
       console.log("Comment has been added!");
       res.redirect("/post/"+req.params.id);

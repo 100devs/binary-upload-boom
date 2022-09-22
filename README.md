@@ -1,20 +1,21 @@
-# Install
+# Binary Upload Boom
+A social media app with authentication, posting, commenting, and more.
 
-`npm install`
+**Link to project:** ~~http://binary-upload-boom.com/~~
 
----
+![alt tag](http://placecorgi.com/1200/650)
 
-# Things to add
+## How It's Made:
 
-- Create a `.env` file in config folder and add the following as `key = value`
-  - PORT = 2121 (can be any port example: 3000)
-  - DB_STRING = `your database URI`
-  - CLOUD_NAME = `your cloudinary cloud name`
-  - API_KEY = `your cloudinary api key`
-  - API_SECRET = `your cloudinary api secret`
+**Tech used:** HTML, CSS, JavaScript, ExpressJS, NodeJS
 
----
+The backend uses Node as an environment to run an express web app. The app uses the MVC architecture to organize backend functionality. The front end is rendered from EJS templates. The front end is HTML & CSS.
 
-# Run
+## Optimizations
+*(optional)*
 
-`npm start`
+Before production need to make sure all functions are converted to asynchronous.
+
+## Lessons Learned:
+
+MVC architecture relies heavily on planning and organizing data prior to implementing any code.

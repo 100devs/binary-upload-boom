@@ -1,0 +1,116 @@
+/***** FONTS *****/
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+@font-face {
+    font-family: Molgan;
+    src: local("Molgan Regular"),
+    local("Molgan-Regular"),
+    url("/public/fonts/Molgan-Regular.otf");
+    font-weight: normal;
+}
+
+
+/***** MAIN CSS *****/
+body {
+    background: url("/imgs/bg-index.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Quicksand', sans-serif;
+}
+.container {
+    background: #fdfdfd93;
+}
+.btn {
+    background: #6D73E1;
+    border: none;
+}
+.btn:hover {
+    background: #9697E7;
+}
+
+
+/***** HEADER CSS *****/
+header {
+    width: 100%;
+    background: rgba(232, 231, 231, 0.9);
+    border-bottom: 1px solid rgb(138, 138, 138);
+}
+header h1 {
+    font-family: 'Molgan', sans-serif;
+}
+header h1 a{
+    text-decoration: none;
+    color:#9697E7;
+}
+header h1 a:hover{
+    color: #6D73E1;
+}
+
+
+/***** INDEX CSS *****/
+.index {
+    min-height: 100vh;
+    padding-top: 9rem;
+}
+.index .indexButtons {
+    width: 450px;
+    margin: auto;
+    background: #9697e741;
+    border: 1px solid #9697E7;
+    border-radius: 10px;
+}
+.indexButtons a {
+    width: 170px;
+    margin: 2.5rem 0;
+}
+
+
+/***** LOGIN CSS *****/
+.login {
+    min-height: 100vh;
+}
+
+
+/***** SIGNUP CSS *****/
+
+
+
+/***** FEED CSS *****/
+.feed {
+    min-height: 100vh;
+}
+.feed img {
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+    transition: transform .2s;
+}
+.feed img:hover {
+    transform: scale(1.2);
+}
+
+
+/***** PROFILE CSS *****/
+.imgProfile {
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+}
+.profile textarea {
+    height: 120px;
+}
+
+
+/***** COMMENT CSS *****/
+.commentSection {
+    margin-left: 13%;
+    text-decoration: none;
+}
+.comment input{
+    height: 120px;
+}
+
+
+
+/***** FOOTER CSS *****/

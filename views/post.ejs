@@ -27,11 +27,26 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
+    <div>
+      <% comments.forEach(comment => { %>
+      <p><%=comment.comment %></p>
+      <% }) %>
+      <div>
+        <form
+          action="/comments/createComment/<%= post.id %>"
+          method="POST"
+          class="col-3"
+        >
+          <input type="text" name="comment" />
+          <button class="btn btn-primary" type="submit">Add Comment</button>
+        </form>
+      </div>
+      <div class="col-6 mt-5">
+        <a class="btn btn-primary" href="/profile">Return to Profile</a>
+        <a class="btn btn-primary" href="/feed">Return to Feed</a>
+      </div>
     </div>
   </div>
-</div>
 
-<%- include('partials/footer') -%>
+  <%- include('partials/footer') -%>
+</div>

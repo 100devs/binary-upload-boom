@@ -16,4 +16,27 @@ module.exports = {
       console.log(err);
     }
   },
+  likeComment: async (req, res) => {
+    try {
+      await Comment.findOneAndUpdate(
+        { _id: req.params.commentId },
+        {
+          $inc: { likes: 1 },
+        }
+      );
+      console.log("Comment Likes +1");
+      res.redirect(`/post/${req.params.postId}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  deleteComment: async (req, res) => {
+    try {
+      await Comment.deleteOne({_id: req.params.commentId})
+      console.log("Deleted Comment");
+      res.redirect(`/post/${req.params.postId}`);
+    } catch (err) {
+        console.error(err);
+    }
+  },
 };

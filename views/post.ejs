@@ -30,8 +30,21 @@
 
     <ul>
       <% for(var i=0; i<comments.length; i++) {%>
-        <li class="col-6 justify-content-between mt-5">
-          <b><%= comments[i].createdBy %></b> <%= comments[i].comment%>
+        <li class="col-6 mt-5">
+          <b><%= comments[i].createdBy %></b> &nbsp;&nbsp; <%= comments[i].comment%> &nbsp;&nbsp;
+
+          <div class="row">
+            <form class="col-1" action="/comment/likeComment/<%= post.id %>/<%= comments[i]._id %>?_method=PUT" method="POST">
+              <button class="btn btn-primary fa fa-heart" type="submit">&nbsp;<%= comments[i].likes %></button> &nbsp;&nbsp;
+            </form>
+          </div>
+
+          <% if(comments[i].createdById == user.id) {%>
+          <form action="/comment/deleteComment/<%= post.id %>/<%= comments[i]._id %>?_method=DELETE" method="POST">
+            <button class="btn btn-outline-danger fa fa-trash" type="submit"> Delete Comment</button>
+          </form>
+          <% } %>
+
         </li>
       <% } %>
     </ul>

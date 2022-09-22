@@ -13,16 +13,6 @@ const CommentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Post",
   },
-  // Added new schema properties to link comments to users - username for attribution, ID to show/hide delete button
-  createdBy: {
-    type: String,
-    ref: "User",
-  },
-  createdById: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
-  // End changes
   createdAt: {
     type: Date,
     default: Date.now,

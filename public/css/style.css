@@ -1,0 +1,19 @@
+/* .btn {
+  background: #1054dd;
+} */
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* h1,
+.text-center {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    rgba(16, 84, 221, 1) 35%,
+    rgba(234, 242, 244, 1) 100%
+  );
+} */

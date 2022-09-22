@@ -26,12 +26,29 @@
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
+      <div>
+        <form action="./createComment/<%= post.id %>" method="POST">
+          <textarea type="text" name="comment" class="form-control"></textarea>
+          <input type="submit" value="Comment" class="btn btn-primary">
+        </form>
+      </div>
+      <div>
+        <ul>
+        <% comments.forEach(el => { %>
+          <li>
+            <p><%= el.userName %> : <%= el.comment %></p>
+          </li>
+        <% }) %>
+        </ul>
+      </div>
+    </div>
     </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
   </div>
-</div>
+
+  
 
 <%- include('partials/footer') -%>

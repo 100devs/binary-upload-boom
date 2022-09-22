@@ -6,14 +6,15 @@
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
         <form
-          class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
-          method="POST"
-        >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          action="post/upvote/<%= post.id %>"?_method=PUT
+          <button class="btn btn-primary fa fa-thumbs-up" type="submit"></button>
         </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
+        <form
+          action="/post/downvote/<%= post.id %>?_method=PUT"
+          <button class="btn btn-primary fa fa-thumbs-down" type="submit"></button>
+      </form>
+        <h3 class="col-3">Coolness Index: <%= post.voteCount %></h3>
+        <%if(post.user.id == user._id){%>
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
           method="POST"
@@ -27,28 +28,23 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
-    <div class="d-flex flex-column align-items-center"><h3>Comments!</h3>
-      <form action="/comment/createComment/<%= post.id %>" method="POST">
-        <label for="comment">Enter a comment:</label>
-        <textarea name="comment" id="comment"></textarea>
-        <button type="submit">Submit</button>
-      </form>
-      <ul>
-        <% for (let i = 0; i < comments.length; i++) { %>
-        <li class="col-6 card mt-1 w-75"><strong><%= comments[i].createdBy %></strong><p class="card"><%= comments[i].comment %></p>
-          <% if(comments[i].createdById == user.id){ %>
-          <form
-            action="/comment/deleteComment/<%=post.id%>/<%= comments[i]._id %>?_method=DELETE"
-            method="POST"
-          >
-            <button class="btn btn-outline-danger fa fa-trash" type="submit"></button>
-          </form>
-          <%}%>
-          <em>Date: <%= comments[i].createdAt.toLocaleString() %></em>
-          </li>
-        <% } %>
-      </ul>
+    <div>
+      Comments:
+      <div class="row">
+        <form
+          action="/comment/createComment/<%= post.id %>/<%= post.comments.id %>"
+          method="POST"
+          class="col-12"
+        >
+        <div class="mb-3">
+          <label for="text" class="form-label">Text</label>
+          <textarea class="form-control" id="text" name="text"></textarea>
+        </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+      </div>  
     </div>
+    <%- include('partials/comments') -%>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

@@ -21,6 +21,25 @@
         >
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
+
+
+        <%}%>
+
+        <form
+          action="/comment/createComment/<%= post.id %>"
+          method="POST"
+        >
+        <label for="comment">Enter your comment here please</label>
+        <input type="text" name="comment" id="comment">
+        <button class="btn btn-primary" type="submit">Submit</button>
+      
+        </form>
+        <%if(post.user == user.id){ %>
+          <ul>
+            <% comments.forEach(comment => { %>
+              <li><%= comment.comment %></li>
+            <%})%>
+          </ul>
         <%}%>
       </div>
     </div>

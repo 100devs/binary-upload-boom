@@ -31,4 +31,6 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
+
+// create a model called Post and assign the schema to it
 module.exports = mongoose.model("Post", PostSchema);

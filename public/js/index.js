@@ -25,11 +25,11 @@
 //     $row.next().after($row.get(0));
 // });
 
-// // A few jQuery helpers for exporting only
+// A few jQuery helpers for exporting only
 // jQuery.fn.pop = [].pop;
 // jQuery.fn.shift = [].shift;
 
-// $BTN.click(function () {
+// $BTN.on(function () {
 //     var $rows = $TABLE.find('tr:not(:hidden)');
 //     var headers = [];
 //     var data = [];

@@ -64,7 +64,6 @@ module.exports = {
       });
 
       /* req.user.entries.push(newPost.id) */
-      console.log(req.body)
 
       const addIdToUser = await User.findOneAndUpdate(
         { _id: req.user.id },
@@ -74,6 +73,7 @@ module.exports = {
       )
       /* console.log(req.user) */ //gets the user model
       /* console.log(newPost) */ //get the new post info
+      console.log(req.body)
 
       console.log("Post has been added!");
       res.redirect("/home"); //changed from profile to home
@@ -92,6 +92,26 @@ module.exports = {
       );
 
       console.log("Toggle pinned");
+      res.redirect(`/post/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  createTable: async (req, res) => {
+    try {
+      await Post.findOneAndUpdate(
+        { _id: req.params.id },
+        [{
+          "$set": { "table": { 'row': [req.body.cell1], 'column': [req.body.cell2] } }
+        }]
+      );
+
+      const post = await Post.findById(req.params.id);
+
+      console.log(post)
+      console.log(req.body)
+
+      console.log("Table created");
       res.redirect(`/post/${req.params.id}`);
     } catch (err) {
       console.log(err);

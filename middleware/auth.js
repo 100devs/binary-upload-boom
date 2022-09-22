@@ -13,4 +13,4 @@ module.exports = {
       res.redirect("/dashboard");
     }
   },
-};
+}

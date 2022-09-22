@@ -42,20 +42,13 @@
 
 
  <ul>
-  <% for(var i=0; i < comments.length; i++) {%>
+  <% for(var i=0; i<comments.length; i++) {%>
     <li class="col-6 justify-content-between mt-5">
-    <h5>  <%= comments[i].comment%>  </h5>
-     <form class="col-1"
-     action="/comment/deleteComment/<%= comment.id%>?_method=DELETE"
-    method="POST"
-      >
-
-      <button class="btn btn-primary fa fa-trash" type="submit"></button>
-    </form>
-  </li>
+      <%= comments[i].comment%>
+      </a>
+    </li>
   <% } %>
 </ul>
-
 </div>
 
     <div class="col-6 mt-5">

@@ -23,7 +23,7 @@
         </form>
         <%}%>
       </div>
-    </div>
+    </div> 
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
@@ -33,24 +33,23 @@
         <div class="mb-3">
           <label for="comment" class="form-label">Comment</label>
           <input type="text" class="form-control" id="comment" name="comment">
-          <!-- <span><%= comment.i.username %></span> -->
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
-      <%if(comment.user == user.id){ %>
-        <form
-          action="/comment/deleteComment/<%=comment.id%>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
-        <%}%>
     </div>
     <ul>
+      <!-- add: username and delete button -->
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
-          <%= comments[i].comment%>
+          "<%= comments[i].comment%>"  made by: <%= comments[i].madeBy%>
+          <%if(comments[i].madeByID == user.id) {%>
+          <form
+          action="/comment/deleteComment/<%= comments[i]._id %>/<%= post.id %>?_method=DELETE"
+          method="POST"
+        >
+          <button class="btn btn-outline-danger fa fa-trash" type="submit"> Delete</button>
+        </form>
+        <% } %>
         </li>
       <% } %>
     </ul>

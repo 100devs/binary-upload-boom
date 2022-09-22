@@ -10,7 +10,7 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
-
+const cloudinary = require('cloudinary').v2;
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
 
@@ -42,7 +42,8 @@ app.use(
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    store: new MongoStore({ mongooseConnection: mongoose.connection }, 
+    {collection: "BUB"}),
   })
 );
 
@@ -59,5 +60,5 @@ app.use("/post", postRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {
-  console.log("Server is running, you better catch it!");
+  console.log(`Server is running on ${process.env.PORT}, you better catch it!`);
 });

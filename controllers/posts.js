@@ -1,5 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
+const { post } = require("../routes/main");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -12,16 +14,20 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
-    } catch (err) {
+      const posts = await Post.find().populate('user').sort({ createdAt: "desc" }).lean();
+      const comments = await Comment.find().sort({ createdAt: "asc" }).lean()
+
+      res.render("feed.ejs", { posts: posts, comments: comments });
+      console.log(comments, posts)
+    } catch (err) { 
       console.log(err);
     }
   },
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
     }
@@ -30,6 +36,7 @@ module.exports = {
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
+      console.log(result)
 
       await Post.create({
         title: req.body.title,
@@ -54,6 +61,32 @@ module.exports = {
         }
       );
       console.log("Likes +1");
+      res.redirect(`/post/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  editPostPage:  async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.id);
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+      res.render("edit.ejs", { post: post, user: req.user, comments: comments });
+    } catch (err) {
+      console.log(err)
+    }
+  },
+
+  editPost: async (req, res) => {
+    try {
+      await Post.findOneAndUpdate(
+        { _id: req.params.id },
+      
+        
+          {...req.body }
+         
+      
+      );
+      console.log("Updated Post",req.body.title );
       res.redirect(`/post/${req.params.id}`);
     } catch (err) {
       console.log(err);

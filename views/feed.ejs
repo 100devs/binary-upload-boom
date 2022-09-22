@@ -3,12 +3,29 @@
     <div class="row justify-content-center mt-5">
       <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
+          <li class="card p-5">
+            <h3 class="card-title"><%=posts[i].title%></h3>
             <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
+              <img class="w-100 rounded" src="<%= posts[i].image%>">
             </a>
+            <div class="align pb-3 pt-1">
+              <div class="">Likes: <%= posts[i].likes %></div>
+              <div class="">Posted by:<%=posts[i].user.userName%></div>
+            </div>
+            <h4>Comments:</h4>
+            <% for(var j=0; j<comments.length; j++) {%>
+              <% if( comments[j].post  == `${posts[i]._id}` ) {%>
+              <p><%= comments[j].comment %></p>
+             <% console.log(posts[i]._id )%>
+             <% console.log(comments[j].post )%>
+           
+             <%}%>
+             <% } %>
+             <% } %>
           </li>
-        <% } %>
+          
+         
+        
         </ul>
     </div>
   </div>  

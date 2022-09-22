@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -21,7 +22,8 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "asc" }).lean();
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
     }
@@ -65,6 +67,11 @@ module.exports = {
       let post = await Post.findById({ _id: req.params.id });
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);
+      // Delete all comments from db before orphaning them
+      let comments = await Comment.find({post: post})
+      comments.forEach(async (comment) => {
+        await Comment.remove({ _id: comment._id })
+      })
       // Delete post from db
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");

@@ -1,9 +1,9 @@
-<% title = (typeof(title) !== 'undefined') ? title : site.pages['profile'].title %>
+<% let profileTitle = (typeof(title) !== 'undefined') ? title : site.pages['profile'].title %>
 <% page = (typeof(page) !== 'undefined') ? page : site.pages['profile'].page %>
 
 
 
-<%- include('layouts/head') -%>
+<%- include('layouts/head', { title: profileTitle }) -%>
 
 <div class="d-flex border w-100 w-lg-50 align-items-center p-3">
 		<div>
@@ -49,26 +49,26 @@
 				<div class="border p-3 mb-lg-0 mb-3">
 					<h4 class="postTitle"><%= drafts[i].title %></h4>
 					<p class="postCaption"><%= drafts[i].caption %></p>
-					<button 
+					<button
 						type="button"
-						class="btn btn-primary" 
-						data-bs-toggle="modal" 
+						class="btn btn-primary"
+						data-bs-toggle="modal"
 						data-bs-target="#myModal"
 						data-modalTitle="Edit your post"
-						data-formContent = "postForm" 
+						data-formContent = "postForm"
 						data-submitButton="Edit post"
 						data-formAction="/post/editPost/<%=drafts[i].id %>?method=PUT"
 						data-title="<%= drafts[i].title %>"
 						data-caption="<%= drafts[i].caption %>"
 						data-enctype="multipart/form-data"
 					>Edit</button>
-					<button 
+					<button
 							type="button"
-							class="btn btn-primary" 
-							data-bs-toggle="modal" 
+							class="btn btn-primary"
+							data-bs-toggle="modal"
 							data-bs-target="#myModal"
 							data-modalTitle="Delete your post"
-							data-formContent = "deleteForm" 
+							data-formContent = "deleteForm"
 							data-submitButton="Delete post"
 							data-deleteType="post"
 							data-formAction="/post/deletePost/<%=drafts[i].id %>?method=DELETE"

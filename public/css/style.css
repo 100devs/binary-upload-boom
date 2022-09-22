@@ -58,3 +58,10 @@ p.post {
 	}
 }
 
+@media (max-width: 500px) {
+	.d-sm-none {
+		display: none;
+	}
+}
+
+

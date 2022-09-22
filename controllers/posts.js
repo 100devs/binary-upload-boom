@@ -2,6 +2,7 @@ const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 
+
 module.exports = {
   getProfile: async (req, res) => {
     try {
@@ -13,21 +14,13 @@ module.exports = {
       console.log(err);
     }
   },
-  getFeed: async (req, res) => {
-    try {
-      const posts = await Post.find({image: { $exists: true}}).sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts, user: req.user  });
-    } catch (err) {
-      console.log(err);
-    }
-  },
 
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id).populate('user');
       // get comment for this post
       const comments = await Comment.find({'postId': req.params.id }).populate('user');
-      res.render("post.ejs", { post: post, user: req.user, comments: comments });
+      res.render("post.ejs", { post: post, user: req.user, comments: comments, title: post.title });
     } catch (err) {
       console.log(err);
 			res.redirect("/feed");
@@ -48,8 +41,8 @@ module.exports = {
 				post['cloudinaryId'] = result.public_id;
 			}
 			await Post.create(post);
-			console.log("Post has been added!");	
-			req.flash('success', { msg: 'Your post has been created.' })	
+			console.log("Post has been added!");
+			req.flash('success', { msg: 'Your post has been created.' })
     } catch (err) {
       console.log(err);
 			req.flash('error', { msg: 'Your post could not be created.' })
@@ -57,6 +50,15 @@ module.exports = {
 			res.redirect("/profile");
 		}
   },
+    getFeed: async (req, res) => {
+    try {
+      const posts = await Post.find({image: { $exists: true}}).sort({ createdAt: "desc" }).lean();
+      res.render("feed.ejs", { posts: posts, user: req.user, page: 'feed'  });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
   editPost: async (req, res) => {
     try {
 			const post = await Post.findById(req.params.id);

@@ -1,0 +1,62 @@
+/* comments css */
+
+#comment {
+    width: 100%;
+}
+
+#comment form {
+    width: 100%;
+}
+
+#comment form .commentInput {
+    margin: 30px 0;
+}
+
+#comment label, #comment input{
+    width: 100%;
+}
+
+#comment label {
+    margin-bottom: 10px;
+}
+
+#comment .commentInput button {
+    margin-top: 10px;
+}
+
+#comment .commentList {
+    width: 100%;
+    display: flex;
+    /* justify-content: left;
+    align-items: center; */
+    flex-direction: column;
+    padding-left: 0;
+}
+
+.commentList div {
+    width: 100%;
+    border: 1px solid rgba(39, 39, 39, 0.29);
+    background-color: rgba(225, 225, 225, 0.299);
+    border-radius: 20px;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+}
+
+.commentList form {
+    display: flex;
+    justify-content: right;
+    width: 100%;
+}
+
+.commentList div form button {
+    display: inline-block;
+}
+
+.commentList  li { 
+    width: 100%;
+    list-style-type: none;
+}
+
+.commentList div > li > i {
+    font-style: normal;
+}

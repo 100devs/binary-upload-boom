@@ -40,7 +40,6 @@
     </div>
     <ul class="row list-unstyled mt-3">
       <% for(var i=0; i < comments.length; i++) {%>
-        <% console.log(comments[i].user, user.id) %>
         <% if(comments[i].user == user.id){ %>
           <li class="justify-content-between mt-2 list">
             <%= comments[i].createdBy %>: <%= comments[i].comment %>

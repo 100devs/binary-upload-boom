@@ -1,0 +1,48 @@
+*{
+  box-sizing: border-box;
+}
+
+.background-radial-gradient {
+  background-color: hsl(218, 41%, 15%);
+  background-image: radial-gradient(650px circle at 0% 0%,
+      hsl(218, 41%, 35%) 15%,
+      hsl(218, 41%, 30%) 35%,
+      hsl(218, 41%, 20%) 75%,
+      hsl(218, 41%, 19%) 80%,
+      transparent 100%),
+    radial-gradient(1250px circle at 100% 100%,
+      hsl(218, 41%, 45%) 15%,
+      hsl(218, 41%, 30%) 35%,
+      hsl(218, 41%, 20%) 75%,
+      hsl(218, 41%, 19%) 80%,
+      transparent 100%);
+      background-image: url(../imgs/fun.jpg);
+      background-blend-mode: lighten;
+      background-position: center;
+      background-size: cover;
+}
+
+.background-login{
+  background-image: url(../imgs/main.jpg);
+  background-blend-mode: normal;
+}
+
+.bg-glass {
+  background-color: hsla(0, 0%, 100%, 0.9) ;
+  backdrop-filter: saturate(200%) blur(25px);
+}
+
+li {
+  list-style-type: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}

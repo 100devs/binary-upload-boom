@@ -44,6 +44,24 @@
         </li>
       <% } %>
     </ul>
+    <div class="mt-5">
+      <h2>Add a Inventory item</h2>
+      <!-- inventoryItem is a server req, response is InventoryRoutes. Routes calls the controller, which provides the creteInventoryItem function -->
+      <form action="/inventoryItem/createInventoryItem/<%=post._id%>"  method="POST">
+        <div class="mb-3">
+            <input type="number" class="form-control" id="amount" name="amount">
+            <input type="text" class="form-control" id="tool" name="tool">
+        </div>
+        <button type="submit" class="btn btn-primary" >Submit</button>
+      </form>
+    </div>
+    <ul> 
+      <% for(var i=0; i<inventory.length; i++) {%>
+        <li class="col-6 justify-content-between mt-5">
+          <!-- for loop. Grabs the amount object in model & tool object in schema.-->
+          <%= inventory[i].amount + " " + inventory[i].tool%>
+        </li>
+      <% } %>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

@@ -3,6 +3,7 @@
   <div class="row mt-5">
       <div class="col-6">
           <div>
+              <h2>Your Profile</h2>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
@@ -27,6 +28,10 @@
           </div>
       </div>
       <div class="col-6">
+        <h2>Your Posts</h2>
+        <% if(posts.length===0) { %>
+          <p><em>You haven't posted anything yet. What are you waiting for!?</em></p>
+        <% } %>
         <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">

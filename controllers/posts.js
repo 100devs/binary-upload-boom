@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -21,11 +22,28 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+<<<<<<< HEAD
+      const comments = await Comment.find({post: req.params.id}).sort({
+        createdAt: "desc" }).lean();
+=======
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+>>>>>>> 4129bedfe93ac30e728fa18acb1dfb96632d4d30
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
     }
   },
+<<<<<<< HEAD
+  // getComment: async (req, res) => {  //what is this doing?  Nothing useful, I think lol
+  //   try {
+  //     const post = await Post.findById(req.params.id);
+  //     res.render("post.ejs", { post: post, user: req.user, comments: [] }); //is this bad? i added comments: comments
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // },
+=======
+>>>>>>> 4129bedfe93ac30e728fa18acb1dfb96632d4d30
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary

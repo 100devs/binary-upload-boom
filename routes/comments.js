@@ -3,8 +3,8 @@ const router = express.Router();
 const commentsController = require("../controllers/comments");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
-//comments Routes - simplified for now
-
+//Comment Routes - simplified for now
 router.post("/createComment/:id", commentsController.createComment);
+
 
 module.exports = router;

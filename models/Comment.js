@@ -1,29 +1,18 @@
 const mongoose = require("mongoose");
 
-const PostSchema = new mongoose.Schema({
-  title: {
+const CommentSchema = new mongoose.Schema({
+  Comment: {
     type: String,
     required: true,
   },
-  image: {
-    type: String,
-    require: true,
-  },
-  cloudinaryId: {
-    type: String,
-    require: true,
-  },
-  caption: {
-    type: String,
-    required: true,
-  },
+  
   likes: {
     type: Number,
     required: true,
   },
-  user: {
+  post: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "Post",
   },
   createdAt: {
     type: Date,
@@ -32,4 +21,4 @@ const PostSchema = new mongoose.Schema({
 });
 
 //model builds our blueprint and call the model then its made
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Comment", CommentSchema);

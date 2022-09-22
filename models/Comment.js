@@ -23,7 +23,8 @@ post:{
   },
   createdAt: {
     type: Date,
-    default: Date.now,
+    immutable: true,
+    default: ()=> Date.now(),
   },
 });
 

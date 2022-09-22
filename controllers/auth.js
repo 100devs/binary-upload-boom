@@ -116,3 +116,17 @@ exports.postSignup = (req, res, next) => {
     }
   );
 };
+
+// Using a virtual 
+//(declared in the user model)
+
+async function run(req, res) {
+  try {
+    const user = await User.findOne({ userName: "ronaldo" })
+    //"domain" is a property you declared in your virtual. it doesn't exist in the database
+    console.log(user.domain);
+  } catch (err) {
+    console.log(err);
+  }
+};
+run();

@@ -26,7 +26,6 @@ module.exports = {
       const post = await Post.findById(req.params.id);
       const comments = await Comment.find({ post: req.params.id }).sort({ createdAt: "asc" }).lean();
       res.render("post.ejs", { post: post, user: req.user, comments: comments });
-     console.log(req.user.userName)
     } catch (err) {
       console.log(err);
     }
@@ -51,15 +50,35 @@ module.exports = {
   },
   likePost: async (req, res) => {
     try {
-      await Post.findOneAndUpdate(
+      let post = await Post.find({
+        _id: req.params.id,
+      });
+      let check;
+      post.forEach((post) => {
+        check = post.likes.includes(req.params.username);
+      });
+      if (!check) {
+        await Post.findOneAndUpdate(
 
-        { _id: req.params.id },
-        {
-          $push: {likes: req.params.username} ,
-        }
-      );
-      console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
+          { _id: req.params.id },
+          //likes are saved as usernames in an array
+          {
+            $push: { likes: req.params.username },
+          }
+        );
+        console.log("Likes +1");
+        res.redirect(`/post/${req.params.id}`);
+      }else {
+        await Post.findOneAndUpdate(
+
+          { _id: req.params.id },
+          {
+            $pull: { likes: req.params.username },
+          }
+        );
+        console.log("Un-liked");
+        res.redirect(`/post/${req.params.id}`);
+      }
     } catch (err) {
       console.log(err);
     }

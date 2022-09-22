@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
-  email: { type: String, unique: true },
+  email: { type: String, unique: true, lowercase: true },
   password: String,
 });
 
@@ -39,4 +39,9 @@ UserSchema.methods.comparePassword = function comparePassword(
   });
 };
 
+UserSchema.virtual('domain').get(function() {
+  return this.email.slice(this.email.indexOf('@') + 1);
+});
+
 module.exports = mongoose.model("User", UserSchema);
+

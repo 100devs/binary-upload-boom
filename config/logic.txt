@@ -1,0 +1,32 @@
+ first you need to check the array and see if the array includes the Id of your user. 
+ You achieve this with a loop. Save this in a variable. 
+ Then you can use a truty statement - If(variable) - then push if not variable then pull
+if (!check) {
+        await Post.findOneAndUpdate(
+          {
+            _id: req.body.postHeartBreakIncreaseDecreaseID,
+          },
+          {
+            $push: {
+              heartBreak: req.user.loginID,
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+then use else
+and instead of $push use $pull
+
+you can use req.user._is
+_id
+loginID is my own variable name
+This is how you check the array
+let post = await Post.find({
+        _id: req.params.id,
+      });
+      let check;
+      post.forEach((post) => {
+        check = post.likes.includes(req.params.username);
+      });

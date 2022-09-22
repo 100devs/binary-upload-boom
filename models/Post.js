@@ -14,7 +14,7 @@ const PostSchema = new mongoose.Schema({
     required: true,
   },
   cloudinaryId: {
-    type: String,
+    type: String, 
     required: true,
   },
   caption: {
@@ -28,7 +28,7 @@ const PostSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now,
+    default: ()=> Date.now(),
   },
 });
 

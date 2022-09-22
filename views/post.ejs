@@ -19,10 +19,11 @@
   <%}else if(post.likes.length === 2 ){ %>
     <h3 class="col-3"> <%= post.likes[0] %> and <%= post.likes[1] %> like this</h3> 
     <%}else if(post.likes.length === 3 ){ %>
-      <h3 class="col-3"> <%= post.likes[0] %>, <%= post.likes[1] %> and <%= post.likes[1] %> like this</h3>
+      <h3 class="col-3"> <%= post.likes[0] %>, <%= post.likes[1] %> and <%= post.likes[2] %> like this</h3>
       <%}else if(post.likes.length > 3 ){ %>
-        <h3 class="col-3"> <%= post.likes[0] %>, <%= post.likes[1] %> and <%=post.likes.length - 2 %> others like this</h3>
-  
+        <h3 class="col-6"> <%= post.likes[0] %>, <%= post.likes[1] %> and <%=post.likes.length - 2 %> others like this</h3>
+        <%}%>
+        <%if(post.user == user.id){ %>
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
           method="POST"
@@ -75,3 +76,4 @@
 </div>
 
 <%- include('partials/footer') -%>
+ 

@@ -21,7 +21,20 @@
         >
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
+        <form action="/comments/createComment/<%= post.id %>" method="POST">
+          <textarea name="comment">
+
+          </textarea>
+          <button type="submit"></button>
+        </form>
         <%}%>
+        <section>
+          <ul>
+            <% for(var i = 0; i < comments.length; i++) { %>
+              <li><%= comments[i].comment %></li>
+            <% } %>
+          </ul>
+        </section>
       </div>
     </div>
     <div class="col-3 mt-5">

@@ -13,4 +13,6 @@ router.put("/pinPost/:id", postsController.pinPost);
 
 router.delete("/deletePost/:id", postsController.deletePost);
 
+router.put("/createTable/:id", postsController.createTable);
+
 module.exports = router;

@@ -27,6 +27,23 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <form action="/comments/createComment/<%= post.id %>" method="POST">
+      <div class="form-group">
+        <label for="commentInput">Add Comment</label>
+        <textarea name="comment" class="form-control" id="exampleFormControlTextarea3" rows="4"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Comment</button>
+    </form>
+    <div class="comments">
+      <ul>
+        <% for(comment of comments) { %>
+          <li>
+            <span><%= comment.comment %></span>
+            <span>by: <%= user.userName %></span>
+          </li>
+        <% } %>
+      </ul>
+    </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

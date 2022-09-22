@@ -1,7 +1,7 @@
-<%- include('partials/header') -%>
+<%- include('partials/header', {user: user}) -%>
 
-<main class="container">
-
+<main class="container under-nav">
+  <%= user || "no user" %>
 </main>
 
 <%- include('partials/footer') -%>

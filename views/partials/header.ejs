@@ -59,15 +59,24 @@
               <li class="nav-item">
                 <a class="nav-link" href="/profile">Profile</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
-              </li>
-              <li>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#loginModal">
-                  Login
-                </button>
-              </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+              <% if (user) { %>
+                <li class="nav-item">
+                  <a class="btn btn-primary" href="/logout">Logout</a>
+                </li>
+              <%} else { %>
+                <li>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#loginModal">
+                    Login
+                  </button>
+                </li>
+              <% } %>
+            </ul>
+              
+              
+              
             </ul>
           </div>
         </div>

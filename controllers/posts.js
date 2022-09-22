@@ -29,10 +29,10 @@ module.exports = {
       console.log(err);
     }
   },
-  // getComment: async (req, res) => {  //what is this doing?  Nothing useful, I think lol
+  // getComment: async (req, res) => {  //
   //   try {
   //     const post = await Post.findById(req.params.id);
-  //     res.render("post.ejs", { post: post, user: req.user, comments: [] }); //is this bad? i added comments: comments
+  //     res.render("post.ejs", { post: post, user: req.user, comments: [] });
   //   } catch (err) {
   //     console.log(err);
   //   }

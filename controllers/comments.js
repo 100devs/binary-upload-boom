@@ -9,7 +9,7 @@ module.exports = {
         comment: req.body.comment,
         likes: 0,
         post: req.params.id,
-        createdBy: commentUser.userName,
+        createdBy: commentUser.userName, //could replace with req.user.userName
         createdById: req.user.id
       });
       console.log("Comment has been added!");

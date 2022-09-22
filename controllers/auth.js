@@ -36,6 +36,7 @@ exports.postLogin = (req, res, next) => {
       if (err) {
         return next(err);
       }
+      console.log(`Logged in as ${user}`);
       req.flash("success", { msg: "Success! You are logged in." });
       res.redirect(req.session.returnTo || "/profile");
     });

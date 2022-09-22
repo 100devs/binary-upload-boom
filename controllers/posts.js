@@ -1,5 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
+
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -20,8 +22,13 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      //'Post' is ..models/Post defined at top
+      const post = await Post.findById(req.params.id); //go to specific collection to find id
+      //looking in req, look in variable, find id variable, need id to find something from db
+      const comments = await Comment.find({post: req.params.id }).sort({ createdAt: "desc" }).lean(); //sort comments by descending
+
+      res.render("post.ejs", { post: post, user: req.user, comments: comments }); //render view, taking data and pass certain elements sending with view
+      //controller sending posts for us to see in ejs
     } catch (err) {
       console.log(err);
     }
@@ -40,7 +47,7 @@ module.exports = {
         user: req.user.id,
       });
       console.log("Post has been added!");
-      res.redirect("/profile");
+      res.redirect("/profile"); //follow route go back to server js to start
     } catch (err) {
       console.log(err);
     }

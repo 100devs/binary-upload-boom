@@ -59,7 +59,7 @@ app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 
 // Routes for comments
-app.use("/comments", commentsRoutes)
+app.use("/comments", commentsRoutes);
 
 
 //Server Running

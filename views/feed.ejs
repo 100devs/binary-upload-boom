@@ -1,9 +1,12 @@
 <%- include('partials/header') -%>
-  <div class="container">
-    <div class="row justify-content-center mt-5">
+  
+<div class="container">
+  <div class="row mt-5">
+    <div class="col">
       <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
+          <li class="col-12 mt-5">
+            <p><strong>Posted By</strong>: <%= posts[i].userName%></p>
             <a href="/post/<%= posts[i]._id%>">
               <img class="img-fluid" src="<%= posts[i].image%>">
             </a>
@@ -11,5 +14,12 @@
         <% } %>
         </ul>
     </div>
-  </div>  
+    <div class="col col-md-2 justify-content-end align-items-end">
+        <a href="/profile" class="text-decoration-none fw-bold text-dark"><p> <%= user.userName %></p></a>
+        <a href="/logout" class="col-7 btn btn-secondary">Logout</a>
+    </div>
+  </div>
+</div>
+
+
 <%- include('partials/footer') -%>

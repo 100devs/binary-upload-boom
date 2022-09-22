@@ -28,7 +28,10 @@
       <p><%= post.caption %></p>
     </div>
     <div class="mt-5">
+      // copied post from profile.ejs right above comments
       <h2>Add a comment</h2>
+      // add %=post._id%> to find post id get from profile.ejs
+      // change posts to post below - take out i bcz there's no loop
       <form action="/comment/createComment/<%=post._id%>" method="POST">
         <div class="mb-3">
             <label for="comment" class="form-label">Comment</label>
@@ -37,9 +40,11 @@
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
+    // loop through comments from the database get it from feed.ejs edit comments 
     <ul>
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
+          // edit this
           <%= comments[i].comment%>
         </li>
       <% } %>

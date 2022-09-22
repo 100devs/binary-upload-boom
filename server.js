@@ -10,6 +10,7 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
+// require commentRoutes
 const commentRoutes = require("./routes/comments");
 
 
@@ -58,6 +59,7 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
+// add commentRoutes then new route file
 app.use("/comment", commentRoutes);
 
 //Server Running

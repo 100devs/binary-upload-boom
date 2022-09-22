@@ -2,15 +2,15 @@
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
-      <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
+      <h2 class="mb-5"><%=post.title %></h2>
+      <img class="img-fluid" src="<%= post.image%>"/>
+      <div class="row justify-content-between mt-3">
         <form
           class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          <button class="btn btn-danger fa fa-heart" type="submit"></button>
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
         <%if(post.user == user.id){ %>
@@ -24,9 +24,50 @@
         <%}%>
       </div>
     </div>
-    <div class="col-3 mt-5">
+
+    <div class=" fs-5 mt-5 shadow-sm p-3 mb-5 bg-body rounded">
       <p><%= post.caption %></p>
     </div>
+
+   
+
+    <!-- comments -->
+    <div class="mt-5">
+      <h2>Add a Comment</h2>
+      <form action="/comments/createComment/<%=post.id%>" method="POST">
+        <div class="mb-3">
+          <label for="comment" class="form-label"></label>
+          <input type="text" class="form-control" id="comment" name="comment" />
+        </div> 
+        <button type="submit" class="btn btn-primary " >
+          Submit
+        </button>
+      </form>
+
+    
+        <!-- comments -->
+      <ul class="list-group list-unstyled list-group-flush mt-3 shadow p-3 mt-5 bg-body rounded">
+        <% for(var i=0; i<comments.length; i++) {%>
+          <li class="col-6 justify-content-between mt-3 list-group-item">
+            <%=comments[i].comment%>
+            <%=comments[i].date%>
+
+            <!-- likes -->
+          <form
+            class="col-1"
+            action="/comments/likeComment/<%= comments[i]._id %>?_method=PUT" 
+            method="POST">
+            <button class="btn btn-danger fa fa-heart  ms-4 " type="submit"></button>
+          </form>
+            <h3 class="fs-6 d-inline-block ms-4">Likes: <%=comments[i].likes %></h3>
+          </li>
+        <% } %>
+        </ul>
+
+       
+
+   </div>
+     
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

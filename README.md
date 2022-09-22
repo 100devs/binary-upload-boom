@@ -36,6 +36,9 @@ Building on the OG codebase as follows.
 - Make it possible to sort posts in feed by recency, popularity (number of likes), personal favorites (liked by viewer), etc.
 - Make it possible for commenter to delete their own comments.
 - Make it visually acceptable (and consider deviating wildly from Instagram design).
+- Make it possible to have various tiers of access based on user grouping ("friends", even!). 
+    - Option 1: If U1 and U2 are friends, and U2 and U3 are friends, U2 can see U1 and U3 posts, and U2's posts can be seen by both U1 and U3. But U1 and U3 cannot see each other's posts. 
+    - Option 2: Alternately/on a smaller scale, everyone sees everyone's posts, but U1 cannot comment on U3's posts nor can U3 comment on U1's posts. They can still like each other's visible posts, though.
 
 **Stretch goals**
 - Try a very different visual approach. Need to decide on mobile and desktop experience.

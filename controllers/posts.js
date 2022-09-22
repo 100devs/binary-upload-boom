@@ -5,7 +5,7 @@ const Comment = require("../models/Comment");
 module.exports = {
 	getProfile: async (req, res) => {
 		try {
-			const posts = await Post.find({ user: req.user.id });
+			const posts = await Post.find({ userId: req.user.id });
 			res.render("profile.ejs", { posts: posts, user: req.user });
 		} catch (err) {
 			console.log(err);
@@ -41,7 +41,8 @@ module.exports = {
 				cloudinaryId: result.public_id,
 				caption: req.body.caption,
 				likes: 0,
-				user: req.user.id,
+				userId: req.user.id,
+				userName: req.user.userName,
 			});
 			console.log("Post has been added!");
 			res.redirect("/profile");

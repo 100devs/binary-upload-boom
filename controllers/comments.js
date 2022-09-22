@@ -25,5 +25,4 @@ module.exports = {
 			res.redirect(req.get("referer"));
 		}
 	},
-	likeComment: async (req, res) => {},
 };

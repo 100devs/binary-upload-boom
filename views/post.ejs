@@ -1,18 +1,25 @@
 <%- include('partials/header') -%>
-<div class="container">
+<%- include('partials/nav') -%>
+<%- include('partials/logo') -%>
+<div class="container justify-content-center">
   <div class="row justify-content-center mt-5">
-    <div class="col-6">
+    <div class=" text-center col">
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
-        <form
-          class="col-1"
+      <div class="col fst-italic mt-2">
+        <p><%= post.caption %></p>
+      </div>
+      <div class="row row-cols-2 justify-content-between">
+        <div class="row row-cols-2 col">
+          <form
+          class="col-4 pe-0"
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
+        <h3 class="text-right col-8 ps-0">Likes: <%= post.likes %></h3>
+        </div>
         <%if(post.user == user.id){ %>
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
@@ -24,37 +31,48 @@
         <%}%>
       </div>
     </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
-    </div>
     <div class="mt-5">
       <h2>Comment</h2>
       <form action="/comment/createComment/<%=post._id%>" method="POST">
         <div class="mb-3">
             <input type="text" class="form-control" id="comment" name="comment">
         </div>
-       
         <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
       </form>
     </div>
-    <div>
+    <!-- comments field -->
+    <div class="container-fluid mt-5">
       <% if(comment.length == 0) { %>
         <ul>
           <li>Be the first to comment</li>
         </ul>
         <% } else { %>
-      <u%l class="row list-unstyled">
+      <ul class="row list-unstyled">
         <% for(let i=0; i < comment.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <%= comment[i].comment %> 
+         <% if (post.id == comment[i].postId) { %>
+          <li class="col-10 mt-2">
+            <strong><%=comment[i].createdBy%></strong>: <span class="fst-italic text-black-50 fw-light"><%= comment[i].comment %></span> 
           </li>
+          <!-- delete comment form -->
+          <div class="col-2">
+            <%if(post.user == user.id || comment[i].createdById == user.id){ %>
+            <form
+            action="/comment/deleteComment/<%= comment[i]._id %>?_method=DELETE"
+            method="POST"
+            class="col-3">
+            <button class="btn btn-primary fa fa-trash" type="submit"></button>
+          </form>
+          <%}%>
+          </div>
         <% } %>
+         <% } %>
         </ul>
-        <% } %>
+        <% } %> 
     </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
+
+    <div class="row row-cols-2 justify-content-center gap-2 m-5">
+      <a class="col-5 btn btn-primary" href="/profile">Return to Profile</a>
+      <a class="col-5 btn btn-primary" href="/feed">Return to Feed</a>
     </div>
   </div>
 </div>

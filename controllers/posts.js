@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -10,7 +11,7 @@ module.exports = {
       console.log(err);
     }
   },
-  getFeed: async (req, res) => {
+  getFeed: async (req, res ) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
       res.render("feed.ejs", { posts: posts });
@@ -20,8 +21,10 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
+      //Post is equal to the post model
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "asc" }).lean();
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
     }
@@ -30,7 +33,7 @@ module.exports = {
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
-
+      if (result.secure_url.toLowerCase().endsWith('heic')) result.secure_url = result.secure_url.replace(/heic$/i,'jpg')
       await Post.create({
         title: req.body.title,
         image: result.secure_url,

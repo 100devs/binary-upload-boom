@@ -5,8 +5,10 @@ const postsController = require("../controllers/posts");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Post Routes - simplified for now
-router.get("/:id", ensureAuth, postsController.getPost);
 
+//helps us retrieve content by their specific ids
+router.get("/:id", ensureAuth, postsController.getPost);
+//multr middleware helps us with uploading images
 router.post("/createPost", upload.single("file"), postsController.createPost);
 
 router.put("/likePost/:id", postsController.likePost);

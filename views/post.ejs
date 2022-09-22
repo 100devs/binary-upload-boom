@@ -5,7 +5,10 @@
       <!-- Post display -->
       <div class="col-6">
         <h2><%= post.title %></h2>
-        <img class="img-fluid" src="<%= post.image%>" />
+        <div class="post-img mx-auto d-block">
+          <img class="img-fluid h-100 mx-auto d-block" src="<%= post.image%>" />
+        </div>
+        
         <div class="row justify-content-between">
           <form
             class="col-1"
@@ -16,9 +19,9 @@
           </form>
           <h3 class="col-3">Likes: <%= post.likes %></h3>
           <%if(post.user == user.id){ %>
-            <form class="col-3">
+            <form class="col-1">
               <button 
-                type="button" class="btn btn-primary fa fa-trash" data-bs-id='<%= post.id %>' data-bs-what="post" data-bs-toggle="modal" data-bs-target="#popupConfirmDelete">
+                type="button" class="btn btn-primary fa fa-trash float-end" data-bs-id='<%= post.id %>' data-bs-what="post" data-mdb-toggle="modal" data-mdb-target="#popupConfirmDelete">
               </button>
             </form>
           <%}%>
@@ -55,7 +58,7 @@
               </form>
               <%if(post.user == user.id){ %>
                   <button 
-                    type="button" class="btn btn-primary fa fa-trash col-1 ms-2" data-bs-id='<%= comments[i]._id %>' data-bs-what="comment" data-bs-toggle="modal" data-bs-target="#popupConfirmDelete">
+                    type="button" class="btn btn-primary fa fa-trash col-1 ms-2" data-bs-id='<%= comments[i]._id %>' data-bs-what="comment" data-mdb-toggle="modal" data-mdb-target="#popupConfirmDelete">
                   </button>
                 </form>
               <%}%>
@@ -67,18 +70,18 @@
       </ul>
 
       <!-- Confirm Delete Modal -->
-      <div class="modal fade" id="popupConfirmDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="popupConfirmDeleteLabel" aria-hidden="true">
+      <div class="modal fade" id="popupConfirmDelete" data-mdb-backdrop="static" data-mdb-keyboard="false" tabindex="-1" aria-labelledby="popupConfirmDeleteLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="popupConfirmDeleteLabel">Confirm Delete</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <p>Are you sure you wish to delete this <span id="item-to-delete"></span>?</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Cancel</button>
               <button type="button" class="popup-delete-item btn btn-primary">Delete</button>
             </div>
           </div>
@@ -86,10 +89,10 @@
       </div>
       <!-- /Modal -->
 
-      <div class="col-6 mt-5">
+      <!-- <div class="col-6 mt-5">
         <a class="btn btn-primary" href="/profile">Return to Profile</a>
         <a class="btn btn-primary" href="/feed">Return to Feed</a>
-      </div>
+      </div> -->
     </div>
   </div>
 </main>

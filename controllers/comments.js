@@ -9,9 +9,19 @@ module.exports = {
         post: req.params.id,
       });
       console.log("Comment has been added!");
-      res.redirect("/post/"+req.params.id);
+      res.redirect(`/feed/`);
     } catch (err) {
       console.log(err);
     }
   },
-};
+  deleteComment: async (req, res) => {
+      try {
+        await Comment.findOne(
+          { _id: req.this.id });
+        console.log(req.this.id)
+        res.redirect(`/feed/`);
+    } catch(err) {
+      console.log(err);
+    }
+  }
+}

@@ -37,13 +37,22 @@
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
-    <ul>
+    <%if(post.user == user.id){ %>
+  <form
+    action="/comment/deleteComment/<%= comments.id %>?_method=DELETE"
+    method="POST"
+    class="mb-3"
+  >
+       <ul>
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
-          <%= comments[i].comment%>
+          <%= comments[i].comment%><button class="btn btn-primary fa fa-trash" type="submit"></button>
         </li>
       <% } %>
     </ul>
+    
+  </form>
+  <%}%>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

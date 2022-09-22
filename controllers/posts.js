@@ -22,7 +22,7 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      const comments = await Comment.find({ postId: req.params.id }).populate("user");
+      const comments = await Comment.find({ postId: req.params.id });
       res.render("post.ejs", { post, user: req.user, comments });
     } catch (err) {
       console.log(err);

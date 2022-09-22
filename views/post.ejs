@@ -23,6 +23,29 @@
         </form>
         <%}%>
       </div>
+
+      <section id="comment-section">
+        <form
+          action="/comment/createComment/<%=post._id%>"
+          method="POST"
+          class="comment-form"
+        >
+          <div class="commentInput">
+            <label for="comment">Leave a comment here</label>
+            <input type="text" name="comment" placeholder="Comment" />
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </div>
+        </form>
+        <% if(comments.length != 0) { %>
+        <ul class="comment-ul">
+          <% comments.forEach(comment => { %>
+          <div>
+            <li><i><%= user.userName %>: </i> <%= comment.comment %></li>
+          </div>
+          <% }) %>
+        </ul>
+        <% } %>
+      </section>
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>

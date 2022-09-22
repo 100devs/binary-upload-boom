@@ -1,0 +1,53 @@
+#comment-section {
+    width: 100%;
+}
+
+.comment-form {
+    width: 100%;
+}
+
+.commentInput {
+    margin: 1.5rem 0;
+}
+
+#comment-section label, #comment-section input{
+    width: 100%;
+}
+
+#comment-section label {
+    margin-bottom: .5rem;
+}
+
+.btn {
+    margin-top: .5rem;
+}
+
+.comment-ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+}
+
+.comment-ul div, .commentInput {
+    background-color: #8d8c8c4c;
+    border-radius: .4rem;
+    margin-bottom: 1rem;
+    padding: 1rem 1rem;
+    width: 100%;
+}
+
+.comment-form {
+    display: flex;
+    justify-content: right;
+    width: 100%;
+}
+
+.btn {
+    display: inline-block;
+}
+
+.comment-ul li { 
+    width: 100%;
+    list-style: none;
+}

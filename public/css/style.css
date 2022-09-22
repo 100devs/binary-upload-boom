@@ -519,6 +519,7 @@ body {
     height: 8rem;
     margin-right: 1rem;
     border: 1px solid #E1A750;
+    font-size: 2rem;
 }
 
 .item-modal {
@@ -556,7 +557,7 @@ body {
 .add-league {
     width: 15%;
     min-width: 12rem;
-    border: 1px dashed #E1A750;
+    border: 2px dashed #E1A750;
 
 }
 
@@ -570,6 +571,7 @@ body {
 
 .add-league i {
     color: #E1A750;
+    font-size: 2.5rem;
 }
 
 .other-section {
@@ -764,7 +766,7 @@ body {
     color: white;
     font-family: 'Jaldi', sans-serif;
     margin-top: 20vh;
-    border: 1px dashed #E1A750;
+    border: 2px dashed #E1A750;
     height: 50vh;
 }
 
@@ -1033,6 +1035,7 @@ body {
     border: 1px dashed #E1A750;
     width: 100%;
     margin-top: 2rem;
+    color: white;
 }
 
 
@@ -1094,3 +1097,59 @@ table td {
     text-align: center;
     }
 */
+
+
+@import "compass/css3";
+
+.table {
+    background: white !important;
+}
+
+.th {
+    color: white;
+}
+
+.table-editable {
+    position: relative;
+}
+
+.table-editable .glyphicon {
+    font-size: 20px;
+}
+
+/* .table-add {
+    color: green !important;
+} */
+
+.table-remove {
+    color: #700;
+    cursor: pointer;
+}
+
+.table-remove:hover {
+    color: #f00;
+}
+
+
+.table-up,
+.table-down {
+    color: #007;
+    cursor: pointer;
+}
+
+.table-up :hover,
+.table-down :hover {
+    color: #00f;
+}
+
+
+.table-add {
+    color: #070;
+    cursor: pointer;
+    top: 8px;
+    right: 0;
+}
+
+.table-add:hover {
+    color: #0b0;
+}

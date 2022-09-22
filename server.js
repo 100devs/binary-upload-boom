@@ -13,6 +13,7 @@ const postRoutes = require("./routes/posts");
 const profileRoutes = require('./routes/profile');
 const feedRoutes = require('./routes/feed');
 const { application } = require("express");
+const jsdom = require('jsdom');
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });

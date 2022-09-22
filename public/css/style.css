@@ -7,7 +7,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #E0E0E0;
+  background-color: #e0e0e0;
 }
 
 html,
@@ -26,7 +26,6 @@ body,
 .profile-pic-container {
   width: 200px;
   height: 200px;
- 
 }
 
 .profile-pic-image {
@@ -37,7 +36,7 @@ body,
   border-radius: 10px;
 }
 
-.btn {
+.profile-container .btn {
   min-width: 200px;
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -51,8 +50,8 @@ body,
   justify-content: center;
   border-radius: 10px;
 }
-.fw-bold{
-  color: #E5C15B;;
+.fw-bold {
+  color: var(--bub-color);
   font-family: 'PP Pangram Sans Rounded', Arial, Helvetica, sans-serif;
 }
 .post-card {
@@ -63,7 +62,7 @@ body,
 }
 
 .card-img-container {
-  background-color: #726F6A;
+  background-color: #726f6a;
 }
 
 .post-card img {
@@ -104,21 +103,20 @@ body,
 
 .navbar li {
   margin-left: 20px;
-  font-family: 'PP Pangram Sans Rounded','Roboto', 'Inter', Arial, Helvetica, sans-serif;
+  font-family: 'PP Pangram Sans Rounded', 'Roboto', 'Inter', Arial, Helvetica,
+    sans-serif;
 }
-.mb-0{
+.mb-0 {
   font-family: 'PP Pangram Sans Rounded', 'Roboto', Arial, Helvetica, sans-serif;
-  
 }
 .text-bub {
-  color: #E5C15B;
+  color: var(--bub-color);
   font-family: 'PP Pangram Sans Rounded', 'Roboto', Arial, Helvetica, sans-serif;
   font-size: 1.3em;
 }
 
 .navbar img {
   width: 50px;
- 
 }
 
 .card {
@@ -130,14 +128,22 @@ body,
   color: var(--white);
   text-align: center;
   padding: 0.5rem 0;
-  font-family: 'PP Pangram Sans Rounded','Futura', 'Roboto', sans-serif;
-  
+  font-family: 'PP Pangram Sans Rounded', 'Futura', 'Roboto', sans-serif;
 }
 
 .likes-card {
   max-width: 600px;
-
 }
+
+.post-img {
+  object-fit: contain;
+  aspect-ratio: 1;
+}
+
+.icon-container a {
+  text-decoration: none;
+}
+
 /*Media Query*/
 @media (max-width: 768px) {
   .navbar-container {

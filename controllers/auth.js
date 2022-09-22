@@ -55,7 +55,6 @@ exports.logout = (req, res) => {
     res.redirect("/");
   });
 };
-
 exports.getSignup = (req, res) => {
   if (req.user) {
     return res.redirect("/profile");

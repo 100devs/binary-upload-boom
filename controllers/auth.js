@@ -43,7 +43,6 @@ exports.postLogin = (req, res, next) => {
     });
   })(req, res, next);
 };
-
 exports.logout = (req, res,next) => {
   req.logout((error) => {
     if(error){

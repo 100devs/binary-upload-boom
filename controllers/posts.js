@@ -22,7 +22,7 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      const comments = await Comment.find({ post: req.params.id }).sort({createdAt: "desc"}).lean();
+      const comments = await Comment.find({ post: req.params.id }).sort({createdAt: "asc"}).lean();
       res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
@@ -41,7 +41,7 @@ module.exports = {
         likes: 0,
         user: req.user.id,
       });
-      console.log("Post has been added!");
+      console.log(`Comment has been added by ${req.user.userName}!`);
       res.redirect("/profile");
     } catch (err) {
       console.log(err);

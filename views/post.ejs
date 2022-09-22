@@ -1,6 +1,6 @@
 <%- include('partials/header') -%>
 <div class="container">
-  <div class="row justify-content-center mt-5">
+  <div class="d-flex row justify-content-center mt-5">
     <div class="col-6">
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
@@ -27,16 +27,28 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
-    <form action="/comment/createComment/<%= post.id %>" method="POST">
-      <label for="comment">Enter a comment:</label>
-      <textarea name="comment" id="comment"></textarea>
-      <button type="submit">Submit</button>
-    </form>
-    <ul>
-      <% for (let i = 0; i < comments.length; i++) { %>
-        <li><%= comments[i].comment %></li>
-      <%} %>
-    </ul>
+    <div class="d-flex flex-column align-items-center"><h3>Comments!</h3>
+      <form action="/comment/createComment/<%= post.id %>" method="POST">
+        <label for="comment">Enter a comment:</label>
+        <textarea name="comment" id="comment"></textarea>
+        <button type="submit">Submit</button>
+      </form>
+      <ul>
+        <% for (let i = 0; i < comments.length; i++) { %>
+        <li class="col-6 card mt-1 w-75"><strong><%= comments[i].createdBy %></strong><p class="card"><%= comments[i].comment %></p>
+          <% if(comments[i].createdById == user.id){ %>
+          <form
+            action="/comment/deleteComment/<%=post.id%>/<%= comments[i]._id %>?_method=DELETE"
+            method="POST"
+          >
+            <button class="btn btn-outline-danger fa fa-trash" type="submit"></button>
+          </form>
+          <%}%>
+          <em>Date: <%= comments[i].createdAt.toLocaleString() %></em>
+          </li>
+        <% } %>
+      </ul>
+    </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

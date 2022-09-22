@@ -8,6 +8,6 @@ router.post("/createComment/:id", commentsController.createComment);
 
 // router.put("/likePost/:id", postsController.likePost);
 
-// router.delete("/deletePost/:id", commentsController.deleteComment);
+router.delete("/deleteComment/:postid/:commentid", commentsController.deleteComment);
 
 module.exports = router;

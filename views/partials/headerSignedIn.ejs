@@ -23,9 +23,29 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-  <header class="container">
-    <div class="text-center">
-      <img src="/imgs/onlyMeowsLogo.png" id="headerLogo" alt="Only Meows: Show Me Your Kitties" />
+  <!-- Navbar -->
+  <header class="navbar navbar-expand-md py-0 ">
+    <div class="container-fluid">
+      <a href="#" class="navbar-brand"><img src="/imgs/onlyMeowsLogo.png" alt="Only Meows: Show Me Your Kitties"
+          width="150"></a>
+
+      <button class="navbar-toggler navbar-light" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"
+        aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navmenu">
+        <div class="container d-flex align-items-center">
+          <p class="lead">Welcome <%= user.userName %>
+          </p>
+        </div>
+
+        <form class="container-fluid justify-content-end d-flex">
+          <a href="/feed" class="btn btn-primary mx-2">My Feed</a>
+          <a href="/profile" class="btn btn-primary mx-2" type="button">Add a Kitty</a>
+          <a href="/logout" class="btn btn-primary mx-2" type="button">Logout</a>
+        </form>
+      </div>
     </div>
   </header>
 </body>

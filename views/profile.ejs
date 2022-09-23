@@ -1,6 +1,6 @@
 <%- include('partials/navbarHeader') -%>
 
-<div class="container">
+<div class="profile-container container">
   <div class="row mt-3">
     <div class="col-12 col-md-8">
       <div class="card h-100 text-center">
@@ -87,6 +87,13 @@
     <div class="col-12 col-md-6">
       <div class="card">
         <h4 class="profile-title">Add A Post</h4>
+        <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => {
+        %>
+        <div class="alert alert-danger mx-2"><%= el.msg %></div>
+        <% }) %> <% } %> <% if (locals.messages.info) { %> <%
+        messages.info.forEach( el => { %>
+        <div class="alert alert-danger mx-2"><%= el.msg %></div>
+        <% }) %> <% } %>
         <form
           class="mx-2"
           action="/post/createPost"
@@ -110,12 +117,14 @@
             <label
               for="caption"
               class="form-label"
+              required
               >Caption</label
             >
             <textarea
               class="form-control"
               id="caption"
               name="caption"
+              required
             ></textarea>
           </div>
           <div class="mb-3">
@@ -129,6 +138,7 @@
               class="form-control"
               id="imageUpload"
               name="file"
+              required
             />
           </div>
           <div class="text-center">

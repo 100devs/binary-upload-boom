@@ -7,6 +7,14 @@
               <p><strong>Email</strong>: <%= user.email %></p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
+          <form action="/post/astro" method='POST'>Enter sign and day:
+            <input type="text" name="sign">
+            <input type="text" name="day">
+            <input type="submit">
+          </form>
+          <%if(locals.zodiac){ %>
+            <p><%= zodiac %></p>
+            <%}%>
           <div class="mt-5">
             <h2>Add a post</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">

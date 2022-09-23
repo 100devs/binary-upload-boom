@@ -1,7 +1,32 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const axios = require("axios");
 
 module.exports = {
+//-------------------------------------------------------------------
+  getAstro: async(req, res) => {
+    let sign = req.body.sign
+    let day = req.body.day
+
+    // ^^ doing this cause I am using a form
+    
+    const options = {
+      method: 'GET',
+      url: `https://astro-daily-live-horoscope.p.rapidapi.com/horoscope/${sign}/${day}`,
+      headers: {
+        'X-RapidAPI-Key': process.env.KEY,
+        'X-RapidAPI-Host': process.env.HOST
+      }
+    };
+    
+    axios.request(options).then(function (astrodice) {
+        console.log(astrodice.data);
+        res.render("profile.ejs", { posts: [], user: req.user, zodiac: astrodice.data[sign] });
+    }).catch(function (err) {
+        console.error(err);
+    })
+},
+//-------------------------------------------------------------------
   getProfile: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.user.id });

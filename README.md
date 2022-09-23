@@ -40,5 +40,5 @@
 :computer: [Github](https://github.com/jonathanmani/)
 
 **:point_right: Chavis Gill**
-:e-mail: [email@email.com](mailto:chavistgill@gmail.com)
+:e-mail: [chavistgill@gmail.com](mailto:chavistgill@gmail.com)
 :computer: [Github](https://github.com/chavgill/)

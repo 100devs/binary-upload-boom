@@ -1,0 +1,15 @@
+body{
+    background-color: #000;
+    color: #FFF;
+}
+li{
+   list-style: none; 
+   color: #ff0000
+}
+div .margin{
+    margin: 10px 0 10px 0;
+}
+.red-text{
+    color:#ff0000
+}
+

@@ -1,51 +1,49 @@
 const Comment = require('../models/Comment')
 
 module.exports = {
-    createComment: async (req, res) => {
+    createComment: async (reqest, response) => {
         try {
             // Upload image to cloudinary
-            const result = await cloudinary.uploader.upload(req.file.path);
+            const result = await cloudinary.uploader.upload(request.file.path);
 
             await Comment.create({
-                title: req.body.title,
-                image: result.secure_url,
-                cloudinaryId: result.public_id,
-                caption: req.body.caption,
+                body: request.body.comment,
                 likes: 0,
-                user: req.user.id,
+                user: request.user.id,
+                post: request.params.id
             });
             console.log("Comment has been added!");
-            res.redirect("/profile");
+            response.redirect("/profile");
         } catch (err) {
             console.log(err);
         }
     },
-    likeComment: async (req, res) => {
+    likeComment: async (request, response) => {
         try {
             await Comment.findOneAndUpdate(
-                { _id: req.params.id },
+                { _id: request.params.id },
                 {
                     $inc: { likes: 1 },
                 }
             );
             console.log("Likes +1");
-            res.redirect(`/Comment/${req.params.id}`);
+            response.redirect(`/Comment/${request.params.id}`);
         } catch (err) {
             console.log(err);
         }
     },
-    deleteComment: async (req, res) => {
+    deleteComment: async (request, response) => {
         try {
             // Find Comment by id
-            let Comment = await Comment.findById({ _id: req.params.id });
+            let Comment = await Comment.findById({ _id: request.params.id });
             // Delete image from cloudinary
             await cloudinary.uploader.destroy(Comment.cloudinaryId);
             // Delete Comment from db
-            await Comment.remove({ _id: req.params.id });
+            await Comment.remove({ _id: request.params.id });
             console.log("Deleted Comment");
-            res.redirect("/profile");
+            response.redirect("/profile");
         } catch (err) {
-            res.redirect("/profile");
+            response.redirect("/profile");
         }
     },
 };

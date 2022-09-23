@@ -1,0 +1,14 @@
+<!-- ! Comments list -->
+<div>
+  <% comments.forEach( c => { %>
+  <div>
+    <span>
+      <!-- ? Username of commenter -->
+      <%= users.filter(u => String(c.user) === String(u["_id"]))[0].userName
+      %></span
+    >
+    <span><%= c.comment %></span>
+    <span><%= calculate.commentDiff(c.createdAt) %></span>
+    <% }) %>
+  </div>
+</div>

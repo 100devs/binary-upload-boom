@@ -27,6 +27,17 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+
+    <%- include('partials/comment') -%>
+
+    <div>
+      <form action="/post/addComment/<%= post.id %>?_method=POST" method="POST">
+        <label for="comment">Add a comment:</label>
+        <textarea name="comment" rows="1" cols="15"></textarea>
+        <button type="submit">Comment</button>
+      </form>
+    </div>
+
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

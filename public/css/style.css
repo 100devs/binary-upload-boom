@@ -1,0 +1,19 @@
+p.post {
+    width: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+.feeds {
+   display: flex;
+  flex-wrap: wrap;
+}
+
+.feeds .post {
+   margin: 0px 1%;
+  width: 30%;
+  height: 30%;
+  min-height: 30px;
+  min-width: 30px;
+  flex: 0 0 30%;
+}

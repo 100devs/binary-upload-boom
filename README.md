@@ -12,6 +12,7 @@
   - CLOUD_NAME = `your cloudinary cloud name`
   - API_KEY = `your cloudinary api key`
   - API_SECRET = `your cloudinary api secret`
+  - SESSION_SECRET = `your session secret code`
 
 ---
 

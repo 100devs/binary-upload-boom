@@ -38,7 +38,7 @@
           <li class="col-6 justify-content-between mt-5">
             <%= comment[i].comment %>
           </li>
-          <%if(post.user == user.id){ %>
+          <%if(comment[i].user == user.id){ %>
             <form
               action="/comment/deleteComment/<%= comment[i]._id %>?_method=DELETE"
               method="POST"

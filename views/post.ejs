@@ -27,6 +27,22 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <form id="commentForm" action="/post/comment/<%= post.id %>" method="POST">
+      <input id="commentInput" name="comment">
+      <button id="postCommentBtn" type="submit" class="btn btn-primary">Post Comment</button>
+    </form>
+    <div class="commentContainer">
+      <h2>Comments: </h2>
+      <ul id="commentList">
+        <% for(var i=0; i < comments.length; i++) {%>
+          <li class="col-6 justify-content-center mt-5 commentItem">
+            <h4><%= comments[i].userName %></h4>
+            <h3><%= comments[i].comment %></h3>
+            
+          </li>
+        <% } %>
+      </ul>
+    </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

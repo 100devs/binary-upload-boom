@@ -8,7 +8,8 @@
             <a href="/post/<%= posts[i]._id%>">
               <img class="img-fluid" src="<%= posts[i].image%>">
             </a>
-            <span>Likes: <%= posts[i].likes %></span>
+            <span class="likes">Likes: <%= posts[i].likes %></span>
+            <span class="caption">Caption: <%= posts[i].caption %></span>
           </li>
         <% } %>
         </ul>

@@ -74,3 +74,22 @@ h1 > a:hover {
     border-radius: 8px;
     background-color: white;
 }
+#commentForm{
+    width: 50%;
+    margin-top: 5%;
+}
+#commentForm input{
+    width: 70%;
+}
+.commentItem{
+    border: 2px solid goldenrod;
+    border-radius: 8px;
+    list-style-type: none;
+}
+.commentItem > h3{
+    text-align: center;
+}
+.likes, .caption{
+    display: inline-block;
+    width: 100%;
+}

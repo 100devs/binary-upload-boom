@@ -1,5 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
+const User = require("../models/User");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -21,7 +23,24 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc"}).lean();
+      
+      // get the user objects corresponding to each comment, by mapping the comments array
+      const users = await getUsers();
+      
+      // see https://zellwk.com/blog/async-await-in-loops/ this was tricky...
+      async function getUsers() {
+        const promises = comments.map(async element => {
+          // don't sort because the indexes of comments and users are linked
+          const oneUser = await User.findById(element.madeBy).lean();
+          return oneUser;
+        });
+        const arrayUser = await Promise.all(promises);
+        return arrayUser;
+      }
+
+      // pass comments
+      res.render("post.ejs", { post: post, user: req.user, comments: comments, users: users });
     } catch (err) {
       console.log(err);
     }

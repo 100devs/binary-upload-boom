@@ -17,4 +17,4 @@
 
 # Run
 
-`npm start`
+2. `npm start`

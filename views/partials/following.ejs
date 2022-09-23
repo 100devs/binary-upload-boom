@@ -1,0 +1,10 @@
+<div class="text-center border-bottom pb-2 mb-2">
+  <h5>Following</h5>
+  <% for (var i=0; i < user.following.length; i++) {%>
+  <div class="pb-2">
+    <a href="/publicProfile/<%= user.following[i]._id %>">
+      <span><%= user.following[i].userName %></span>
+    </a>
+  </div>
+  <% } %>
+</div>

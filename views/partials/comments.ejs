@@ -1,0 +1,36 @@
+<div>
+    <h3>Comments</h3>
+    <ul>
+        <% for(let i = 0; i < post.comments.length; i++){ %>
+        <li>
+        <p><%= post.comments[i].text %></p>
+        <p>By: <%= post.comments[i].user.userName %></p>
+        <p>On: <%= post.comments[i].createdAt.toLocaleString() %></p>
+        <%if(post.comments[i].user.id == user._id){%>
+        <form
+            action="/comment/deleteComment/<%= post.id %>/<%= post.comments[i].id %>?_method=DELETE"
+            method="POST"
+            class="col-3"
+        >
+            <button class="btn btn-primary fa fa-trash" type="submit"></button>
+        </form>
+        <%}%>
+        <form
+            action="/comment/createReply/<%= post.id %>/<%= post.comments[i].id %>/"
+            method="POST"
+        >
+            <div class="mb-3">
+                <label for="text" class="form-label">Reply to this comment</label>
+                <textarea class="form-control" id="text" name="text"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+        <% if(post.comments[i].replies.length < 1) {%>
+            <p></p>
+        <% } else {%>
+        <%- include('replies', { replies: post.comments[i].replies, user: user }) %>
+        <% } %>
+        </li>
+        <% } %>
+    </ul>
+</div>

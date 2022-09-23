@@ -1,5 +1,8 @@
 const Comment = require("../models/Comment");
 const User = require("../models/User");
+const Post = require("../models/Post");
+const { array } = require("../middleware/multer");
+const { populate } = require("../models/Comment");
 
 module.exports = {
   getComment: async (req, res) => {
@@ -12,16 +15,39 @@ module.exports = {
   },
 
   createComment: async (req, res) => {
+    let parentPost = await Post.findById(req.params.postid);
     try {
       await Comment.create({
         text: req.body.text,
         user: req.user.id,
-        post: req.params.postid,
-        parentComment: req.params.commentid,
+        parents: parentPost,
       });
+      let comment = await Comment.findOne({text: req.body.text});
+      parentPost.comments.push(comment);
+      await parentPost.save();
       console.log(req.body)
       console.log(`Comment has been added by ${req.user.userName}!`);
       res.redirect("/post/" + req.params.postid);
+    }
+    catch (err) {
+      console.log(err);
+    }
+  },
+
+  createReply: async (req, res) => {
+    let parentPost = await Post.findById(req.params.postid);
+    let parentComment = await Comment.findById(req.params.commentid);
+    try {
+      await Comment.create({
+        text: req.body.text,
+        user: req.user.id,
+        parents: [parentComment, parentPost],
+      });
+      let comment = await Comment.findOne({text: req.body.text});
+      parentPost.comment[i].replies.push(comment);
+      await parentComment.save();
+      console.log(`Comment has been added by ${req.user.userName}!`);
+      res.redirect("/comment/" + req.params.commentid);
     }
     catch (err) {
       console.log(err);
@@ -32,7 +58,7 @@ module.exports = {
     try {
       const comment = await Comment.findById(req.params.id);
       if (comment.createdById == req.user.id) {
-        comment.comment = req.body.comment;
+        comment.text = req.body.text;
         await comment.save();
         console.log("Comment has been edited!");
         res.redirect("/post/"+req.params.id);

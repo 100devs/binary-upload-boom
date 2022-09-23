@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema.Types;
 
 const commentSchema = new mongoose.Schema({
   text: {
@@ -29,7 +30,7 @@ const commentSchema = new mongoose.Schema({
   depth: {
     type: Number,
     required: true,
-    default: 0,
+    default: 1,
   },
   voteCount: {
     type: Number,

@@ -1,26 +1,31 @@
 <%- include('partials/header') -%>
 <div>
-    <h2><%= post.title %></h2>
-    <img class="img-fluid" src="<%= post.image%>" />
-    <div class="row justify-content-between">
-        <form
-        class="col-1"
-        action="/post/votePost/<%= post.id %>?_method=PUT"
-        method="POST"
-        >
-        <button class="btn btn-primary fa fa-thumbs-up" type="submit"></button>
-        </form>
-        <h3 class="col-3">Coolness Index: <%= post.voteCount %></h3>
-        <%if(post.user == user.id){ %>
-        <form
-        action="/post/deletePost/<%= post.id %>?_method=DELETE"
+    <h2>Check out this rad comment!</h2>
+    <p><%= comment.text %></p>
+    <p>By: <%= comment.user.userName %></p>
+    <p>On: <%= comment.createdAt.toLocaleString() %></p>
+    <form
+        action="/comment/deleteComment/<%= comment.id %>?_method=DELETE"
         method="POST"
         class="col-3"
-        >
+    >
         <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
-        <%}%>
-    </div>
+    </form>
+    <form
+        action="/comment/createReply/<%= comment.id %>/"
+        method="POST"
+    >
+        <div class="mb-3">
+            <label for="text" class="form-label">Reply to this comment</label>
+            <textarea class="form-control" id="text" name="text"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+    <% if(comment.replies.length < 1) {%>
+        <p></p>
+    <% } else {%>
+    <%- include('partials/replies', { replies: comment.replies, user: user }) %>
+    <% } %>
 </div>
 
 <%- include('partials/footer') -%>

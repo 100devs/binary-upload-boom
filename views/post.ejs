@@ -28,23 +28,25 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
-    <div>
-      Comments:
-      <div class="row">
-        <form
-          action="/comment/createComment/<%= post.id %>/<%= post.comments.id %>"
-          method="POST"
-          class="col-12"
-        >
-        <div class="mb-3">
-          <label for="text" class="form-label">Text</label>
-          <textarea class="form-control" id="text" name="text"></textarea>
-        </div>
-          <button class="btn btn-primary" type="submit">Submit</button>
-        </form>
-      </div>  
+    <div class="row">
+      <form
+        action="/comment/createComment/<%= post.id %>/"
+        method="POST"
+      >
+      <div class="mb-3">
+        <label for="text" class="form-label">What do you think?</label>
+        <textarea class="form-control" id="text" name="text"></textarea>
+      </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
     </div>
-    <%- include('partials/comments') -%>
+    <div>
+      <% if(post.comments.length < 1) {%>
+      <h3>No comments yet</h3>
+      <% } else {%>
+        <%- include('partials/comments') -%>
+      <% } %>
+    </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

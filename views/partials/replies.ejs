@@ -1,0 +1,33 @@
+<div>
+    <ul>
+        <li>
+            <% for (let i = 0; i < replies.length; i++) { %>
+            <p><%= replies[i].text %></p>
+            <p>By: <%= replies[i].user.userName %></p>
+            <p>On: <%= replies[i].createdAt.toLocaleString() %></p>
+            <%if(replies[i].user.id == user._id){%>
+            <form
+                action="/comment/deleteComment/<%= replies[i].id %>?_method=DELETE"
+                method="POST"
+                class="col-3">
+            </form>
+            <% } %>
+            <form
+                action="/comment/createReply/<%= replies[i].id %>/"
+                method="POST"
+            >
+                <div class="mb-3">
+                    <label for="text" class="form-label">Reply to this comment</label>
+                    <textarea class="form-control" id="text" name="text"></textarea>
+                </div>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+            <% if(replies[i].replies.length < 1) {%>
+                <p></p>
+            <% } else {%>
+            <%- include('replies', { replies: replies[i].replies, user: user }) %>
+            <% } %>
+        <% } %>
+        </li>
+    </ul>
+</div>

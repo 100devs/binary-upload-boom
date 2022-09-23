@@ -30,7 +30,7 @@
     
     <div class="mt-5">
       <h2>Add a comment</h2>
-      <form action="/comment/createComment/<%=post._id%>" method="POST">
+      <form action="/comment/createComment/<%= post._id %>" method="POST">
         <div class="mb-3">
             <label for="comment" class="form-label">Comment</label>
             <input type="text" class="form-control" id="comment" name="comment">
@@ -43,9 +43,9 @@
 
     <ul>
       <!-- loop through all the comments you will find in the db -->
-      <% for(var i=0; i<comments.length; i++) {%>
+      <% for(var i=0; i<comment.length; i++) {%> 
         <li class="col-6 justify-content-between mt-5">
-         <%= comments[i].comment%>
+        <p> <%= comment[i].comment%> </p>
         </li>
       <% } %>
 

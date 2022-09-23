@@ -22,7 +22,7 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      const comments = await Comment.find({ post: req.params.id }).sort({ createdAt: "desc" }).lean();         
+      const comments = await Comment.find({ post: req.params.id }).sort({ createdAt: "asc" }).lean();         
 
       res.render("post.ejs", { post: post, user: req.user, comments: comments});
     } catch (err) {
@@ -49,25 +49,6 @@ module.exports = {
       console.log(err);
     }
   },
-  // createPost: async (req, res) => {
-  //   try {
-  //     // Upload image to cloudinary
-  //     const result = await cloudinary.uploader.upload(req.file.path);
-
-  //     await Post.create({
-  //       title: req.body.title,
-  //       image: result.secure_url,
-  //       cloudinaryId: result.public_id,
-  //       caption: req.body.caption,
-  //       likes: 0,
-  //       user: req.user.id,
-  //     });
-  //     console.log("Post has been added!");
-  //     res.redirect("/profile");
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // },
   likePost: async (req, res) => {
     try {
       await Post.findOneAndUpdate(
@@ -84,8 +65,6 @@ module.exports = {
   },
   deletePost: async (req, res) => {
     try {
-      // Find post by id
-      // let post = await Post.findById({ _id: req.params.id }); // <---dont need this line. this is for checking to see that the post is there. 
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db

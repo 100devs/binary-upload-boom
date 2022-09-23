@@ -46,14 +46,16 @@
           <%= comments[i].comment%>
         </li>
       <% } %>
-      <!-- Comment likes button -->
+      <!-- Comment likes -->
+      <% for(var i=0; i<comments.length; i++) {%>
       <form
           class="col-1"
-          action="/post/likeComment/<%= post.id %>?_method=PUT"
+          action="/comment/likeComment/<%= comments[i]._id %>?_method=PUT"
           method="POST"
         >
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
+        <% } %>
 
     </ul>
     <div class="col-6 mt-5">

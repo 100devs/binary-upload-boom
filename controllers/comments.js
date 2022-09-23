@@ -10,7 +10,7 @@ module.exports = {
         post: req.user.id,
       });
       console.log("Commentsss has been added!");
-      res.redirect("/post/" + req.params.id);
+      res.redirect("/post/"+req.params.id);
     } catch (err) {
       console.log(err);
     }

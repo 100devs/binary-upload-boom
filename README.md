@@ -30,4 +30,5 @@
 - update comment model to include userId
 - in comments.js controller added user id to the CreateComment method and also the deleteComment method
 - in posts EJS we added a deleteComment form with a garbage can icon and only showed this to users whom created the comment
-- added required attri
+  - added required attribute to comment input in form
+

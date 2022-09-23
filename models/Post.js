@@ -1,47 +1,25 @@
 const mongoose = require("mongoose");
-//const { url } = require("../middleware/cloudinary"); prob deleted it
 
 const PostSchema = new mongoose.Schema({
-  team: {
+  title: {
     type: String,
-    required: false,
+    required: true,
   },
   image: {
-    feed: {
-      type: String,
-      required: false,
-    },
-    profile: {
-      type: String,
-      required: false,
-    },
-    required: false
+    type: String,
+    require: true,
   },
   cloudinaryId: {
     type: String,
     require: true,
   },
-  player: {
+  caption: {
     type: String,
     required: true,
   },
-  position: {
-    type: String,
-    required: false,
-  },
-  win: {
-    type: String,
-    required: false,
-    default: 0,
-  },
-  loss: {
-    type: String,
-    required: false,
-    default: 0,
-  },
-  notes: {
-    type: String,
-    required: false,
+  likes: {
+    type: Number,
+    required: true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -51,10 +29,6 @@ const PostSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  pinned: {
-    type: Boolean,
-    default: false,
-  }
 });
 
 module.exports = mongoose.model("Post", PostSchema);

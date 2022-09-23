@@ -11,6 +11,14 @@ module.exports = {
       console.log(err);
     }
   },
+  getCreate: async (req, res) => { //createPost page
+    try {
+      const posts = await Post.find({ user: req.user.id });
+      res.render("createPost.ejs", { posts: posts, user: req.user });
+    } catch (err) {
+      console.log(err);
+    }
+  },
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();

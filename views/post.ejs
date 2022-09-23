@@ -33,5 +33,13 @@
     </div>
   </div>
 </div>
-
+<h2>Add a Comment</h2>
+      <form action="/comment/createComment" method="POST">
+          <div class="mb-3">
+              <label for="comment" class="form-label">Comment</label>
+              <input type="text" class="form-control" id="comment" name="comment">
+           </div>
+      <input type="hidden" name="post" value="<%=post._id%>">     
+      <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+     </form> 
 <%- include('partials/footer') -%>

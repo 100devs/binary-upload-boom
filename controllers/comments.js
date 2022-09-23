@@ -5,10 +5,10 @@ module.exports = {
   createComment: async (req, res) => {
     try {
       // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
+      //const result = await cloudinary.uploader.upload(req.file.path);
 
       await Comment.create({
-        comment: req.body.title,
+        comment: req.body.comment,
         likes: 0,
         user: req.user.id,
         post: req.body.post

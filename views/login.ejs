@@ -1,43 +1,37 @@
-<%- include('partials/headers/header-logo') -%>
+<%- include('partials/header') -%>
 
-<main class="container-login-signup-main">
-  <div class="container-login-signup-box">
-    <section class="container-login-section container-login-signup-section">
-      <h2 class="login-signup-title">SIGN IN</h2>
+<main class="container">
+  <div class="row justify-content-center">
+    <section class="col-6 mt-5">
+      <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
+      <div class="alert alert-danger"><%= el.msg %></div>
+      <% }) %> <% } %> <% if (locals.messages.info) { %> <%
+      messages.info.forEach( el => { %>
+      <div class="alert alert-info"><%= el.msg %></div>
+      <% }) %> <% } %>
       <form action="/login" method="POST">
-        <section class="section-login-form section-login-signup-form">
-            <section class="section-each-input-login section-each-input-login-signup" >
-              <label for="exampleInputEmail1" class="form-label login-signup-text"
-              >Email
-            </label> 
-            <input
-              type="email"
-              class="form-input"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              name="email"/>
-            </section>
-            <section class="section-each-input-login section-each-input-login-signup">
-              <label for="exampleInputPassword1" class="form-label login-signup-text">Password</label>
-              <input
-                type="password"
-                class="form-input"
-                id="exampleInputPassword1"
-                name="password"/>
-          </section>
-        </section>
-        <section class="container-alert">
-          <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
-            <span class="alert-msg"><%= el.msg %></span>
-            <% }) %> <% } %>
-            <% if (locals.messages.info) { %> <%
-              messages.info.forEach( el => { %>
-              <span class="alert-msg"><%= el.msg %></span>
-              <% }) %> <% } %>
-        </section>
-        <section class="container-btn">
-          <button type="submit" class="login-signup-submit-btn">GO</button>
-        </section>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"
+            >Email address</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            name="email"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            name="password"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </section>
   </div>

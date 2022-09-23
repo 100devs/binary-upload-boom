@@ -1,262 +1,55 @@
-<%- include('partials/headers/header-menu') -%>
-
-  <main class="container container-post">
-    <section class="container-section-post">
-      <section class="section-profile-post">
-        <%if(post.user==user.id){ %>
-          <section class="nav-profile-post">
-            <img class="img-fluid" src="<%= post.image.profile %>" />
-            <section class="section-column-post">
-              <section class="section-row-post">
-                <section class="section-second-column-post">
-                  <section class="section-each-extra-post">
-                    <h1>
-                      <%= post.player %>
-                    </h1>
-                  </section>
-                  <section class="section-each-extra-post">
-                    <h2>
-                      <%= post.team %>
-                    </h2>
-                  </section>
-                </section>
-                <section class="section-icons-post">
-                  <form class="col-1" action="/post/editPost/<%= post.id %>?_method=PUT" method="POST">
-                    <button class="btn" type="submit">
-                      <i class="fa-regular fa-pen-to-square fa-xl post-btn"></i>
-                    </button>
-                  </form>
-                  <form class="col-1" action="/post/pinPost/<%= post.id %>?_method=PUT" method="POST">
-                    <button class="btn" type="submit">
-                      <% if (post.pinned==true ) { %>
-                        <i class="fa-solid fa-thumbtack fa-xl pinned-btn"></i>
-                        <% } else { %>
-                          <i class="fa-solid fa-thumbtack fa-xl unpinned-btn"></i>
-                          <% } %>
-                    </button>
-                  </form>
-                  <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-1">
-                    <button class="btn" type="submit">
-                      <i class="fa-regular fa-trash-can fa-xl post-btn"></i>
-                    </button>
-                  </form>
-                </section>
-              </section>
-              <section class="section-person-post">
-                <section class="section-person-post-extra">
-                  <section class="section-each-extra-post">
-                    <h2>
-                      <%= post.position %>
-                    </h2>
-                    <span>position</span>
-                  </section>
-                  <section class="section-each-extra-post">
-                    <h2>
-                      <%= %>
-                    </h2>
-                    <span>height</span>
-                  </section>
-                  <section class="section-each-extra-post">
-                    <h2>
-                      <%= %>
-                    </h2>
-                    <span>weight</span>
-                  </section>
-                  <section class="section-each-extra-post">
-                    <h2>
-                      <%= %>
-                    </h2>
-                    <span>age</span>
-                  </section>
-                </section>
-              </section>
-            </section>
-          </section>
-
-      </section>
-      <section class="section-table-post">
-
-
-
-        <form action="/post/createTable/<%= post.id %>?_method=PUT" class="col-1" enctype="multipart/form-data"
-          method="POST">
-          <button class="btn table-add" type="submit">
-            <i class="fa-solid fa-circle-plus"></i>
-          </button>
-          <%- include('partials/table') -%>
-        </form>
-        <!--  <table>
-          <thead>
-            <tr>
-              <th>Header 1</th>
-              <th>Header 2</th>
-              <th>Header 3</th>
-              <th>Header 4</th>
-              <th>Header 5</th>
-              <th>Header 6</th>
-              <th>Header 7</th>
-              <th>Header 8</th>
-              <th>Header 9</th>
-              <th>Header 10</th>
-              <th>Header 11</th>
-              <th>Header 12</th>
-              <th>Header 13</th>
-              <th>Header 14</th>
-              <th>Header 15</th>
-              <th>Header 16</th>
-              <th>Header 17</th>
-              <th>Header 18</th>
-              <th>Header 19</th>
-              <th>Header 20</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            </table>
-          </tbody> -->
-
-      </section>
-      <%}%>
+<%- include('partials/header') -%>
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-6">
+        <h2>
+          <%= post.title %>
+        </h2>
+        <img class="img-fluid" src="<%= post.image%>" />
+        <div class="row justify-content-between">
+          <form class="col-1" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
+            <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          </form>
+          <h3 class="col-3">Likes: <%= post.likes %>
+          </h3>
+          <%if(post.user==user.id){ %>
+            <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-3">
+              <button class="btn btn-primary fa fa-trash" type="submit"></button>
+            </form>
+            <%}%>
         </div>
-        <!-- <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
-    </div> -->
-    </section>
-    </section>
-  </main>
+      </div>
+      <div class="col-3 mt-5">
+        <p>
+          <%= post.caption %>
+        </p>
+        <div class="col-6 mt-5">
+          <ul>
+            <% comments.forEach(el=> { %>
+              <li class="">
+                <%= el.comment %>
+                  <%= el.likes %>
+
+                    <form action="/comment/likeComment/<%= el._id %>?_method=PUT" method="POST">
+                      <button class="btn btn-primary fa fa-thumbs-up" type="submit"></button>
+                    </form>
+              </li>
+              <% }) %>
+          </ul>
+        </div>
+
+        <form action="/comment/addComment/<%= post.id %>" method="post">
+          <label for="comment" class="form-label">Add Comment</label>
+          <input type="text" class="form-control" id="comment" name="comment">
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+
+      </div>
+      <div class="col-6 mt-5">
+        <a class="btn btn-primary" href="/profile">Return to Profile</a>
+        <a class="btn btn-primary" href="/feed">Return to Feed</a>
+      </div>
+    </div>
+  </div>
 
   <%- include('partials/footer') -%>
-
-    <!-- ATTEMPT DIAGONAL LINE -->
-
-    <!-- <section class="section-person-post-extra">
-  <div class="post">
-    <h3 class=""><%= post.player %></h3>
-  </div>
-  
-  <div class="div-post">
-    <h2 class="" >player</h2>
-   
-  </div>
-</section>
-<section class="section-person-post-extra">
-  
-  <div class="post">
-    <h3 class=""><%= post.team %></h3>
-  </div>
-  <div class="div-post">
-    <h2 class="" >team</h2>
-   
-  </div>
-  
-</section> -->

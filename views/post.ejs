@@ -1,36 +1,95 @@
 <%- include('partials/header') -%>
 <div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-6">
+  <div class="row mt-5 container__flag">
+    <div class="col-6 Post__container">
       <h2><%= post.title %></h2>
+      <span class="col">By: <a href="/<%= author._id%>/profile"><%= author.userName %></a></span>
       <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
+      <div class="row align-items-center">
         <form
-          class="col-1"
+          class="col"
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          <button class="btn" type="submit">
+              <img 
+                class="icon" 
+                src='<%= likedByViewer ? "/imgs/liked.png" : "/imgs/notLiked.png" %>'
+                alt="not filled heart"
+              >
+              <% if (likedByViewer){ %>
+                <% if (post.likes > 1){ %>
+                  <span>You and <%=post.likes - 1 %> liked this</span>
+                <% }else{ %>
+                  <span>You liked this</span>
+                <% } %>
+              <% } else { %>
+                <% if (post.likes === 0){ %>
+                  <span><%=post.likes%></span>
+                <% } else { %>
+                  <span><%=post.likes%> liked this</span>
+                <% } %>
+              <% } %>
+          </button>
         </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
         <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
-        <%}%>
+          <form
+            action="/post/deletePost/<%= post.id %>?_method=DELETE"
+            method="POST"
+            class="col-3"
+          >
+            <button class="btn btn-primary fa fa-trash" type="submit"></button>
+          </form>
+          <%}%>
+      </div>
+      <div class="d-flex">
+        <p><%= post.caption %></p>
       </div>
     </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
+    <div class="col mt-2">
+      <ul class="list-unstyled">
+        <% for(var i=0; i<comments.length; i++) {%>
+          <li class="row align-items-center mt-4" id="<%=comments[i]._id %>">
+            <div class="col">
+              <span class="emph"><%= comments[i].writer%></span>
+              <span><%= comments[i].comment%></span>
+            </div>
+            <div class="row align-items-center">
+              <form
+                class="col"  
+                action="/comment/likeComment/<%=comments[i]._id %>?_method=PUT"
+                method="POST"
+              >
+                <button class="btn" type="submit">
+                    <img 
+                      class="icon" 
+                      src='<%= comments[i].likedByViewer ? "/imgs/liked.png" : "/imgs/notLiked.png" %>'
+                      alt="not filled heart"
+                    >
+                      <% if (comments[i].likes > 1 || comments[i].likes && !comments[i].likedByViewer){ %>
+                        <span><%=comments[i].likes%></span>
+                      <% } %>
+                </button>
+              </form>
+            </div>
+          </li>
+        <% } %>
+      </ul>
     </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
-    </div>
+  </div>
+  <div class="mt-5">
+    <h2>Add a comment</h2>
+    <form action="/comment/createComment/<%=post._id%>" method="POST">
+      <div class="mb-3">
+          <label for="comment" class="form-label">Comment</label>
+          <input type="text" class="form-control" placeholder="Type comment..." id="comment" name="comment">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <div class="col-6 mt-5">
+    <a class="btn btn-primary" href="/profile">Return to Profile</a>
+    <a class="btn btn-primary" href="/feed">Return to Feed</a>
   </div>
 </div>
 

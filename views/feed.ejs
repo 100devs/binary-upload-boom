@@ -1,15 +1,48 @@
 <%- include('partials/header') -%>
+
+<div class="fixed col-9">
+  <a href="<%=link.link%>" class="btn btn-primary"><%=link.linkName%></a>
+  <a href="/profile" class="btn btn-primary">Profile</a>
+  <a href="/logout" class="btn btn-primary">Logout</a>
+</div>
   <div class="container">
     <div class="row justify-content-center mt-5">
-      <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
+      <ul class="feed list-unstyled">
+        <% for(let i=0; i<posts.length; i++) {%>
+          <li id="<%=posts[i]._id%>" class="col-6 justify-content-between mt-5 post-on-feed">
+            <% if (posts[i].user == user.id) {%>
+              <h3><a href="/profile"><strong><%= posts[i].userName%></strong></a></h3>
+            <% } else { %>
+            <h3><a href="/profile/<%=posts[i].user%>"><strong><%= posts[i].userName%></strong></a></h3>
+            <% } %>
             <a href="/post/<%= posts[i]._id%>">
               <img class="img-fluid" src="<%= posts[i].image%>">
             </a>
+            <div class="row justify-content-between margin-top-small">
+              <div class ='col-3'>
+                <% if (user.likedPosts.includes(posts[i]._id)) { %>
+                <button data-post-user="<%= posts[i].user %>" data-post-id='<%= posts[i]._id %>' class="btn btn-primary fa fa-heart liked like-button"></button>
+                <% } else { %>
+                <button data-post-user="<%= posts[i].user %>" data-post-id='<%= posts[i]._id %>' class="btn btn-primary fa fa-heart like-button"></button>
+                <% } %>
+              </div>
+              <h5 class="col-2"><span class='like-span' data-post-id='<%= posts[i]._id %>'><%= posts[i].likes %></span> likes</h5>  
+            </div>
+            <p class="code-font"><%=posts[i].title%></p>
           </li>
         <% } %>
         </ul>
     </div>
   </div>  
+  <h4 id="hello" class="code-font">Hello <%=user.userName%></h4>
+  <div id="leader-board">
+    <h2>LeaderBoard</h2>
+    <ol class="code-font">
+      <%for(let i=0; i<number; i++) {%>
+
+        <li class="leader justify-content-between"><a href='/profile/<%= allUsers[i]._id %>'><%=allUsers[i].userName%></a><span class="total-likes"><%=allUsers[i].totalLikes%> likes</span></li> 
+      <%}%>
+    </ol>
+  </div>
+
 <%- include('partials/footer') -%>

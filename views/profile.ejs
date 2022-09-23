@@ -9,6 +9,7 @@
           </div>
           <div class="mt-5">
             <h2>Add a post</h2>
+            <!-- multer needs enctype="multipart/form-data" for it to work -->
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
                   <label for="title" class="form-label">Title</label>

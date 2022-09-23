@@ -1,5 +1,8 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
+
+
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -13,15 +16,20 @@ module.exports = {
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+     
+      res.render("feed.ejs", { posts: posts, comments:comments });
     } catch (err) {
       console.log(err);
     }
   },
   getPost: async (req, res) => {
     try {
+   
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+
+      // find comments by post id that I am currently on
+      const comments = await Comment.find({post:req.params.id}).sort({ createdAt: "desc" }).lean();
+      res.render("post.ejs", { post: post, user: req.user, comments:comments});
     } catch (err) {
       console.log(err);
     }
@@ -45,6 +53,7 @@ module.exports = {
       console.log(err);
     }
   },
+
   likePost: async (req, res) => {
     try {
       await Post.findOneAndUpdate(
@@ -74,3 +83,27 @@ module.exports = {
     }
   },
 };
+
+
+// // *******************************************
+// // INSERT DUMMY DATA
+// // *******************************************
+
+// async function insertDummyCommentData(){
+//     try{
+//         await Comment.insertMany([
+//          {"comment":"Got Promoted",
+         
+//             },
+//             {"comment":"I lost my job",
+          
+//             }
+//             ]) // wait until Category is aquired
+
+//     }catch (error){
+// console.log('err' + error)
+//     }
+
+// }
+
+// insertDummyCommentData();

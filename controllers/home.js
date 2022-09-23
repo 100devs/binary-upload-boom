@@ -8,4 +8,7 @@ module.exports = {
   getAbout: (req, res) => {
     res.render("about.ejs");
   },
+  getAdmin: (req, res) => {
+    res.render("admin.ejs");
+  },
 };

@@ -2,45 +2,25 @@ const cloudinary = require("../middleware/cloudinary");
 const Player = require("../models/Player");
 
 module.exports = {
-  getProfile: async (req, res) => {
-    try {
-      const posts = await Post.find({ user: req.user.id });
-      res.render("profile.ejs", { posts: posts, user: req.user });
-    } catch (err) {
-      console.log(err);
-    }
-  },
-  getFeed: async (req, res) => {
-    try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
-    } catch (err) {
-      console.log(err);
-    }
-  },
-  getPost: async (req, res) => {
-    try {
-      const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
-    } catch (err) {
-      console.log(err);
-    }
-  },
-  createPost: async (req, res) => {
+  createPlayer: async (req, res) => {
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
 
-      await Post.create({
-        title: req.body.title,
+      await Player.create({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         image: result.secure_url,
         cloudinaryId: result.public_id,
-        caption: req.body.caption,
-        likes: 0,
+        gender: req.body.gender,
+        league: req.body.league,
+        email: req.body.email,
+        prefCourt: req.body.prefCourt,
+        prefTime: req.body.prefTime,
         user: req.user.id,
       });
-      console.log("Post has been added!");
-      res.redirect("/profile");
+      console.log("Player has been added!");
+      res.redirect("/admin");
     } catch (err) {
       console.log(err);
     }

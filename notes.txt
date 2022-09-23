@@ -80,6 +80,47 @@ this is just like in the post controller in line 24
 
 redirect back to the same post. "/post/"+req.params.id
 
+This is from admin.ejs
+<section></section>
+<h2>Add player</h2>
+<!-- Create player form -->
+<form action="/addPlayer" method="POST">
+    <input type="text" placeholder="First Name" name="firstNameS">
+    <input type="text" placeholder="Last Name" name="lastNameS">
+    <select type="gender" placeholder="M/F" name="gender">
+        <option value="M">men</option>
+        <option value="W">women</option>
+    </select>
+    <select type="text" placeholder="level" name="level">
+        <option value="3.5">3.5</option>
+        <option value="4.0">4.0</option>
+        <option value="4.5">4.5</option>
+        <option value="5.0">5.0</option>
+    </select>
+    <input type="text" placeholder="email" name="email">
+    <input type="text" placeholder="Preferred Locations" name="prefLocation">
+    <input type="text" placeholder="Preferred Times" name="prefTime">
+    <input type="submit" value = "Submit">
+</form>
+</section>
 
+<h2>Edit players</h2>
+<section>
+    <table class="pure-table pure-table-horizontal">
+        <tr>
+          <th>Name</th>
+          <th>Food</th>
+          <th>Host</th>
+          <th>MM/YY</th>
+        </tr>
+        <% for(var i=0; i < info.length; i++) { %>
+        <tr>
+            <td><%= info[i].firstName %></td>
+            <td class='fa fa-trash'></td>
+        </tr>
+         <% } %>
+      </table>
 
+    <h2>Add a movie!</h2>
+</section>
 

@@ -3,6 +3,7 @@ const Post = require('../models/Post');
 const User = require('../models/User');
 const Comment = require('../models/Comment');
 const Profile = require('../models/Profile');
+const validator = require('validator');
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -15,7 +16,6 @@ module.exports = {
           select: '_id userName',
         })
         .populate({ path: 'followers', select: '_id userName' });
-      console.log(user);
       res.render('profile.ejs', { posts: posts, user: user, profile: profile });
     } catch (err) {
       console.log(err);
@@ -32,7 +32,6 @@ module.exports = {
         .populate({ path: 'followers', select: '_id userName' });
       const following = req.user.following;
       const posts = await Post.find({ user: req.params.id });
-      console.log(user);
       if (req.user._id.toString() === user._id.toString())
         res.redirect('/profile');
       res.render('publicProfile.ejs', {
@@ -84,6 +83,19 @@ module.exports = {
   },
   createPost: async (req, res) => {
     try {
+      const validationErrors = [];
+      if (!req.file) validationErrors.push({ msg: 'Please add an image file' });
+      if (validator.isEmpty(req.body.title))
+        validationErrors.push({ msg: 'Title must not be blank' });
+      if (validator.isEmpty(req.body.caption))
+        validationErrors.push({ msg: 'Caption must not be blank' });
+
+      if (validationErrors.length) {
+        console.log('validationErrors', validationErrors);
+        req.flash('errors', validationErrors);
+        return res.redirect('/profile');
+      }
+
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
 

@@ -1,0 +1,105 @@
+#cover-photo {
+    width: 50%;
+    padding-top: 3%;
+    margin-bottom: 10px;
+    height: 165px;
+
+}
+
+#cover-photo:hover {
+    width:55%;
+    height: 165px;
+}
+#cover-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#slogan {
+    font-family: Consolas, monaco, monospace;
+    font-size: 19px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: 23px;
+
+}
+
+.code-font {
+        font-family: Consolas, monaco, monospace;
+        font-size: 16px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 700;
+        line-height: 23px;
+        margin-top: 5px;
+}
+
+a{
+    text-decoration: none !important;
+    color: black;
+}
+
+
+a:hover:not(.btn){
+    color: rgb(143, 143, 143);
+}
+
+.margin-top-small{
+    margin-top: 15px;
+}
+
+.feed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10%;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    width: 45%;
+}
+
+.fixed {
+    position: fixed;
+    left: 80%;
+    top: 5%;
+}
+.comments {
+    padding-left: 20px;
+    margin-top: 20px;
+    border-left: 1px solid grey;
+}
+#leader-board {
+    position: fixed;
+    left: 3%;
+    top: 15%;
+    border: 1px solid rgb(92, 149, 132);
+    border-radius: 5%;
+    padding: 30px 20px;
+}
+
+#hello {
+    position: fixed;
+    left: 5%;
+    top: 6%;
+}
+
+
+.total-likes {
+    font-size: x-small;
+    width: 30%;
+    margin-left: 10px;
+    color: rgb(162, 162, 162);
+}
+
+.liked {
+    color: red;
+}
+
+.liked:focus{
+    color: red;
+}

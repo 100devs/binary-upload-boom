@@ -2,22 +2,29 @@
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
-      <h2><%= post.title %></h2>
+      <% if (user.id == postOwner.id) {%>
+        <h1><a href="/profile"><strong>
+              <%= postOwner.userName %>
+            </strong></a></h1>
+      <%} else {%>
+      <h1><a href="/profile/<%=postOwner.id%>"><strong><%= postOwner.userName %></strong></a></h1>
+      <%}%>
+      <p class="code-font"><%= post.title %></p>
       <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
-        <form
-          class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
-          method="POST"
-        >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+      <div class="row justify-content-between margin-top-small">
+        <form class="col-1" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
+          <% if (user.likedPosts.includes(post._id)) { %>
+            <button class="btn btn-primary fa fa-heart liked" type="submit"></button>
+          <%} else {%>
+            <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          <%}%>
         </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
+        <h4 class="col-2"><%= post.likes %> likes</h4>
         <%if(post.user == user.id){ %>
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
           method="POST"
-          class="col-3"
+          class="col-1"
         >
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
@@ -25,13 +32,31 @@
       </div>
     </div>
     <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
+      <h3>Comments</h3>
+          <!-- LIST OF COMMENTS -->
+      <ul class="list-unstyled comments">
+        <% if(comments.length) {%>
+          <% for(var i=0; i<comments.length; i++) {%>
+            <li>
+              <%= comments[i].user%>: <%= comments[i].content%>
+            </li>
+          <% } %>
+        <% } %>
+      </ul>
+      <form action="/post/<%= post.id %>/createComment" method="POST">
+        <div class="mb-3">
+          <label for="comment" class="form-label">Post a Comment:</label>
+          <input type="text" class="form-control" id="comment" name="comment">
+        </div>
+      <button class="btn btn-primary" type="submit">Submit</button>
     </div>
+
+
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
   </div>
 </div>
-
+ 
 <%- include('partials/footer') -%>

@@ -1,8 +1,8 @@
 <%- include('partials/header') -%>
-  <div class="container justify-content-center mt-5 border">
+  <div class="container justify-content-center mt-5 feed">
     <div class="d-flex flex-row flex-wrap">
-      <div class="d-flex justify-content-center align-items-center col-md-8">
-        <img class="img-fluid" src="<%= post.image%>">
+      <div class="d-flex justify-content-center align-items-top col-md-8">
+        <img class="img-fluid mt-5 mb-5" src="<%= post.image%>">
       </div>
       <div class="d-flex flex-column col m-3">
         <div class="d-flex flex-row justify-content-between">
@@ -18,25 +18,39 @@
         <div class="flex-fill">
 
           <ul>
-            <li class="mt-1 pb-2 border-bottom">
-              <% for (let i = 0; i < users.length; i++) { %>
-                <% if (String(users[i]._id) == post.user) { %>
-                  <a class="fw-bold text-reset text-decoration-none" href="/profile/<%= users[i]._id %>""> <%= users[i].userName %> </a>
-                <% } %>
-              <% } %>
-              <span><%= post.caption %></span>
-            </li>
-          
-            <% for (let i=0; i < comments.length; i++) {%>
-              <li class="mt-1">
-                <% for (let j = 0; j < users.length; j++) { %>
-                  <% if (String(users[j]._id) === comments[i].user) { %>
-                    <a class="fw-bold text-reset text-decoration-none" href="/profile/<%= users[j]._id %>""> <%= users[j].userName %> </a>
+              <li class="mt-1 pb-2 border-bottom">
+                <% for (let i = 0; i < users.length; i++) { %>
+                  <% if (String(users[i]._id) == post.user) { %>
+                    <a class="fw-bold text-reset text-decoration-none" href="/profile/<%= users[i]._id %>"> <%= users[i].userName %> </a>
                   <% } %>
                 <% } %>
-                <span> <%= comments[i].comment %> </span>
+                <span><%= post.caption %></span>
               </li>
-              <% } %>
+              
+              <div class="container">
+                <% for (let i=0; i < comments.length; i++) {%>
+                  <li class="mt-1 comments">
+                    <div class="row">
+                      <div class="col-4 mx-2">
+                            <% for (let j = 0; j < users.length; j++) { %>
+                              <% if (String(users[j]._id) === comments[i].user) { %>
+                                <a class="fw-bold text-reset text-decoration-none" href="/profile/<%= users[j]._id %>"> <%= users[j].userName %> </a>
+                              <% } %>
+                            <% } %>
+                      </div>
+                      <div class="col-7 justify-content-end">
+                          <span class="small float-end"> <%= timestamps[i] %> </span>
+                      </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="row mx-1">
+                      <p class="text-start"> <%= comments[i].comment %> </span>
+                    </div>
+                  </li>
+                <% } %>
+            </div>
           </ul>
         </div>
 

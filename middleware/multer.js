@@ -1,3 +1,4 @@
+//multer is used for handling multipart/form-data primarily used for uploading files usually written on top of busboy
 const multer = require("multer");
 const path = require("path");
 

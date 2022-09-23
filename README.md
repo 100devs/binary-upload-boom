@@ -38,3 +38,7 @@
 **:point_right: Jonathan Mani**
 :e-mail: [email@email.com](mailto:social.chapters@simplelogin.com)
 :computer: [Github](https://github.com/jonathanmani/)
+
+**:point_right: Chavis Gill**
+:e-mail: [email@email.com](mailto:chavistgill@gmail.com)
+:computer: [Github](https://github.com/chavgill/)

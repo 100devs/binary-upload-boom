@@ -21,6 +21,7 @@ body,
 .logo-image {
   max-width: 300px;
   width: 100%;
+  border-radius: 0.5rem;
 }
 
 .profile-pic-container {
@@ -110,6 +111,19 @@ body,
   font-family: 'PP Pangram Sans Rounded', 'Roboto', Arial, Helvetica, sans-serif;
   
 }
+
+.centerContent {
+  display: flex;
+  justify-content: center;
+}
+
+#postImageCenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
 .text-bub {
   color: #E5C15B;
   font-family: 'PP Pangram Sans Rounded', 'Roboto', Arial, Helvetica, sans-serif;
@@ -136,8 +150,8 @@ body,
 
 .likes-card {
   max-width: 600px;
-
 }
+
 /*Media Query*/
 @media (max-width: 768px) {
   .navbar-container {
@@ -148,4 +162,5 @@ body,
   .navbar li {
     margin: 10px 20px 5px;
   }
+
 }

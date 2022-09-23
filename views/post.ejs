@@ -30,7 +30,7 @@
 
     <div class="mt-5">
       <h2>Add a Comment</h2>
-      <form action="/comments/createComment" method="POST">
+      <form action="/comments/createComment/<%= post.id %>" method="POST">
         <div class="mb-3">
           <label for="comment" class="form-label">Comment</label>
           <textarea class="form-control" id="comment" name="comment"></textarea>
@@ -43,7 +43,7 @@
         <ul class="row list-unstyled">
           <% for(var i=0; i<comment.length; i++) {%>
             <li class="col-6 justify-content-between mt-5">
-             <%= comment[i].id %>
+             <%= comment[i].comment %>
             </li>
           <% } %>
           </ul>

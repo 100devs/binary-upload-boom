@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const PostSchema = new mongoose.Schema({
   title: {
@@ -7,11 +7,11 @@ const PostSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    require: true,
+    required: true,
   },
   cloudinaryId: {
     type: String,
-    require: true,
+    required: true,
   },
   caption: {
     type: String,
@@ -21,9 +21,18 @@ const PostSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  comments: [
+    {
+      content: String,
+      createdAt: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
   },
   createdAt: {
     type: Date,
@@ -31,4 +40,4 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model('Post', PostSchema);

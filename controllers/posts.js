@@ -1,10 +1,13 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment")
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
+      //Get all the posts associated with the specific userId
       const posts = await Post.find({ user: req.user.id });
+      //rendering profile.ejs with the data from the database. The user data is coming from the request.
       res.render("profile.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
@@ -20,19 +23,24 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
+      //Find a specific post by the unique id that was passed in through the path. Referencing the 'Post' model
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      //Use the commment model to get to the comments collection, find the comments that have the post property of the post that we are on and sort in decending order
+      const comments = await Comment.find({post: req.params.id, }).sort({ createdAt: "asc" }).lean()
+      //Sending information to the post.ejs view file so that it can render a new page
+      res.render("post.ejs", { post: post, user: req.user, comments:comments });
     } catch (err) {
       console.log(err);
     }
   },
   createPost: async (req, res) => {
     try {
-      // Upload image to cloudinary
+      // Upload image to cloudinary. File path to the file in you temporary directory wher multer saved it.
       const result = await cloudinary.uploader.upload(req.file.path);
-
+    //Referencing the Post model to create a new post in the database.Consolidating data from different sources and sending it to the db.
       await Post.create({
         title: req.body.title,
+        //Comes from cloudinary
         image: result.secure_url,
         cloudinaryId: result.public_id,
         caption: req.body.caption,
@@ -40,6 +48,7 @@ module.exports = {
         user: req.user.id,
       });
       console.log("Post has been added!");
+      //redirecting to the profile route
       res.redirect("/profile");
     } catch (err) {
       console.log(err);

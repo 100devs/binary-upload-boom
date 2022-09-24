@@ -1,0 +1,13 @@
+name: Deploy on Render
+on:
+  pull_request:
+    types: closed
+    branches: main
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use deploy API
+        run: curl -X POST -d {} https://api.render.com/deploy/${{ secrets.RENDER_DEPLOY_HOOK }}

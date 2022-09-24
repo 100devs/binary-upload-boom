@@ -27,6 +27,34 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+
+
+<div>
+  <%for (let i=0; i>comment.length;i++)%>
+  <%{%>
+  <p><%=comment[0].comment%></p>
+  <span><%=comment[0].user.userName%><span>
+  <%}%>
+
+
+
+</div>
+
+    <form action="/comments/createComment/<%=post._id %>" method="POST">
+      
+        
+            
+      <div class="mb-3">
+        <label for="comments" class="form-label">comments</label>
+        <input
+          type="text"
+          class="form-control"
+          id="comments"
+          name="comments"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

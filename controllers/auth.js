@@ -6,8 +6,10 @@ exports.getLogin = (req, res) => {
   if (req.user) {
     return res.redirect(`/profile/${req.user.id}`);
   }
+  let user = ((typeof(req.user) !== 'undefined') ? req.user : { _id: '' })
   res.render("login", {
     title: "Login",
+    user: user,
   });
 };
 
@@ -60,8 +62,10 @@ exports.getSignup = (req, res) => {
   if (req.user) {
     return res.redirect(`/profile/${req.user.id}`);
   }
+  let user = ((typeof(req.user) !== 'undefined') ? req.user : { _id: '' })
   res.render("signup", {
-    title: "Create Account",
+    title: "Create Account", 
+    user: user,
   });
 };
 

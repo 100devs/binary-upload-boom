@@ -13,4 +13,8 @@ module.exports = {
       console.log(err);
     }
   },
+  notLoggedIn: (req, res) => {
+    console.log('Please login to access profiles page. Redirecting...')
+    res.redirect('/')
+  }
 };

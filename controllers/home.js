@@ -1,6 +1,7 @@
 module.exports = {
   getIndex: (req, res) => {
-
-    res.render("index.ejs", { user: req.user });
+    let user = ((typeof(req.user) !== 'undefined') ? req.user : { _id: '' })
+    console.log(user)
+    res.render("index.ejs", { user: user });
   },
 };

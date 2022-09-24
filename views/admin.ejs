@@ -5,6 +5,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+<link
+  href="https://cdn.jsdelivr.net/npm/@tailwindcss/custom-forms@0.2.1/dist/custom-forms.css"
+  rel="stylesheet"
+/>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -91,9 +95,11 @@
               aria-controls="tabs-messagesVertical" aria-selected="false">Start New Season</a>
           </li>
         </ul>
+        <!-- containers for the tabs -->
         <div class="tab-content" id="tabs-tabContentVertical">
           <div class="tab-pane fade show active" id="tabs-homeVertical" role="tabpanel"
             aria-labelledby="tabs-home-tabVertical">
+            <!-- text box for announcement -->
             <div class="flex justify-center">
                 <div class="mb-3 xl:w-96">
                   <label for="exampleFormControlTextarea1" class="form-label inline-block mb-2 text-gray-700"
@@ -123,13 +129,19 @@
                   ></textarea>
                 </div>
               </div> 
+              <!-- end of text box for announcement -->
+              <div class="flex space-x-2 justify-center">
+                <button type="button" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Submit</button>
+              </div>
           </div>
+
+          <!-- content for Add Player Tab -->
           <div class="tab-pane fade" id="tabs-profileVertical" role="tabpanel" aria-labelledby="tabs-profile-tabVertical">
-            <!-- add player -->
+            <!-- email -->
             <div class="flex justify-center">
                 <div class="mb-3 xl:w-96">
                   <label for="exampleEmail0" class="form-label inline-block mb-2 text-gray-700"
-                    >Email input</label
+                    >Email</label
                   >
                   <input
                     type="email"
@@ -155,10 +167,11 @@
                   />
                 </div>
               </div>
+              <!-- first name -->
               <div class="flex justify-center">
                 <div class="mb-3 xl:w-96">
                   <label for="exampleText0" class="form-label inline-block mb-2 text-gray-700"
-                    >Text input</label
+                    >First Name</label
                   >
                   <input
                     type="text"
@@ -180,21 +193,136 @@
                       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
                     "
                     id="exampleText0"
-                    placeholder="Text input"
+                    placeholder=""
                   />
                 </div>
               </div>
+              <!-- last name -->
+            <div class="flex justify-center">
+                <div class="mb-3 xl:w-96">
+                  <label for="exampleEmail0" class="form-label inline-block mb-2 text-gray-700"
+                    >Last Name</label
+                  >
+                  <input
+                    type="email"
+                    class="
+                      form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                    "
+                    id="exampleEmail0"
+                    placeholder=""
+                  />
+                </div>
+              </div>
+              <!-- league -->
+              <label class="block text-left" style="max-width: 300px">
+                <span class="text-gray-700">League</span>
+                <select class="form-multiselect block w-full mt-1" multiple>
+                  <option>5.0 Men</option>
+                  <option>4.5 Men</option>
+                  <option>4.0 Men</option>
+                  <option>3.5 Men</option>
+                  <option>4.5+ Women</option>
+                  <option>4.0 Women</option>
+                </select>
+              </label>
+              <!-- pref courts -->
+              <div class="flex justify-center">
+                <div class="mb-3 xl:w-96">
+                  <label for="exampleEmail0" class="form-label inline-block mb-2 text-gray-700"
+                    >Preferred Courts</label
+                  >
+                  <input
+                    type="email"
+                    class="
+                      form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                    "
+                    id="exampleEmail0"
+                    placeholder="Wimbledon"
+                  />
+                </div>
+              </div>
+              <!-- Pref times -->
+              <div class="flex justify-center">
+                <div class="mb-3 xl:w-96">
+                  <label for="exampleEmail0" class="form-label inline-block mb-2 text-gray-700"
+                    >Preferred Times</label
+                  >
+                  <input
+                    type="email"
+                    class="
+                      form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                    "
+                    id="exampleEmail0"
+                    placeholder="After 5PM MWF"
+                  />
+                </div>
+              </div>
+              <!-- next section -->
+              <div class="flex space-x-2 justify-center">
+                <button type="button" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Button</button>
+              </div>
+              <!-- end of add player tab -->
           </div>
+          <!-- content for Add Match Tab -->
           <div class="tab-pane fade" id="tabs-messagesVertical" role="tabpanel"
             aria-labelledby="tabs-profile-tabVertical">
+            <!-- Beginning of add match tab -->
             Add Match
+            <!-- end of add match tab -->
           </div>
+          <!-- content for Start New Season Tab -->
           <div class="tab-pane fade" id="tabs-messagesVertical" role="tabpanel"
             aria-labelledby="tabs-profile-tabVertical">
-            Start new season
+            <!-- beginning of start new season tab -->
+            Start new season11241234q234
+            <!-- end of start new season tab -->
+            <!-- the added tab doesn't show what I want.. -->
           </div>
         </div>
       </div>
+      
       <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 </body>
 

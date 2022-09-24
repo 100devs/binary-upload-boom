@@ -26,7 +26,9 @@
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
+      <h2><%= post.address %></h2>
     </div>
+    
     <div class="mt-5">
       <h2>Add a Comment</h2>
       <form action="/comment/createComment/<%=post._id%>"  method="POST">
@@ -62,6 +64,22 @@
           <%= inventory[i].amount + " " + inventory[i].tool%>
         </li>
       <% } %>
+    </ul>
+    <h2>Todos</h2>
+    <form action="/todos/createTodo/<%=post._id%>" method='POST'>
+      <input type="text" placeholder="Enter Todo Item" name='todoItem'>
+      <input type="submit">
+    </form>
+      <ul>
+      <% todo.forEach( el => { %>
+              <li class='todoItem' data-id='<%=el._id%>'>
+                  <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
+                  <span class='del'> Delete </span>
+              </li>
+      <% }) %>    
+      </ul>
+     
+  
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

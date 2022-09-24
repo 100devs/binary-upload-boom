@@ -27,6 +27,29 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <% for (let i = 0; i < comments.length; i++) {%>
+      <div class="card mt-3">
+          <div class="card-header">
+              <a class="card-link" href=""></a>
+          </div>
+          <div class="card-body">
+              <p class="card-text"><%= comments[i].comment %></p>
+          </div>
+      </div>
+  <%}%>
+  <div class="mt-5 col-6">
+      <form action="/comment/createComment/<%=post.id%>" method="POST">
+          <div class="mb-3">
+            <label for="comment" class="form-label" id="leld">Comment</label>
+            <textarea class="form-control" id="comment" name="comment" placeholder="Add a comment"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="imgUpload" class="form-label">Image</label>
+            <input type="file" class="form-control" id="imageUpload" name="file">
+          </div>
+          <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+      </form>
+  </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

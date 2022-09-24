@@ -26,6 +26,7 @@
     "nodemon": "^2.0.7",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
+    "tw-elements": "^1.0.0-alpha12",
     "validator": "^13.6.0"
   }
 }

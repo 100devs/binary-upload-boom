@@ -1,30 +1,201 @@
 <%- include('partials/header') -%>
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
-<script src="../script.js" defer></script>
-<link href="../styles.css" rel="stylesheet">
+<!-- <script src="../node_modules/tw-elements/dist/js/index.min.js"></script> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'sans-serif'],
+        },
+      }
+    }
+  }
+</script>
 <body>
-    <ul>
-        <li data-tab-target="#addAnnouncement" class="active tab">Add Announcement</li>
-        <li data-tab-target="#addPlayer" class="tab">Add Player</li>
-        <li data-tab-target="#addMatch" class="tab">Add Match</li>
-        <li data-tab-target="#startNewSeason" class="tab">Start New Season</li>
-    </ul>
-
-    <div class="tab-content">
-        <div id="addAnnouncement" data-tab-content class="active">
-            <h1>Add Announcement</h1>
+    <div class="flex items-start">
+        <ul class="nav nav-tabs flex flex-col flex-wrap list-none border-b-0 pl-0 mr-4" id="tabs-tabVertical"
+          role="tablist">
+          <li class="nav-item flex-grow text-center" role="presentation">
+            <a href="#tabs-homeVertical" class="
+                nav-link
+                block
+                font-medium
+                text-xs
+                leading-tight
+                uppercase
+                border-x-0 border-t-0 border-b-2 border-transparent
+                px-6
+                py-3
+                my-2
+                hover:border-transparent hover:bg-gray-100
+                focus:border-transparent
+                active
+              " id="tabs-home-tabVertical" data-bs-toggle="pill" data-bs-target="#tabs-homeVertical" role="tab"
+              aria-controls="tabs-homeVertical" aria-selected="true">Add Announcement</a>
+          </li>
+          <li class="nav-item flex-grow text-center" role="presentation">
+            <a href="#tabs-profileVertical" class="
+                nav-link
+                block
+                font-medium
+                text-xs
+                leading-tight
+                uppercase
+                border-x-0 border-t-0 border-b-2 border-transparent
+                px-6
+                py-3
+                my-2
+                hover:border-transparent hover:bg-gray-100
+                focus:border-transparent
+              " id="tabs-profile-tabVertical" data-bs-toggle="pill" data-bs-target="#tabs-profileVertical" role="tab"
+              aria-controls="tabs-profileVertical" aria-selected="false">Add Player</a>
+          </li>
+          <li class="nav-item flex-grow text-center" role="presentation">
+            <a href="#tabs-messagesVertical" class="
+                nav-link
+                block
+                font-medium
+                text-xs
+                leading-tight
+                uppercase
+                border-x-0 border-t-0 border-b-2 border-transparent
+                px-6
+                py-3
+                my-2
+                hover:border-transparent hover:bg-gray-100
+                focus:border-transparent
+              " id="tabs-messages-tabVertical" data-bs-toggle="pill" data-bs-target="#tabs-messagesVertical" role="tab"
+              aria-controls="tabs-messagesVertical" aria-selected="false">Add Match</a>
+          </li>
+          <li class="nav-item flex-grow text-center" role="presentation">
+            <a href="#tabs-messagesVertical" class="
+                nav-link
+                block
+                font-medium
+                text-xs
+                leading-tight
+                uppercase
+                border-x-0 border-t-0 border-b-2 border-transparent
+                px-6
+                py-3
+                my-2
+                hover:border-transparent hover:bg-gray-100
+                focus:border-transparent
+              " id="tabs-messages-tabVertical" data-bs-toggle="pill" data-bs-target="#tabs-messagesVertical" role="tab"
+              aria-controls="tabs-messagesVertical" aria-selected="false">Start New Season</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="tabs-tabContentVertical">
+          <div class="tab-pane fade show active" id="tabs-homeVertical" role="tabpanel"
+            aria-labelledby="tabs-home-tabVertical">
+            <div class="flex justify-center">
+                <div class="mb-3 xl:w-96">
+                  <label for="exampleFormControlTextarea1" class="form-label inline-block mb-2 text-gray-700"
+                    >Announcement</label
+                  >
+                  <textarea
+                    class="
+                      form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                    "
+                    id="exampleFormControlTextarea1"
+                    rows="3"
+                    placeholder="Your message"
+                  ></textarea>
+                </div>
+              </div> 
+          </div>
+          <div class="tab-pane fade" id="tabs-profileVertical" role="tabpanel" aria-labelledby="tabs-profile-tabVertical">
+            <!-- add player -->
+            <div class="flex justify-center">
+                <div class="mb-3 xl:w-96">
+                  <label for="exampleEmail0" class="form-label inline-block mb-2 text-gray-700"
+                    >Email input</label
+                  >
+                  <input
+                    type="email"
+                    class="
+                      form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                    "
+                    id="exampleEmail0"
+                    placeholder="Email input"
+                  />
+                </div>
+              </div>
+              <div class="flex justify-center">
+                <div class="mb-3 xl:w-96">
+                  <label for="exampleText0" class="form-label inline-block mb-2 text-gray-700"
+                    >Text input</label
+                  >
+                  <input
+                    type="text"
+                    class="
+                      form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                    "
+                    id="exampleText0"
+                    placeholder="Text input"
+                  />
+                </div>
+              </div>
+          </div>
+          <div class="tab-pane fade" id="tabs-messagesVertical" role="tabpanel"
+            aria-labelledby="tabs-profile-tabVertical">
+            Add Match
+          </div>
+          <div class="tab-pane fade" id="tabs-messagesVertical" role="tabpanel"
+            aria-labelledby="tabs-profile-tabVertical">
+            Start new season
+          </div>
         </div>
-        <div id="addPlayer" data-tab-content>
-            <h1>Add Player</h1>
-        </div>
-        <div id="addMatch" data-tab-content>
-            <h1>Add Match</h1>
-        </div>
-        <div id="startNewSeason" data-tab-content>
-            <h1>Start New Season</h1>
-        </div>
-    </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 </body>
 
 

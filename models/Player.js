@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const PlayerSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+  },
   firstName: {
     type: String,
     required: true,
@@ -27,10 +31,6 @@ const PlayerSchema = new mongoose.Schema({
   },
   points: {
     type: Number,
-    required: true,
-  },
-  email: {
-    type: String,
     required: true,
   },
   prefCourt: {

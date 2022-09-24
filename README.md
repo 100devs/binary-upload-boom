@@ -39,6 +39,6 @@
 :e-mail: [email@email.com](mailto:social.chapters@simplelogin.com)
 :computer: [Github](https://github.com/jonathanmani/)
 
-**:point_right: Chavis Gill**
+**:point_right: Chavis T. Gill**
 :e-mail: [chavistgill@gmail.com](mailto:chavistgill@gmail.com)
 :computer: [Github](https://github.com/chavgill/)

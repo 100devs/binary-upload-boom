@@ -1,3 +1,4 @@
+//used post model as template
 const mongoose = require("mongoose");
 
 const CommentSchema = new mongoose.Schema({

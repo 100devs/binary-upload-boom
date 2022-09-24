@@ -1,40 +1,66 @@
-<%- include('partials/header') -%>
+<%- include('partials/header', {navbar: "no", title: "Log in"}) -%>
+<div class="grid grid-cols-1 gap-y-16 lg:gap-y-12 items-center text-gray-900 dark:text-white">
+	<div class="lg:pl-20 absolute -mt-12">
+		<div class="max-w-xs px-2.5 lg:max-w-none" role="presentation">
+			<img alt="A collection of polaroid pictures. Photo by cottonbro from Pexels" src="https://i.imgur.com/yE51T1w.jpg" width="700" height="700" decoding="async" data-nimg="future" class="aspect-square -rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800 opacity-50" loading="lazy" style="color: transparent;">
+		</div>
+	</div>
+	<div class="lg:order-first lg:row-span-2 z-10">
+		<div class="flex items-center justify-center -mt-4 sm:-mt-8 md:-mt-10 lg:-mt-16 mb-12">
+			<div class="max-w-md w-full bg-zinc-50/90 dark:bg-zinc-900/95 space-y-8 py-8 shadow md:shadow-lg sm:rounded-md">
+			<div>
+				<h1 class="text-center text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+				Log in
+				</h1>
+			</div>
+			
+			<form action="/login" method="POST">
+				<div class="sm:overflow-hidden">
+					<div class="px-6 md:px-9 space-y-8">
+						<!-- Form Fields -->
+						<div class="col-span-6">
+							<label class="block font-medium dark:font-normal text-zinc-800 dark:text-zinc-200">
+								Email address
+								<input type="text" name="email" id="email" autocomplete="email" required 
+								class="dark:bg-zinc-800/90 bg-gray-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-300 focus:ring focus:ring-offset-3 focus:ring-teal-400 focus:ring-opacity-70">
+							</label>
+						</div>
+						<div class="col-span-6">
+							<label class="block font-medium dark:font-normal text-zinc-800 dark:text-zinc-200">
+								Password
+								<input type="password" name="password" autocomplete="current-password" required class="dark:bg-zinc-800/90 bg-gray-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-300 focus:ring focus:ring-offset-3 focus:ring-teal-400 focus:ring-opacity-70"/>
+								</label>
+						</div>
+						
+						<div>
+							<button type="submit" class="group relative w-full flex mb-4 justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md transition active:transition-none bg-zinc-800 font-semibold text-zinc-100 hover:bg-zinc-700 active:bg-zinc-800 active:text-zinc-100/70 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:active:bg-zinc-700 dark:active:text-zinc-100/70 focus:outline-none focus:ring focus:ring-offset-3 focus:ring-teal-400">
+								<span class="absolute left-0 inset-y-0 flex items-center pl-3">
+								<!-- Heroicon name: solid/lock-closed -->
+								<svg class="h-5 w-5 text-zinc-600 dark:text-zinc-500 group-hover:text-zinc-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+								<path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+								</svg>
+							</span>
+							Sign in
+							</button>
+						</div>
+						<!-- / Form Fields -->
+					</div>
+				</div>
+			</form>
 
-<main class="container">
-  <div class="row justify-content-center">
-    <section class="col-6 mt-5">
-      <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
-      <div class="alert alert-danger"><%= el.msg %></div>
-      <% }) %> <% } %> <% if (locals.messages.info) { %> <%
-      messages.info.forEach( el => { %>
-      <div class="alert alert-info"><%= el.msg %></div>
-      <% }) %> <% } %>
-      <form action="/login" method="POST">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            name="email"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-            name="password"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </section>
-  </div>
-</main>
+			<div class="flex items-center px-6 md:px-9 space-y-8 text-zinc-800 dark:text-zinc-100">
+				<div class="text-sm mb-12">
+					<p class="inline">Don't have an account?</p>
+					<a href="/signup" class="inline font-medium text-teal-700 dark:text-teal-400 hover:text-teal-500 dark:hover:text-teal-500 transition transition-50">
+					Sign up.
+					</a>
+					<a class="block underline underline-offset-4 text-sm text-zinc-500 dark:text-zinc-400 hover:text-teal-500 dark:hover:text-teal-500" href="/">Go to main page</a>
+					<p class="block mt-8 absolute text-sm text-zinc-300 dark:text-zinc-600">Photo by <a class="underline underline-offset-4 hover:text-teal-500 dark:hover:text-teal-500" href="https://www.pexels.com/photo/captured-memories-3419719/">cottonbro</a> from Pexels</p>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <%- include('partials/footer') -%>

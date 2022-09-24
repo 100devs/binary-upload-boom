@@ -1,46 +1,161 @@
-<%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-          </div>
-          <div class="mt-5">
-            <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
-              </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
-          </div>
-      </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>  
-      </div>  
-    </div>
-  </div>
+<%- include('partials/header', {navbar: "yes", title: "User profile", active: "profile"} ) %>
+
+<div class="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
+	<div class="lg:order-first lg:row-span-2">
+		<h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+			Hi, <%= user.userName %>! 👋
+		</h1>
+		<div class="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+			<p>What would you like to do today?</p>
+		
+			<section class="w-full rounded-lg divide-y rounded divide-slate-200 dark:border-zinc-700 text-gray-900 dark:text-white shadow-md shadow-teal-500/40">
+
+				<details class="p-4 group focus:ring focus-within:ring-teal-400 focus-within:ring-opacity-70">
+					<summary class="[&::-webkit-details-marker]:hidden relative pr-8 font-medium list-none cursor-pointer text-gray-900 dark:text-white group-hover:text-gray-500 group-hover:dark:text-gray-400 transition">
+						Change profile picture
+						<svg xmlns="http://www.w3.org/2000/svg" class="absolute right-0 w-6 h-6 transition -rotate-90 duration-300 top-1 stroke-slate-700 dark:stroke-slate-300 group-open:rotate-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+							<path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+						</svg>
+					</summary>
+					<form action="/user/update/picture/?_method=PUT" class="my-8 px-3 sm:px-8 md:px-12" enctype="multipart/form-data" method="post">
+						<input type="hidden" name="update" value="picture">
+						<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="user_avatar">
+							Upload picture
+						</label>
+						<input name="file" class="block w-full text-sm bg-gray-50 rounded-lg border border-gray-300 cursor-pointer file:mr-4 file:py-2 file:px-4 file:border file:border-e file:border-gray-200 dark:file:border-0 file:text-base file:font-semibold file:bg-zinc-100 dark:file:bg-zinc-700 file:text-zinc-700 dark:file:text-zinc-200 hover:file:bg-zinc-200 dark:hover:file:bg-zinc-600 focus:ring focus:ring-offset-3 focus:ring-teal-400 focus:ring-opacity-70 dark:bg-zinc-800/90 dark:placeholder-zinc-200 dark:border-gray-600" aria-describedby="user_avatar_help" id="user_avatar" type="file" required>
+					
+						<div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help">
+							Supported file formats: JPG, JPEG, and PNG.
+						</div>
+
+						<button type="submit" class="group relative w-full flex my-6 justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md transition active:transition-none bg-zinc-800 font-semibold text-zinc-100 hover:bg-zinc-700 active:bg-zinc-800 active:text-zinc-100/70 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:active:bg-zinc-700 dark:active:text-zinc-100/70 focus:outline-none focus:ring focus:ring-offset-3 focus:ring-teal-400">
+							<span class="absolute right-0 inset-y-0 flex items-center pr-3">
+								<!-- Heroicon name: arrow-up-tray -->
+								<svg class="h-5 w-5 text-zinc-600 transition dark:text-zinc-500 group-hover:text-zinc-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+									<path d="M9.25 13.25a.75.75 0 001.5 0V4.636l2.955 3.129a.75.75 0 001.09-1.03l-4.25-4.5a.75.75 0 00-1.09 0l-4.25 4.5a.75.75 0 101.09 1.03L9.25 4.636v8.614z" />
+									<path d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
+								</svg>
+							</span>
+							Submit new picture
+						</button>
+					</form>
+				</details>
+
+				<details class="p-4 group focus:outline-none focus:ring focus:ring-offset-3 focus:ring-teal-400 focus:ring-opacity-70">
+					<summary class="[&::-webkit-details-marker]:hidden relative pr-8 font-medium list-none cursor-pointer text-gray-900 dark:text-white group-hover:text-gray-500 group-hover:dark:text-gray-400 transition">
+						Change name or e-mail
+						<svg xmlns="http://www.w3.org/2000/svg" class="absolute right-0 w-6 h-6 transition -rotate-90 duration-300 top-1 stroke-slate-700 dark:stroke-slate-300 group-open:rotate-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+							<path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+						</svg>
+					</summary>
+					<div class="my-8 px-3 sm:px-8 md:px-12">
+						<form action="/user/update/?_method=PUT" class="my-8 px-3 sm:px-8 md:px-12" method="post">
+							<input type="hidden" name="update" value="info">
+							<div class="sm:overflow-hidden">
+								<div class="space-y-6">
+									<!-- Form Fields -->
+									<div class="col-span-6">
+										<label class="block text-zinc-800 dark:text-zinc-200">
+											<span class="font-medium dark:font-normal text-gray-500 dark:text-gray-300">Current name: <%= user.userName %></span> 
+											<span class="block font-medium dark:font-normal">New name:</span>
+											<input type="text" name="newName" autocomplete="off"  
+											class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-300 focus:ring focus:ring-offset-3 focus:ring-teal-400 focus:ring-opacity-70">
+										</label>
+									</div>
+									<div class="col-span-6">
+										<label class="block text-zinc-800 dark:text-zinc-200">
+											<span class="font-medium dark:font-normal text-gray-500 dark:text-gray-300">Current e-mail: <%= user.email %></span> 
+											<span class="block font-medium dark:font-normal">New e-mail address:</span>
+											<input type="email" inputmode="email" name="newEmail" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-300 focus:ring focus:ring-offset-3 focus:ring-teal-400 focus:ring-opacity-70"/>
+											</label>
+									</div>
+									
+									<div>
+										<button type="submit" class="group relative w-full flex my-6 justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md transition active:transition-none bg-zinc-800 font-semibold text-zinc-100 hover:bg-zinc-700 active:bg-zinc-800 active:text-zinc-100/70 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:active:bg-zinc-700 dark:active:text-zinc-100/70 focus:outline-none focus:ring focus:ring-offset-3 focus:ring-teal-400">
+											<span class="absolute right-0 inset-y-0 flex items-center pr-3">
+												<!-- Heroicon name: arrow-path -->
+												<svg class="h-5 w-5 text-zinc-600 dark:text-zinc-500 group-hover:text-zinc-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+													<path fillRule="evenodd" d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H3.989a.75.75 0 00-.75.75v4.242a.75.75 0 001.5 0v-2.43l.31.31a7 7 0 0011.712-3.138.75.75 0 00-1.449-.39zm1.23-3.723a.75.75 0 00.219-.53V2.929a.75.75 0 00-1.5 0V5.36l-.31-.31A7 7 0 003.239 8.188a.75.75 0 101.448.389A5.5 5.5 0 0113.89 6.11l.311.31h-2.432a.75.75 0 000 1.5h4.243a.75.75 0 00.53-.219z" clipRule="evenodd" />
+												</svg>
+											</span>
+											Update info
+										</button>
+									</div>
+									<!-- / Form Fields -->
+								</div>
+							</div>
+						</form>
+					</div>
+				</details>
+
+				<details class="p-4 group focus:outline-none focus:ring focus:ring-offset-3 focus:ring-teal-400 focus:ring-opacity-70">
+					<summary class="[&::-webkit-details-marker]:hidden relative pr-8 font-medium list-none cursor-pointer text-zinc-800 dark:text-zinc-200 group-hover:text-zinc-600 group-hover:dark:text-zinc-300 transition">
+						Change password
+						<svg xmlns="http://www.w3.org/2000/svg" class="absolute right-0 w-6 h-6 transition -rotate-90 duration-300 top-1 stroke-slate-700 dark:stroke-slate-300 group-open:rotate-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+							<path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+						</svg>
+					</summary>
+				</details>
+			</section>
+		</div>
+	</div>
+
+	<div class="lg:pl-20 text-gray-900 dark:text-white">
+		<h2 id="addPost" class="mb-8 text-3xl font-bold tracking-tight text-zinc-800 dark:text-zinc-200 sm:text-4xl">
+			Add a post:
+		</h2>
+		<form action="/post/create" enctype="multipart/form-data" method="POST">
+			<div class="mb-3">
+				<label for="title" class="block mb-2 font-medium text-gray-900 dark:text-gray-300">Title</label>
+				<input type="text" class="block w-full bg-gray-50 rounded-lg border border-gray-300 cursor-pointer focus:ring focus:ring-offset-3 focus:ring-teal-400 focus:ring-opacity-70 dark:bg-zinc-800/90 dark:placeholder-zinc-200 dark:border-gray-600" id="title" name="title" required>
+			</div>
+			<div class="mb-3">
+			  <label for="caption" class="block mb-2 font-medium text-gray-900 dark:text-gray-300">Caption</label>
+			  <textarea class="block w-full bg-gray-50 rounded-lg border border-gray-300 cursor-pointer focus:ring focus:ring-offset-3 focus:ring-teal-400 focus:ring-opacity-70 dark:bg-zinc-800/90 dark:placeholder-zinc-200 dark:border-gray-600" id="caption" name="caption" required></textarea>
+			</div>
+
+			<div class="mb-3">
+			<label class="block mb-2 font-medium text-gray-900 dark:text-gray-300" for="imageUpload">Image</label>
+			<input type="file" class="block w-full text-sm bg-gray-50 rounded-lg border border-gray-300 cursor-pointer file:mr-4 file:py-2 file:px-4 file:border file:border-e file:border-gray-200 dark:file:border-0 file:text-base file:font-semibold file:bg-zinc-100 dark:file:bg-zinc-700 file:text-zinc-700 dark:file:text-zinc-200 hover:file:bg-zinc-200 dark:hover:file:bg-zinc-600 focus:ring focus:ring-offset-3 focus:ring-teal-400 focus:ring-opacity-70 dark:bg-zinc-800/90 dark:placeholder-zinc-200 dark:border-gray-600" id="imageUpload" placeholder="No file" name="file" required>
+			</div>
+
+			<button type="submit" class="group relative w-full flex my-8 justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md transition active:transition-none bg-zinc-800 font-semibold text-zinc-100 hover:bg-zinc-700 active:bg-zinc-800 active:text-zinc-100/70 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:active:bg-zinc-700 dark:active:text-zinc-100/70 focus:outline-none focus:ring focus:ring-offset-3 focus:ring-teal-400">
+				<span class="absolute right-0 inset-y-0 flex items-center pr-3">
+					<!-- Heroicon name: paper-airplane -->
+					<svg class="h-5 w-5 text-zinc-600 dark:text-zinc-500 group-hover:text-zinc-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+						<path d="M3.105 2.289a.75.75 0 00-.826.95l1.414 4.925A1.5 1.5 0 005.135 9.25h6.115a.75.75 0 010 1.5H5.135a1.5 1.5 0 00-1.442 1.086l-1.414 4.926a.75.75 0 00.826.95 28.896 28.896 0 0015.293-7.154.75.75 0 000-1.115A28.897 28.897 0 003.105 2.289z" />
+					</svg>
+				</span>
+				Submit post
+			</button>
+		  </form>  
+
+	</div>
+
+	<div class="lg:pl-20">
+		<% if (posts.length) {%>
+		<h3 id="latestPosts" class="mb-8 text-3xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-4xl">
+			Your latest posts:
+		</h3>
+		<% } %>
+		<div class="grid grid-cols-1 gap-x-2 gap-y-4 sm:grid-cols-2">
+			<% for(var i=0; i < posts.length; i++) {%>
+			<div class="relative flex flex-col mx-auto group">
+				<figure class="relative transition flex-none rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:rounded-2xl max-w-xs shadow-md shadow-teal-500/30 group-hover:shadow-lg group-hover:shadow-teal-500/40">
+					<a href="/post/<%= posts[i]._id %>" aria-label="See the post <%= posts[i].title %>">
+						<img class="inset-0 object-cover object-center rounded-xl sm:rounded-2xl opacity-75 group-hover:opacity-100 transition" src="<%= posts[i].image.split('upload').join('upload/ar_16:9,c_thumb,w_320,g_center') %>" width="320" role="link">
+					</a>
+					<figcaption class="absolute bottom-0 rounded-b-xl sm:rounded-b-2xl text-base text-zinc-100 px-4 bg-zinc-800/70 w-full max-w-xs">
+						<div class="mt-1 mb-1">
+							<p><span class="sr-only">Number of likes:</span><span aria-hidden="true">🤍</span> <%= posts[i].likes %></p>
+							<p><%= new Date(posts[i].createdAt).toLocaleDateString('en', { year: 'numeric' , month: 'short' , day: '2-digit' }) %></p>
+						</div>
+					</figcaption>
+				</figure>
+			</div>
+			<% } %>
+		</div>
+	</div>
 </div>
+
 <%- include('partials/footer') -%>

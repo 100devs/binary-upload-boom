@@ -1,52 +1,127 @@
-<%- include('partials/header') -%>
-<div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-6">
-      <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
-        <form
-          class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
-          method="POST"
-        >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
-        </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
-        <%}%>
-      </div>
-    </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
+<%- include('partials/header', {navbar: "yes" , title: "Post" , active: " " }) %>
 
-      <% comment.forEach( el=> { %>
-        <p><%= el.comment %></p>
-        <% }) %>
-        
-    </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
-    </div>
-  </div>
-</div>
-<h2>Add a post</h2>
-<form action="/comments/createComment/" method="POST"> 
-<div class="mb-3">
-      <label for="comment" class="form-label">Title</label>
-      <input type="text" class="form-control" id="comment" name="comment">
-      <input type="hidden" name="post" value="<%= post._id %>">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+	<div class="xl:relative">
+		<div class="mx-auto max-w-2xl">
+			<a href="/feed" class="group mb-8 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md shadow-teal-500/30 hover:shadow-lg hover:shadow-teal-500/40 ring-1 ring-zinc-900/10 transition dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0 dark:ring-white/10 dark:hover:border-zinc-700 dark:hover:ring-white/20 lg:absolute lg:-left-5 lg:mb-0 lg:-mt-2 xl:-top-1.5 xl:left-0 xl:mt-0">
+				<span class="sr-only">Go back to feed</span>
+				<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" class="h-4 w-4 stroke-zinc-500 transition dark:stroke-zinc-500 group-hover:stroke-teal-500 dark:group-hover:stroke-teal-400">
+					<path d="M7.25 11.25 3.75 8m0 0 3.5-3.25M3.75 8h8.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+				</svg>
+			</a>
+			<article aria-labelledby="articleTitle">
+				<header class="flex flex-col">
+					<h1 id="articleTitle" class="mt-6 text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+						<%= post.title %>
+					</h1>
+					<time datetime="<%= post.createdAt %>" class="order-first flex items-center text-base text-zinc-700 dark:text-zinc-400">
+						<span class="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500"></span>
+						<span class="ml-3"><%= new Date(post.createdAt).toLocaleDateString('en', { year: 'numeric' , month: 'long' , day: '2-digit' }) %></span>
+					</time>
+				</header>
+				<div class="mt-8 prose dark:prose-invert">
+					
+					<img alt="<%= post.title %>" src="<%= post.image.split('upload').join('upload/ar_16:9,c_fill,g_auto,w_800') %>"
+						width="1000" height="auto" decoding="async" loading="lazy"
+						style="color: transparent;">
+					
+					<p><%= post.caption %></p>
+					<div class="pb-2 flex justify-between">
+						<div class="flex items-center gap-x-2">
+							<button class="p-3 transition duration-100 rounded justify-self-center text-red-400 hover:bg-rose-100 hover:text-red-600 focus:bg-rose-200 focus:text-red-600" type="button" id="<%= post._id %>" onclick="likePost(this.id)" >
+								<span class="relative only:-mx-6">
+									<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 transition duration-100 group-hover:scale-125 group-active:scale-150 group-focus:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+									</svg>
+								</span>
+								<span class="sr-only">Like this post</span>
+							</button>
+						  <span class="text-black/90 font-semibold tracking-wider dark:text-white/90"><%= post.likes %> <%= (post.likes > 1) ? "likes" : "like" %></span>
+						</div>
+						<%if(post.user==user.id){ %>
+						<div class="flex items-center gap-x-2" data-id="<%= post._id %>">
+							<button class="p-3 transition duration-100 rounded justify-self-center
+							text-red-500 hover:text-rose-100 hover:bg-red-600 focus:text-rose-200 focus:bg-red-600" type="button" data-modal-trigger aria-controls="deletePostModal" aria-expanded="false">
+								<span class="pointer-events-none only:-mx-6">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 transition duration-100 group-hover:scale-125 group-active:scale-150 group-focus:scale-125">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+									  </svg>									  
+								</span>
+								<span class="sr-only">Delete this post</span>
+							</button>
+						</div>
+						
+						<div id="deletePostModal" role="dialog" aria-labelledby="deletePostTitle" aria-modal="true" data-modal-target="" class="hidden">
+
+							<div data-modal-close="" data-modal-overlay="" tabindex="-1" data-class-in="opacity-50" data-class-out="opacity-0" class="fixed inset-0 z-50 bg-zinc-800/40 backdrop-blur-sm dark:bg-black/80 opacity-100 duration-150 motion-reduce:transition-none opacity-0 mx-auto"></div>
+							
+							<div data-modal-wrapper="" data-class-in="opacity-100 translate-y-0" data-class-out="opacity-0 translate-y-5" class="flex max-w-xs flex-col fixed inset-x-4 top-8 z-50 origin-top rounded-2xl bg-white p-6 ring-1 gap-8 ring-zinc-900/5 dark:bg-zinc-900 dark:ring-zinc-800 scale-100 duration-150 motion-reduce:transition-none mx-auto opacity-100 translate-y-0">
+								<div class="flex flex-col items-center">
+									<button data-modal-close="" aria-label="Close" type="button" class="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white focus:text-black dark:focus:text-white ml-auto">
+										<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+										<span class="sr-only">Close</span>
+									</button>
+									<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 -mt-4 mb-4 stroke-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+									</svg>
+									<p id="deletePostTitle" class="m-0 flex-1 text-xl font-medium tracking-tight text-zinc-800 dark:text-zinc-100">Delete post?
+									</p>
+								</div>
+								
+								<div class="px-2 text-center">
+									<p class="m-0 text-lg font-normal text-gray-600 dark:text-gray-400">Please note that deleting this post will also delete its likes, comments, and the picture.</p>
+								</div>
+
+								<div class="flex mb-4 flex-wrap justify-center gap-2">
+									<button id="closeDeleteModal" data-modal-close="" class="inline-flex items-center justify-center flex-1 h-10 gap-2 px-5 text-sm font-medium tracking-wide transition duration-300 rounded justify-self-center whitespace-nowrap text-teal-600 dark:text-teal-500 hover:bg-teal-100 dark:hover:bg-teal-100/70 border border-teal-600 dark:border-teal-500 dark:hover:text-black focus:bg-teal-100 focus:text-teal-700 dark:focus:text-teal-700 focus-visible:outline-none">
+										<span>Maybe not</span>
+									</button>
+
+									<button id="<%= post._id %>" onclick="deletePost(this.id)" class="inline-flex items-center justify-center flex-1 border border-red-500 h-10 gap-2 px-5 text-sm font-medium tracking-wide transition duration-300 rounded whitespace-nowrap bg-red-500 text-white hover:text-rose-100 hover:bg-red-700 focus:text-rose-100 focus:bg-red-700 focus-visible:outline-none">
+										<span>Yes, I'm sure</span>
+									</button>
+								</div>
+
+							</div>
+						</div>
+
+						<%}%>
+					</div>
+			</article>
+		<section aria-labelledby="commentsTitle">
+			<h2 id="commentsTitle" class="my-8 text-2xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-4xl">
+				Comments
+			</h2>
+			<% comment.forEach( el=> { %>
+			<div class="py-6 flex px-2 space-x-4 align-text-top relative">
+				<img class="inline w-8 h-8 rounded-full object-cover" src="<%= el.picture ? el.picture : 'https://api.lorem.space/image/face?w=50&h=50' %>" aria-hidden="true">
+				<div class="prose dark:prose-invert">
+					<span class="text-black/90 font-semibold tracking-tight dark:text-white/90 text-lg mr-2"><%= el.createdBy %></span>
+					<p class="inline"><%= el.comment %></p>
+				</div>
+				<span class="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-teal-500/0 via-teal-500/40 to-teal-500/0 dark:from-teal-400/0 dark:via-teal-400/40 dark:to-teal-400/0"></span>
+			</div>
+			<% }) %>
+
+			<form action="/comments/create/" method="POST" class="mt-8 grid grid-cols-1 gap-x-2 gap-y-4" aria-labelledby="commentLabel">
+				<input type="hidden" name="post" value="<%= post._id %>">
+				<label id="commentLabel" for="commentInput" class="block text-sm font-medium text-gray-900 dark:text-gray-300">Add your comment
+					<textarea class="block w-full rounded-lg border border-gray-300 cursor-pointer focus:ring focus:ring-offset-3 focus:ring-teal-400 focus:ring-opacity-70 dark:bg-zinc-800/90 bg-gray-50  dark:placeholder-zinc-200 dark:border-gray-600" rows="4" id="commentInput" name="comment" required></textarea>
+				</label>
+				<div>
+
+					<button type="submit" class="group flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md transition active:transition-none bg-zinc-800 font-semibold text-zinc-100 hover:bg-zinc-700 active:bg-zinc-800 active:text-zinc-100/70 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:active:bg-zinc-700 dark:active:text-zinc-100/70 focus:outline-none focus:ring focus:ring-offset-3 focus:ring-teal-400">
+						Submit
+						<span class="relative top-0.5 inset-y-0 flex items-center pl-3">
+							<!-- Heroicon name: paper-airplane -->
+							<svg class="h-5 w-5 text-zinc-600 dark:text-zinc-500 group-hover:text-zinc-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+								<path d="M3.105 2.289a.75.75 0 00-.826.95l1.414 4.925A1.5 1.5 0 005.135 9.25h6.115a.75.75 0 010 1.5H5.135a1.5 1.5 0 00-1.442 1.086l-1.414 4.926a.75.75 0 00.826.95 28.896 28.896 0 0015.293-7.154.75.75 0 000-1.115A28.897 28.897 0 003.105 2.289z" />
+							</svg>
+						</span>
+					</button>
+				</div>
+			</form>
+		</section>
+	</div>	
 
 
-<%- include('partials/footer') -%>
+	<%- include('partials/footer') -%>

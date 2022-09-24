@@ -2,9 +2,22 @@ const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-  userName: { type: String, unique: true },
-  email: { type: String, unique: true },
-  password: String,
+	userName: { 
+		type: String,
+		unique: true 
+	},
+	email: { 
+		type: String,
+		unique: true 
+	},
+	password: String,
+	profile: { 
+		type: String,
+		default: "https://api.lorem.space/image/face?w=150&h=150" 
+	},
+	bio: { 
+		type: String 
+	}
 });
 
 // Password hash middleware.

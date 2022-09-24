@@ -1,11 +1,111 @@
-<%- include('partials/header') -%>
+<%- include('partials/header', {navbar: "no", title: "" }) -%>
+	<header class="max-w-2xl">
+		<h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+			Your latest social network.
+		</h1>
+		<p class="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+			Not all social networks are built the same. This one is. Or not. Kind of. You should try it just to see if I'm lying.
+			Anyway I hope these pictures of happy people can convince you.
+		</p>
+	</header>
+	<div class="mt-8 sm:mt-16">
+		<div class="mt-4 flex gap-4">
+			<a href="/login"
+				class="inline-flex items-center gap-2 justify-center rounded-full py-3 px-4 text-md outline-offset-2 transition active:transition-none bg-zinc-800 font-semibold text-zinc-100 hover:bg-zinc-700 active:bg-zinc-800 active:text-zinc-100/70 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:active:bg-zinc-700 dark:active:text-zinc-100/70 flex-none">
+				<span>
+					Log in
+					<span aria-hidden="true" class="text-slate-400 sm:inline">→</span>
+				</span>
+			</a>
+			<a class="inline-flex items-center gap-2 justify-center rounded-full text-md font-semibold py-3 px-4 transition active:transition-none outline-offset-2 bg-white text-slate-900 dark:hover:bg-white dark:bg-slate-200 ring-1 ring-slate-900/10 hover:bg-slate-200 hover:ring-slate-900/15 "
+				href="/signup">
+				<span>Sign up
+					<span aria-hidden="true" class="text-black/50 sm:inline">→</span>
+				</span>
+			</a>
+		</div>
+	</div>
+	
+</div>
+</div>
+</div>
+</div>
+	<div class="mt-16 sm:mt-20">
+		<div class="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
+			<div class="relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl rotate-2">
+				<figure>
+					<img alt="<%= data[0].alt_description %>" src="<%= data[0].urls.raw %>&fm=jpg&crop=edges&fit=crop&w=640&h=427&q=80&fit=max" decoding="async" class="absolute inset-0 h-full w-full object-cover" width="640" height="427" loading="lazy">	
+					<figcaption class="absolute bottom-0 text-xs text-zinc-200 px-4 bg-zinc-800/60 w-full">
+						<div>
+							<p class="drop-shadow-md">Photo by 
+								<a href="<%= data[0].user.links.html %>?utm_source=myPetPal&utm_medium=referral">
+								<%= data[0].user.name %>
+								</a> on 
+								<a href="https://unsplash.com/?utm_source=myPetPal&utm_medium=referral">Unsplash</a></p>
+						</div>
+					</figcatpion>
+				</figure>
+			</div>
+			<div class="relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl -rotate-2">
+				<figure>
+					<img alt="<%= data[1].alt_description %>" src="<%= data[1].urls.raw %>&fm=jpg&crop=edges&fit=crop&w=640&h=427&q=80&fit=max" decoding="async" class="absolute inset-0 h-full w-full object-cover" width="640" height="427" loading="lazy">	
+					<figcaption class="absolute bottom-0 text-xs text-zinc-200 px-4 bg-zinc-800/60 w-full">
+						<div>
+							<p class="drop-shadow-md">Photo by 
+								<a href="<%= data[1].user.links.html %>?utm_source=myPetPal&utm_medium=referral">
+								<%= data[1].user.name %>
+								</a> on 
+								<a href="https://unsplash.com/?utm_source=myPetPal&utm_medium=referral">Unsplash</a>
+							</p>
+						</div>
+					</figcatpion>
+				</figure>
+			</div>
+			<div class="relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl rotate-2">
+				<figure>
+					<img alt="<%= data[2].alt_description %>" src="<%= data[2].urls.raw %>&fm=jpg&crop=edges&fit=crop&w=640&h=427&q=80&fit=max" decoding="async" class="absolute inset-0 h-full w-full object-cover" width="640" height="427" loading="lazy">	
+					<figcaption class="absolute bottom-0 text-xs text-zinc-200 px-4 bg-zinc-800/60 w-full">
+						<div>
+							<p class="drop-shadow-md">Photo by 
+								<a href="<%= data[2].user.links.html %>?utm_source=myPetPal&utm_medium=referral">
+								<%= data[2].user.name %>
+								</a> on 
+								<a href="https://unsplash.com/?utm_source=myPetPal&utm_medium=referral">Unsplash</a>
+							</p>
+						</div>
+					</figcatpion>
+				</figure>
+			</div>
+			<div class="relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl rotate-2">
+				<figure>
+					<img alt="<%= data[3].alt_description %>" src="<%= data[3].urls.raw %>&fm=jpg&crop=edges&fit=crop&w=640&h=427&q=80&fit=max" decoding="async" class="absolute inset-0 h-full w-full object-cover" width="640" height="427" loading="lazy">	
+					<figcaption class="absolute bottom-0 text-xs text-zinc-200 px-4 bg-zinc-800/60 w-full">
+						<div>
+							<p class="drop-shadow-md">Photo by 
+								<a href="<%= data[3].user.links.html %>?utm_source=myPetPal&utm_medium=referral">
+								<%= data[3].user.name %>
+								</a> on 
+								<a href="https://unsplash.com/?utm_source=myPetPal&utm_medium=referral">Unsplash</a>
+							</p>
+						</div>
+					</figcatpion>
+				</figure>
+			</div>
+			<div class="relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl -rotate-2">
+				<figure>
+					<img alt="<%= data[4].alt_description %>" src="<%= data[4].urls.raw %>&fm=jpg&crop=edges&fit=crop&w=640&h=427&q=80&fit=max" decoding="async" class="absolute inset-0 h-full w-full object-cover" width="640" height="427" loading="lazy">	
+					<figcaption class="absolute bottom-0 text-xs text-zinc-200 px-4 bg-zinc-800/60 w-full">
+						<div>
+							<p class="drop-shadow-md">Photo by 
+								<a href="<%= data[4].user.links.html %>?utm_source=myPetPal&utm_medium=referral">
+								<%= data[4].user.name %>
+								</a> on 
+								<a href="https://unsplash.com/?utm_source=myPetPal&utm_medium=referral">Unsplash</a></p>
+						</div>
+					</figcatpion>
+				</figure>
+			</div>
+		</div>
+	</div>
 
-<main class="container">
-    <div class="row justify-content-around mt-5">
-        <a href="/login" class="col-3 btn btn-primary"> Login</a>
-        <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
-    </div>
-</main>
-    
-
-<%- include('partials/footer') -%>
+	<%- include('partials/footer') -%>

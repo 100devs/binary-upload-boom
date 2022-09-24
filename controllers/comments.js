@@ -7,6 +7,8 @@ module.exports = {
         comment: req.body.comment,
         likes: 0,
         user: req.user.id,
+		createdBy: req.user.userName,
+		picture: req.user.profile,
         post: req.body.post
       });
       console.log("Comment has been added!");
@@ -17,16 +19,17 @@ module.exports = {
   },
   likeComment: async (req, res) => {
     try {
-      await Comment.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
-        }
-      );
-      console.log("Likes +1");
-      res.redirect(`/Comment/${req.params.id}`);
+      const updatedComment = await Comment.findByIdAndUpdate(
+		req.body.id, 
+		{ 
+			$inc: { likes: 1 }
+		},
+		{ new: true } 
+		)
+      res.json(updatedComment);
+	  console.log('Likes +1')
     } catch (err) {
-      console.log(err);
+      res.status(400).end;
     }
   },
   deleteComment: async (req, res) => {

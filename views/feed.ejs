@@ -1,15 +1,22 @@
-<%- include('partials/header') -%>
-  <div class="container">
-    <div class="row justify-content-center mt-5">
-      <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-    </div>
-  </div>  
+<%- include('partials/header', {navbar: "yes", title: "Photo feed", active: "feed"}) -%>
+	<section aria-labelledby="feedTitle" class="container flex flex-col justify-center mx-auto max-w-2xl">
+		<h1 id="feedTitle" class="my-6 text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">Picture feed</h1>
+		<div class="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-4 sm:grid-cols-2">
+		<% for(var i=0; i<posts.length; i++) {%>
+			<div class="relative flex flex-col mx-auto group">
+				<figure class="relative transition flex-none rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:rounded-2xl max-w-xs shadow-md group-hover:shadow-lg">
+					<a href="/post/<%= posts[i]._id %>" aria-label="See the post <%= posts[i].title %>">
+						<img class="inset-0 object-cover object-center rounded-xl sm:rounded-2xl opacity-75 group-hover:opacity-100 transition" src="<%= posts[i].image.split('upload').join('upload/ar_1:1,c_thumb,w_500,g_center') %>" width="500" role="link">
+					</a>
+					<figcaption class="absolute bottom-0 rounded-b-xl sm:rounded-b-2xl text-base text-zinc-100 px-4 bg-zinc-800/70 w-full max-w-xs">
+					<div class="mt-1 mb-1">
+						<p><span class="sr-only">Number of likes:</span><span aria-hidden="true">🤍</span> <%= posts[i].likes %></p>
+					</div>
+					</figcaption>
+				</figure>
+			</div>
+		<% } %>
+		</div>
+	</div>
+
 <%- include('partials/footer') -%>

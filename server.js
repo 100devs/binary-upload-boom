@@ -11,8 +11,15 @@ const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
 
+
+
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
+
+//check to see if .env variables are being read 
+
+console.log(process.env.DATABASE_URL);
+
 
 // Passport config
 require("./config/passport")(passport);

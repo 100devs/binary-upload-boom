@@ -1,11 +1,12 @@
 const cloudinary = require("../middleware/cloudinary");
 const Player = require("../models/Player");
+const Announcement = require("../models/Announcement")
 
 module.exports = {
   createPlayer: async (req, res) => {
     try {
       // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
+      // const result = await cloudinary.uploader.upload(req.file.path);
 
       await Player.create({
         firstName: req.body.firstName,
@@ -25,16 +26,13 @@ module.exports = {
       console.log(err);
     }
   },
-  likePost: async (req, res) => {
+  createAnnouncement: async (req, res) => {
     try {
-      await Post.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
-        }
-      );
-      console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
+      await Announcement.create({
+        announcementText: req.body.announcementText,
+      });
+      console.log("Announcement has been added!");
+      res.redirect("/admin");
     } catch (err) {
       console.log(err);
     }

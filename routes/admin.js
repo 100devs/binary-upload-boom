@@ -9,7 +9,7 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 //Main Routes - simplified for now
 router.post("/addPlayer", ensureAuth, adminController.addPlayer);
 router.post("/addMatch", ensureAuth, adminController.addMatch);
-router.post("/addAnnouncement", ensureAuth, adminController.addAnnouncement);
+router.post("/createAnnouncement", ensureAuth, adminController.createAnnouncement);
 router.post("/startSeason", ensureAuth, adminController.startSeason);
 
 

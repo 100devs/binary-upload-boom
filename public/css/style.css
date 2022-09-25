@@ -1,0 +1,125 @@
+
+  
+  main {
+    margin-top: 5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .main-header {
+      justify-content: space-between;
+    }
+  }
+
+  .modal {
+    z-index: 100;
+    position: fixed;
+    top: 22vh;
+    left: 10%;
+    width: 80%;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    border-radius: 8px;
+  }
+  
+  .modal__header {
+    width: 100%;
+    padding: 1rem 0.5rem;
+    background: #2a006e;
+    color: white;
+  }
+  
+  .modal__header h2 {
+    margin: 0.5rem;
+  }
+  
+  .modal__content {
+    padding: 1rem 0.5rem;
+  }
+  
+  .modal__footer {
+    padding: 1rem 0.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .modal {
+      left: calc(50% - 20rem);
+      width: 40rem;
+    }
+  }
+  
+  .modal-enter {
+    transform: translateY(-10rem);
+    opacity: 0;
+  }
+  
+  .modal-enter-active {
+    transform: translateY(0);
+    opacity: 1;
+    transition: all 200ms;
+  }
+  
+  .modal-exit {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  .modal-exit-active {
+    transform: translateY(-10rem);
+    opacity: 0;
+    transition: all 200ms;
+  }
+  /* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+  }
+  
+  /* Add some content at the bottom of the video/page */
+  .content {
+    position: fixed;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  /* Style the button used to pause/play the video */
+  #myBtn {
+    width: 200px;
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+  }
+  .headline {
+    font-size: 300%;
+  }
+
+  .subheadline {
+    font-size: 200%
+  }
+
+  .img-fluid {
+    margin-bottom: 10px;
+  }
+
+  .main-title {
+    font-size: 300%;
+    text-decoration: none;
+  }
+  
+  .span1 {
+    font-size: 200%;
+  }
+
+  .anchor {
+    text-decoration: none;
+  }
+ 
+ 

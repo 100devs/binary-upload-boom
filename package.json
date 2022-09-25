@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nodemon server.js",
+    "dev-database": "(if not exist database mkdir database) && mongod --port 8888 --dbpath ./database"
   },
   "author": "",
   "license": "MIT",

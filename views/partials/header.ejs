@@ -23,14 +23,21 @@
       integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/css/style.css" />
+   
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  
   </head>
   <body>
-    <header class="container">
-      <div class="text-center">
-          <h1><a href="/profile">Workout Tracker</a></h1>
-        <span>An Online Workout Tracker To Document Your Fitness Joruney!</span>
+    <header class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+      <div class="container">
+        <a href="/feed" class="navbar-brand">Workout Tracker</a>
+          <div class="collapse navbar-collapse justify-content-end">  
+            <a href="/" class="btn btn-primary">Logout</a>
+         
+          </div>
+        
       </div>
+    </nav>
     </header>
-  </body>
-</html>
+  

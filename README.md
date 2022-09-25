@@ -8,6 +8,25 @@ A project to practice handling file uploads, user authentication, and styling wi
 
 
 ## Table of Contents
+
+[Latest Social Network](#latest-social-network)
+  * [Table of Contents](#table-of-contents)
+  * [Links](#links)
+  * [Demo](#demo)
+  * [Screenshots](#screenshots)
+    + [Home Page (light mode)](#home-page--light-mode-)
+    + [Picture feed (smaller screen, dark mode)](#picture-feed--smaller-screen--dark-mode-)
+    + [Post (light mode)](#post--light-mode-)
+    + [User profile (light mode)](#user-profile--light-mode-)
+  * [Tech Stack](#tech-stack)
+  * [Features](#features)
+  * [Run Locally](#run-locally)
+  * [Environment Variables](#environment-variables)
+  * [Roadmap](#roadmap)
+  * [Lessons Learned](#lessons-learned)
+  * [Authors](#authors)
+  * [Acknowledgements](#acknowledgements)
+
 ## Links
 
 - [Submit a bug/issue](https://github.com/raissa-k/latest-social-network/issues)

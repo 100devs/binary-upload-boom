@@ -22,7 +22,7 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "asc" }).lean();
       res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
@@ -31,13 +31,21 @@ module.exports = {
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
-
+      // const result = await cloudinary.uploader.upload(req.file.path);
+      // DESC: Upload song to cloudinary
+      const music = await cloudinary.uploader.upload(req.file.path, {
+        resource_type: "video"
+      });
       await Post.create({
         title: req.body.title,
-        image: result.secure_url,
-        cloudinaryId: result.public_id,
-        caption: req.body.caption,
+        // image: result.secure_url,
+        // cloudinaryId: result.public_id,
+        song: music.secure_url,
+        songId: music.public_id,
+        tempo: req.body.tempo,
+        // caption: req.body.caption,
+        lyrics: req.body.lyrics,
+        details: req.body.details,
         likes: 0,
         user: req.user.id,
       });
@@ -65,10 +73,10 @@ module.exports = {
     try {
       // Find post by id
       let post = await Post.findById({ _id: req.params.id });
-      // Delete image from cloudinary
-      await cloudinary.uploader.destroy(post.cloudinaryId);
+      // Delete Song from cloudinary
+      await cloudinary.uploader.destroy(post.songId);
       // Delete post from db
-      await Post.remove({ _id: req.params.id });
+      await Post.deleteOne({ _id: req.params.id });
       console.log("Deleted Post");
       res.redirect("/profile");
     } catch (err) {

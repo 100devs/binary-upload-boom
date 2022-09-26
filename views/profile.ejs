@@ -1,46 +1,152 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-          </div>
-          <div class="mt-5">
-            <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
-              </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
-          </div>
-      </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>  
-      </div>  
+<!-- DESC: User info -->
+<div class="border flex flex-row justify-between bg-gradient-to-r from-gray-200 via-green-200">
+  <p class="text-base-300 font-semibold" ><%= user.userName %></p>
+<section class="flex">
+  <div class="badge"></div>
+  <div class="badge badge-primary"></div>
+  <div class="badge badge-secondary"></div>
+  <div class="badge badge-accent"></div>
+  <div class="badge badge-ghost"></div>
+  <div class="badge"></div>
+</section>
+</div>
+
+<section class="flex justify-center h-11 shadow bg-gradient-to-r from-blue-200 via-green-200">
+  <!-- <h1 class="h-full text-4xl font-bold ">Track Organizer</h1> -->
+</section>
+
+<!-- Drawer Button -->
+<label for="my-drawer" class="btn  drawer-button ">Organize your next track</label>
+
+<!-- drawer -->
+<section class="flex justify-self-center">
+<div class="drawer">
+  <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+  <div class="drawer-content">
+
+
+
+<!-- ASIDE MENU -->
+<section class="flex justify-center ">
+  
+  <!-- Section for media query -->
+  <section id="trackListing" class="flex justify-center ">
+
+  <!-- TRACK TITLES -->
+  <!--Track titles  Card -->
+<div class="card w-96 bg-base-100 shadow-xl">
+ 
+  <div class="card-body">
+    <h2 class="card-title">Track Titles</h2>
+    <p>Here are your track titles</p>
+    <div class="card-actions justify-end">
+     <!-- <a href="/profile"><button class="btn btn-primary">Profile</button></a> -->
     </div>
+    <!-- <figure><img src="/imgs/music-notes.jpeg" alt="Shoes" /></figure> -->
   </div>
 </div>
+
+<!-- Track title aggregation -->
+<aside class="w-64" aria-label="Sidebar">
+  <div class="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
+     <ul class="space-y-2">
+          <% for(var i=0; i<posts.length; i++) {%>
+            <li>
+              <a class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-green-100 dark:hover:bg-gray-700" href="/post/<%= posts[i]._id%>">
+                <svg aria-hidden="true" class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
+                <span class="ml-3"><%= posts[i].title%></span>
+              </a>
+            </li>
+          <% } %>
+     </ul>
+  </div>
+</aside> 
+
+<section>
+  
+</section>
+<!-- TRACK DETAILS  -->
+<!-- Card -->
+<div class="card w-96 bg-base-100 shadow-xl">
+
+  <div class="card-body">
+    <h2 class="card-title">Track Details</h2>
+    <p>Here are your corresponding track details</p>
+    <div class="card-actions justify-end">
+      <!-- <button class="btn btn-primary">Buy Now</button> -->
+    </div>  
+    <!-- <figure><img src="/imgs/music-notes.jpeg" alt="Shoes" /></figure> -->
+  </div>
+</div>
+
+
+<!-- details of each track post -->
+<aside class="w-64" aria-label="Sidebar">
+  <div class="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
+     <ul class="space-y-2">
+          <% for(var i=0; i<posts.length; i++) {%>
+            <li>
+              <div class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white " href="/post/<%= posts[i]._id%>">
+                <svg aria-hidden="true" class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"></svg>
+                <span class="ml-3"><%= posts[i].details%></span>
+              </div>
+            </li>
+          <% } %>
+     </ul>
+  </div>
+</aside> 
+</section>
+</section>
+  <!-- Seperate area -->
+    
+  </div> 
+  <div class="drawer-side">
+    <label for="my-drawer" class="drawer-overlay"></label>
+    <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
+      <!-- Sidebar content here -->
+      <div class="mt-5">
+        <h2>Track:</h2>
+        <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+          <div class="mb-3">
+              <label for="title" class="form-label"></label>
+              <input type="text" class="input input-bordered w-full max-w-xs" placeholder="Title"id="title" name="title">
+          </div>
+          <div class="mb-3">
+            <label for="tempo" class="form-label"></label>
+            <input type="text" class="input input-bordered w-full max-w-xs" placeholder="Tempo" id="tempo" name="tempo">
+          </div>
+          <!-- <div class="mb-3">
+            <label for="caption" class="form-label">Caption</label>
+            <textarea class="form-control shadow-sm" id="caption" name="caption"></textarea>
+          </div> -->
+          <div class="mb-3">
+            <label for="lyrics" class="form-label"></label>
+            <textarea type="text" class="textarea textarea-bordered" placeholder="Lyrics" name="lyrics"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="details" class="form-label"></label>
+            <textarea type="text" class="textarea textarea-bordered" placeholder="Details" name="details"></textarea>
+          </div>
+          <!-- <div class="mb-3">
+            <label for="imgUpload" class="form-label">Image</label>
+            <input type="file" class="form-control shadow-sm" id="imageUpload" name="file">
+          </div> -->
+          <div class="mb-3">
+            <label for="sngUpload" class="form-label">Song:</label>
+            <input type="file" class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="songUpload" name="file">
+          </div>
+          <button type="submit" class="btn" value="Upload">Submit</button>
+        </form>
+      </div>
+  </div>
+</div>
+</section> 
+
+
+
+<!-- DESC: removed feed from here for now, may implement again in the future -->
+<!-- <div class="row justify-content-center mt-5">
+          <a class="btn text-white" style="background-color: rgb(144, 204, 254)" href="/feed">Return to Feed</a>
+        </div>   -->
 <%- include('partials/footer') -%>

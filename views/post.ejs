@@ -1,73 +1,106 @@
 <%- include('partials/header') -%>
+<!-- DESC: User info -->
+<div class="border flex flex-row justify-between bg-gradient-to-r from-gray-200 via-green-200">
+  <p class="text-base-300 font-semibold" ><%= user.userName %></p>
+<section class="flex">
+  <div class="badge"></div>
+  <div class="badge badge-primary"></div>
+  <div class="badge badge-secondary"></div>
+  <div class="badge badge-accent"></div>
+  <div class="badge badge-ghost"></div>
+  <div class="badge"></div>
+</section>
+</div>
+
 <div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-6">
+  <div >
+    <div class="col-6">  
+    <div>
+      <h5>Title:</h5>
       <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
+      </div>
+    <div class="col-3 mt-5">
+      <h5>Tempo</h5>
+      <p><%= post.tempo %></p>
+    </div>
+    <div>
+      <audio controls >
+        <source src="<%= post.song%>">
+      </audio>
+    </div>
+      <!-- DESC: This is the older way where the anchor sends you to a url and it plays there-->
+      <!-- <a style="text-decoration: none; background-color: rgb(86, 179, 255); " class="btn text-white" href="<%= post.song%>">Play track</a> -->
+      <!-- DESC: This is so users can like a post -->
+      <!-- <div class="row justify-content-between">
         <form
           class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          <button class="btn  fa fa-heart text-white" style="margin: 2px; background-color: rgb(144, 204, 254);" type="submit"></button>
         </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
+        <h3 class="col-3 " style="color: rgb(144, 204, 254)">Likes: <%= post.likes %></h3>
+        -->
         <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
+        <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-3">
+          <button class="btn  fa fa-trash text-white" style="margin: 2px; background-color: rgb(254, 144, 184);" type="submit"></button>
         </form>
         <%}%>
       </div>
     </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
+    
+    <div class="col-3 mt-5 border shadow-sm p-3 mb-5 bg-body rounded">
+      <h5>Lyrics</h5>
+      <p><%= post.lyrics %></p>
     </div>
-    <div>
-      <div class="mt-5">
+    <div class="col-3 mt-5 border shadow-sm p-3 mb-5 bg-body rounded">
+      <h5>Details</h5>
+      <p><%= post.details %></p>
+    </div>
+
+    <!-- <div> -->
+      <!-- DESC: This is so users can add a comment -->
+      <!-- <div class="mt-5">
         <h2>Add a comment</h2>
         <form action="/comment/add/<%=post._id%>" method="POST">
           <div class="mb-3">
-            <label for="comment" class="form-label">Comment</label>
-            <input
-              type="text"
-              class="form-control"
-              id="comment"
-              name="comment"
-            />
+            <label for="comment" class="form-label ">Comment</label>
+            <input type="text" class="form-control shadow-sm p-3 mb-5 bg-body rounded" id="comment" name="comment"/>
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn text-white" style="margin: 2px; background-color: rgb(144, 204, 254)">Submit</button>
         </form>
-      </div>
-      <ul>
+      </div> -->
+
+      <!-- DESC: This is so users can like the comment -->
+      <!-- <div>
+      <ul class="list-group">
         <% for( let i = 0; i < comments.length; i++ ) { %>
-        <li><%= comments[i].comment %></li>
+        <li class="list-group-item"><%= comments[i].comment %></li>
+        <div class="d-flex">
         <form
           action="/comment/delete/<%= comments[i]._id %>?_method=DELETE&postid=<%= post._id %> "
           method="POST"
         >
-          <button type="submit" class="btn btn-info fa fa-trash"></button>
+          <button type="submit" class="btn fa fa-trash text-white" style="margin: 2px; background-color: rgb(144, 204, 254)"></button>
         </form>
         <form
         class="col-1"
         action="/comment/like/<%= comments[i]._id %>?_method=PUT&postid=<%= post._id %> "
         method="POST"
       >
-        <button class="btn btn-info fa fa-heart" type="submit"></button>
+        <button class="btn fa fa-heart text-white" style="margin: 2px; background-color: rgb(144, 204, 254)" type="submit"></button>
       </form>
+    </div>
         <% } %>
-      </ul>
-      
-    </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
-    </div>
+      </ul>  
+    </div> -->
+ <!-- DESC: removed return to feed, might implement back again at some point -->
+    <!-- <div class="col-6 mt-5">
+      <a class="btn" href="/profile">Return to Profile</a> -->
+      <!-- <a class="btn text-white" style="background-color: rgb(144, 204, 254)" href="/feed">Return to Feed</a> -->
+    <!-- </div> -->
   </div>
+</div>
 </div>
 
 <%- include('partials/footer') -%>

@@ -1,13 +1,17 @@
 const Post = require('../models/Post');
 const Comment = require('../models/Comment');
 
+
 module.exports = {
   createComment: async (req, res) => {
     try {
+      // add new properties to each document
       await Comment.create({
         comment: req.body.comment,
         likes: 0,
         post: req.params.id,
+        createdBy: req.user.userName,
+        createdById: req.user.id
       });
       console.log('Comment has been added!');
       res.redirect(`/post/${req.params.id}`);
@@ -36,10 +40,9 @@ module.exports = {
   deleteComment: async (req, res) => {
     try {
       // Find post by id
-
       let comment = await Comment.findById({ _id: req.params.id });
       // Delete post from db
-      await Comment.remove({ _id: req.params.id });
+      await Comment.deleteOne({ _id: req.params.id });
       console.log('Deleted Comment');
       console.log(req.params.id);
       res.redirect(`/post/${req.query.postid}`);

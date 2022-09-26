@@ -14,26 +14,25 @@
                 <% } %>
                 <form action="/signup" method="POST">
                     <div class="mb-3">
-                        <label for="userName" class="form-label">User Name</label>
-                        <input type="text" class="form-control" id="userName" name="userName">
+                        <label for="userName" class="form-label"></label>
+                        <input type="text"class="input input-bordered w-full max-w-xs" placeholder="User Name" id="userName" name="userName">
                       </div>
                     <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Email address</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                      <label for="exampleInputEmail1" class="form-label"></label>
+                      <input type="email" class="input input-bordered w-full max-w-xs" placeholder="Email Address" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
                       <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <div class="mb-3">
-                      <label for="password" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="password" name="password">
+                      <label for="password" class="form-label"></label>
+                      <input type="password" class="input input-bordered w-full max-w-xs" placeholder="Password" id="password" name="password">
                     </div>
                     <div class="mb-3">
-                        <label for="confirmPassword" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+                        <label for="confirmPassword" class="form-label"></label>
+                        <input type="password" class="input input-bordered w-full max-w-xs" placeholder="Confirm Password" id="confirmPassword" name="confirmPassword">
                       </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn">Submit</button>
                   </form>
             </section>
         </div>
     </main>
 
-<%- include('partials/footer') -%>

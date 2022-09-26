@@ -1,0 +1,8 @@
+
+
+@media(max-width: 600px) {
+    #trackListing {
+      display: flex;
+      flex-direction: column;
+    }
+  }

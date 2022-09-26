@@ -5,15 +5,35 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  image: {
+  // image: {
+  //   type: String,
+  //   require: false,
+  // },
+  song: {
+   type: String,
+   require: true,
+  },
+  songId: {
     type: String,
     require: true,
   },
-  cloudinaryId: {
+  // cloudinaryId: {
+  //   type: String,
+  //   require: true,
+  // },
+  tempo: {
     type: String,
-    require: true,
+    required: true
   },
-  caption: {
+  // caption: {
+  //   type: String,
+  //   required: true,
+  // },
+  lyrics: {
+    type: String,
+    required: true,
+  },
+  details:{
     type: String,
     required: true,
   },

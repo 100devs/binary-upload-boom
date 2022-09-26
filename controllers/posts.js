@@ -19,13 +19,33 @@ module.exports = {
       }
     };
     
-    axios.request(options).then(function (astrodice) {
-        console.log(astrodice.data);
-        res.render("profile.ejs", { posts: [], user: req.user, zodiac: astrodice.data[sign] });
+    await axios.request(options).then(function (astrodaily) {
+        console.log(astrodaily.data);
+        res.render("profile.ejs", { posts: [], user: req.user, zodiac: astrodaily.data[sign] });
     }).catch(function (err) {
         console.error(err);
     })
-},
+},  
+
+  getAstroCareer: async(req, res) => {
+    let sign = req.body.sign
+
+    const options = {
+    method: 'GET',
+    url: `https://astro-daily-live-horoscope.p.rapidapi.com/horoscope-career-monthly/${sign}`,
+    headers: {
+      'X-RapidAPI-Key': process.env.KEY,
+      'X-RapidAPI-Host': process.env.HOST
+    }
+};
+
+   await axios.request(options).then(function (astrocareer) {
+      console.log(astrocareer.data);
+      res.render("profile.ejs", { posts: [], user: req.user, zodiac: astrocareer.data[sign] });
+    }).catch(function (err) {
+      console.error(err);
+    });
+  },    
 //-------------------------------------------------------------------
   getProfile: async (req, res) => {
     try {

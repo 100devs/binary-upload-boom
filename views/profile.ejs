@@ -1,7 +1,35 @@
-<%- include('partials/header') -%>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RandoAstro</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/imgs/favicon-32x32.png"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />   
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
 <div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
+    <!--  -->
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
@@ -15,7 +43,15 @@
           <%if(locals.zodiac){ %>
             <p><%= zodiac %></p>
             <%}%>
-          <div class="mt-5">
+        <!--  -->
+          <form action="/post/astro" method='POST'>Enter sign for career horoscope:
+            <input type="text" name="sign">
+            <input type="submit">
+          </form>
+          <%if(locals.zodiac){ %>
+            <p><%= zodiac %></p>
+            <%}%>      
+          <!-- <div class="mt-5">
             <h2>Add a post</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
@@ -33,9 +69,9 @@
               <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
             </form>
           </div>
+      </div> -->
+        </div>
       </div>
-      
     </div>
-  </div>
-</div>
-<%- include('partials/footer') -%>
+  </body>
+</html>

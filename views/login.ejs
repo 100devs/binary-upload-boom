@@ -1,5 +1,36 @@
-<%- include('partials/header') -%>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+  rel="icon"
+  type="image/png"
+  sizes="32x32"
+  href="/imgs/favicon-32x32.png"
+/>
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+  crossorigin="anonymous"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+  crossorigin="anonymous"
+/>   
+<link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/css/style.css" />
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
 <main class="container">
   <div class="row justify-content-center">
     <section class="col-6 mt-5">
@@ -10,7 +41,7 @@
       <div class="alert alert-info"><%= el.msg %></div>
       <% }) %> <% } %>
       <form action="/login" method="POST">
-        <div class="mb-3">
+         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label"
             >Email address</label
           >
@@ -35,6 +66,71 @@
       </form>
     </section>
   </div>
+  
+  <div class="hero min-h-screen bg-base-200 bg-primary">
+    <div class="hero-content flex-col lg:flex-row-reverse">
+      <div class="text-center lg:text-left">
+        <h1 class="text-5xl font-bold">Login now!</h1>
+        <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+      </div>
+      <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <div class="card-body">
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Email</span>
+            </label>
+            <input type="text" placeholder="email" class="input input-bordered" />
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Password</span>
+            </label>
+            <input type="text" placeholder="password" class="input input-bordered" />
+            <label class="label">
+              <a href="#" class="label-text-alt link link-hover"></a>
+            </label>
+          </div>
+          <div class="form-control mt-6">
+            <button><form action="/login" method="POST" class="btn btn-primary">Login</form></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer p-10 bg-base-200 text-base-content">
+    <div>
+      <span class="footer-title">Services</span> 
+      <a class="link link-hover">Branding</a> 
+      <a class="link link-hover">Design</a> 
+      <a class="link link-hover">Marketing</a> 
+      <a class="link link-hover">Advertisement</a>
+    </div> 
+    <div>
+      <span class="footer-title">Company</span> 
+      <a class="link link-hover">About us</a> 
+      <a class="link link-hover">Contact</a> 
+      <a class="link link-hover">Jobs</a> 
+      <a class="link link-hover">Press kit</a>
+    </div> 
+    <div>
+      <span class="footer-title">Legal</span> 
+      <a class="link link-hover">Terms of use</a> 
+      <a class="link link-hover">Privacy policy</a> 
+      <a class="link link-hover">Cookie policy</a>
+    </div> 
+    <div>
+      <span class="footer-title">Newsletter</span> 
+      <div class="form-control w-80">
+        <label class="label">
+          <span class="label-text">Enter your email address</span>
+        </label> 
+        <div class="relative">
+          <input type="text" placeholder="username@site.com" class="input input-bordered w-full pr-16" /> 
+          <button class="btn btn-primary absolute top-0 right-0 rounded-l-none">Subscribe</button>
+        </div>
+      </div>
+    </div>
+  </footer>
 </main>
 
-<%- include('partials/footer') -%>
+

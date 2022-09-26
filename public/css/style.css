@@ -1,0 +1,20 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+.randoastro {
+    font-size: 75px;
+}
+
+.bg-primary {
+    
+}
+
+.hero.min-h-screen.bg-base-200.bg-primary {
+    color: purple;
+}
+
+.link-hover {
+    color: orange;
+}

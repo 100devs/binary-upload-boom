@@ -1,12 +1,17 @@
 const express = require("express");
 const router = express.Router();
+
+// helping to uploader
 const upload = require("../middleware/multer");
 const postsController = require("../controllers/posts");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Post Routes - simplified for now
+
+// check if we are logged in
 router.get("/:id", ensureAuth, postsController.getPost);
 
+// using the multer
 router.post("/createPost", upload.single("file"), postsController.createPost);
 
 router.put("/likePost/:id", postsController.likePost);

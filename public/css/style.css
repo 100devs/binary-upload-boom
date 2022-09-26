@@ -79,6 +79,10 @@ main.index, main.signup, main.login{
 main.index{
     height: 90vh;
 } 
+main.index div > p{
+    margin: -3.34em 3em 6em 0;
+    font-size: 1.2rem;
+}
 main.index .interact{
     width: 20em;
 }
@@ -400,4 +404,27 @@ footer{
               opacity: 1;
     }
   }
-  
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 600px) {
+    main.index a.navbar-brand{
+        font-size: 4em;
+    }
+    main.index div > p {
+        margin: 1em 0 2em 0;
+        font-size: 1rem;
+        text-align: center;
+        padding: 0 2em;
+    }
+}
+@media (min-width: 600px) and (max-width: 880px) {
+    main.index a.navbar-brand{
+        font-size: 7em;
+    }
+    main.index div > p {
+        margin: -1em 0 4em 0;
+        font-size: 1rem;
+        text-align: center;
+        padding: 0 2em;
+    }
+}

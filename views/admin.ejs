@@ -139,6 +139,7 @@
           </div>
 
           <!-- content for Add Player Tab -->
+          <form action="">
           <div class="tab-pane fade" id="tabs-profileVertical" role="tabpanel" aria-labelledby="tabs-profile-tabVertical">
             <!-- email -->
             <div class="flex justify-center">
@@ -167,6 +168,7 @@
                     "
                     id="exampleEmail0"
                     placeholder="Email input"
+                    name="email"
                   />
                 </div>
               </div>
@@ -197,6 +199,7 @@
                     "
                     id="exampleText0"
                     placeholder=""
+                    name="firstName"
                   />
                 </div>
               </div>
@@ -227,13 +230,14 @@
                     "
                     id="exampleEmail0"
                     placeholder=""
+                    name="lastName"
                   />
                 </div>
               </div>
               <!-- league -->
               <label class="block text-left" style="max-width: 300px">
                 <span class="text-gray-700">League</span>
-                <select class="form-multiselect block w-full mt-1" multiple>
+                <select class="form-multiselect block w-full mt-1" multiple name="league">
                   <option>5.0 Men</option>
                   <option>4.5 Men</option>
                   <option>4.0 Men</option>
@@ -269,6 +273,7 @@
                     "
                     id="exampleEmail0"
                     placeholder="Wimbledon"
+                    name="prefCourt"
                   />
                 </div>
               </div>
@@ -299,6 +304,7 @@
                     "
                     id="exampleEmail0"
                     placeholder="After 5PM MWF"
+                    name="prefTime"
                   />
                 </div>
               </div>
@@ -306,6 +312,7 @@
               <div class="flex space-x-2 justify-center">
                 <button type="button" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Button</button>
               </div>
+            </form>
               <!-- end of add player tab -->
           </div>
           <!-- content for Add Match Tab -->

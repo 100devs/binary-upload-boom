@@ -1,6 +1,7 @@
 module.exports = {
   ensureAuth: function (req, res, next) {
     if (req.isAuthenticated()) {
+      // allow to continue in the process
       return next();
     } else {
       res.redirect("/");

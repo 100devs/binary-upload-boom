@@ -6,7 +6,19 @@
         <a href="/login" class="col-3 btn btn-primary"> Login</a>
         <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
     </div>
-    
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+          <ul class="row list-unstyled">
+            <% for(var i=0; i<announcements.length; i++) {%>
+              <li class="col-6 justify-content-between mt-5">
+                <a href="/admin/<%= announcements[i]._id%>">
+                  <img class="img-fluid" src="<%= announcements[i].image%>">
+                </a>
+              </li>
+            <% } %>
+            </ul>
+        </div>
+      </div>  
 </main>
     
 

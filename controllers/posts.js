@@ -30,14 +30,17 @@ module.exports = {
       const cAuthId = comments.map((x,i) => {
         return x.user;
       })
-      // console.log(cAuthId);
-
       // cUsers is an array of user objects
       const cUsers = await User.find({_id: cAuthId})
-      // console.log(cUsers)
-      
-      //console.log(post,comments);
-      res.render("post.ejs", { post: post, author: author, comments: comments, cUsers: cUsers,user: req.user });
+      let usernames = [];
+      function sortNames(ids,users){
+        for (let i = 0; i < ids.length; i++){
+          usernames.push( users.find( x => x._id == ids[i] ));
+        }
+        usernames = usernames.map(el => el.userName)
+      }
+      sortNames(cAuthId,cUsers);
+      res.render("post.ejs", { post: post, author: author, comments: comments, cUsers: usernames, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -45,7 +48,6 @@ module.exports = {
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
-      
       const result = await cloudinary.uploader.upload(req.file.path);
 
       await Post.create({

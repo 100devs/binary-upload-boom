@@ -1,0 +1,410 @@
+<%- include('partials/header') -%>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-warning py-2 fixed-top">
+  <div class="container">
+    <!-- <a href="#" class="navbar-brand">Lego Marketplace</a> -->
+    <a class="navbar-brand" href="#">
+      <img src="img/BrickFlip-Logo.png" height="75" alt="" />
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a href="#learn" class="nav-link">What You'll Learn</a>
+        </li>
+        <li class="nav-item">
+          <a href="#questions" class="nav-link">Questions</a>
+        </li>
+        <li class="nav-item">
+          <a href="#contributors" class="nav-link">Contributors</a>
+        </li>
+        <li class="nav-item">
+          <a href="/user" class="nav-link">Account</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Showcase -->
+<section class="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
+  <div class="container">
+    <div class="d-sm-flex align-items-center justify-content-between">
+      <div>
+        <h1>Best Deals In <span class="text-warning">Lego Land</span></h1>
+        <p class="lead my-4">
+          Brick Flip focuses on bringing you the best deals in Lego Land.
+        </p>
+        <button class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#enroll" data-dismiss="modal">
+          Current Deals
+        </button>
+      </div>
+      <!-- img-fluid makes it bound to the container -->
+      <img class="img-fluid w-50 d-none d-sm-block" src="img/legomap.png" alt="" />
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+
+<!-- <section class="bg-danger text-light p-5">
+  <div class="container">
+    <div class="d-md-flex justify-content-between align-items-center">
+      <h3 class="mb-3 mb-md-0">Sign Up For Our Newsletter</h3>
+
+      <div class="input-group news-input">
+        <input type="text" class="form-control" placeholder="Enter Email" /> -->
+        <!-- removed the following from input, double check for accessibility: aria-label="Recipient's username" aria-describedby="button-addon2" -->
+        <!-- <button class="btn btn-dark btn-lg" type="button">Button</button>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- Boxes -->
+<section class="p-5">
+  <div class="container">
+    <div class="row text-center g-4">
+      <div class="col-md">
+        <div class="card bg-success text-light">
+          <div class="card-body text-center">
+            <div class="h1 mb-3">
+              <i class="bi bi-laptop"></i>
+            </div>
+            <h3 class="card-title mb-3">Multiplication</h3>
+            <p class="card-text">
+              Battle for your place on the leaderboards while practicing your times tables.
+            </p>
+            <a href="" class="btn btn-dark">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md">
+        <div class="card bg-warning text-dark">
+          <div class="card-body text-center">
+            <div class="h1 mb-3">
+              <i class="bi bi-person-square"></i>
+            </div>
+            <h3 class="card-title mb-3">Fractions</h3>
+            <p class="card-text">
+              Fractions can be tough but practice makes better. Try your best.
+            </p>
+            <a href="" class="btn btn-dark">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md">
+        <div class="card bg-success text-light">
+          <div class="card-body text-center">
+            <div class="h1 mb-3">
+              <i class="bi bi-people"></i>
+            </div>
+            <h3 class="card-title mb-3">Decimals</h3>
+            <p class="card-text">
+              Play this fun game and practice your decimal operations!
+            </p>
+            <a href="" class="btn btn-dark">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Learn Sections -->
+<!-- First Learn Section -->
+<section id="learn" class="p-5">
+  <div class="container">
+    <div class="row align-items-center justify-content-between">
+      <div class="col-md">
+        <img src="img/legomap.png" class="img-fluid" alt="" />
+      </div>
+      <div class="col-md p-5">
+        <h2>Learn The Fundamentals</h2>
+        <p class="lead">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
+          laudantium hic explicabo iste ullam ut.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
+          eum reprehenderit nemo reiciendis animi quasi hic fugiat dolores
+          et deserunt totam, temporibus cupiditate mollitia porro! Animi
+          reiciendis nostrum autem maiores.
+        </p>
+        <a href="#" class="btn btn-light mt-3">
+          <i class="bi bi-chevron-right"> </i> Read More
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Second Learn Section -->
+<section id="learn" class="p-5 bg-primary text-light">
+  <div class="container">
+    <div class="row align-items-center justify-content-between">
+      <div class="col-md p-5">
+        <h2>Learn About Legos</h2>
+        <p class="lead">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
+          laudantium hic explicabo iste ullam ut.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
+          eum reprehenderit nemo reiciendis animi quasi hic fugiat dolores
+          et deserunt totam, temporibus cupiditate mollitia porro! Animi
+          reiciendis nostrum autem maiores.
+        </p>
+        <a href="#" class="btn btn-light mt-3">
+          <i class="bi bi-chevron-right"> </i> Read More
+        </a>
+      </div>
+
+      <div class="col-md">
+        <img src="img/legomap.png" class="img-fluid" alt="" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Questions Accordion -->
+<section id="questions" class="p-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+    <div class="accordion accordion-flush" id="questions">
+      <!-- Item 1 ##################-->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <!-- Removed accessibility: aria-expanded="false" aria-controls="flush-collapseOne" -->
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#question-one">
+            What do you sell in your marketplace?
+          </button>
+        </h2>
+        <div id="question-one" class="accordion-collapse collapse" data-bs-parent="#questions">
+          <div class="accordion-body">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Blanditiis, labore incidunt magni vero eaque inventore quaerat
+            id assumenda quis fuga. Amet illum dolore voluptatem non eveniet
+            cumque porro debitis ex ipsam architecto veniam quibusdam rem
+            quis recusandae alias facilis magni nesciunt officia nemo
+            fugiat, corrupti itaque! Consequatur inventore facere quod?
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 2 ##################-->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <!-- Removed accessibility: aria-expanded="false" aria-controls="flush-collapseOne" -->
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#question-two">
+            Do you only sell Lego Sets?
+          </button>
+        </h2>
+        <div id="question-two" class="accordion-collapse collapse" data-bs-parent="#questions">
+          <div class="accordion-body">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Blanditiis, labore incidunt magni vero eaque inventore quaerat
+            id assumenda quis fuga. Amet illum dolore voluptatem non eveniet
+            cumque porro debitis ex ipsam architecto veniam quibusdam rem
+            quis recusandae alias facilis magni nesciunt officia nemo
+            fugiat, corrupti itaque! Consequatur inventore facere quod?
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3 ##################-->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <!-- Removed accessibility: aria-expanded="false" aria-controls="flush-collapseOne" -->
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#question-three">
+            Are all Lego sets legitimate?
+          </button>
+        </h2>
+        <div id="question-three" class="accordion-collapse collapse" data-bs-parent="#questions">
+          <div class="accordion-body">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Blanditiis, labore incidunt magni vero eaque inventore quaerat
+            id assumenda quis fuga. Amet illum dolore voluptatem non eveniet
+            cumque porro debitis ex ipsam architecto veniam quibusdam rem
+            quis recusandae alias facilis magni nesciunt officia nemo
+            fugiat, corrupti itaque! Consequatur inventore facere quod?
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contributors -->
+<section id="contributors" class="p-5 bg-success">
+  <div class="container">
+    <h2 class="text-center text-white">Our Contributors</h2>
+    <p class="lead text-center text-white mb-5">
+      Our contributors are just trying to make the Lego world better, one
+      brick at a time.
+    </p>
+    <div class="row justify-content-center g-4">
+      <!-- Contributor 1 -->
+      <div class="col-md-8 col-lg-4">
+        <div class="card bg-light">
+          <div class="card-body text-center">
+            <img src="https://randomuser.me/api/portraits/men/11.jpg" class="rounded-circle mb-3" alt="" srcset="" />
+            <h3 class="card-title mb-3">John Doe</h3>
+            <p class="card-text">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae
+              itaque doloremque iste natus, similique reprehenderit?
+            </p>
+            <a href="#"><i class="bi bi-twitter text-dark mx-1"></i></a>
+            <a href="#"><i class="bi bi-facebook text-dark mx-1"></i></a>
+            <a href="#"><i class="bi bi-linkedin text-dark mx-1"></i></a>
+            <a href="#"><i class="bi bi-instagram text-dark mx-1"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- Contributor 2 -->
+      <div class="col-md-8 col-lg-4">
+        <div class="card bg-light">
+          <div class="card-body text-center">
+            <img src="https://randomuser.me/api/portraits/men/16.jpg" class="rounded-circle mb-3" alt="" srcset="" />
+            <h3 class="card-title mb-3">James Smith</h3>
+            <p class="card-text">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae
+              itaque doloremque iste natus, similique reprehenderit?
+            </p>
+            <a href="#"><i class="bi bi-twitter text-dark mx-1"></i></a>
+            <a href="#"><i class="bi bi-facebook text-dark mx-1"></i></a>
+            <a href="#"><i class="bi bi-linkedin text-dark mx-1"></i></a>
+            <a href="#"><i class="bi bi-instagram text-dark mx-1"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- Contributor 3 -->
+      <div class="col-md-8 col-lg-4">
+        <div class="card bg-light">
+          <div class="card-body text-center">
+            <img src="https://randomuser.me/api/portraits/men/7.jpg" class="rounded-circle mb-3" alt="" srcset="" />
+            <h3 class="card-title mb-3">Mike Jones</h3>
+            <p class="card-text">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae
+              itaque doloremque iste natus, similique reprehenderit?
+            </p>
+            <a href="#"><i class="bi bi-twitter text-dark mx-1"></i></a>
+            <a href="#"><i class="bi bi-facebook text-dark mx-1"></i></a>
+            <a href="#"><i class="bi bi-linkedin text-dark mx-1"></i></a>
+            <a href="#"><i class="bi bi-instagram text-dark mx-1"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact & Map -->
+<!-- <section class="p-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md">
+          <h2 class="text-center mb-4">Contact Info</h2>
+          <ul class="list-group list-group-flush lead">
+            <li class="list-group-item">
+              <span class="fw-bold">Main Location</span> 50 Main St New York
+              NY
+            </li>
+            <li class="list-group-item">
+              <span class="fw-bold">Enrollment Phone:</span> (555) 555-5555
+            </li>
+            <li class="list-group-item">
+              <span class="fw-bold">Student Phone:</span> (333) 333-3333
+            </li>
+            <li class="list-group-item">
+              <span class="fw-bold">Support Email</span> info@brickFlip.com
+            </li>
+          </ul>
+        </div>
+        <div class="col-md">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+<!-- Footer -->
+<footer class="p-5 bg-primary text-white text-center position-relative">
+  <div class="container">
+    <p class="lead">Copyright &copy; 2022 Brick Flip</p>
+    <a href="#" class="position-absolute bottom-0 end-0 p-5">
+      <i class="bi bi-arrow-up-circle h1"></i>
+    </a>
+  </div>
+</footer>
+
+<!-- Modal -->
+<div class="modal fade" id="enroll" tabindex="-1" role="dialog" aria-labelledby="enrollLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="enrollLabel">Brick Flip Modal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="lead">Fill our this form and we will get back to you</p>
+        <form>
+          <div class="mb-3">
+            <label for="first-name" class="col-form-label">
+              First Name:
+            </label>
+            <input type="text" class="form-control" id="first-name" />
+          </div>
+          <div class="mb-3">
+            <label for="last-name" class="col-form-label">
+              Last Name:
+            </label>
+            <input type="text" class="form-control" id="last-name" />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="col-form-label"> Email: </label>
+            <input type="text" class="form-control" id="email" />
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="col-form-label"> Phone: </label>
+            <input type="text" class="form-control" id="phone" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="col-6 mt-5">
+      <a class="btn btn-primary" href="/profile">Return to Profile</a>
+      <a class="btn btn-primary" href="/feed">Return to Feed</a>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') -%>
+*/ -->
+
+
+
+
+
+
+
+

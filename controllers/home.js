@@ -1,3 +1,5 @@
+const Announcement = require("../models/Announcement");
+
 module.exports = {
   getIndex: (req, res) => {
     res.render("index.ejs");
@@ -13,7 +15,7 @@ module.exports = {
   },
   getAnnouncement: async (req, res) => {
     try {
-      const announcements = await announcements.find().sort({ createdAt: "desc" }).lean();
+      const announcements = await Announcement.find().sort({ createdAt: "desc" }).lean();
       res.render("index.ejs", { announcements: announcements });
     } catch (err) {
       console.log(err);

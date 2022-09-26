@@ -6,7 +6,23 @@
       <% for(var i=0; i<posts.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
           <a href="/post/<%= posts[i]._id%>">
-            <img class="img-fluid" src="<%= posts[i].image%>">
+            <div class="fullwrap">
+              <img class="img-fluid" src="<%= posts[i].image%>">
+              <div class="fullcap">
+                <section class="postData">
+                  <div class="postHead">
+                    <h3><%= posts[i].title %></h3>
+                    <p class="desc">"<%= posts[i].description%>"</p>
+                  </div>
+                  <!--likes-->
+                  <%if(posts[i].likes == 1){ %>
+                    <span class="likes"><i class="fa fa-heart"></i>  <%= posts[i].likes %> Like</span>
+                  <%} else if (posts[i].likes > 1){%>
+                    <span class="likes"><i class="fa fa-heart"></i>  <%= posts[i].likes %> Likes</span>
+                  <%}%>
+                </section
+              </div>
+            </div>
           </a>
         </li>
       <% } %>

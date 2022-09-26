@@ -1,0 +1,16 @@
+1 - Add a delete button and delete ability to each comment which is only visible to the user who submitted the comment.
+
+What is needed:
+// Done    - The user/userID of who created the comment
+// Done    - a button
+    - a conditional statement in the view that compares the logged in user with the comment userID
+// Done    - add a controller with a delete method 
+// Done    - need route to this controller
+// Done    - DB storage of the user who created the comment // Models//Backend
+
+
+2 - Add the username associated with each comment to the comment text.
+
+What is needed:
+// Done    - find by username based on the userID attached to comment
+    - display in DOM

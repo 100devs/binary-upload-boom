@@ -10,7 +10,7 @@
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          <button class="btn-sm btn btn-outline-primary fa fa-heart" type="submit"></button>
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
         <%if(post.user == user.id){ %>
@@ -19,7 +19,7 @@
           method="POST"
           class="col-3"
         >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
+          <button class="btn-sm btn btn-outline-danger fa fa-trash" type="submit"></button>
         </form>
         <%}%>
       </div>
@@ -29,7 +29,8 @@
       <p><%= post.caption %></p>
     </div>
 
-    <!-- Comment Create -->
+    <!-- comment display -->
+    
     <div class="mt-5">
       <h2>Add a comment</h2>
       <form action="/comment/createComment/<%=post._id%>" method="POST">
@@ -37,20 +38,32 @@
             <label for="comment" class="form-label"></label>
             <input type="text" class="form-control" id="comment" name="comment">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn-sm btn btn-outline-primary">Submit</button>
       </form>
     </div>
 
-    <!-- comment display -->
-
+ 
+    <!-- Comment Create and Display -->
+    
     <ul>
       <% for(var i=0; i<comments.length; i++) {%>
-      <!-- <h4><%=comments[i].user.userName%></h4> -->
-        <li class="col-6 justify-content-between mt-5">
-          <%= comments[i].comment%>
+        <h6><%= comments[i].createdByUserName%>:</h6>
+            <%= comments[i].comment%>
+            
+            <%if(comments[i].createdByID == user.id) {%>
+            <form
+            action="/comment/deleteComment/<%= post.id %>/<%= comments[i]._id %>?_method=DELETE"
+            method="POST"
+            >
+            <button class="btn-sm btn btn-outline-danger" type="submit">Delete</button>
+            </form>
+            <% } %>              
         </li>
       <% } %>
     </ul>
+
+    <!-- Bottom Buttons -->
+
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

@@ -23,6 +23,16 @@
         </form>
         <%}%>
       </div>
+
+
+
+      <form id="commentForm" action="/comment/createComment/<%= post._id %>" method="post" enctype="application/x-www-form-urlencoded">
+        <input type="text" name="commentText" id="commentText" />
+        <input type="submit" id="mysubmit" />
+      </form>
+
+
+      
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>

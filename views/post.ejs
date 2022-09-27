@@ -37,10 +37,30 @@
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
-    <ul>
+    <ul class="list-group mt-5">
       <% for(var i=0; i<comments.length; i++) {%>
-        <li class="col-6 justify-content-between mt-5">
+        <li class="list-group-item active" aria-current="true">Comment from <%= user.userName %></li>
+        <li class="list-group-item">
           <%= comments[i].comment%>
+          <div class="row justify-content-between">
+            <form
+              class="col-1"
+              action="/post/likePost/<%= comments.id %>?_method=PUT"
+              method="POST"
+            >
+              <button class="btn btn-primary fa fa-heart" type="submit"></button>
+            </form>
+            <h3 class="col-3">Likes: <%= comments.likes %></h3>
+            <%if(comments.user == user.id){ %>
+            <form
+              action="/post/deletePost/<%= post.id %>?_method=DELETE"
+              method="POST"
+              class="col-3"
+            >
+              <button class="btn btn-primary fa fa-trash" type="submit"></button>
+            </form>
+            <%}%>
+          </div>
         </li>
       <% } %>
     </ul>

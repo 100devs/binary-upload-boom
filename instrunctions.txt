@@ -1,0 +1,338 @@
+Auth,profiles,feed, posts(delete,like), comments
+
+localhost:2121/post/501
+    post has img, username, likes, caption, comments, delete button
+    each post has a _id:500, img: url/image, likes:3, caption: str, createdBy: 100, deleted: false
+    post is tied to 501 document, and we call pull data from collection to render to ejs
+
+localhost:2121/feed
+    easy to setup: just FIND all the post by collection (lazy loading later? dont post deleted)
+    can add createAt property to schema or TIME, have way to show most recent post
+    What route gets triggered? /feed/
+    server.js has 2 routes: mainRoutes and postroutes. (/post was not in the route for feed)
+    routes/main.js -> router.get("/feed", ensureAuth, postsController.getfeed) Can only see feed if user is logged in. If click, sends to to sign up if u want to see post
+    controllers/posts.js -> getFeed: method
+        find all post, and sort by descending order based on createdAt: date. (mongoose) 
+        Once getFeed all post, pass to ejs. Name the post POST in ejs
+        views/feed.js -> for loop creating Li each with anchor tags and contain post ID
+            there is a partials/footer.ejs and header.ejs folder. It will have header and footer containing bootstrap. Don't have to retype on each page
+        What is Post? it's a model const Post = require('models/post.js)
+        models/post.js -> schema
+
+    WHAT HAPPENS WHEN YOU LOOK AT feed
+        get request: routes/main.js to hear get request on /feed route. 
+        controllers/posts.js -> getFeed go to post collection to get all post in descending order from mongodb then pass all objects into ejs. loop through each one to grab what you need 
+            grab _id and plug into ejs href. Then grab img by grabbing image: property in db which is link where img stored
+
+
+localhost:2121/profile/100
+    profile page from users/_id: 100  id:100, userName, bob, email: b@b.com, pw:hash
+    Should be able to see other people's profile, but if on my own profile, want to be able to create stuff
+        use ensureAuth. req.user:id with session running. if logged in users req.user:id matches user id on page, its their page
+        use a conditional in ejs: if profile/100 = user/_id: 100, allow create content button
+
+comments
+    How many trips to db collection so far? Used 3 collection so far.
+    First request, load post page from post collection. To get user name, have to use createdBy:100, then go to users collection = to 100
+    In order to load comment, have to go to comment collection, and grab specific comment and who madeBy. Which is id of user from user collection
+
+When log into a test account, upload form is available since its your account
+When viewing feed, click post, can like, can't delete other people post. Can delete your own post
+Currently doesn't display user name of poster, need to add later * 
+wrong password, flash notification login fail
+
+Whats in ejs for each post with img? There is anchor tag with post id. Inspect -> anchor tag -> link /post/postId
+For loop in ejs build out Li with each have a anchor tag with link to post route with post id
+
+
+
+Render Images to Dom
+images hosted to cloudify
+
+
+
+How to grab individual POST from clicking image:
+If click on image in dom - get request - event listener - li is anchor tag to link to post
+    get request is on '/post/id' route (hardcoded in ejs)
+    server.js app.use postRoutes -> routes/posts.js - router.get("/:id", ensureAuth, postsController.getPost)
+        query parameter :id allows us to grab url value from id
+        must be logged in via ensureAuth
+        controllers/posts.js -> getPost: method
+            finds specific document based on id. 
+            Since :id was used, grab the id from url /post/id using findById(req.params.id)
+            Click image, find post id, render to ejs (res.render). req.user - there is user property involved
+            views/posts.js - put in what you want to plug into ejs
+
+            ex) router.get("http://localhost:2121/post/:id", ensureAuth, postsController.getPost)
+                const post = await Post.findById(req.params.id)
+
+    :id is a function holding a value. 
+
+Profile:
+localhost:2121/profile - get request
+start: server.js app.use(mainRoutes)
+routes/main.js -> router.get("/profile", ensureAuth, postsController.getProfile)
+controllers/posts.js -> module.exports: getProfile -> go to posts collection : const posts to FIND doc with user property (user:)
+profile only works on logged in user.
+To extend, individual post will have a user name to click to go profile. Right now just looking for posts: from logged in user:
+In mongodb post collection, see user: objectid: to find only users posts
+test: console.log(req.user) -> pulls _id:, userName:,  email, pw:. Can grab any of these properties. (req.userId)
+
+profile ejs ereview
+Use id to connect all the pieces
+
+Liking:
+
+Trashcans:
+
+stay logged in since session is stored in db
+
+
+9/13/2022
+Review
+What paradigm are we using? MVC
+When going to localhost:2121/feed/ 
+    router - controller - all posts from db - render documents in ejs - ejs spits out html - sent back to client to see feed
+loop builds out feed. Anchor tag in feed is clickable.
+
+How do we determine what we show in a post? Unique id in post collection. Post have individual number for url to query db
+
+Dont have profile for indivdual users yet - how do we get unique profile for each user? Use their id #! document in user collection
+HW::: How to show posts in bob's profile? go to post collection, find all createBy bob 
+        Add user name, add comments together, add profile page
+
+Go to localhost2121 - how do we get profile info for logged in user?
+    Active session, every request has req.user. A specific user object and body to get current logged in user ID. Use ID to grab only their info
+    Query post req.user to find his posts
+
+How to add likes? 
+    PUT and delete requests were made using FETCH. Fetch is a web api so it is dependent on the environment (browser). If client doesn't have api, they cant see anything
+     Only get(anchor tag/refresh) and post(forms) request 
+    VIEWS/POST.EJS
+    If you inspect like button, its a form. 
+    What do you need to do to make a post to a put? override the METHOD. 
+        <form class ="col-1" action="/post/abcd1234_method=PUT"    
+            query parameter looks for the post to add a like to it
+        technically, submitting a post, but on backend, we can override it to a PUT method.
+        routes/post.js --> controller/posts.js/likePost/ -- find likePost Method.
+            findOneAndUpdate with _id, when you find it, $inc: { likes:1 } -> INCREMENT like property by 1
+            In db, posts collection -> likes: 
+        When you click like button, submit a form with a query parameter containing post id _method=PUT. Backend setup to hear that query, and instead of post, treat as put
+            Find post router, like post route, 1:46 (1:42 in video for summary)
+    If you inspect the trash can
+        also a form: query parameter _method=DELETE
+
+client side javascript? there is none. Usually in public/main.js which contains event listeners
+
+server.jsconst methodOverride
+    below: app.use(methodOverride("_method")) - all post request that come in, use this middleware to override
+
+
+No Css. Style is bootstrap in EJS under classes
+
+models/post.js
+    module.exports = mongooose.model("ox", PostSchema)
+        create a new collection called ox. Doesn't exist yet. If you make a post, it will error. Controller not setup to use "ox" collection
+        Mongoose knows your collection will have multiple documents so it will change collection name to "Oxen" plural.
+
+
+Deleting
+server.js -> router.get("/:id", ensureAuth, postsController.getPost)
+controller/posts.js -> getPost method
+    look at views/posts.ejs
+        conditional logic: if post.user == user.id (check if the post is by the user) post.user is person who made post and user.id is logged in user
+        logic to show trashcan only if its the user logged in who made the post. (logic found in view/posts.ejs)
+        form -> post/deletePost containing post.id and override method=delete
+        server.js -> ( 2:12 delete process )
+
+        deletePost function
+            delete image from coludinary, delete post from db, refresh back to profile
+            first line "let post = await Post.findById( {_id: req.params.id })  <-- check to make sure post exist first
+
+    click trashcan - submits a form with a specific route and id number for the post. Also has a query param _method =delete
+    when post get sent to server, server overrides post to delete
+    find route - /post/deletePost - with query parameter - find right method - make sure post exist - delete from cloudinary, delete from db
+    (2:17 in video)
+
+
+    views/profile.ejs 
+        /post/createPost/ using method
+    Routes/posts.js
+        server.js const upload = require middleware/multer
+        router.post("/createPost", upload.single("file"), postsController.createPost)
+    middleware/multer.js 
+        checks for jpg png jpeg
+
+    
+2:27 - cloudinary explanation 
+
+
+speed run code to add comments: 
+npm start 
+
+who made comment
+what post id comment is tied to
+postid in comment collection match post id in post collection
+
+models folder
+new file - comment.js
+paste post model in it
+const CommentSchema = new mongoose.Schema({})
+    remove all you dont need - comment, likes, post { type: mongoose.schema.types.objectid,
+    ref: "post",}, createdAt
+
+controller/post.js
+const comment
+under getPost func under const post - method used to render specific post. Already on the post from req.params.id)
+ - reuse search post code and add post
+add const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc"}).lean();
+ - add to ejs
+    res.render("post.ejs", { post: post, user: req.user, comments: comments })
+
+    modify post.ejs to show comments
+view/posts.ejs
+    loop through all comments in db - was used in feed.ejs
+    <p><%=post.caption %></p>
+    </div>
+    <ul>    (look at post model and comment property)
+        <% for(var i = 0; i < comments.length; i++) {%>
+        <li class = "col-6 justify-conetent-between mt-5">
+            <%= comments[i].comment%>
+        </li>
+        <% } % >
+
+In order to add comment, you have a have a form. There is a form already in the profile from profile.ejs
+    add form on top of post.ejs 
+        <form action = "/post/createPost" method="POST">  action="/comment/createComment/<%=post._id%>"     <- not correct. NEED TO MAKE ROUTE FOR COMMENTS
+            <div class="mb-3">
+                <label for ="comment" class'"form-label">Comment</label>
+                <input type="text" class"form-control" id="comment"
+                name="comment">
+
+will need to know which post you are on for each form for each comment.
+Under profile.ejs - in loop - bit of code to plug post[i]._id
+
+In controller called something else : post not PostSchema
+
+no loop error : profile.ejs loop through 1 post so dont need index. Change post[i] to post._id
+
+Need add new route. 
+server.js
+app.use("/comment", commentRoutes)
+const commentRoutes = require("./routes/commnets")
+- routes/comments.js
+    const express, router
+    const commentsController=require("../controllers/comments")
+    const { ensureAuth, ensureGuest } = require("../middleware/auth")
+
+    add comments route under:
+    dont need get, put, delete
+    router.post("/createComment/:id", commentsController.createComment)
+    module.exports = router
+
+    controller/comments.js
+    change createPost func to createComment
+        CHANGES HERE AS WELL - didnt see
+        .. await Comment.create({
+            comment: req.body.comment,     (shcema only has comment, lieks, post)
+            likes: 0,
+            post: req.params.id,      (grab id # of post)   createAt is default so dont need to add
+        })
+
+    remove cloudinary, like and delete
+
+    redirect to post
+    console.log("")
+    res.redirect("/post/"+req.params.id)       (take them back to the post)
+
+comments tied to individual posts. not tied to each image
+
+create comment model with comment 
+getPost - find all comments and sort. pass to ejs and render
+post.ejs - for loop - loop through and show all comments in dom
+
+
+need mongodb and cloudinary account
+this is hw due through
+
+review:
+added comment model model/comment.js
+controller/post.js - grab all post and pass to ejs. also add form to add comment
+view/post.ejs
+routes/comment.js
+controller/comments.js
+
+
+
+
+
+STARTING PROJECT:
+npm i (install app packages)
+create .env file in config folder
+add mongo db link with password and ?/ add collection name
+add cloudinary info node.js. Remove all ":" "'" and replace with = 
+
+Adding comment:
+Start with tying comments to the post id in post collection
+Start with model: copy code from models/post.js
+    remove from the schema what you dont need.
+
+Where are we getting the post from?
+controller/post.js : add in const Comment to pull comment model
+    used the find code from getFeed in getPost
+    under const post add const comments = await 
+        comments that match post we are on
+        then res.render post.ejs
+when you get post, get comments
+
+view/post.ejs
+    loop through all the comment from db (loop found in feed.ejs)
+    removed unecessary stuff
+    look at post model, there is comment property
+    when we loop through all the comment, we pull from the comment property
+
+currently will only show existing comments. In order for users to add comment, we need a form
+pull form from views/profile.ejs
+    change h2 to add a comment
+    form action remove encrypt
+    labels all comment
+    remove 2 divs under input
+    remove value upload from button
+
+    form action : need to create a new route for comment
+    how do we know what post we are on? If we add comment form to every post, how do we know which post we are on
+    plug id into form. under profile.ejs we have code to plug in _id
+    no router or controller yet.
+    Under view/post.ejs - already have access to post id
+    error: post not defined - controller/post.js -> res.render called post: not posts:
+    2nd error: remove [i] not looping anything
+    - image stopped showing up - <img class="img-fluid" src="<%= post.image%>" /
+
+
+need route to post a comment
+    server.js to add a new route
+        app.use("/comment", commentRoutes);
+        top - add const commentRoutes = require("./routes/comments")
+    
+    Add routes/comments.js - copy over from post.js
+        add commentsController
+        Only need POST comment route
+            add createComment/:id to pull id, remove upload, commentsController.createComment
+
+        Now when you submit form, server js send to router/comments.js, router.post -> commentsController 
+            need to create controller for comment
+            pull info from controller/post.js
+            remove all but createPost -> createComment
+                remove cloudinary
+
+            await: title -> comment. req.body.comment (because view/post.ejs form is called comment)
+                schema: comment, likes, post
+                under post, how do we grab the post the comment is tied to?
+                     pass in id from routes/comments.js -> /createComment/:id
+                     req.user.id -> req.params.id
+                     grab id from url and save as post
+                
+                remove getLike and getDelete
+                remove everything above createComment up to module.exports
+                
+                want to redirect them to same post

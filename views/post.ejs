@@ -7,6 +7,17 @@
       <div class="row justify-content-between">
         <form
           class="col-1"
+          action="/post/commentPost/<%= post.id %>?_method=PUT"
+          method="POST"
+        >
+          <div class="comment-wrapper">
+            <label for="comment">Comment</label>
+            <input id="comment" name="comment" type="text" />
+          </div>
+          <button class="btn btn-primary" type="submit">Comment</button>
+        </form>
+        <form
+          class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
@@ -22,6 +33,16 @@
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
         <%}%>
+        <div class="comments">
+          <ul>
+            <% for (let entry of post.comments) { %>
+            <li>
+              <p><%=entry.comment %></p>
+              <small>- <%= entry.author.userName%></small>
+            </li>
+            <%}%>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="col-3 mt-5">

@@ -38,7 +38,7 @@ module.exports = {
         title: req.body.title,
         image: result.secure_url,
         cloudinaryId: result.public_id,
-        caption: req.body.caption,
+        caption: req.body.caption.trim().split('\n'),
         likes: 0,
         user: req.user.id,
       });

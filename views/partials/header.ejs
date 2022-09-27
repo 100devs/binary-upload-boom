@@ -24,7 +24,7 @@
       crossorigin="anonymous"
     />
    
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="/public/css/style.css">
   
   </head>
@@ -32,13 +32,11 @@
     <header class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <nav class="navbar navbar-expand-lg navbar-light fixed-top">
       <div class="container">
-        <a href="/feed" class="navbar-brand">
-          <img src="/public/imgs/logo.png" alt="logo for website" width="100" height="100">
-        </a>
           <div class="collapse navbar-collapse justify-content-end">  
-            <span class="navbar-text"> Welcome,  <%= user.userName %></span>
-            <a class="btn btn-primary" href="/profile">Create Post</a>
-            <a href="/" class="btn btn-dark">Logout</a>
+            <span class="navbar-text">Welcome,  <%= user.userName %> </span>
+            <a href="/feed" class="btn btn-primary"> Explore </a>
+            <a class="btn btn-primary" href="/profile"> Create Post </a>
+            <a href="/" class="btn btn-dark"> Logout </a>
          
           </div>
         

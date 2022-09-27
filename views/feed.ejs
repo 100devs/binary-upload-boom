@@ -1,27 +1,21 @@
 <%- include('partials/header') -%>
 <div class="container card-container">
-  <h1>Explore Your Past Workouts!</h1>
+  <h1 class="display-4">Explore Your Past Workouts!</h1>
 <div class="row row-cols-1 row-cols-md-3 g-4">
-  
-  
-    
         <% for(var i=0; i<posts.length; i++) {%>
         <div class="col">
         <div class="card h-100">
         <img class="card-img-top" src="<%= posts[i].image%>">
         <div class="card-body">
-           <h5 class="card-text"><%= posts[i].title %></h5>
-          <p class="card-title"> By: <%= user.userName %></p>
-          <a href="/post/<%= posts[i]._id%>" class="btn btn-primary">
+           <h5 class="card-text lead"><%= posts[i].title %></h5>
+          <p class="card-title lead"> By: <%= user.userName %></p>
+          <a href="/post/<%= posts[i]._id%>" class="btn btn-primary lead">
             Click Here To View More
            </a> 
         </div>
         </div>
     </div>
-    <% } %>
-  
-
-  
+    <% } %> 
 </div>
 </div>
 <!--

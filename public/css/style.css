@@ -2,7 +2,10 @@
  * Globals
  */
 
-
+img{
+  height:50%;
+  width:25%;
+}
 /* Custom default button */
 .btn-secondary,
 .btn-secondary:hover,
@@ -15,14 +18,6 @@
 /*
  * Base structure
  */
-
-body {
-  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
-  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
-  background: url("fitness.jpeg");
-  background-repeat: no-repeat;
-  margin-top:10% 0;
-}
 
 .cover-container {
   max-width: 42em;
@@ -52,11 +47,65 @@ body {
   border-bottom-color: #fff;
 }
 
-#navbarSupportedContent{
-    margin:2%;
+
+
+html,
+body {
+    height: 100%;
+    font-size: 1rem;
+    text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+    box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
 }
 
-img{
-    width:10%;
-    height:10%;
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+.card-container{
+  margin-top: 10rem;  
+}
+
+.page-header {
+    margin-top: 4rem;
+    font-size: 1.25rem;
+}
+
+/* .page-section {
+    background-color: red;
+    height: 40%;
+} */
+
+.btn-nav{
+    margin-right: .5rem;
+}
+
+
+
+.home{
+    border: 2px solid black;
+    min-height: 80vh;
+}
+
+.card-img-top{
+    width: 100%;
+    height: 80%;
+}
+
+.btn-liked{
+    color: #f03566;
+  }
+
+.btn-bookmarked{
+    background: #ffff;
+}
+
+.btn-sign-in{
+    background-color: #e94135;
+    color: #ffff;
+}
+
+p{
+  font-size: 50px;
 }

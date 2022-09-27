@@ -1,0 +1,15 @@
+.comment-wrapper > * {
+  display: block;
+}
+
+.comment-wrapper {
+  margin-top: 10px;
+}
+
+li {
+  list-style: none;
+}
+
+li > p {
+  margin-bottom: 0;
+}

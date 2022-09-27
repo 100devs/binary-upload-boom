@@ -1,6 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Player = require("../models/Player");
 const Announcement = require("../models/Announcement")
+const Match = require("../models/Match")
 
 module.exports = {
   createPlayer: async (req, res) => {
@@ -29,6 +30,19 @@ module.exports = {
         announcementText: req.body.announcementText,
       });
       console.log("Announcement has been added!");
+      res.redirect("/admin");
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  // important function. when a match is added, check if match has occurred between player 1 and 2. If p1 has more than 2 wins against p2, add 2 points. else 10 points to p1. will have to add property to player1. 
+  // I'm going to have to make year objects.
+  addMatch: async (req, res) => {
+    try {
+      await Match.create({
+        announcementText: req.body.announcementText,
+      });
+      console.log("Match has been added!");
       res.redirect("/admin");
     } catch (err) {
       console.log(err);

@@ -11,16 +11,16 @@
             <h2>Add a post</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
-                  <label for="title" class="form-label">Date</label>
-                  <input type="date" class="form-control" id="title" name="title">
+                  <label for="title" class="form-label">Muscle Group Targeted</label>
+                  <input type="text" class="form-control" id="title" name="title" placeholder="Please Enter Muscle Group">
               </div>
               <div class="mb-3">
-                <label for="caption" class="form-label">Description Of Workout</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
+                <label for="caption" class="form-label">Description Of Workout (Include Reps and Sets)</label>
+                <textarea class="form-control" id="caption" name="caption" placeholder="Enter Each Set On Its Own Line"></textarea>
               </div>
               <div class="mb-3">
                 <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file" required multiple>
+                <input type="file" class="form-control" id="imageUpload" name="file">
               </div>
               <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
             </form>

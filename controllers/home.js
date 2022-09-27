@@ -13,8 +13,10 @@ module.exports = {
   getAdmin: (req, res) => {
     res.render("admin.ejs");
   },
+  // https://www.twitch.tv/videos/1585669216 1:32
   getAnnouncement: async (req, res) => {
     try {
+      // go to the db, to the Announcement collection, put all that data into variable announcements. take that array and put it into index.ejs, then we're going to name our announcements announcements in our ejs
       const announcements = await Announcement.find().sort({ createdAt: "desc" }).lean();
       res.render("index.ejs", { announcements: announcements });
     } catch (err) {

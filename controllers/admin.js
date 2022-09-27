@@ -11,9 +11,6 @@ module.exports = {
       await Player.create({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        image: result.secure_url,
-        cloudinaryId: result.public_id,
-        gender: req.body.gender,
         league: req.body.league,
         email: req.body.email,
         prefCourt: req.body.prefCourt,

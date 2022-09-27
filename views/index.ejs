@@ -6,19 +6,24 @@
         <a href="/login" class="col-3 btn btn-primary"> Login</a>
         <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
     </div>
+
+    <p class="text-xl font-light leading-relaxed mt-6 mb-4 text-gray-800">   
     <div class="container">
         <div class="row justify-content-center mt-5">
           <ul class="row list-unstyled">
+            <!-- loops through each announcement and builds li for each -->
             <% for(var i=0; i<announcements.length; i++) {%>
               <li class="col-6 justify-content-between mt-5">
-                <a href="/admin/<%= announcements[i]._id%>">
-                  <img class="img-fluid" src="<%= announcements[i].image%>">
+                <!-- each of these is an anchor tag to this home route -->
+                <a href="/home/<%= announcements[i]._id%>">
+                    <%= announcements[i].announcementText%>
                 </a>
               </li>
             <% } %>
             </ul>
         </div>
       </div>  
+    </p>
 </main>
     
 

@@ -21,16 +21,8 @@ const PlayerSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  gender: {
-    type: String,
-    required: true,
-  },
   league: {
-    type: String,
-    required: true,
-  },
-  points: {
-    type: Number,
+    type: Array,
     required: true,
   },
   prefCourt: {

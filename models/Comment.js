@@ -13,6 +13,14 @@ const CommentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Post",
   },
+  createBy: {
+    type: String,
+    ref: "User",
+  },
+  createById: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   createdAt: {
     type: Date,
     default: Date.now,

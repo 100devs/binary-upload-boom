@@ -36,7 +36,20 @@
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
+     
     </div>
+
+    <div class="comments">
+      <% for(var i=0; i<comments.length; i++) {%>
+     
+        <p>
+          <%= comments[i].text%>
+        </p>
+        <hr>
+      <% } %>
+    </div>
+
+  
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

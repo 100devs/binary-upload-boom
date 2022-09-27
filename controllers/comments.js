@@ -8,7 +8,7 @@ module.exports = {
       console.log(req.body)
       console.log(req.params)
       await Comment.create({
-        text : req.body.comment,
+        text : req.body.commentText,
         post : req.params._id
       })
       

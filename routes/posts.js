@@ -9,7 +9,7 @@ router.get("/:id", ensureAuth, postsController.getPost);
 //----------------------------------------------------
 router.post("/astro", postsController.getAstro);
 
-router.post("/astro", postsController.getAstroCareer);
+router.post("/astroCareer", postsController.getAstroCareer);
 //----------------------------------------------------
 router.post("/createPost", upload.single("file"), postsController.createPost);
 

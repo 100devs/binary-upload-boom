@@ -25,14 +25,13 @@
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="/css/style.css" />
-  <title>Document</title>
 </head>
 <body>
   
 </body>
 </html>
 <main class="container">
-  <div class="row justify-content-center">
+  <!-- <div class="row justify-content-center">
     <section class="col-6 mt-5">
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
       <div class="alert alert-danger"><%= el.msg %></div>
@@ -65,39 +64,48 @@
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </section>
-  </div>
-  
-  <div class="hero min-h-screen bg-base-200 bg-primary">
-    <div class="hero-content flex-col lg:flex-row-reverse">
-      <div class="text-center lg:text-left">
-        <h1 class="text-5xl font-bold">Login now!</h1>
-        <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-      </div>
-      <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-        <div class="card-body">
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text">Email</span>
-            </label>
-            <input type="text" placeholder="email" class="input input-bordered" />
-          </div>
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text">Password</span>
-            </label>
-            <input type="text" placeholder="password" class="input input-bordered" />
-            <label class="label">
-              <a href="#" class="label-text-alt link link-hover"></a>
-            </label>
-          </div>
-          <div class="form-control mt-6">
-            <button><form action="/login" method="POST" class="btn btn-primary">Login</form></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <footer class="footer p-10 bg-base-200 text-base-content">
+  </div> -->
+
+</main>
+
+  <div class="row justify-content-center sidebars">
+    <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
+    <div class="alert alert-danger"><%= el.msg %></div>
+    <% }) %> <% } %> <% if (locals.messages.info) { %> <%
+    messages.info.forEach( el => { %>
+    <div class="alert alert-info"><%= el.msg %></div>
+    <% }) %> <% } %>
+    <form action="/login" method="POST">
+      <div class="hero min-h-screen bg-base-200 bg-primary">
+          <div class="hero-content flex-col lg:flex-row-reverse">
+            <div class="text-center lg:text-left">
+              <h1 class="text-5xl font-bold">Login now!</h1>
+              <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+            </div>
+            <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+              <div class="card-body">
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Email</span>
+                  </label>
+                  <input type="text" placeholder="email" class="input input-bordered" name="email" />
+                </div>
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Password</span>
+                  </label>
+                  <input type="text" placeholder="password" class="input input-bordered" name="password" />
+                  <label class="label">
+                    <a href="#" class="label-text-alt link link-hover"></a>
+                  </label>
+                </div>
+                <div class="form-control mt-6">
+                  <button><form action="/login" method="POST" class="btn btn-primary">Login</form></button>
+                </div>
+    </form>
+</div>
+
+  <!-- <footer class="footer p-10 bg-base-200 text-base-content">
     <div>
       <span class="footer-title">Services</span> 
       <a class="link link-hover">Branding</a> 
@@ -130,7 +138,7 @@
         </div>
       </div>
     </div>
-  </footer>
-</main>
+  </footer> -->
+
 
 

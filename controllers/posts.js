@@ -41,7 +41,7 @@ module.exports = {
 
    await axios.request(options).then(function (astrocareer) {
       console.log(astrocareer.data);
-      res.render("profile.ejs", { posts: [], user: req.user, zodiac: astrocareer.data[sign] });
+      res.render("profile.ejs", { posts: [], user: req.user, zodiac2: astrocareer.data[sign] });
     }).catch(function (err) {
       console.error(err);
     });

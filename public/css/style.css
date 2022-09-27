@@ -1,14 +1,16 @@
 html, body {
     margin: 0;
     height: 100%;
+    background-image: url(../imgs/zodiac.jpg);
+    background-size: cover;
+}
+
+.main {
+    margin: 5px;
 }
 
 .randoastro {
     font-size: 75px;
-}
-
-.bg-primary {
-    
 }
 
 .hero.min-h-screen.bg-base-200.bg-primary {
@@ -17,4 +19,38 @@ html, body {
 
 .link-hover {
     color: orange;
+}
+
+.profile {
+    
+}
+
+.sidebars {
+    overflow: hidden;
+}
+
+.main-footer {
+    margin-top: auto;
+}
+
+p, form {
+    color: white;
+    text-shadow: 3px 3px 3px black;
+}
+
+.container {
+    height: 700px;
+    padding: 25px;
+}
+
+.container-input {
+    padding-top: 30px;
+}
+
+.form-astro {
+    padding-bottom: 50px;
+}
+
+.form-career {
+    padding-top: 20px;
 }

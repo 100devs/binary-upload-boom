@@ -40,7 +40,8 @@ module.exports = {
   addMatch: async (req, res) => {
     try {
       await Match.create({
-        announcementText: req.body.announcementText,
+        player1: req.body.player1,
+        player1: req.body.player2,
       });
       console.log("Match has been added!");
       res.redirect("/admin");

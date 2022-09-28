@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose");//mongoose schema that models the data that is going into the db
 
 const PostSchema = new mongoose.Schema({
   title: {

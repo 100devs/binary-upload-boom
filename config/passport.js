@@ -1,11 +1,11 @@
-const LocalStrategy = require("passport-local").Strategy;
-const mongoose = require("mongoose");
-const User = require("../models/User");
+const LocalStrategy = require("passport-local").Strategy; //setup passport local strategy
+const mongoose = require("mongoose"); //requires mongoose schema
+const User = require("../models/User"); //uses the model-schema 
 
-module.exports = function (passport) {
+module.exports = function (passport) { //the "module.exports" is being declared here so you can use this elsewhere
   passport.use(
-    new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
-      User.findOne({ email: email.toLowerCase() }, (err, user) => {
+    new LocalStrategy({ usernameField: "email" }, (email, password, done) => { //the localstrategy is stating three param, email, pass, done
+      User.findOne({ email: email.toLowerCase() }, (err, user) => { //this logic will check for an user with this email. Otherwise, will throw an err. stating that the email was not found
         if (err) {
           return done(err);
         }
@@ -18,7 +18,7 @@ module.exports = function (passport) {
               "Your account was registered using a sign-in provider. To enable password login, sign in using a provider, and then set a password under your user profile.",
           });
         }
-        user.comparePassword(password, (err, isMatch) => {
+        user.comparePassword(password, (err, isMatch) => { // this logic will match the password stored with the pass inputted.
           if (err) {
             return done(err);
           }
@@ -31,11 +31,11 @@ module.exports = function (passport) {
     })
   );
 
-  passport.serializeUser((user, done) => {
+  passport.serializeUser((user, done) => { //sets up ids as cookies in user's browser
     done(null, user.id);
   });
 
-  passport.deserializeUser((id, done) => {
+  passport.deserializeUser((id, done) => { //this gets the id from the cookie
     User.findById(id, (err, user) => done(err, user));
   });
 };

@@ -1,4 +1,4 @@
-const multer = require("multer");
+const multer = require("multer");// middleware that is used to upload files.
 const path = require("path");
 
 module.exports = multer({

@@ -1,8 +1,8 @@
-const cloudinary = require("../middleware/cloudinary");
-const Post = require("../models/Post");
+const cloudinary = require("../middleware/cloudinary");//uses middleware that handles cloudinary credentias
+const Post = require("../models/Post");//uses schema for posting
 
 module.exports = {
-  getProfile: async (req, res) => {
+  getProfile: async (req, res) => {//gets the user profile and renders it
     try {
       const posts = await Post.find({ user: req.user.id });
       res.render("profile.ejs", { posts: posts, user: req.user });
@@ -10,7 +10,7 @@ module.exports = {
       console.log(err);
     }
   },
-  getFeed: async (req, res) => {
+  getFeed: async (req, res) => {//pull feed
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
       res.render("feed.ejs", { posts: posts });
@@ -26,7 +26,7 @@ module.exports = {
       console.log(err);
     }
   },
-  createPost: async (req, res) => {
+  createPost: async (req, res) => {//creates a new post
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
@@ -45,7 +45,7 @@ module.exports = {
       console.log(err);
     }
   },
-  likePost: async (req, res) => {
+  likePost: async (req, res) => {//adds a like 
     try {
       await Post.findOneAndUpdate(
         { _id: req.params.id },
@@ -59,7 +59,7 @@ module.exports = {
       console.log(err);
     }
   },
-  deletePost: async (req, res) => {
+  deletePost: async (req, res) => {//find post by id and deletes it
     try {
       // Find post by id
       let post = await Post.findById({ _id: req.params.id });

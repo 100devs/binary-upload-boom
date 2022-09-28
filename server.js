@@ -10,32 +10,34 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
-
+//########################################################### react added dependencies such as mongoose
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
 
-// Passport config
+// this is the passport configuration file where we set up params
 require("./config/passport")(passport);
 
-//Connect To Database
+//database configuration file. Pretty much how the data is being handled
 connectDB();
 
-//Using EJS for views
+//this is where we tell the app to use the templating language ejs
 app.set("view engine", "ejs");
 
-//Static Folder
+//what the name implies, using the static folder named public.
 app.use(express.static("public"));
 
-//Body Parsing
+//Middleware that is bodyParser
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//Logging
+//utilizing morgan for logging http request
 app.use(logger("dev"));
 
-//Use forms for put / delete
+//this lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
+// Uses forms for put / delete
 app.use(methodOverride("_method"));
 
+// session is used to to keep track of the user's state. Since we are using auth, we need to store this in a server or a DB
 // Setup Sessions - stored in MongoDB
 app.use(
   session({
@@ -46,11 +48,11 @@ app.use(
   })
 );
 
-// Passport middleware
+// Passport middleware. It is used for authentication
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Use flash messages for errors, info, ect...
+//This enables devs to display or render pop-up messages every time a user is redirected to a certain page. in this case it's being used for errors, info, ect...
 app.use(flash());
 
 //Setup Routes For Which The Server Is Listening

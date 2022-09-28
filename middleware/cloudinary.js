@@ -1,4 +1,4 @@
-const cloudinary = require("cloudinary").v2;
+const cloudinary = require("cloudinary").v2;//cloudinary credentials are being pulled from .env and assigned to these varaiables
 
 require("dotenv").config({ path: "./config/.env" });
 

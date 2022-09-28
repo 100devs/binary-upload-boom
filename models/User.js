@@ -1,7 +1,7 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");// it's a library that helps you hash passwords
 const mongoose = require("mongoose");
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({//defines the schema for the user
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
   password: String,
@@ -14,7 +14,7 @@ UserSchema.pre("save", function save(next) {
   if (!user.isModified("password")) {
     return next();
   }
-  bcrypt.genSalt(10, (err, salt) => {
+  bcrypt.genSalt(10, (err, salt) => {//hashes and salts the password
     if (err) {
       return next(err);
     }

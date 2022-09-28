@@ -10,7 +10,7 @@
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          <button class="btn btn-primary fa fa-heart" style="background-color: blue" type="submit"></button>
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
         <%if(post.user == user.id){ %>
@@ -19,7 +19,7 @@
           method="POST"
           class="col-3"
         >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
+          <button class="btn btn-primary fa fa-trash" style="background-color: blue" type="submit"></button>
         </form>
         <%}%>
       </div>
@@ -34,7 +34,7 @@
             <label for="comment" class="form-label">Comment</label>
             <input type="text" class="form-control" id="comment" name="comment">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" style="background-color: blue" class="btn btn-primary">Submit</button>
       </form>
     </div>
     <ul>

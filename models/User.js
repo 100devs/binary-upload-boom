@@ -5,7 +5,9 @@ const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
   password: String,
-});
+}
+// to input specific collection you can do ,{collection: 'name'}
+);
 
 // Password hash middleware.
 
@@ -39,4 +41,4 @@ UserSchema.methods.comparePassword = function comparePassword(
   });
 };
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", UserSchema); // after userschema you can add another parameter so mongoose doesn't pluralify things and chooses name you define

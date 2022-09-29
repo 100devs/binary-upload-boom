@@ -5,6 +5,14 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  notes:{
+    type: String,
+    require: false,
+  },
+  tags:{
+    type: Array,
+    require: false,
+  },
   image: {
     type: String,
     require: true,
@@ -12,14 +20,6 @@ const PostSchema = new mongoose.Schema({
   cloudinaryId: {
     type: String,
     require: true,
-  },
-  caption: {
-    type: String,
-    required: true,
-  },
-  likes: {
-    type: Number,
-    required: true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,

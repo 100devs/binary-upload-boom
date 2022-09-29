@@ -1,0 +1,17 @@
+<%- include('partials/header') -%>
+
+<div class="container"></div>
+<ul class="container">
+    
+    <% for(var i=0; i<wishlist.length; i++) {%>
+      <li class="col-6 justify-content-between mt-5">
+       <%= wishlist[i].title%>
+        </li>
+    <% } %>
+  </ul>
+</div>
+  
+
+    
+
+<%- include('partials/footer') -%>

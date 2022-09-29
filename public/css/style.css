@@ -1,6 +1,6 @@
 body{
-    background-color: #000;
-    color: #FFF;
+    background-color: #FFF;
+    color: #000;
 }
 li{
    list-style: none; 
@@ -12,4 +12,20 @@ div .margin{
 .red-text{
     color:#ff0000
 }
-
+img, .img-thumbnail{
+    height:200px;
+    width: 200px;
+}
+/*----------------------------------------------------------------------------------  
+    LOGIN Main - gave margin to the login area 
+------------------------------------------------------------------------------------*/    
+main, .marginBottom{
+    margin-bottom: 200px;
+}
+  
+/*----------------------------------------------------------------------------------------*/
+header h1 a{
+    font-family: 'Homemade Apple', cursive;
+    text-decoration: none;
+    font-size: 50px;
+}

@@ -1,14 +1,23 @@
 <%- include('partials/header') -%>
 <div class="container">
-  <div class="row mt-5">
+  <div class="row mt-6">
       <div class="col-6">
           <div>
               <p><strong>User Name</strong>: <span class="red-text"><%= user.userName%></span></p>
               <p><strong>Email</strong>: <span class="red-text"><%= user.email %></span></p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+            <!------------Added a link to wishlist--------------------------------------------------> 
+            <form action="/wishlist/:id" method="GET">
+              <div class="mb-3">
+                  <label for="title" class="form-label"></label>
+              </div>
+                <button type="submit" class="col-3 btn btn-success">Wishlist</button>
+            </form>
+            
+            <!-------------------------------------------------------------------------------------->  
           </div>
           <div class="mt-5">
-            <h2>Add a post</h2>
+            <h2>Add a book</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
                   <label for="title" class="form-label">Title</label>
@@ -22,7 +31,9 @@
                 <label for="imgUpload" class="form-label">Image</label>
                 <input type="file" class="form-control" id="imageUpload" name="file">
               </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+                <div class="mb-5">
+                      <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+                </div>  
             </form>
           </div>
       </div>

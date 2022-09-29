@@ -8,19 +8,39 @@
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
           <div class="mt-5">
-            <h2>Add a post</h2>
+            <h2>Add an entry</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" required>
               </div>
               <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
+                  <label for="title" class="form-label">Tags</label>
+                  <select class="form-control" id="tags" name="tags" multiple>
+                    <option value="appliances">Appliances</option>
+                    <option value="bathroom">Bathroom</option>
+                    <option value="electrical">Electrical</option>
+                    <option value="hvac">HVAC</option>
+                    <option value="kitchen">Kitchen</option>
+                    <option value="landscaping">Landscaping</option>
+                    <option value="painting">Painting</option>
+                    <option value="plumbing">Plumbing</option>
+                    <option value="pool">Pool</option>
+                    <option value="roofing">Roofing</option>
+                    <option value="other">Other</option>
+                  </select>
+              </div>
+              <div class="mb-3">
+                <label for="notes" class="form-label">Notes</label>
+                <textarea class="form-control" id="notes" name="notes"></textarea>
               </div>
               <div class="mb-3">
                 <label for="imgUpload" class="form-label">Image</label>
                 <input type="file" class="form-control" id="imageUpload" name="file">
+              </div>
+              <div class="mb-3">
+                <label for="date" class="form-label">Date</label>
+                <input type="date" class="form-control" id="date" name="date">
               </div>
               <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
             </form>

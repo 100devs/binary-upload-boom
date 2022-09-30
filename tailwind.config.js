@@ -1,6 +1,8 @@
+const autoprefixer = require('autoprefixer');
+
 module.exports = {
-    content: ['./src/**/*.{html,js}', './node_modules/tw-elements/dist/js/**/*.js'],
+    content: ['"./views/**/*.ejs"'],
     plugins: [
-      require('tw-elements/dist/plugin')
+      require('tw-elements/dist/plugin'),
     ]
   }

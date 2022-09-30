@@ -27,71 +27,21 @@
 />
   </head>
   <body>
-    <nav class="navbar w-full bg-white">
-      <div class="container-lg px-0">
-        <div class="flex w-full items-center">
-          <button
-            navbar-trigger=""
-            class="navbar-trigger ml-auto mr-0 mb-0 block lg:hidden"
-            type="button"
-            aria-controls="navigation"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-trigger-icon">
-              <span bar1="" class="navbar-trigger-bar mt-1"
-                ><span class="hidden origin-[10%_10%] rotate-45"></span
-              ></span>
-              <span bar2="" class="bar2 navbar-trigger-bar mt-2"></span>
-              <span bar3="" class="bar3 navbar-trigger-bar mt-2"
-                ><span
-                  class="mt-mt-[0.4375rem] hidden origin-[10%_90%] -rotate-45"
-                ></span
-              ></span>
-            </span>
-          </button>
-        </div>
-        <div class="collapse navbar-collapse" navbar-menu="">
-          <ul class="navbar-nav">
-            <li>
-              <a class="nav-link" aria-current="page" href="/">
-                <i class="material-icons mr-2 text-base opacity-60">article</i>
-                <span>Home</span>
-              </a>
-            </li>
-            <li>
-              <a class="nav-link" href="/leaderboard">
-                <i class="material-icons mr-2 text-base opacity-60">apps</i>
-                <span>Leaderboard</span>
-              </a>
-            </li>
-            <li class="flex">
-              <a class="nav-link" href="/profile">
-                <i class="material-icons mr-2 text-base opacity-60"
-                  >view_carousel</i
-                >
-                <span>Profiles</span>
-              </a>
-            </li>
-            <li>
-              <a class="nav-link" href="/about">
-                <i class="fab fa-github mr-2 text-base opacity-60"></i>
-                <span>About</span>
-              </a>
-            </li>
-            <li>
-              <a class="nav-link" href="/admin">
-                <i class="fab fa-github mr-2 text-base opacity-60"></i>
-                <span>Admin</span>
-              </a>
-            </li>
-          </ul>
-        </div>
+
+    <div class="navbar bg-base-100">
+      <div class="flex-1">
+        <a class="btn btn-ghost normal-case text-xl" href="/">DMV Singles Ladder</a>
       </div>
-    </nav>
+      <div class="flex-none">
+        <ul class="menu menu-horizontal p-0">
+          <li><a href="/">Home</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="profile">Profiles</a></li>
+          <li><a href="about">About</a></li>
+          <li><a href="admin">Admin</a></li>
+        </ul>
+      </div>
+    </div>
 
   </body>
-  <!-- from node_modules -->
-<script src="/node_modules/@material-tailwind/html/scripts/collapse.js"></script>
- 
 </html>

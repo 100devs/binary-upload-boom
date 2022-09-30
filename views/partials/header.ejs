@@ -13,20 +13,85 @@
       href="/imgs/favicon-32x32.png"
     />
     <link href="/dist/output.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
-<!-- <script src="../node_modules/tw-elements/dist/js/index.min.js"></script> -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+    <link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+ 
+<!-- Font Awesome Link -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+  integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+  crossorigin="anonymous"
+/>
   </head>
   <body>
-    <div class="navbar bg-base-100">
-      <a href="/" class="btn btn-ghost normal-case text-xl">Home</a>
-      <a href="/leaderboard" class="btn btn-ghost normal-case text-xl">Leaderboard</a>
-      <a href="/profile" class="btn btn-ghost normal-case text-xl">Profiles</a>
-      <a href="/about" class="btn btn-ghost normal-case text-xl">About</a>
-      <a href="/admin" class="btn btn-ghost normal-case text-xl">Admin</a>
-    </div>
+    <nav class="navbar w-full bg-white">
+      <div class="container-lg px-0">
+        <div class="flex w-full items-center">
+          <button
+            navbar-trigger=""
+            class="navbar-trigger ml-auto mr-0 mb-0 block lg:hidden"
+            type="button"
+            aria-controls="navigation"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-trigger-icon">
+              <span bar1="" class="navbar-trigger-bar mt-1"
+                ><span class="hidden origin-[10%_10%] rotate-45"></span
+              ></span>
+              <span bar2="" class="bar2 navbar-trigger-bar mt-2"></span>
+              <span bar3="" class="bar3 navbar-trigger-bar mt-2"
+                ><span
+                  class="mt-mt-[0.4375rem] hidden origin-[10%_90%] -rotate-45"
+                ></span
+              ></span>
+            </span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" navbar-menu="">
+          <ul class="navbar-nav">
+            <li>
+              <a class="nav-link" aria-current="page" href="/">
+                <i class="material-icons mr-2 text-base opacity-60">article</i>
+                <span>Home</span>
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" href="/leaderboard">
+                <i class="material-icons mr-2 text-base opacity-60">apps</i>
+                <span>Leaderboard</span>
+              </a>
+            </li>
+            <li class="flex">
+              <a class="nav-link" href="/profile">
+                <i class="material-icons mr-2 text-base opacity-60"
+                  >view_carousel</i
+                >
+                <span>Profiles</span>
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" href="/about">
+                <i class="fab fa-github mr-2 text-base opacity-60"></i>
+                <span>About</span>
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" href="/admin">
+                <i class="fab fa-github mr-2 text-base opacity-60"></i>
+                <span>Admin</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
   </body>
+  <!-- from node_modules -->
+<script src="/node_modules/@material-tailwind/html/scripts/collapse.js"></script>
+ 
 </html>

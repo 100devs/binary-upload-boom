@@ -11,7 +11,7 @@ const TodoSchema = new mongoose.Schema({
   },
   userId: {
     type: String,
-    required: true
+    required: false
   },
   post: {
     type: mongoose.Schema.Types.ObjectId,

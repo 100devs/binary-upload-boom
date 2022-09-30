@@ -27,7 +27,7 @@ module.exports = {
       const comments = await Comment.find({post:req.params.id}).sort({ createdAt: "desc" }).lean();
       const inventory = await InventoryItem.find({post:req.params.id}).sort({ createdAt: "desc"}).lean();
       const todo = await Todo.find({post:req.params.id}).sort({createdAt: "desc"}).lean();
-      console.log(inventory)
+      console.log(todo)
       res.render("post.ejs", { post: post, user: req.user, comments: comments, inventory:inventory, todo:todo });
     } catch (err) {
       console.log(err);

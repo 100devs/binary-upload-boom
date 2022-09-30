@@ -1,7 +1,7 @@
 const Todo = require('../models/Todo')
 
 module.exports = {
-   /* getTodos: async (req,res)=>{
+   /*getTodos: async (req,res)=>{
         console.log(req.user)
         try{
             const todoItems = await Todo.find({userId:req.user.id})
@@ -15,14 +15,15 @@ module.exports = {
         try{
             await Todo.create({todo: req.body.todoItem, 
                 completed: false, 
-                userId: req.user.id})
+                post: req.params.id})
             console.log('Todo has been added!')
-            res.redirect('/todos')
+            //changed redirect from todos page to post id
+            res.redirect("/post/"+req.params.id);
         }catch(err){
             console.log(err)
         }
     },
-   /* markComplete: async (req, res)=>{
+    markComplete: async (req, res)=>{
         try{
             await Todo.findOneAndUpdate({_id:req.body.todoIdFromJSFile},{
                 completed: true
@@ -44,7 +45,7 @@ module.exports = {
             console.log(err)
         }
     },
-    deleteTodo: async (req, res)=>{
+    /*deleteTodo: async (req, res)=>{
         console.log(req.body.todoIdFromJSFile)
         try{
             await Todo.findOneAndDelete({_id:req.body.todoIdFromJSFile})
@@ -54,4 +55,16 @@ module.exports = {
             console.log(err)
         }
     }*/
+    deleteTodo: async (req, res) => {
+        try {
+          // Find post by id
+          let todo = await Todo.findById({ _id: req.body.todoItem });
+            // Delete post from db
+          await Todo.remove({ _id: req.params.id });
+          console.log("Deleted Todo");
+          res.redirect("/profile");
+        } catch (err) {
+          res.redirect("/profile");
+        }
+      },
 }    

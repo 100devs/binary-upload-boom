@@ -72,7 +72,7 @@
     </form>
       <ul>
       <% todo.forEach( el => { %>
-              <li class='todoItem' data-id='<%=el._id%>'>
+              <li class='todoItem' data-id='<%el._id%>'>
                   <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
                   <span class='del'> Delete </span>
               </li>
@@ -86,5 +86,5 @@
     </div>
   </div>
 </div>
-
+<script src="public/main/js"></script>
 <%- include('partials/footer') -%>

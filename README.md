@@ -6,6 +6,10 @@ Social Media Website
 
 A simple social media website that allows users to create and share images
 
+## Tech Stack
+
+HTML, CSS, EJS, JavaScript, Node.JS, Express.JS, MongoDB, Mongoose, Passport.JS
+
 ## Getting Started
 
 ### Installing

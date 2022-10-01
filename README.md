@@ -5,11 +5,7 @@ A full-stack photo-sharing social media app that enables users to post photos & 
 
 **Link to project:** https://pictogram.cyclic.app
 
-## Screenshots
-
 ![pictogram](https://user-images.githubusercontent.com/101529105/193375716-6619770d-a471-49d4-b07c-b5d558ab4d22.png)
-
-
 
 ## Tech Stack
 

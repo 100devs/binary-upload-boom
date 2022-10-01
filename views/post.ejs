@@ -43,10 +43,14 @@
         <div class="card-body">
           <h5 class="cart-title"><%= comment.userID.userName %></h5>
           <h6 class="card-subtitle text-muted mb-2"><%= comment.createdAt.toLocaleString() %></h6>
+          <h6 class="card-subtitle text-muted mb-2">Likes: <%= comment.likes %></h6>
           <div class="card-text">
             <%= comment.commentBody %>
+            <form action="/comment/likeComment/<%= post._id %>/<%= comment._id %>?_method=PUT" method="post">
+              <button class="btn btn-primary mt-2">Like</button>
+            </form>
           </div>
-          </div>
+        </div>
       </div>
       <% }) %>
     <div class="col-6 mt-5">

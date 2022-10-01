@@ -1,7 +1,7 @@
 <%- include('partials/header') -%>
   <div class="container">
     <div class="row justify-content-center mt-5">
-      <ul class="row list-unstyled">
+      <!-- <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
             <a href="/post/<%= posts[i]._id%>">
@@ -9,7 +9,19 @@
             </a>
           </li>
         <% } %>
-        </ul>
+        </ul> -->
+      <% posts.forEach(post => { %>
+        <a class="col-6" href="/post/<%= post._id %>">
+          <div class="card">
+            <img src="<%= post.image %>" alt="<%= post.caption %>" class="img-fluid">
+            <div class="card-body">
+              <h5 class="card-title"><%= post.title %></h5>
+              <h6 class="card-subtitle mb-2"><%= post.createdAt.toLocaleString() %></h6>
+              <h6 class="card-subtitle">Likes: <%= post.likes %></h6>
+            </div>
+          </div>
+        </a>
+      <% }) %>
     </div>
   </div>  
 <%- include('partials/footer') -%>

@@ -46,9 +46,16 @@
           <h6 class="card-subtitle text-muted mb-2">Likes: <%= comment.likes %></h6>
           <div class="card-text">
             <%= comment.commentBody %>
-            <form action="/comment/likeComment/<%= post._id %>/<%= comment._id %>?_method=PUT" method="post">
-              <button class="btn btn-primary mt-2">Like</button>
-            </form>
+            <div class="row">
+              <form class="col-1" action="/comment/likeComment/<%= post._id %>/<%= comment._id %>?_method=PUT" method="post">
+                <button class="btn btn-primary mt-2 fa fa-heart"></button>
+              </form>
+              <% if (user.id == comment.userID._id) { %>
+                <form class="col-1" action="/comment/deleteComment/<%= post._id %>/<%= comment._id %>?_method=DELETE" method="post">
+                  <button class="btn btn-primary mt-2 fa fa-trash"></button>
+                </form>
+              <% } %>
+            </div>
           </div>
         </div>
       </div>

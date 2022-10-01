@@ -1,10 +1,20 @@
-# Install
+# Project Title
+
+Social Media Website
+
+## Description
+
+A simple social media website that allows users to create and share images
+
+## Getting Started
+
+### Installing
 
 `npm install`
 
 ---
 
-# Things to add
+### Things to add
 
 - Create a `.env` file in config folder and add the following as `key = value`
   - PORT = 2121 (can be any port example: 3000)
@@ -15,6 +25,6 @@
 
 ---
 
-# Run
+### Run
 
 `npm start`

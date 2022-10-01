@@ -23,6 +23,7 @@ module.exports = {
     try {
       const post = await Post.findById(req.params.id);
       const comments = await Comment.find({ postID: req.params.id })
+        .populate("userID")
         .sort({ createdAt: "asc" })
         .lean();
       res.render("post.ejs", { post: post, user: req.user, comments });

@@ -37,11 +37,17 @@
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
-    <div class="mt-5">
-      <% comments.forEach(comment => { %>
-        <div><%= comment.commentBody %></div>
+    <% comments.forEach(comment => { %>
+      <div class="card mt-2">
+        <div class="card-body">
+          <h5 class="cart-title"><%= comment.userID.userName %></h5>
+          <h6 class="card-subtitle text-muted mb-2"><%= comment.createdAt.toLocaleString() %></h6>
+          <div class="card-text">
+            <%= comment.commentBody %>
+          </div>
+          </div>
+      </div>
       <% }) %>
-    </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

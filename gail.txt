@@ -45,14 +45,13 @@
         <li class="col-6 justify-content-between mt-5">
           <%= comments[i].createdBy%>: "<%= comments[i].comment%>"
           <%if(comments[i].createdById == user.id) {%>
-   
         <form
         action="/comment/deleteComment/<%= post.id %>/<%= comments[i]._id %>?_method=DELETE" 
         method="POST"
       >
         <button class="btn btn-outline-danger" type="submit">Delete</button>
-        </form> 
-        <% } %>
+        </form>
+        <%}%>
     </li>
       <% } %>
     </ul>

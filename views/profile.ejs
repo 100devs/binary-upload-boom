@@ -2,11 +2,15 @@
 <div class="container">
   <div class="row mt-5">
       <div class="col-6">
-          <div>
+
+          <% if (paramsID == user.id) { %>
+
+            <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
+          
           <div class="mt-5">
             <h2>Add a post</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
@@ -25,6 +29,8 @@
               <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
             </form>
           </div>
+
+          <% } %>
       </div>
       <div class="col-6">
         <ul class="row list-unstyled">
@@ -36,9 +42,9 @@
           </li>
         <% } %>
         </ul>
-        <div class="row justify-content-center mt-5">
+        <!-- <div class="row justify-content-center mt-5">
           <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>  
+        </div>   -->
       </div>  
     </div>
   </div>

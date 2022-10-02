@@ -24,17 +24,17 @@ connectDB();
 //Using EJS for views
 app.set("view engine", "ejs");
 
-//Static Folder
+//Static Folder - CSS, JS, img
 app.use(express.static("public"));
 
-//Body Parsing
+//Body Parsing - pull things out of the request being made
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//Logging
+//Logging - using Morgan 
 app.use(logger("dev"));
 
-//Use forms for put / delete
+//Use forms for put / delete. When any types of requests come in, if it has _method after it, override requests.
 app.use(methodOverride("_method"));
 
 // Setup Sessions - stored in MongoDB
@@ -51,7 +51,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Use flash messages for errors, info, ect...
+//Use flash messages for errors, info, ect... Used for error messages
 app.use(flash());
 
 //Setup Routes For Which The Server Is Listening

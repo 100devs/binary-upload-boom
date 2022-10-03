@@ -1,4 +1,4 @@
-const Post = require("../models/Post");
+const Disc = require("../models/Disc");
 const Comment = require("../models/Comment");
 
 
@@ -7,13 +7,12 @@ module.exports = {
     try {
 
       await Comment.create({
-        madeBy: req.body.madeBy,
         comment: req.body.comment,
-        post: req.params.id,
+        disc: req.params.id,
         likes: 0,
       });
       console.log("Comment has been added!");
-      res.redirect("/post/"+req.params.id);
+      res.redirect("/disc/"+req.params.id);
     } catch (err) {
       console.log(err);
     }

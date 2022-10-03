@@ -11,11 +11,10 @@ const CommentSchema = new mongoose.Schema({
   },
   madeBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "madeBy"
   },
-  post: {
+  disc: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Post'
+    ref: 'Disc'
   },
 });
 

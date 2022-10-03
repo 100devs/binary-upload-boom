@@ -1,0 +1,62 @@
+<%- include('partials/header') -%>
+<div class="container">
+  <div class="row mt-5">
+      <div class="col-6">
+          <div>
+              <p><strong>User Name</strong>: <%= user.userName %></p>
+              <p><strong>Email</strong>: <%= user.email %></p>
+              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+          </div>
+          <div class="mt-5">
+            <h2>Add a disc</h2>
+            <form action="/disc/createDisc" enctype="multipart/form-data" method="POST">
+              <div class="mb-3">
+                  <label for="discName" class="form-label">Disc Name</label>
+                  <input type="text" class="form-control" id="discName" name="discName">
+              </div>
+              <div class="mb-3">
+                <label for="discBrand" class="form-label">Disc Brand</label>
+                <textarea class="form-control" id="discBrand" name="discBrand"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="discSpeed" class="form-label">Disc Speed</label>
+                <textarea class="form-control" id="discSpeed" name="discSpeed"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="discGlide" class="form-label">Disc Glide</label>
+                <textarea class="form-control" id="discGlide" name="discGlide"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="discTurn" class="form-label">Disc Turn</label>
+                <textarea class="form-control" id="discTurn" name="discTurn"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="discFade" class="form-label">Disc Fade</label>
+                <textarea class="form-control" id="discFade" name="discFade"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="imgUpload" class="form-label">Disc Image</label>
+                <input type="file" class="form-control" id="imageUpload" name="file">
+              </div>
+              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+            </form>
+          </div>
+      </div>
+      <div class="col-6">
+        <ul class="row list-unstyled">
+        <% for(var i=0; i<discs.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <a href="/disc/<%= discs[i]._id%>">
+              <img class="img-fluid" src="<%= discs[i].image%>">
+            </a>
+          </li>
+        <% } %>
+        </ul>
+        <div class="row justify-content-center mt-5">
+          <a class="btn btn-primary" href="/feed">Return to Feed</a>
+        </div>  
+      </div>  
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') -%>

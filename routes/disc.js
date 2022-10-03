@@ -1,19 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/multer");
-const postsController = require("../controllers/posts");
+const discsController = require("../controllers/discs");
 const commentController = require("../controllers/comments");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
-//Post Routes - simplified for now
-router.get("/:id", ensureAuth, postsController.getPost);
+//Disc Routes 
+router.get("/:id", ensureAuth, discsController.getDisc);
 
-router.post("/createPost", upload.single("file"), postsController.createPost);
+router.post("/createDisc", upload.single("file"), discsController.createDisc);
 
 router.post("/createComment", commentController.createComment);
 
-router.put("/likePost/:id", postsController.likePost);
+router.put("/likeDisc/:id", discsController.likeDisc);
 
-router.delete("/deletePost/:id", postsController.deletePost);
+router.delete("/deleteDisc/:id", discsController.deleteDisc);
 
 module.exports = router;

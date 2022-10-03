@@ -7,23 +7,30 @@
         <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
     </div>
 <!-- Announcements box -->
-    <p class="text-xl font-light leading-relaxed mt-6 mb-4 text-gray-800">   
-    <div class="container">
-        <div class="row justify-content-center mt-5">
-          <ul class="row list-unstyled">
-            <!-- loops through each announcement and builds li for each -->
-            <% for(var i=0; i<announcements.length; i++) {%>
-              <li class="col-6 justify-content-between mt-5">
-                <!-- each of these is an anchor tag to this home route -->
-                <a href="/home/<%= announcements[i]._id%>">
-                    <%= announcements[i].announcementText%>
-                </a>
-              </li>
-            <% } %>
-            </ul>
-        </div>
-      </div>  
-    </p>
+<div class="hero min-h-screen min-w-full" style="background-image: url(https://placeimg.com/1000/800/arch);">
+  <div class="hero-overlay bg-opacity-60"></div>
+  <div class="hero-content text-center text-neutral-content">
+    <div class="max-w-md">
+      <h1 class="mb-0 w-full text-5xl font-bold">Hello there</h1>
+      <p class="mb-0 w-full">
+        <ul class="row list-unstyled">
+          <!-- loops through each announcement and builds li for each -->
+          <% for(var i=0; i<announcements.length; i++) {%>
+            <li class="col-6 justify-content-between mt-5">
+              <!-- each of these is an anchor tag to this home route -->
+              <a href="/home/<%= announcements[i]._id%>">
+                  <%= announcements[i].announcementText%>
+              </a>
+            </li>
+          <% } %>
+          </ul>
+      </p>
+      <button class="btn btn-primary">Get Started</button>
+    </div>
+  </div>
+</div>
+
+
 <!-- Leaderboard box -->
     <div class="overflow-x-auto">
       <table class="table w-full">

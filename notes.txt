@@ -124,3 +124,12 @@ This is from admin.ejs
     <h2>Add a movie!</h2>
 </section>
 
+How to show different ladders on the index page?
+create each ladder table as tab
+
+why are announcementys links?
+
+yo.. you can change classes to edit the layout and customize sizes, etc
+https://tailwindcss.com/docs/margin
+
+work on add match!

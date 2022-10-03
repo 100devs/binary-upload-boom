@@ -14,6 +14,10 @@ router.get("/",homeController.getAnnouncement);
 // router.get("/editProfiles", ensureAuth, postsController.getUserProfiles);
 // end of new pages
 router.get("/", homeController.getIndex);
+router.get("/addAnnouncement", homeController.getAddAnnouncement);
+router.get("/addPlayer", homeController.getAddPlayer);
+router.get("/addMatch", homeController.getAddMatch);
+router.get("/newSeason", homeController.getNewSeason);
 router.get("/profile", ensureAuth, postsController.getProfile);
 router.get("/feed", ensureAuth, postsController.getFeed);
 router.get("/login", authController.getLogin);

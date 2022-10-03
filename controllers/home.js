@@ -13,6 +13,18 @@ module.exports = {
   getAdmin: (req, res) => {
     res.render("admin.ejs");
   },
+  getAddAnnouncement: (req, res) => {
+    res.render("addAnnouncement.ejs");
+  },
+  getAddPlayer: (req, res) => {
+    res.render("addPlayer.ejs");
+  },
+  getAddMatch: (req, res) => {
+    res.render("addMatch.ejs");
+  },
+  getNewSeason: (req, res) => {
+    res.render("newSeason.ejs");
+  },
   // https://www.twitch.tv/videos/1585669216 1:32
   getAnnouncement: async (req, res) => {
     try {

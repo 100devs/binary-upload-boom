@@ -45,7 +45,7 @@ module.exports = {
             console.log(err)
         }
     },
-    /*deleteTodo: async (req, res)=>{
+   /* deleteTodo: async (req, res)=>{
         console.log(req.body.todoIdFromJSFile)
         try{
             await Todo.findOneAndDelete({_id:req.body.todoIdFromJSFile})
@@ -55,16 +55,15 @@ module.exports = {
             console.log(err)
         }
     }*/
-    deleteTodo: async (req, res) => {
+     deleteTodo: async (req, res) => {
         try {
           // Find post by id
-          let todo = await Todo.findById({ _id: req.body.todoItem });
+          let todo = await Todo.findById({ _id: req.params.todoid });
             // Delete post from db
-          await Todo.remove({ _id: req.params.id });
-          console.log("Deleted Todo");
-          res.redirect("/profile");
-        } catch (err) {
-          res.redirect("/profile");
-        }
-      },
+          res.redirect("/post/"+req.params.postid);
+             } catch (err){
+            console.log(err)
+         }
+    }
+           
 }    

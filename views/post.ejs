@@ -40,10 +40,24 @@
       </form>
     </div>
     <ul> 
+      <!--createdById not showing up in DB as a argument. Is in Schema. Not Priority bug for MVP-->
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
-          <%= comments[i].comment%>
+         User <%= comments[i].createdBy%> says: "<%= comments[i].comment%>"
+         <!-- Conditinal doesn't work due to createdById bug. Line 48 should be === user.id Refrenced line 43 and models/comments.js-->
+         <% if( comments[i].createdById == user.userame) {%>
+          <p> <%= comments[i].createdById %></p>
+          <p><%= user.id %></p>
+         <form
+          action="/comment/deleteComment/<%= post._id %>/<%= comments[i]._id %>?_method=DELETE"
+          method="POST"
+          class="col-3"
+          >
+          <button class="btn btn-outline-danger" type="submit">Delete</button>
+        </form>
+        <%}%>
         </li>
+       
       <% } %>
     </ul>
     <div class="mt-5">
@@ -74,11 +88,17 @@
       <% todo.forEach( el => { %>
               <li class='todoItem' data-id='<%el._id%>'>
                   <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
-                  <span class='del'> Delete </span>
+                  <form
+                    action="/comment/deleteComment/<%= post._id %>/<%= todo[i]._id %>?_method=DELETE"
+                    method="POST"
+                     class="col-3"
+                    >
+                    <button class="btn btn-outline-danger" type="submit">Delete</button>
+                   </form>
               </li>
       <% }) %>    
       </ul>
-     
+      
   
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
@@ -86,5 +106,5 @@
     </div>
   </div>
 </div>
-<script src="public/main/js"></script>
+
 <%- include('partials/footer') -%>

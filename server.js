@@ -45,6 +45,11 @@ app.use(
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
+// 
+app.use((req, res, next) => {
+  res.locals.currentUser = (req.session.passport) ? (req.session.passport.user) : undefined;
+  next();
+});
 
 // Passport middleware
 app.use(passport.initialize());

@@ -30,6 +30,13 @@
       <div class="text-center">
         <h1 class=""><a href="/profile">Binary Upload Boom</a></h1>
         <span>The #100Devs Social Network</span>
+        <% if (currentUser) {%>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a class="btn btn-primary" href="/profile">Profile</a></li>
+            <li class="list-inline-item"><a class="btn btn-primary" href="/feed">Feed</a></li>            
+            <li class="list-inline-item"><a class="btn btn-primary" href="/logout">Logout</a></li>
+          </ul>
+        <%}%>
       </div>
     </header>
   </body>

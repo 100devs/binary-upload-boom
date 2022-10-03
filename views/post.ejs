@@ -88,8 +88,16 @@
       <% todo.forEach( el => { %>
               <li class='todoItem' data-id='<%el._id%>'>
                   <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
-                 
-                    <button class="btn btn-outline-danger" type="submit">Delete</button>
+                  <!-- el._id in action(line 93) replaces todo._id as these todos are generated via forEach loop(i think. it works)-->
+                  <form
+                  action="todos/deleteTodo/<%= post._id %>/<%=el._id %>?_method=DELETE"
+                  method="POST"
+                  class="col-3"
+                  >
+                 <p> <%= el._id %> </p>
+                  <button class="btn btn-outline-danger" type="submit">Delete</button>
+                </form>
+                   
                    
               </li>
       <% }) %>    

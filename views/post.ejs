@@ -88,13 +88,9 @@
       <% todo.forEach( el => { %>
               <li class='todoItem' data-id='<%el._id%>'>
                   <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
-                  <form
-                    action="/comment/deleteComment/<%= post._id %>/<%= todo[i]._id %>?_method=DELETE"
-                    method="POST"
-                     class="col-3"
-                    >
+                 
                     <button class="btn btn-outline-danger" type="submit">Delete</button>
-                   </form>
+                   
               </li>
       <% }) %>    
       </ul>

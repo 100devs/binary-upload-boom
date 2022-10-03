@@ -6,26 +6,17 @@ const Post = require("../models/Post");
 module.exports = {
   createComment: async (req, res) => {
     try {
-      //const commentUser = await User.findById(req.user.id)
       // creates a new comment
-      const comment = await Comment.create({
-        title: req.body.title,
-        body: req.body.body,
-        createdBy: req.user.userName,
-        createdByID: req.user.id
+      await Comment.create({
+        comment: req.body.comment,
+        likes: 0,
+        post: req.params.id,
       });
 
-      //add the id of the comment to the array in the post document
-      Post.findById(req.params.id, (err, post) => {
-        post.comments.push(comment.id)
-        post.save()
-      })
-
       console.log("Comment has been added!");
-      res.redirect("/profile");
+      res.redirect("/post/"+req.params.id);
     } catch (err) {
       console.log(err);
-      res.redirect("/profile");
     }
   },
   deleteComments: async (req, res) => {

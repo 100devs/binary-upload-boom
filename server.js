@@ -11,8 +11,9 @@ const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
 const commentRoutes = require("./routes/comments");
-
-
+const providerRoutes = require("./routes/providers");
+const doctorRoutes = require("./routes/doctors");
+const bodyParser = require("body-parser");
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -42,7 +43,7 @@ app.use(methodOverride("_method"));
 // Setup Sessions - stored in MongoDB
 app.use(
   session({
-    secret: "keyboard cat",
+    secret: "taco cat",
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
@@ -60,6 +61,8 @@ app.use(flash());
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 app.use("/comment", commentRoutes);
+app.use("/providers", providerRoutes);
+app.use("/doctors", doctorRoutes);
 
 
 //Server Running

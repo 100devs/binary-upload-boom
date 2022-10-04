@@ -1,0 +1,73 @@
+<%- include('partials/header') -%>
+<div class="container">
+  <div class="row mt-5">
+      <div class="col-6">
+         <!-- <div>
+              <p><strong>User Name</strong>: <%= user.userName %></p>
+               <p><strong>Email</strong>: <%= user.email %></p> 
+              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+          </div> -->
+          <div class="mt-5">
+            <h2>Add Doctor Information:</h2>
+            <form action="/provider/createDoctor" enctype="multipart/form-data" method="POST">
+              <div class="mb-3">
+                  <label for="title" class="form-label">Doctor's Name</label>
+                  <input type="text" class="form-control" id="title" name="title">
+              </div>
+              <div class="mb-3">
+                <label for="location" class="form-label">Address</label>
+                <textarea class="form-control" id="caption" name="caption"></textarea>
+              </div>
+              <!-- <div class="mb-3">
+                <label for="provider" class="form-label">Prescribing Physician</label>
+                <input type="text" class="form-control" id="provider" name="provider">
+              </div> -->
+              <!-- <div class="mb-3">
+                <label for="imgUpload" class="form-label">Photo of Medication and Label</label>
+                <input type="file" class="form-control" id="imageUpload" name="file">
+              </div> -->
+              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+            </form>
+          </div>
+      </div>
+      <div class="col-6">
+        <label for="ul"><h2>Your Doctors</h2>
+        <span>Click to View:</span></label>
+        <ul class="row list-unstyled">
+        <% for(var i=0; i<providers.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <a href="/providers/<%= providers[i]._id%>">
+            
+          </li>
+        <% } %>
+        </ul>
+        <!--  -->
+        <!-- <div>
+          <h1>Your Providers</h1>
+          <p>All of your care professionals</p>
+        </div>
+          <div class="container">
+            <div class="row justify-content-center mt-5">
+              <ul class="row list-unstyled">
+                <% for(var i=0; i<providers.length; i++) {%>
+                  <li class="col-6 justify-content-between mt-5">
+                    <a href="/providers/<%= providers[i]._id%>">
+                      <img class="img-fluid" src="<%= providers[i].image%>">
+                    </a>
+                  </li>
+                <% } %>
+                </ul>
+            </div>
+          </div>   -->
+        <!--  -->
+
+        <div class="row justify-content-center mt-5">
+          <a class="btn btn-primary" href="/cabinet">Medicine Cabinet</a>
+          <a class="btn btn-outline-primary" href="/profile">Add a Medication</a>
+
+        </div>  
+      </div>  
+    </div>
+  </div>
+</div>
+

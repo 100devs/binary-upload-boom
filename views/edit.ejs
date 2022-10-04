@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<header>
+    <section>
+    <h1>MedMinder v1</h1>
+    </section>
+</header>
+
+<body>
+    <section class="container">
+    <section class="inner">
+
+        <h1>Current Meds</h1>
+    <ul class="meds">
+    <% for(let i=0; i < info.length; i++) {%>
+        <li class="med">
+            <span><%= info[i].newName %></span>
+            <span><%= info[i].doseAmt %></span>
+            <span><%= info[i].doseFreq %></span>
+            <span><%= info[i].doseDay %></span>
+            <span><%= info[i].confirm %></span>
+            <span class='fa fa-edit'></span>
+            <span class='fa fa-trash'></span>
+        </li>
+    <% } %>
+    </ul>
+
+    <h2>Edit a Medication</h2>
+    <form action="/editMed" method="PUT">
+        <input type="text" placeholder="Medication Name" name="newName">
+        <input type="text" placeholder="Dosage" name="doseAmt">
+        <input type="text" placeholder="Frequency" name="doseFreq">
+        <input type="select" placeholder="Day" name="doseDay">
+        <input type="submit" name="Update">
+    </form>
+    
+
+    </section>
+
+    <section class="innerTwo">
+        <h2> Here's where Ill put something else. Calendar, maybe?</h2>
+    </section>
+
+</section>
+    
+    <script src='js/main.js'></script>
+</body>
+</html>

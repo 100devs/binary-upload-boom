@@ -1,21 +1,18 @@
-<%- include('partials/header') -%>
+ include('partials/header')
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
-      <h2><%= post.title %></h2>
+      <h2><%= providers.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
         <form
           class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
-          <!-- <button class="btn btn-primary fa fa-heart" type="submit"></button> -->
         </form>
-        <!-- <h3 class="col-3">Likes: <%= post.likes %></h3> -->
-        <%if(post.user == user.id){ %>
+        <%if(providers.user == user.id){ %>
         <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
+          action="/doctors/deleteProvider/<%= post.id %>?_method=DELETE"
           method="POST"
           class="col-3"
         >
@@ -25,32 +22,32 @@
       </div>
     </div>
     <div class="col-3 mt-5">
-      <label for="caption" class="form-label">Dosage:</label>
-      <p><%= post.caption %></p>
+      <label for="title" class="form-label">Name:</label>
+      <p><%= providers.title %></p>
     </div>
     <div class="mt-5">
-      <h2>Add a note:</h2>
+      <h2>Address:</h2>
       <form action="/comment/createComment/<%=post._id%>" method="POST">
         <div class="mb-3">
-            <label for="comment" class="form-label">Add any notes about this medication, or questions you'd like to ask your doctor</label>
-            <input type="text" class="form-control" id="comment" name="comment">
+            <label for="provider" class="form-label">What is the address</label>
+            <input type="text" class="form-control" id="location" name="location">
         </div>
        
         <button type="submit" class="btn btn-primary">Add note</button>
       </form>
     </div>
     <ul>
-      <% for(var i=0; i<comments.length; i++) {%>
+      <% for(var i=0; i<providers.length; i++) {%>
         <li class="col-6 justify-content-between mt-5 messges">
-         <%= comments[i].comment%>
+         <%= providers[i].comment%>
         </li>
       <% } %>
     </ul>
-    <div class="row justify-content-center mt-5">
+    <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Add a New Medication</a>
-      <a class="btn btn-outline-primary" href="/cabinet">Medicine Cabinet</a>
+      <a class="btn btn-primary" href="/cabinet">Medicine Cabinet</a>
     </div>
   </div>
 </div>
 
-<%- include('partials/footer') -%>
+include('partials/footer') 

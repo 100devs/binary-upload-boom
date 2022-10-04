@@ -1,0 +1,16 @@
+.login-card {
+     display: flex;
+    /*align-self: center;
+    justify-self: center; */
+    border: 4px solid blue;
+    width: 30%;
+    height: 80%;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid blue;
+    height: 400px;
+}

@@ -41,7 +41,8 @@ module.exports = {
     try {
       await Match.create({
         player1: req.body.player1,
-        player1: req.body.player2,
+        player2: req.body.player2,
+        score: req.body.score,
       });
       console.log("Match has been added!");
       res.redirect("/admin");

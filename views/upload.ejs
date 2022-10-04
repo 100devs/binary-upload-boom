@@ -5,7 +5,7 @@
           <div>
               <p><strong><%= user.userName %></strong></p>
               <!-- <p><strong>Email</strong>: <%= user.email %></p> -->
-              <a href="/logout" class="col-3 btn btn-primary rounded-md shadow">logout</a>
+              <a href="/logout" class="col-3 btn btn-primary">logout</a>
           </div>
           <div class="mt-5">
             <h2>add a pattern</h2>
@@ -22,25 +22,10 @@
                 <label for="imgUpload" class="form-label">image</label>
                 <input type="file" class="form-control" id="imageUpload" name="file">
               </div>
-              <button type="submit" class="btn btn-primary rounded-md shadow" value="Upload">upload</button>
+              <button type="submit" class="btn btn-primary" value="Upload">upload</button>
             </form>
           </div>
       </div>
-      <div class="col-6">
-        <h2>pattern collection</h2>
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-        <div class="row justify-content-center mt-5 rounded-md shadow mt-3 sm:mt-0 sm:ml-3">
-          <a class="btn btn-primary hover:bg-indigo-800 px-8 py-2.5" href="/feed">main collection</a>
-        </div>  
-      </div>  
     </div>
   </div>
 </div>

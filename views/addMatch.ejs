@@ -1,11 +1,20 @@
 <%- include('partials/header') -%>
-
+<link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
 <!-- Beginning of add match tab -->
 <form>
     <div class="flex justify-center">
       <div class="mb-3 xl:w-96">
         <label class="block text-left" style="max-width: 300px">
+          <span class="text-gray-700">Season</span>
+          <br>
+          <select class="form-multiselect block w-full mt-1" multiple name="season">
+            <option>Spring 2022</option>
+            <option>Winter 2022</option>
+          </select>
+        </label> 
+        <label class="block text-left" style="max-width: 300px">
           <span class="text-gray-700">League</span>
+          <br>
           <select class="form-multiselect block w-full mt-1" multiple name="league">
             <option>5.0 Men</option>
             <option>4.5 Men</option>

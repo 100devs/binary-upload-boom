@@ -1,6 +1,6 @@
 <%- include('partials/header') -%>
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+<!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" /> -->
 <main class="container">
     <div class="row justify-content-around mt-5">
         <a href="/login" class="col-3 btn btn-primary"> Login</a>
@@ -11,7 +11,7 @@
   <div class="hero-overlay bg-opacity-60"></div>
   <div class="hero-content text-center text-neutral-content">
     <div class="max-w-md">
-      <h1 class="mb-0 w-full text-5xl font-bold">Hello there</h1>
+      <h1 class="mb-0 w-full text-5xl font-bold">Announcements</h1>
       <p class="mb-0 w-full">
         <ul class="row list-unstyled">
           <!-- loops through each announcement and builds li for each -->
@@ -33,6 +33,7 @@
 
 <!-- Leaderboard box -->
     <div class="overflow-x-auto">
+      <h2>4.5 Men's Leaderboard</h2>
       <table class="table w-full">
         <!-- head -->
         <thead>
@@ -47,23 +48,61 @@
           <!-- row 1 -->
           <tr>
             <th>1</th>
-            <td>Cy Ganderton</td>
+            <td>Nathan Leslie</td>
             <td>54-10</td>
             <td>540</td>
           </tr>
           <!-- row 2 -->
           <tr>
             <th>2</th>
-            <td>Hart Hagerty</td>
+            <td>Jin Hong</td>
             <td>45-35</td>
             <td>450</td>
           </tr>
           <!-- row 3 -->
           <tr>
             <th>3</th>
-            <td>Brice Swyre</td>
-            <td>34-21</td>
-            <td>340</td>
+            <td>Tony Nguyen</td>
+            <td>28-5</td>
+            <td>280</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="overflow-x-auto">
+      <h2>5.0 Men's Leaderboard</h2>
+      <table class="table w-full">
+        <!-- head -->
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>W/L</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- row 1 -->
+          <tr>
+            <th>1</th>
+            <td>Joseph Awadalla</td>
+            <td>24-2</td>
+            <td>240</td>
+          </tr>
+          <!-- row 2 -->
+          <tr>
+            <th>2</th>
+            <td>Kyu Choi</td>
+            <td>18-6</td>
+            <td>180</td>
+          </tr>
+          <!-- row 3 -->
+          <tr>
+            <th>3</th>
+            <td>Nathan Leslie</td>
+            <td>15-4</td>
+            <td>150</td>
           </tr>
         </tbody>
       </table>

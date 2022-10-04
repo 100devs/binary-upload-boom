@@ -1,0 +1,60 @@
+html,
+body {
+    height: 100%;
+    font-size: 1rem;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+.card-container{
+  margin-top: 10rem;  
+}
+
+.page-header {
+    margin-top: 4rem;
+    font-size: 1.25rem;
+}
+
+/* .page-section {
+    background-color: red;
+    height: 40%;
+} */
+
+.btn-nav{
+    margin-right: .5rem;
+}
+
+
+
+.home{
+    border: 2px solid black;
+    min-height: 80vh;
+}
+
+.card-img-top{
+    width: 100%;
+    height: 80%;
+}
+
+.btn-liked{
+    color: #f03566;
+  }
+
+.btn-bookmarked{
+    background: #ffff;
+}
+
+.btn-sign-in{
+    background-color: #e94135;
+    color: #ffff;
+}
+
+/* .card-img-top {
+    width: 100%;
+    height: 20vw;
+    object-fit: cover;
+} */

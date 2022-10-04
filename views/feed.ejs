@@ -1,8 +1,8 @@
-<%- include('partials/header') -%>
-  <div class="container">
+<%- include('partials/logged-in-header') -%>
+  <!-- <div class="container">
     <div class="row justify-content-center mt-5">
       <ul class="row list-unstyled">
-        <% for(let i=0; i<posts.length; i++) {%>
+        <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
             <a href="/post/<%= posts[i]._id%>">
               <img class="img-fluid" src="<%= posts[i].image%>">
@@ -11,5 +11,46 @@
         <% } %>
         </ul>
     </div>
-  </div>  
+  </div> -->
+
+  <!-- <div class="container">
+    <% for(var i=0; i<posts.length; i++) {%>
+    <div class="card" style="width: 18rem;">
+      <img src="<%= posts[i].image%>" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= posts[i].title%></h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <span class="badge rounded-pill bg-primary"><%= posts[i].country%></span>
+        <span class="badge rounded-pill bg-secondary"><%= posts[i].dish%></span>
+        <a href="/post/<%= posts[i]._id%>" class="btn btn-primary">View Recipe</a>
+      </div>
+      <% } %>
+    </div>
+  </div> -->
+
+  <div class="container card-container">
+    <h1>Explore Movies</h1>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% for(var i=0; i<posts.length; i++) {%>
+    <div class="col">
+      <div class="card h-100">
+        <img src="<%= posts[i].image%>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= posts[i].title%></h5>
+          <p class="card-text"><i class="px-1 bi bi-heart"></i><%= posts[i].likes.length - 1 %></p>
+          <p class="card-text"><small class="text-muted">By: <%= userName[i]%></small></p>
+          <p class="card-text"><%= posts[i].caption %></p>
+          <a href="/post/<%= posts[i]._id%>" class="btn btn-outline-primary">View Movie</a>
+        </div>
+        <div class="card-footer">
+          <span class="badge bg-primary"><%= posts[i].category%></span>
+          <span class="badge rounded-pill bg-secondary"><%= posts[i].rating%></span>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+
 <%- include('partials/footer') -%>

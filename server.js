@@ -70,10 +70,6 @@ const connectDB = async () => {
     console.error(err);
     process.exit(1);
   }
-  //Server Running
-  app.listen(process.env.PORT, () => {
-    console.log("Server is running, you better catch it!");
-  });
 };
 cloudinary.config({ 
   cloud_name: 'wo1vin', 
@@ -81,3 +77,7 @@ cloudinary.config({
   api_secret: dotenv.API_SECRET
 });
 connectDB();
+  //Server Running
+  app.listen(process.env.PORT, () => {
+    console.log("Server is running, you better catch it!");
+  });

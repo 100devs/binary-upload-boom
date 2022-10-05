@@ -57,18 +57,12 @@ app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 app.use("/comment", commentRoutes);
 
-let dbConnect = fs.readFileSync(process.env.DB_STRING);
 //Connect To Database
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(dbConnect, {
+    const conn = await mongoose.connect(process.env.DB_STRING, {
       useNewUrlParser: true,
       useCreateIndex: true,
-    });
-    
-    //Server Running
-    app.listen(process.env.PORT, () => {
-      console.log("Server is running, you better catch it!");
     });
 
     console.log(`MongoDB Connected: ${conn.connection.host}`);
@@ -76,6 +70,10 @@ const connectDB = async () => {
     console.error(err);
     process.exit(1);
   }
+  //Server Running
+  app.listen(process.env.PORT, () => {
+    console.log("Server is running, you better catch it!");
+  });
 };
 cloudinary.config({ 
   cloud_name: 'wo1vin', 

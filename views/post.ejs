@@ -42,20 +42,20 @@
         <li class="col-6 justify-content-between mt-5">
           <%= comments[i].comment%>
           <%= comments[i].user%>
-          <%= comments[i]._id%>
         </li>
 
         <div class="row justify-content-between">
           <form
             class="col-1"
-            action="/comment/likeComment/<%=comments[i]._id%>?_method=PUT"
+            action="/comment/likeComment/<%= post.id %>/<%=comments[i]._id%>?_method=PUT"
             method="POST"
           >
             <button class="btn btn-primary fa fa-heart" type="submit"></button>
           </form>
+          <span class="col-3">Likes: <%= comments[i].likes %></span>
           <%if(post.user == user.id){ %>
           <form
-            action="/comment/deleteComment/<%= post.id %>?_method=DELETE"
+            action="/comment/deleteComment/<%= post.id %>/<%=comments[i]._id%>?_method=DELETE"
             method="POST"
             class="col-3"
           >

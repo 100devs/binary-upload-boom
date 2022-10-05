@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-const cloudinary = require("cloudinary");
-const dotenv = require("dotenv").config({ path: "./config/.env" });
 
 const connectDB = async () => {
   try {

@@ -11,9 +11,9 @@ const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
 const commentRoutes = require("./routes/comments");
-
+const path = require('path');
 //Use .env file in config folder
-require("dotenv").config({ path: "./config/.env" });
+require("dotenv").config({ path: path.resolve(__dirname, './.env') });
 
 // Passport config
 require("./config/passport")(passport);

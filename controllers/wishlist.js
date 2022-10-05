@@ -7,8 +7,10 @@ module.exports = {
   getWishlist: async (req, res) => {
     try {
       const wishlist = await Wishlist.find({user: req.user});
+
+      //const post = await Post.findById(req.params.id);////////////////// changed 1, 2. added post to render
           
-      res.render("wishlist.ejs", { wishlist: wishlist, user: req.user,});//post linked to line 32 post.ejs
+      res.render("wishlist.ejs", { wishlist: wishlist, user: req.user});//post linked to line 32 post.ejs
     } catch (err) {
       console.log(err);
     }
@@ -26,25 +28,24 @@ module.exports = {
   
   createWishlist: async (req, res) => {
     try {
-      // Upload image to cloudinary
-      //const result = await cloudinary.uploader.upload(req.file.path);
+      //Upload image to cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path);
 
       await Wishlist.create({
-        title: req.params.id,
-        //image: result.secure_url,
+        postId: req.params.id,//////////////////////////////////////// /////////////changed title to post name
+        image: result.secure_url,
         //cloudinaryId: result.public_id,
-        
+    
         
         user: req.user.id,
       });
-      //console.log(title.title)
+      
       console.log("wishlist has been added!");
       res.redirect("/profile");
     } catch (err) {
       console.log(err);
     }
   },
- 
   deletePost: async (req, res) => {
     try {
       // Find post by id

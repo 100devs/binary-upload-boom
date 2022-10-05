@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const WishlistSchema = new mongoose.Schema({
-    title: {
+  postId: {            /////////////////////changed 'title to post'
         type: String,
         required: true,
       },
@@ -18,6 +18,7 @@ const WishlistSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
       },
+      
     });
     
 

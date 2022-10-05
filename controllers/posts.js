@@ -10,7 +10,7 @@ module.exports = {
     try {
       const wishlist = await Wishlist.find({user: req.user});
           
-      res.render("wishlist.ejs", { wishlist: wishlist, user: req.user,});//post linked to line 32 post.ejs
+      res.render("wishlist.ejs", { wishlist: wishlist, user: req.user});//post linked to line 32 post.ejs
     } catch (err) {
       console.log(err);
     }

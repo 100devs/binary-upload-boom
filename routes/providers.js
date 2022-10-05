@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/multer");
 const providersController = require("../controllers/providers");
+const doctorsController = require("../controllers/doctors");
 const bodyParser = require      
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
@@ -10,7 +11,7 @@ router.get(":id", ensureAuth, providersController.getProvider);
 
 router.post("/createProvider", upload.single("file"), providersController.createProvider);
 
-// router.put("/likePost/:id", postsController.likePost);
+router.post("/createDoctor", upload.single("file"), doctorsController.createDoctor);
 
 router.delete("/deleteProvider/:id", providersController.deleteProvider);
 

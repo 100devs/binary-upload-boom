@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/multer");
+const providersController = require("../controllers/providers");
 const doctorsController = require("../controllers/doctors");
 const bodyParser = require      
 const { ensureAuth, ensureGuest } = require("../middleware/auth");

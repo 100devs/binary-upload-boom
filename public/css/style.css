@@ -16,7 +16,8 @@ FOOTER (8vh)
 
 NAV */
 nav.navbar{
-    background-color: #97b8aba6;
+    background-color: #0b2d1fb3;
+    /* #000000ba */
     border-bottom: 2px dotted #003c0dd9;
 }
 .index .navbar-brand{
@@ -37,7 +38,7 @@ nav.navbar>div>a:hover.wobble-hor-bottom {
 	        animation: wobble-hor-bottom 0.8s both;
 }
 nav.navbar>div>a:hover{
-    color: #000;
+    color: #ffd000;
 }
 .navbar-brand {
     margin: 0 .5rem 0 1rem;
@@ -50,7 +51,7 @@ nav.navbar>div>a>img{
     margin-left: 0.2em;
 }
 nav div a{
-    color: rgb(0, 0, 0);
+    color: rgb(255,255,255);
     font-size: .9rem;
 }
 a.fade-in, div.fade-in {
@@ -65,7 +66,7 @@ nav img{
     height: 3em;
 }
 nav.navbar div a.navbar-brand:hover{
-    filter: sepia(130%) saturate(1504%) hue-rotate(-40deg) brightness(99%) contrast(90%);
+    filter: sepia(130%) saturate(1504%) hue-rotate(-40deg) brightness(105%) contrast(90%);
 }
 
 /* MAIN - index */

@@ -5,3 +5,7 @@
 .not{
     text-decoration: underline;
 }
+
+.img-fluid {
+    width:30vw;
+}

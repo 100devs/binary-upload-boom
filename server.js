@@ -1,5 +1,7 @@
+const path = require('path');
 const express = require("express");
 const app = express();
+const fs = require('fs');
 const mongoose = require("mongoose");
 const cloudinary = require("cloudinary");
 //Use .env file in config folder
@@ -13,7 +15,6 @@ const logger = require("morgan");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
 const commentRoutes = require("./routes/comments");
-const path = require('path');
 
 // Passport config
 require("./config/passport")(passport);
@@ -56,13 +57,12 @@ app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 app.use("/comment", commentRoutes);
 
+let dbConnect = fs.readFileSync(process.env.DB_STRING);
 //Connect To Database
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.DB_STRING, {
+    const conn = await mongoose.connect(dbConnect, {
       useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
       useCreateIndex: true,
     });
     

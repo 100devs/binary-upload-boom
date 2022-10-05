@@ -1,20 +1,43 @@
 # Introduction
 ---
 
-This project is a work in progress. 
-The Art Lounge aims to provide a space for people to post their art and design to receive constructive criticism, professional critiques, and general appreciation for the users' artwork to help them improve their skills. 
+This project is a work in progress.
+I created The Art Lounge to fill the need for artists to request and receive genuine feedback that would help them improve their artwork. Generally, artists have to depend on their social media following, which may not be a reliable source because most people will say the artwork is great if they already like the artist's work, and they may also not understand what to look for in terms of artistic analysis. 
 
 ---
 
 # Objectives
+---
+
+The purpose of The Art Lounge is to provide a space for people to post their art and design to receive constructive criticism, professional critiques, and general appreciation for the users' artwork with a focus on helping them improve their skills. 
 
 ---
 
 # Who is this for?
+---
+
+The platform is open to anyone with a serious interest in improving their artistic skills. 
 
 ---
 
 # Packages/Dependenciea
+---
+
+- Bcrypt
+- Cloudinary
+- Dotenv
+- Mongo and Connect-mongo
+- Express, Express-flash, and Express-sessin
+- Ejs
+- Method-override
+- MongoDB
+- Mongoose
+- Moment
+- Morgan
+- Multer
+- Nodemon
+- Passport and Passport-local
+- Validator
 
 ---
 

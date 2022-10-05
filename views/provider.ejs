@@ -8,43 +8,43 @@
              <!-- <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div> -->
           <div class="mt-5">
-            <h2>Add a medication:</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+            <h2>Add a Doctor:</h2>
+            <form action="/doctor/createProvider" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
-                  <label for="title" class="form-label">Medication Name</label>
-                  <input type="text" class="form-control" id="title" name="title">
+                  <label for="name" class="form-label">Physician Name</label>
+                  <input type="text" class="form-control" id="name" name="name">
               </div>
+              <!-- <div class="mb-3">
+                <label for="address" class="form-label">Addresss</label>
+                <textarea class="form-control" id="address" name="address"></textarea>
+              </div> -->
               <div class="mb-3">
-                <label for="caption" class="form-label">Dosage and Notes</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
+                <label for="phoneNr" class="form-label">Office Phone</label>
+                <input type="text" class="form-control" id="phoneNr" name="phoneNr">
               </div>
-              <div class="mb-3">
-                <label for="provider" class="form-label">Prescribing Physician</label>
-                <input type="text" class="form-control" id="provider" name="provider">
-              </div>
-              <div class="mb-3">
+              <!-- <div class="mb-3">
                 <label for="imgUpload" class="form-label">Photo of Medication and Label</label>
                 <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
+              </div> -->
               <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
             </form>
           </div>
       </div>
       <div class="col-6">
-        <label for="ul"><h2>Your Medications</h2>
-        <span>Click to View:</span></label>
+        <label for="ul"><h2>Your Doctors</h2>
+        <span>Click to View Details:</span></label>
         <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
+        <% for(var i=0; i<providers.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
+            <a href="/provider/<%= providers[i]._id%>">
+              <!-- <img class="img-fluid" src="<%= providers[i].image%>"> -->
             </a>
           </li>
         <% } %>
         </ul>
         <div class="row justify-content-center mt-5">
           <a class="btn btn-primary" href="/cabinet">Medicine Cabinet</a>
-          <a class="btn btn-outline-primary" href="/providers">Your Doctors</a>
+          <a class="btn btn-outline-primary" href="/dashboard">Add a Medication</a>
         </div>  
       </div>  
     </div>

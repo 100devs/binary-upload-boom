@@ -6,18 +6,18 @@
   <div class="container">
     <div class="row justify-content-center mt-5">
       <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
+        <% for(var i=0; i<meds.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
+            <a href="/med/<%= meds[i]._id%>">
+              <img class="img-fluid" src="<%= meds[i].image%>">
             </a>
           </li>
         <% } %>
         </ul>
     </div>
     <div class="row justify-content-center mt-5">
-      <a class="btn btn-primary" href="/profile">Add a Medication</a>
-      <a class="btn btn-outline-primary" href="/providers">Your Doctors</a>
+      <a class="btn btn-primary" href="/dashboard">Add a Medication</a>
+      <a class="btn btn-outline-primary" href="/provider">Your Doctors</a>
     </div>  
   </div>  
 <%- include('partials/footer') -%>

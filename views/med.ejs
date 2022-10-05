@@ -2,20 +2,18 @@
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
-      <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
+      <h2><%= med.title %></h2>
+      <img class="img-fluid" src="<%= med.image%>" />
       <div class="row justify-content-between">
         <form
           class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
+          action="/med/likeMed/<%= med.id %>?_method=PUT"
           method="POST"
         >
-          <!-- <button class="btn btn-primary fa fa-heart" type="submit"></button> -->
         </form>
-        <!-- <h3 class="col-3">Likes: <%= post.likes %></h3> -->
-        <%if(post.user == user.id){ %>
+        <%if(med.user == user.id){ %>
         <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
+          action="/med/deleteMed/<%= med.id %>?_method=DELETE"
           method="POST"
           class="col-3"
         >
@@ -26,11 +24,11 @@
     </div>
     <div class="col-3 mt-5">
       <label for="caption" class="form-label">Dosage:</label>
-      <p><%= post.caption %></p>
+      <p><%= med.caption %></p>
     </div>
     <div class="mt-5">
       <h2>Add a note:</h2>
-      <form action="/comment/createComment/<%=post._id%>" method="POST">
+      <form action="/comment/createComment/<%=med._id%>" method="POST">
         <div class="mb-3">
             <label for="comment" class="form-label">Add any notes about this medication, or questions you'd like to ask your doctor</label>
             <input type="text" class="form-control" id="comment" name="comment">
@@ -47,7 +45,7 @@
       <% } %>
     </ul>
     <div class="row justify-content-center mt-5">
-      <a class="btn btn-primary" href="/profile">Add a New Medication</a>
+      <a class="btn btn-primary" href="/dashboard">Add a New Medication</a>
       <a class="btn btn-outline-primary" href="/cabinet">Medicine Cabinet</a>
     </div>
   </div>

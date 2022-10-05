@@ -1,26 +1,17 @@
 const mongoose = require("mongoose");
 
 const ProviderSchema = new mongoose.Schema({
-  title: {
+  name: {
     type: String,
-    // required: true,
+    required: true,
   },
-//   image: {
+//   address: {
 //     type: String,
-//     require: true,
-//   },
-//   cloudinaryId: {
-//     type: String,
-//     require: true,
-//   },
-  location: {
-    type: String,
-    // required: true,
-  },
-//   likes: {
-//     type: Number,
 //     required: true,
 //   },
+  phoneNr: {
+    type: Number,
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

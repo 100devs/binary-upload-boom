@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const PostSchema = new mongoose.Schema({
+const MedSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -19,12 +19,7 @@ const PostSchema = new mongoose.Schema({
   },
   provider: {
     type: String,
-    // required: true,
   },
-  // likes: {
-  //   type: Number,
-  //   required: true,
-  // },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -35,4 +30,4 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Med", MedSchema);

@@ -1,12 +1,13 @@
 const cloudinary = require("../middleware/cloudinary");
 const Provider = require("../models/Provider");
-const Comment = require("../models/Comment")
+const Doctor = require("../models/Provider");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProvider: async (req, res) => {
     try {
       const providers = await Provider.find({ user: req.user.id });
-      res.render("provider.ejs", { providers: providers, user: req.user });
+      res.render("doctor.ejs", { providers: providers, name: req.body.name, address: req.body.address, phoneNr: req.body.phoneNr, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -40,7 +41,7 @@ module.exports = {
         user: req.user.id,
       });
       console.log("Doctor has been added!");
-      res.redirect("/provider");
+      res.redirect("/doctor");
     } catch (err) {
       console.log(err);
     }
@@ -52,9 +53,9 @@ module.exports = {
       // Delete Dr from db
       await Provider.remove({ _id: req.params.id });
       console.log("Deleted Dr");
-      res.redirect("/provider");
+      res.redirect("/doctor");
     } catch (err) {
-      res.redirect("/provider");
+      res.redirect("/doctor");
     }
   },
 };

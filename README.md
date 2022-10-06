@@ -1,3 +1,5 @@
+![The Art Lounge cover image](https://github.com/wo1vin/socialnetwork/blob/main/public/imgs/cover.png?raw=true)
+
 # Introduction
 This project is a work in progress.
 I created The Art Lounge to fill the need for artists to request and receive genuine feedback that would help them improve their artwork. Generally, artists have to depend on their social media following, which may not be a reliable source because most people will say the artwork is great if they already like the artist's work, and they may also not understand what to look for in terms of artistic analysis. 

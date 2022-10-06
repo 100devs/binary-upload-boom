@@ -9,7 +9,11 @@ const MatchSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  winner: {
+  score: {
+    type: String,
+    required: true,
+  },
+  league: {
     type: String,
     required: true,
   },

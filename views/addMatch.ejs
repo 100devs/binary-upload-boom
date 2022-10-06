@@ -1,7 +1,7 @@
 <%- include('partials/header') -%>
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
 <!-- Beginning of add match tab -->
-<form>
+<form action="/admin/addMatch" method="POST">
     <div class="flex justify-center">
       <div class="mb-3 xl:w-96">
         <label class="block text-left" style="max-width: 300px">
@@ -47,7 +47,7 @@
             focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
           "
           id="exampleFormControlInput1"
-          placeholder="FirstName, LastName"
+          placeholder="FirstName LastName"
           name="player1"
         />
       </div>
@@ -77,7 +77,7 @@
             focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
           "
           id="exampleFormControlInput1"
-          placeholder="FirstName, LastName"
+          placeholder="FirstName LastName"
           name="player2"
         />
       </div>

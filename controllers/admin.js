@@ -30,7 +30,7 @@ module.exports = {
         announcementText: req.body.announcementText,
       });
       console.log("Announcement has been added!");
-      res.redirect("/admin");
+      res.redirect("/admin/addMatch");
     } catch (err) {
       console.log(err);
     }
@@ -43,9 +43,11 @@ module.exports = {
         player1: req.body.player1,
         player2: req.body.player2,
         score: req.body.score,
+        league: req.body.league,
       });
       console.log("Match has been added!");
-      res.redirect("/admin");
+
+      res.redirect("/addMatch");
     } catch (err) {
       console.log(err);
     }

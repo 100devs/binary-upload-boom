@@ -127,7 +127,7 @@ This is from admin.ejs
 How to show different ladders on the index page?
 create each ladder table as tab
 
-why are announcementys links?
+why are announcements links?
 
 yo.. you can change classes to edit the layout and customize sizes, etc
 https://tailwindcss.com/docs/margin

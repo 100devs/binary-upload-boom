@@ -19,7 +19,7 @@ module.exports = {
         user: req.user.id,
       });
       console.log("Player has been added!");
-      res.redirect("/admin");
+      res.redirect("/addPlayer");
     } catch (err) {
       console.log(err);
     }
@@ -30,7 +30,7 @@ module.exports = {
         announcementText: req.body.announcementText,
       });
       console.log("Announcement has been added!");
-      res.redirect("/admin/addMatch");
+      res.redirect("/addAnnouncement");
     } catch (err) {
       console.log(err);
     }

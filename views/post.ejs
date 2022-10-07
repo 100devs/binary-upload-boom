@@ -25,7 +25,17 @@
         </p>
       </div>
 
-      <!-- comments -->
+      <div class="mt-5">
+        <h2>Add a comment</h2>
+        <form action="/comment/createComment/<%= post.id %>" method="POST">
+          <div class="mb-3">
+            <label for="comment" class="form-label">Comment</label>
+            <input type="text" class="form-control" id="comment" name="comment">
+          </div>
+          <button type="submit" class="btn btn-primary"> Submit</button>
+        </form>
+      </div>
+
 
       <div class="container">
         <div class="row justify-content-center mt-5">
@@ -34,16 +44,20 @@
               <% if (comment[i].deleted == false){ %>
               <li class="col-6 justify-content-between mt-5">
                 <%= comment[i].comment %>
-                  <form class="col-1" action="/comments/likeComment/<%= comment[i].id %>?_method=PUT" method="POST">
+
+                  <form class="col-1" action="/comment/likeComment/<%= comment[i]._id %>?_method=PUT" method="POST">
+
                     <button class="btn btn-primary fa fa-heart" type="submit"></button>
                     <input type="hidden" name="postid" value="<%= post.id %>">
                   </form>
+
                   <%if(post.user==user.id){ %>
                     <form action="/comments/deleteComment/<%= comment[i].id %>?_method=PUT" method="POST" class="col-3">
                       <button class="btn btn-primary fa fa-trash" type="submit"></button>
                       <input type="hidden" name="postid" value="<%= post.id %>">
                     </form>
                     <%}%>
+
                   <h3 class="col-3">Likes: <%= comment[i].likes %>
                   </h3>
                   

@@ -22,9 +22,13 @@ module.exports = {
 					$inc: { likes: 1 },
 				}
 			);
+
+			const comment = await Comment.findById(req.params.id);
 			console.log("Likes +1");
-			console.log(`post ${req.body.postid}`)
-			res.redirect(`/post/${req.body.postid}`);
+
+			console.log(comment.postid);
+			res.redirect(`/post/${comment.postid}`);
+
 		} catch (err) {
 			console.log(err);
 		}

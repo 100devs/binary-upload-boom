@@ -5,12 +5,11 @@ module.exports = {
 		try {
 			await Comment.create({
 				comment: req.body.comment,
-				likes: 0,
 				user: req.user.id,
-				postid: req.params.id,
+				postid: req.params.idPost,
 			});
 			console.log("Comment has been added!");
-			res.redirect("/post/" + req.params.id);
+			res.redirect("/post/" + req.params.idPost);
 		} catch (err) {
 			console.log(err);
 		}
@@ -18,7 +17,7 @@ module.exports = {
 	likeComment: async (req, res) => {
 		try {
 			await Comment.findOneAndUpdate(
-				{ _id: req.params.id },
+				{ _id: req.params.idComment },
 				{
 					$inc: { likes: 1 },
 				}
@@ -26,10 +25,28 @@ module.exports = {
 
 			const comment = await Comment.findById(req.params.id);
 			console.log("Likes +1");
+
 			console.log(comment.postid);
 			res.redirect(`/post/${comment.postid}`);
+
 		} catch (err) {
 			console.log(err);
 		}
 	},
+	softDeleteComment: async (req, res)=>{
+		try {
+			await Comment.findOneAndUpdate(
+				{ _id: req.params.idComment },
+				{
+					deleted: true
+				}
+			);
+			console.log("Comment Deleted. Well... at least as far as a user is concerned");
+			console.log(`post ${req.body.postid}`)
+			res.redirect(`/post/${req.body.postid}`);
+		} catch (err) {
+			console.log(err);
+		}
+	}
+		
 };

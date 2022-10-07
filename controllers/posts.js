@@ -23,7 +23,7 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      const posts = await Post.find({ user: { $ne: req.user.id } } ).sort({ createdAt: "desc" }).lean();
       res.render("feed.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
@@ -82,9 +82,9 @@ module.exports = {
       // Delete post from db
       await Post.remove({ _id: req.params['postID'] });
       console.log("Deleted Post");
-      res.redirect("/profile");
+      res.redirect("/profile/"+req.user.id);
     } catch (err) {
-      res.redirect("/profile");
+      res.redirect("/profile/"+req.user.id);
     }
   },
 };

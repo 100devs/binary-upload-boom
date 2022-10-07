@@ -59,7 +59,7 @@ exports.logout = (req, res) => {
 
 exports.getSignup = (req, res) => {
   if (req.user) {
-    return res.redirect("/profile");
+    return res.redirect("/profile/"+req.user.id);
   }
   res.render("signup", {
     title: "Create Account",
@@ -111,7 +111,7 @@ exports.postSignup = (req, res, next) => {
           if (err) {
             return next(err);
           }
-          res.redirect("/profile");
+          res.redirect("/profile/"+req.user.id);
         });
       });
     }

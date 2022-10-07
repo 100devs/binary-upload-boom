@@ -1,4 +1,52 @@
-img{
-    max-width: 300px;
-    max-height: 300px;
+
+body{
+    background-color: rgb(24,24,24);
 }
+
+img{
+    width: 100%;
+    max-height: 500px;
+}
+
+.rowRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.row{
+    display: flex;
+    flex-direction: column;
+}
+
+.spicy {
+    border: 1px solid black;
+    width: 95%;
+    height: 550px;
+}
+
+.profileBtn{
+    padding-left: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.btn{
+    width: 88px;
+    height: 35px;
+}
+
+
+.userNameFont{
+    color: white;
+    font-size: 1.8em;
+    text-decoration: none;
+}
+
+.captionFont{
+    color: white;
+    font-size: 1.2em;
+    text-decoration: none;
+}
+

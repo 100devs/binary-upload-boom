@@ -54,18 +54,21 @@ module.exports = {
       console.log(err);
     }
   },
-  deletePost: async (req, res) => {
+  // https://www.twitch.tv/videos/1590219170?t=01h20m17s
+  // need it to add points to the correct league...
+  // req.body.league, req.body.winner===player?
+  addPoints: async (req, res) => {
     try {
-      // Find post by id
-      let post = await Post.findById({ _id: req.params.id });
-      // Delete image from cloudinary
-      await cloudinary.uploader.destroy(post.cloudinaryId);
-      // Delete post from db
-      await Post.remove({ _id: req.params.id });
-      console.log("Deleted Post");
-      res.redirect("/profile");
+      await Player.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          $inc: { points: 1 },
+        }
+      );
+      console.log("Likes +1");
+      res.redirect(`/post/${req.params.id}`);
     } catch (err) {
-      res.redirect("/profile");
+      console.log(err);
     }
   },
 };

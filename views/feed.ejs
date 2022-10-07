@@ -1,17 +1,24 @@
 <%- include('partials/header') -%>
-<a href="/profile" class="col-3 btn btn-primary">Profile</a>
+<form action="/<%= %> " method="POST">
+  <a href="/profile/<%= user._id%>" class="col-3 btn btn-primary">Profile</a>
+</form>
   <div class="container">
     <div class="row justify-content-center mt-5">
       <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
-            <a href="post/posts[i]._id">
+            <a href="/post/<%= posts[i]._id%>">
               <img class="img-fluid" src="<%= posts[i].image%>">
-              <span>  <%= user.userName %> </span>
+              <%if(comments[i].user == user.id){ %>
+
+
+              <%}%>
+              <span class=""><a href="/profileTwo/<%= posts[i].user %>"><%= posts[i].userName %></a></span>
             </a>
 
               <span>  <%= posts[i].caption %> </span>
           </li>
+
         <% } %>
         </ul>
     </div>

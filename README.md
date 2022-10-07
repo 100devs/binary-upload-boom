@@ -45,7 +45,12 @@ Take a look at these couple examples that I have in my own portfolio:
 # Things to add
 
 Users to edit own information
-Convert to REACT
+
+Admin privileges - only admin can add match and add players
+
+Logic on addMatch according to league rules. 2 points for >2 victories against the same person.
+
+Convert to REACT - this will let me use state on the addMatch form. That way selecting 4.5 league would show players only in that league in the subsequent dropdown menus. 
 
 ---
 

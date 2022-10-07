@@ -11,7 +11,7 @@ router.get("/leaderboard", homeController.getLeaderboard);
 router.get("/about", homeController.getAbout);
 router.get("/admin", homeController.getAdmin);
 router.get("/",homeController.getAnnouncement);
-router.get("/addMatch",homeController.getPlayers);
+router.get("/addMatch",ensureAuth,homeController.getPlayers);
 // router.get("/editProfiles", ensureAuth, postsController.getUserProfiles);
 // end of new pages
 router.get("/", homeController.getIndex);

@@ -36,7 +36,9 @@ module.exports = {
     }
   },
   // important function. when a match is added, check if match has occurred between player 1 and 2. If p1 has more than 2 wins against p2, add 2 points. else 10 points to p1. will have to add property to player1. 
-  // I'm going to have to make year objects.
+  // I'm going to have to make year objects. 
+  // findOneAndUpdate: https://www.twitch.tv/videos/1590219170?t=01h38m37s
+// now make addMatch give 10 points to the winner
   addMatch: async (req, res) => {
     try {
       await Match.create({

@@ -138,3 +138,5 @@ I need to make addMatch fill players from the db...try to use the code from anno
 
 
 findOneAndUpdate: https://www.twitch.tv/videos/1590219170?t=01h38m37s
+
+now make addMatch give 10 points to the winner

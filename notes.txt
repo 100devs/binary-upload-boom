@@ -134,4 +134,7 @@ https://tailwindcss.com/docs/margin
 
 work on add match!
 
-I need to make addMatch fill players from the db...
+I need to make addMatch fill players from the db...try to use the code from announcements..
+
+
+findOneAndUpdate: https://www.twitch.tv/videos/1590219170?t=01h38m37s

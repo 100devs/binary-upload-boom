@@ -2,7 +2,6 @@
 
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
 
-<!-- https://www.mongodb.com/docs/guides/crud/read_queries/ -->
 <!-- Beginning of add match tab -->
 <form action="/admin/addMatch" method="POST">
     <div class="flex justify-center">
@@ -27,64 +26,30 @@
             <option>4.0 Women</option>
           </select>
         </label> 
-        <label for="exampleFormControlInput1" class="form-label inline-block mb-2 text-gray-700"
-          >Winner</label
-        >
-        <input
-          type="text"
-          class="
-            form-control
-            block
-            w-full
-            px-3
-            py-1.5
-            text-base
-            font-normal
-            text-gray-700
-            bg-white bg-clip-padding
-            border border-solid border-gray-300
-            rounded
-            transition
-            ease-in-out
-            m-0
-            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-          "
-          id="exampleFormControlInput1"
-          placeholder="FirstName LastName"
-          name="player1"
-        />
+        <!-- change this input type to option and use loop through -->
+        <label class="block text-left" style="max-width: 500px" padding="50px">
+          <span class="text-gray-700">Winner</span>
+          <br>
+          <select class="form-multiselect block w-full mt-1" multiple name="player1">
+            <!-- loops through each announcement and builds li for each -->
+          <% for(var i=0; i<players.length; i++) {%>
+              <option><%= players[i].firstName +" "+ players[i].lastName%></option> <% } %>
+          </select>
+        </label> 
       </div>
     </div>
-    <div class="flex justify-center">
-      <div class="mb-3 xl:w-96">
-        <label for="exampleFormControlInput1" class="form-label inline-block mb-2 text-gray-700"
-          >Player 2</label
-        >
-        <input
-          type="text"
-          class="
-            form-control
-            block
-            w-full
-            px-3
-            py-1.5
-            text-base
-            font-normal
-            text-gray-700
-            bg-white bg-clip-padding
-            border border-solid border-gray-300
-            rounded
-            transition
-            ease-in-out
-            m-0
-            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-          "
-          id="exampleFormControlInput1"
-          placeholder="FirstName LastName"
-          name="player2"
-        />
-      </div>
-    </div>
+
+    <label class="block text-left" style="max-width: 500px" padding="50px">
+      <span class="text-gray-700">Player 2</span>
+      <br>
+      <select class="form-multiselect block w-full mt-1" multiple name="player2">
+        <!-- loops through each announcement and builds li for each -->
+      <% for(var i=0; i<players.length; i++) {%>
+          <option><%= players[i].firstName +" "+ players[i].lastName%></option> <% } %>
+      </select>
+    </label> 
+
+    
     <div class="flex justify-center">
       <div class="mb-3 xl:w-96">
         <label for="exampleFormControlInput1" class="form-label inline-block mb-2 text-gray-700"

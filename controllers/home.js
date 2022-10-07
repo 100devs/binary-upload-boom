@@ -1,4 +1,5 @@
 const Announcement = require("../models/Announcement");
+const Players = require("../models/Player");
 
 module.exports = {
   getIndex: (req, res) => {
@@ -31,6 +32,15 @@ module.exports = {
       // go to the db, to the Announcement collection, put all that data into variable announcements. take that array and put it into index.ejs, then we're going to name our announcements announcements in our ejs
       const announcements = await Announcement.find().sort({ createdAt: "desc" }).lean();
       res.render("index.ejs", { announcements: announcements });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  getPlayers: async (req, res) => {
+    try {
+      // go to the db, to the Announcement collection, put all that data into variable announcements. take that array and put it into index.ejs, then we're going to name our announcements announcements in our ejs
+      const players = await Players.find().sort({ createdAt: "desc" }).lean();
+      res.render("addMatch.ejs", { players: players });
     } catch (err) {
       console.log(err);
     }

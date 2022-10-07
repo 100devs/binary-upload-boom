@@ -57,6 +57,7 @@ module.exports = {
   // https://www.twitch.tv/videos/1590219170?t=01h20m17s
   // need it to add points to the correct league...
   // req.body.league, req.body.winner===player?
+  // can a form POST and PUT at the same time?
   addPoints: async (req, res) => {
     try {
       await Player.findOneAndUpdate(

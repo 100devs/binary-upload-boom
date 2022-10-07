@@ -1,11 +1,14 @@
+//Use .env file in config folder
+const dotenv = require("dotenv").config({ path: "./config/.env" });
 const path = require('path');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const client = new MongoClient(process.env.DB_STRING, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
 const express = require("express");
 const app = express();
 const fs = require('fs');
 const mongoose = require("mongoose");
 const cloudinary = require("cloudinary");
-//Use .env file in config folder
-const dotenv = require("dotenv").config({ path: "./config/.env" });
 const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
@@ -60,9 +63,10 @@ app.use("/comment", commentRoutes);
 //Connect To Database
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.DB_STRING, {
+    const conn = await client.connect(process.env.DB_STRING, {
       useNewUrlParser: true,
       useCreateIndex: true,
+      useUnifiedTopology: true 
     });
 
     console.log(`MongoDB Connected: ${conn.connection.host}`);

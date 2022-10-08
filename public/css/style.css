@@ -1,28 +1,31 @@
 
-body{
-    background-color: rgb(24,24,24);
-}
-
 img{
     width: 100%;
     max-height: 500px;
 }
 
 .rowRow{
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
 .row{
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
 
 .spicy {
-    border: 1px solid black;
-    width: 95%;
-    height: 550px;
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+.rounded-box{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
 .profileBtn{
@@ -37,6 +40,13 @@ img{
     height: 35px;
 }
 
+.userNameSpan{
+    width: 25%;
+}
+
+h3{
+    max-width: 40%;
+}
 
 .userNameFont{
     color: white;
@@ -45,8 +55,15 @@ img{
 }
 
 .captionFont{
+    max-width: 40%;
     color: white;
-    font-size: 1.2em;
+    font-size: 1.5em;
     text-decoration: none;
+}
+
+.credentials{
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 

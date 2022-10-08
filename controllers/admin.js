@@ -48,7 +48,8 @@ module.exports = {
         league: req.body.league,
       });
       console.log("Match has been added!");
-
+// how to add 10 points to player1?
+// for player in players.. if player===player1, player[i].league.score +=10
       res.redirect("/addMatch");
     } catch (err) {
       console.log(err);
@@ -58,18 +59,4 @@ module.exports = {
   // need it to add points to the correct league...
   // req.body.league, req.body.winner===player?
   // can a form POST and PUT at the same time?
-  addPoints: async (req, res) => {
-    try {
-      await Player.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: { points: 1 },
-        }
-      );
-      console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
-    } catch (err) {
-      console.log(err);
-    }
-  },
 };

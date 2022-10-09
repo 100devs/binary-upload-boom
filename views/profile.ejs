@@ -4,30 +4,14 @@
       <div class="col-6">
           <div>
               <p><strong><%= user.userName %></strong></p>
+                <img class="img-thumbnail" src="/imgs/profile.png" alt="profile" width="100" height="200">
               <!-- <p><strong>Email</strong>: <%= user.email %></p> -->
               <a href="/logout" class="col-3 btn btn-primary rounded-md shadow">logout</a>
           </div>
-          <div class="mt-5">
-            <h2>add a pattern</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">title</label>
-                  <input type="text" class="form-control" id="title" name="title">
-              </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">description</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary rounded-md shadow" value="Upload">upload</button>
-            </form>
-          </div>
+              <a class="btn btn-primary rounded-md shadow" href="/upload">upload</a>
       </div>
       <div class="col-6">
-        <h2>pattern collection</h2>
+        <h2 class="">pattern collection</h2>
         <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">

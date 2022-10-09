@@ -1,14 +1,17 @@
-const PhonoCombo = require("../models/PhonoCombo");
+const LangCombo = require("../models/Language");
 
 module.exports = {
+  getLangComp: (req, res) => {
+    res.render("langChoice.ejs");
+  },
   createTable: async (req, res) => {
     try {
-      await PhonoCombo.create({
+      await LangCombo.create({
         comment: req.body.comment,
         likes: 0,
         post: req.params.id,
       });
-      console.log("PhonoCombo has been added!");
+      console.log("LangCombo has been added!");
       res.redirect("/post/"+req.params.id);
     } catch (err) {
       console.log(err);

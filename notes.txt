@@ -146,3 +146,9 @@ now make addMatch give 10 points to the winner
           <% } %>
 
           Where should something like this go?
+
+          maybe add it to another await function in addMatch. I'll have to see if the it has access to the db...
+
+                    <% for(player in players) {%>
+                <%return ((player.firstName+" "+player.lastName) == player1.firstName+" "+player1.lastName ? player.league.points +=10 : player.league.points+=0) %>
+            <% } %>

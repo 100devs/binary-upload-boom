@@ -54,6 +54,11 @@ module.exports = {
     } catch (err) {
       console.log(err);
     }
+    const players = await Player.find().sort({ createdAt: "desc" }).lean();
+    // let player1 = req.body.player1
+    // for(player in players) {
+    //   return ((player.firstName+" "+player.lastName) == player1.firstName+" "+player1.lastName ? player.league.points +=10 : player.league.points+=0)
+    // }
   },
   // https://www.twitch.tv/videos/1590219170?t=01h20m17s
   // need it to add points to the correct league...

@@ -100,7 +100,7 @@
   <div class="navbar-start">
   </div>
   <div class="navbar-center">
-    <a class="btn btn-ghost normal-case text-5xl">HìnH</a>
+    <a class="btn btn-ghost normal-case text-5xl" href="/feed/<%= user.id %>">HìnH</a>
   </div>
   <div class="navbar-end">
     <div class="flex-none">
@@ -117,15 +117,16 @@
       </div>
   </div>
 </div>
-  <div class="">
+
       <div class="credentials">
-          <div class="card card-compact w-96 bg-base-100 shadow-xl">
+        <div class="creCre">
+          <div class="card card-compact w-50 bg-base-100 shadow-xl">
             <div class="card-body">
               <h2 class="card-title"><strong>User Name</strong>: <%= user.userName %></h2>
               <h2 class="card-title"><strong>Email</strong>: <%= user.email %></h2>
             </div>
           </div>
-
+        
          <div class="card card-compact w-96 bg-base-100 shadow-xl">
           <h2 class="card-title"><strong>Add a post</strong></h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
@@ -147,6 +148,7 @@
               </div>
               <button type="submit" class="btn bg-primary" value="Upload">Submit</button>
             </form>
+          </div>
           </div>
       </div>
 

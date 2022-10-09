@@ -1,6 +1,23 @@
-<%- include('partials/header') -%>
+<!DOCTYPE html>
+<html lang="en" data-theme="aqua">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HìnH</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+<div class="navbar bg-base-100">
+  <div class="navbar-centerCnter">
+    <a class="btn btn-ghost normal-case text-5xl">HìnH</a>
+  </div>
 
-<main class="container">
+</div>
+
+<main class="containerNer">
   <div class="row justify-content-center">
     <section class="col-6 mt-5">
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
@@ -10,31 +27,33 @@
       <div class="alert alert-info"><%= el.msg %></div>
       <% }) %> <% } %>
       <form action="/login" method="POST">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            name="email"
-          />
+        <div class="form-control">
+          <label  for="exampleInputEmail1" class="label">
+            <span class="label-text">Your Email</span>
+          </label>
+          <label class="input-group input-group-vertical">
+            <input type="email" class="input input-bordered" id="exampleInputEmail1" aria-describedby="emailHelp"  name="email"/>
+          </label>
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-            name="password"
-          />
+        <div class="form-control">
+          <label  for="exampleInputEmail1" class="label">
+            <span class="label-text">Password</span>
+          </label>
+          <label class="input-group input-group-vertical">
+            <input type="password" class="input input-bordered" id="exampleInputPassword1" aria-describedby="emailHelp"  name="password"/>
+          </label>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="mega">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        
       </form>
     </section>
   </div>
 </main>
+
+  </body>
+  <script src="https://cdn.tailwindcss.com"></script>
+  </html>
 
 <%- include('partials/footer') -%>

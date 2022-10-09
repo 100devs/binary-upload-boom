@@ -90,6 +90,10 @@ h3{
     height: 100px;
 }
 
+.proPro{
+    width: 388px;
+    height: 50px;
+}
 .w-96{
     display: flex;
     flex-direction: row;

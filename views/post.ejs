@@ -1,67 +1,78 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-6">
-      <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
-        <form
-          class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
-          method="POST"
-        >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
-        </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
-        <%}%>
-      </div>
-    </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
-    </div>
-    <div>
-      <ul>
-        <% for(var i=0; i<comments.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <!--Add user attribution-->
-            <span><%= comments[i].createdBy%>: "<%= comments[i].comment%>" 
-            <!--If comment was created by current user, then show delete button-->
-            <br> <%if(comments[i].createdById == user.id){ %>
-                  <form
-                    action="/comment/deleteComment/<%=post._id%>/<%= comments[i]._id %>?_method=DELETE"
-                    method="POST"
-                    >
-                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+
+
+<main>
+
+
+
+<div class="flex justify-center items-center mt-5 ">
+
+    <!-- Left Side -->
+        <div class="flex flex-col">
+            <img class="img-fluid w-60" src="<%= post.image%>" />
+        </div>
+
+
+<!-- Right Side -->
+        <div class="flex flex-col items-center justify-center">
+                <div class="flex flex-col mb-5 mt-16">
+                  <h2 class="font-silk text-2xl self-center"><%= post.title %></h2>
+                  <p class="text-lg font-silk ">Caption : <%= post.caption %></p>
+                </div>
+
+                <div class="flex flex-around">
+                  <form class="m-3" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
+                    <button class="text-accent-content hover:text-primary fa fa-heart" type="submit"></button>
                   </form>
-                  <%}%>
-          </li>
-        <% } %>
-      </ul>
-      <div class="mt-5">
-        <h2>Add a comment</h2>
-        <form action="/comment/createComment/<%=post._id%>" method="POST">
-          <div class="mb-3">
-              <label for="comment" class="form-label">Comment</label>
-              <input type="text" class="form-control" id="comment" name="comment">
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-      </div>
-      <ul>
-    </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
-    </div>
-  </div>
+                  <h3 class="m-3">Likes: <%= post.likes %></h3>
+                      <%if(post.user == user.id){ %>
+                        <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="m-3">
+                          <button class="text-accent-content hover:text-primary fa fa-trash" type="submit"></button>
+                        </form>
+                      <%}%>
+                </div>
+                <div class="flex flex-col items-center mt-5">
+                    <h4 class="font-silk text-md m-3">Comments:</h4>
+                    <ul>
+                      <% for(var i=0; i<comments.length; i++) {%>
+                        <li class="flex justify-center">
+                          <!--Add user attribution-->
+                          <span class="mr-4"><%= comments[i].createdBy%>: "<%= comments[i].comment%>"</span> 
+                          <!--If comment was created by current user, then show delete button-->
+                         <%if(comments[i].createdById == user.id){ %>
+                                <form
+                                  action="/comment/deleteComment/<%=post._id%>/<%= comments[i]._id %>?_method=DELETE"
+                                  method="POST"
+                                  >
+                                  <button type="submit" class="text-accent-content hover:text-primary fa fa-trash"></button>
+                                </form>
+                                <%}%>
+                        </li>
+                      <% } %>
+                    </ul>
+                    <div class="flex justify-center m-5">
+                      <h2 class="font-silk text-sm self-center mr-2">Comment: </h2>
+                      <form action="/comment/createComment/<%=post._id%>" method="POST" class="flex">
+                        <label class="input-group input-group-sm">
+                          <textarea class="textarea textarea-bordered" placeholder="Comment" id="comment" name="comment"></textarea>
+                        </label>
+                        <button type="submit" class="btn btn-sm btn-primary self-center ml-3">Submit</button>
+                      </form>
+                  </div>
+
+                  <div class="flex flex-center">
+                    <a class="btn btn-accent m-5" href="/profile">Return to Profile</a>
+                    <a class="btn btn-accent m-5" href="/feed">Return to Feed</a>
+                  </div>
+        </div>
+
 </div>
+</div>
+</main>
+
+
+
+
+
 
 <%- include('partials/footer') -%>

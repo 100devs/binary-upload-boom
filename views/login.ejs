@@ -1,39 +1,32 @@
 <%- include('partials/header') -%>
 
-<main class="container">
-  <div class="row justify-content-center">
-    <section class="col-6 mt-5">
+<main class="h-full flex flex-col justify-center items-center">
+
+  <div class="card w-96 bg-base-100 shadow-xl border-secondary border-2">
+    <div class="card-body text-primary-content content items-center text-center">
+      <h2 class="card-title text-2xl font-silk">Login</h2>
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
-      <div class="alert alert-danger"><%= el.msg %></div>
-      <% }) %> <% } %> <% if (locals.messages.info) { %> <%
-      messages.info.forEach( el => { %>
-      <div class="alert alert-info"><%= el.msg %></div>
-      <% }) %> <% } %>
-      <form action="/login" method="POST">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            name="email"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-            name="password"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </section>
+        <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %> <% } %> <% if (locals.messages.info) { %> <%
+        messages.info.forEach( el => { %>
+        <div class="alert alert-info"><%= el.msg %></div>
+        <% }) %> <% } %>
+        <form action="/login" method="POST">
+          <div class="form-control m-3">
+            <label class="input-group input-group-sm">
+              <span class="text-xs w-1/4">Email Address</span>
+              <input  type="email" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" class="w-3/4 input input-bordered input-sm" />
+            </label>
+          </div>
+          <div class="form-control  m-3">
+            <label class="input-group input-group-sm">
+              <span class="text-xs w-1/4">Password</span>
+              <input type="password" id="exampleInputPassword1" name="password" class="w-3/4 input input-sm input-bordered" />
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary mt-5">Submit</button>
+        </form>
+    </div>
   </div>
 </main>
 

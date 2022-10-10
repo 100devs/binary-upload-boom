@@ -1,13 +1,9 @@
 <%- include('partials/header') -%>
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
-<!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" /> -->
+
 <main class="container">
-    <div class="row justify-content-around mt-5">
-        <a href="/login" class="col-3 btn btn-primary"> Login</a>
-        <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
-    </div>
 <!-- Announcements box -->
-<div class="hero min-h-screen min-w-full" style="background-image: url(https://placeimg.com/1000/800/arch);">
+<div class="hero min-h-screen min-w-full"">
   <div class="hero-overlay bg-opacity-60"></div>
   <div class="hero-content text-center text-neutral-content">
     <div class="max-w-md">
@@ -25,7 +21,6 @@
           <% } %>
           </ul>
       </p>
-      <button class="btn btn-primary">Get Started</button>
     </div>
   </div>
 </div>
@@ -34,7 +29,7 @@
 <!-- Leaderboard box -->
     <div class="overflow-x-auto">
       <h2>4.5 Men's Leaderboard</h2>
-      <table class="table w-full">
+      <table class="table table-zebra w-full">
         <!-- head -->
         <thead>
           <tr>
@@ -72,7 +67,7 @@
 
     <div class="overflow-x-auto">
       <h2>5.0 Men's Leaderboard</h2>
-      <table class="table w-full">
+      <table class="table table-zebra w-full">
         <!-- head -->
         <thead>
           <tr>

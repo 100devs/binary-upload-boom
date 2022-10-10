@@ -1,6 +1,26 @@
 <%- include('partials/header') -%>
+
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
+
 <body>
+  <div class="navbar bg-base-100">
+    <div class="flex-none">
+      <ul class="menu menu-horizontal p-0">
+        <li tabindex="0">
+          <a a href="/admin">
+            Select a function
+            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
+          </a>
+          <ul class="p-2 bg-base-100">
+            <li><a href="/addAnnouncement">Add Announcement</a></li>
+            <li><a href="/addPlayer">Add Player</a></li>
+            <li><a href="/addMatch">Add Match</a></li>
+            <li><a href="/newSeason">Start New Season</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
     <form action="/admin/createPlayer" method="POST">
         <div class="tab-pane fade" id="tabs-addPlayer" role="tabpanel" aria-labelledby="tabs-addPlayer">
           <!-- email -->
@@ -11,23 +31,7 @@
                 >
                 <input
                   type="email"
-                  class="
-                    form-control
-                    block
-                    w-full
-                    px-3
-                    py-1.5
-                    text-base
-                    font-normal
-                    text-gray-700
-                    bg-white bg-clip-padding
-                    border border-solid border-gray-300
-                    rounded
-                    transition
-                    ease-in-out
-                    m-0
-                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                  "
+                  class="input input-bordered w-full max-w-xs"
                   id="exampleEmail0"
                   placeholder="Email input"
                   name="email"
@@ -42,23 +46,7 @@
                 >
                 <input
                   type="text"
-                  class="
-                    form-control
-                    block
-                    w-full
-                    px-3
-                    py-1.5
-                    text-base
-                    font-normal
-                    text-gray-700
-                    bg-white bg-clip-padding
-                    border border-solid border-gray-300
-                    rounded
-                    transition
-                    ease-in-out
-                    m-0
-                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                  "
+                  class="input input-bordered w-full max-w-xs"
                   id="exampleText0"
                   placeholder=""
                   name="firstName"
@@ -73,23 +61,7 @@
                 >
                 <input
                   type="text"
-                  class="
-                    form-control
-                    block
-                    w-full
-                    px-3
-                    py-1.5
-                    text-base
-                    font-normal
-                    text-gray-700
-                    bg-white bg-clip-padding
-                    border border-solid border-gray-300
-                    rounded
-                    transition
-                    ease-in-out
-                    m-0
-                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                  "
+                  class="input input-bordered w-full max-w-xs"
                   id="exampleEmail0"
                   placeholder=""
                   name="lastName"
@@ -99,7 +71,7 @@
             <!-- league -->
             <label class="block text-left" style="max-width: 300px">
               <span class="text-gray-700">League</span>
-              <select class="form-multiselect block w-full mt-1" multiple name="league">
+              <select class="form-multiselect select select-bordered w-full max-w-xs" multiple name="league">
                 <option>5.0 Men</option>
                 <option>4.5 Men</option>
                 <option>4.0 Men</option>
@@ -116,23 +88,7 @@
                 >
                 <input
                   type="text"
-                  class="
-                    form-control
-                    block
-                    w-full
-                    px-3
-                    py-1.5
-                    text-base
-                    font-normal
-                    text-gray-700
-                    bg-white bg-clip-padding
-                    border border-solid border-gray-300
-                    rounded
-                    transition
-                    ease-in-out
-                    m-0
-                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                  "
+                  class="select select-bordered w-full max-w-xs"
                   id="exampleEmail0"
                   placeholder="Wimbledon"
                   name="prefCourt"
@@ -147,23 +103,7 @@
                 >
                 <input
                   type="text"
-                  class="
-                    form-control
-                    block
-                    w-full
-                    px-3
-                    py-1.5
-                    text-base
-                    font-normal
-                    text-gray-700
-                    bg-white bg-clip-padding
-                    border border-solid border-gray-300
-                    rounded
-                    transition
-                    ease-in-out
-                    m-0
-                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                  "
+                  class="select select-bordered w-full max-w-xs"
                   id="exampleEmail0"
                   placeholder="After 5PM MWF"
                   name="prefTime"
@@ -172,7 +112,7 @@
             </div>
             <!-- next section -->
             <div class="flex space-x-2 justify-center">
-              <button type="Submit" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Submit Player</button>
+              <button type="Submit" class="btn">Submit Player</button>
             </div>
           </form>
 </body>

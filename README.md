@@ -3,10 +3,7 @@ This is an application which mimics most of the features of one of the most popu
 
 **Link to project:** https://binary-boom-social.herokuapp.com/post/63333eb0980cbdb006040b0b 
 
-<div align="center">
-<video width="320" height="240">
-        <source src="https://giant.gfycat.com/UnhealthySizzlingHyracotherium.mp4" type="video/mp4" />
-</video></div>
+<h2 align="center" ><img src="https://gfycat.com/unhealthysizzlinghyracotherium"/></h2>
 
 ## How It's Made:
 

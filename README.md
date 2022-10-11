@@ -1,7 +1,7 @@
 # Binary-Upload-Boom
 This is an application which mimics most of the features of one of the most popular social media apps: Instagram
 
-**Link to project:** https://binary-boom-social.herokuapp.com/post/63333eb0980cbdb006040b0b 
+**Link to project:** https://binary-boom-social.herokuapp.com/ 
 
 <h2 align="center" ><img src="https://thumbs.gfycat.com/UnhealthySizzlingHyracotherium-size_restricted.gif"/></h2>
 

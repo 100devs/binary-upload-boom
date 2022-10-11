@@ -1,9 +1,9 @@
 # Binary-Upload-Boom
 This is an application which mimics most of the features of one of the most popular social media apps: Instagram
 
- **Link to project:** https://binary-boom-social.herokuapp.com/post/63333eb0980cbdb006040b0b 
+**Link to project:** https://binary-boom-social.herokuapp.com/post/63333eb0980cbdb006040b0b 
 
- <p align="center" >![Picture of Site](/public/imgs/binary-upload-boom.gif?raw=true "Shailyn Moore's Portfolio")</p>
+<h1 align="center"><img src="/public/imgs/binary-upload-boom.gif" alt="Gif of Site" /></h1>
 
 ## How It's Made:
 

@@ -5,7 +5,7 @@
           <div class="mt-5">
   
             <h2>Add a Doctor</h2>
-            <form action="/contact/createContact"  enctype="multipart/form-data"  method="POST">
+            <form action="/contact/createContact" enctype="multipart/form-data"  method="POST">
               <div class="mb-3">
                   <label for="name" class="form-label">Doctor Name</label>
                   <input type="text" class="form-control" id="title" name="title">
@@ -37,7 +37,11 @@
         <% for(var i=0; i<contacts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
             <h2><%= contact.title %></h2>
+<<<<<<< HEAD
             <a href="/contact/<%= contacts[i]._title%>">
+=======
+            <a href="/contact/<%= contacts[i].title%>">
+>>>>>>> c1bda5ab8bc9a6bfbf780a053f4381899f9164df
             </a>
           </li>
         <% } %>

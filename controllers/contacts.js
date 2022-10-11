@@ -1,76 +1,56 @@
-const Contact = require("../models/Contact");
-const Comment = require("../models/Comment");
-
+const cloudinary = require("../middleware/cloudinary");
+const Med = require("../models/Med");
+const Contact = require("../models/Contacts");
+const Comment = require("../models/Comment")
+const contacts = require("../models/Contacts");
 
 module.exports = {
-    getContact: async (req,res)=>{
-        console.log(req.user)
-        try{
-            const contacts = await Contact.find({userId:req.user.id})
-            const comments = await Comment.find({med: req.params.id}).sort({ createdAt: "desc" }).lean();
-            // const  = await Todo.countDocuments({userId:req.user.id,completed: false})itemsLeft
-        res.render('contact.ejs', {contacts: contacts, user: req.user, comments: comments})
-        }catch(err){
-            console.log(err)
-        }
-    },
-    getDirectory: async (req, res) => {
-        try {
-          const contacts = await Contact.find().sort({ createdAt: "desc" }).lean();
-          res.render("directory.ejs", { contacts: contacts });
-        } catch (err) {
-          console.log(err);
-        }
-      },
-    createContact: async (req, res)=>{
-        try{
-            const contact = await Contact.createOne
-            ({ 
-               title: req.body.title,
-               location: req.body.location,
-               phoneNr: req.body.phoneNr,
-               user: req.user.id,
-            });
 
-        console.log('A new contact has been added!')
-        res.redirect('/contact')
-        }catch(err){
-            console.log(err)
-        }
-    },
-    // markComplete: async (req, res)=>{
-    //     try{
-    //         await Todo.findOneAndUpdate({_id:req.body.todoIdFromJSFile},{
-    //             completed: true
-    //         })
-    //         console.log('Marked Complete')
-    //         res.json('Marked Complete')
-    //     }catch(err){
-    //         console.log(err)
-    //     }
-    // },
-    // markIncomplete: async (req, res)=>{
-    //     try{
-    //         await Todo.findOneAndUpdate({_id:req.body.todoIdFromJSFile},{
-    //             completed: false
-    //         })
-    //         console.log('Marked Incomplete')
-    //         res.json('Marked Incomplete')
-    //     }catch(err){
-    //         console.log(err)
-    //     }
-    // },
-    deleteContact: async (req, res)=>{
-        try{
-      // Find contact by id
-      let contacts = await Contact.findById({ _id: req.params.id });
-      // Delete the contact from the db
-            await Contact.remove({ _id: req.params.id });
-            console.log('Deleted Contact!');
-            res.json('Deleted Contact');
-        res.redirect("/contact");
-    }catch(err){
-        res.redirect("/contact");
-        }
-    },
-};    
+
+getContacts: async (req, res) => {
+    try {
+      const contacts = await Contact.find({ user: req.user.id });
+      res.render("contacts.ejs", { contacts: contacts, user: req.user });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+getDirectory: async (req, res) => {
+    try {
+      const doctors = await Doctor.find().sort({ createdAt: "desc" }).lean();
+      res.render("directory.ejs", { doctors: doctors });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+getContact: async (req, res) => {
+    try {
+      const contacts = await Contact.findById(req.params.id);
+      const comments = await Comment.find({doctor: req.params.id}).sort({ createdAt: "desc" }).lean();
+      res.render("contacts.ejs", { contacts: contacts, user: req.user, comments: comments });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+createContact: async (req, res) => {
+    try {
+      // // Upload image to cloudinary
+      // const result = await cloudinary.uploader.upload(req.file.path);
+
+      await Contact.createOne({
+        name: req.body.name,
+        // image: result.secure_url,
+        // cloudinaryId: result.public_id,
+        address: req.body.address,
+        phoneNr: req.body.phoneNr,
+        // provider: req.body.provider,
+        user: req.user.id,
+      });
+      console.log("Contact has been added!");
+      res.redirect("/contacts");
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+}

@@ -1,0 +1,24 @@
+<%- include('partials/header') -%>
+
+<div class="container mt-5">
+    <h2 class="form-label">Edit Post</h2>
+    <form action="/post/save/<%=post._id%>" method="POST">
+        <div class="mb-3">
+            <input class="form-control" type="text" name="newTitle" value="<%= post.title %>">
+            <input class="mt-3 form-control" type="text" name="newCaption" value="<%= post.caption %>">
+            <div class="mt-3">
+                <button class='btn btn-primary' type="submit">Save</button>
+                <a class='btn btn-primary' href="/post/<%= post._id%>">Cancel</a>
+            </div>
+        </div>
+    </form>
+    <div class="col-6 mt-5">
+        <a class="btn btn-primary" href="/profile">Return to Profile</a>
+        <a class="btn btn-primary" href="/feed">Return to Feed</a>
+      </div>
+    </div>
+</div> 
+        
+   
+
+<%- include('partials/footer') -%>

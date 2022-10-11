@@ -75,4 +75,29 @@ module.exports = {
       res.redirect("/profile");
     }
   },
+  editPost: async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.id);
+      res.render("edit.ejs", { post: post, user: req.user});
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  savePost: async (req, res) => {
+    try {
+      let id = (req.params.id).split('?')[0]
+      await Post.findOneAndUpdate(
+        { _id:id },
+        {
+          title: req.body.newTitle,
+          caption: req.body.newCaption
+        }
+      );
+      console.log("Post Edited");
+      res.redirect(`/post/${id}`);
+    } catch (err) {
+      console.log(err);
+    }
+
+  }
 };

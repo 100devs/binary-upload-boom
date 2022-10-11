@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const MedSchema = new mongoose.Schema({
+const DoctorSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -13,12 +13,12 @@ const MedSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  caption: {
-    type: String,
+  address: {
+    type: String && Number,
     required: true,
   },
-  provider: {
-    type: String,
+  phoneNr: {
+    type: String && Number,
     required: true,
   },
   user: {
@@ -31,4 +31,4 @@ const MedSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Med", MedSchema);
+module.exports = mongoose.model("Doctor", DoctorSchema);

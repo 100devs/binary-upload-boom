@@ -38,7 +38,7 @@ module.exports = {
         image: result.secure_url,
         cloudinaryId: result.public_id,
         caption: req.body.caption,
-        provider: req.body.provider,
+        likes: 0,
         user: req.user.id,
       });
       console.log("Med has been added!");

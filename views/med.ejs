@@ -26,6 +26,10 @@
       <label for="caption" class="form-label">Dosage:</label>
       <p><%= med.caption %></p>
     </div>
+    <div class="col-3 mt-5">
+      <label for="provider" class="form-label">Prescribing Physician:</label>
+      <p><%= med.provider %></p>
+    </div>
     <div class="mt-5">
       <h2>Add a note:</h2>
       <form action="/comment/createComment/<%=med._id%>" method="POST">
@@ -44,7 +48,7 @@
         </li>
       <% } %>
     </ul>
-    <div class="row justify-content-center mt-5">
+    <div class="bottom-nav row justify-content-center mt-5">
       <a class="btn btn-primary" href="/dashboard">Add a New Medication</a>
       <a class="btn btn-outline-primary" href="/cabinet">Medicine Cabinet</a>
     </div>

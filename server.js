@@ -11,9 +11,11 @@ const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const medRoutes = require("./routes/meds");
 const commentRoutes = require("./routes/comments");
-const dashboardRoutes = require("./routes/dashboard")
-const providerRoutes = require("./routes/provider")
+const contactRoutes = require("./routes/contacts");
+const doctorRoutes = require("./routes/doctors");
+// const dashboardRoutes = require("./routes/dashboard");
 const bodyParser = require("body-parser");
+const ejsLint = require('ejs-lint');
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -59,10 +61,11 @@ app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
-app.use("/meds", medRoutes);
+app.use("/med", medRoutes); //This is post routes for me. 
 app.use("/comment", commentRoutes);
-app.use("/dashboard", dashboardRoutes);
-app.use("/provider", providerRoutes);
+app.use("/contacts", contactRoutes);
+app.use("/doctors", doctorRoutes);
+// app.use("/dashboard", dashboardRoutes);
 
 
 //Server Running

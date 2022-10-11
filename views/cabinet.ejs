@@ -1,9 +1,9 @@
 <%- include('partials/header') -%>
-<div>
+<div class="container">
+<div class="row justify-content-center mt-5">
   <h1>Your Cabinet</h1>
   <p>A look at all your current medications.</p>
 </div>
-  <div class="container">
     <div class="row justify-content-center mt-5">
       <ul class="row list-unstyled">
         <% for(var i=0; i<meds.length; i++) {%>
@@ -13,11 +13,12 @@
             </a>
           </li>
         <% } %>
+      
         </ul>
     </div>
     <div class="row justify-content-center mt-5">
       <a class="btn btn-primary" href="/dashboard">Add a Medication</a>
-      <a class="btn btn-outline-primary" href="/provider">Your Doctors</a>
+      <a class="btn btn-outline-primary" href="/contacts">Your Doctors</a>
     </div>  
   </div>  
 <%- include('partials/footer') -%>

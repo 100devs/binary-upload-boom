@@ -2,18 +2,18 @@
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
-      <h2><%= provider.title %></h2>
-      <!-- <img class="img-fluid" src="<%= med.image%>" /> -->
+      <h2><%= doctor.title %></h2>
+      <img class="img-fluid" src="<%= doctor.image%>" />
       <div class="row justify-content-between">
-        <!-- <form
+        <form
           class="col-1"
-          action="/med/likeMed/<%= med.id %>?_method=PUT"
+          action="/doctor/likeDoctor/<%= doctor.id %>?_method=PUT"
           method="POST"
         >
-        </form> -->
-        <%if(provider.user == user.id){ %>
+        </form>
+        <%if(med.user == user.id){ %>
         <form
-          action="/doctor/deleteProvider/<%= provider.id %>?_method=DELETE"
+          action="/doctor/deleteDoctor/<%= doctor.id %>?_method=DELETE"
           method="POST"
           class="col-3"
         >
@@ -22,15 +22,19 @@
         <%}%>
       </div>
     </div>
-    <!-- <div class="col-3 mt-5">
-      <label for="caption" class="form-label">Dosage:</label>
-      <p><%= med.caption %></p>
-    </div> -->
+    <div class="col-3 mt-5">
+      <label for="address" class="form-label">Address:</label>
+      <p><%= doctor.address %></p>
+    </div>
+    <div class="col-3 mt-5">
+      <label for="phoneNr" class="form-label">Phone Number:</label>
+      <p><%= med.phoneNr %></p>
+    </div>
     <div class="mt-5">
       <h2>Add a note:</h2>
-      <form action="/comment/createComment/<%=provider._id%>" method="POST">
+      <form action="/comment/createComment/<%=med._id%>" method="POST">
         <div class="mb-3">
-            <label for="comment" class="form-label">Add any notes about this medication, or questions you'd like to ask your doctor</label>
+            <label for="comment" class="form-label">Questions or Concerns to bring up on your next visit.</label>
             <input type="text" class="form-control" id="comment" name="comment">
         </div>
        
@@ -44,7 +48,7 @@
         </li>
       <% } %>
     </ul>
-    <div class="row justify-content-center mt-5">
+    <div class="bottom-nav row justify-content-center mt-5">
       <a class="btn btn-primary" href="/dashboard">Add a New Medication</a>
       <a class="btn btn-outline-primary" href="/cabinet">Medicine Cabinet</a>
     </div>

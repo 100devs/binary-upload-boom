@@ -11,11 +11,12 @@ const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const medRoutes = require("./routes/meds");
 const commentRoutes = require("./routes/comments");
-const contactRoutes = require("./routes/contacts");
 const doctorRoutes = require("./routes/doctors");
-// const dashboardRoutes = require("./routes/dashboard");
 const bodyParser = require("body-parser");
 const ejsLint = require('ejs-lint');
+const contactRoutes = require("./routes/contacts");
+// const directoryRoutes = require("./routes/directory")
+
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -63,8 +64,10 @@ app.use(flash());
 app.use("/", mainRoutes);
 app.use("/med", medRoutes); //This is post routes for me. 
 app.use("/comment", commentRoutes);
-app.use("/contacts", contactRoutes);
 app.use("/doctors", doctorRoutes);
+app.use("/contact", contactRoutes);
+// app.use("/directory", directoryRoutes);
+
 // app.use("/dashboard", dashboardRoutes);
 
 

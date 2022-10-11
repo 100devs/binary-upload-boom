@@ -1,5 +1,6 @@
 const Contact = require("../models/Contact");
 const Comment = require("../models/Comment");
+const Directory = require("../models/Directory")
 
 
 module.exports = {

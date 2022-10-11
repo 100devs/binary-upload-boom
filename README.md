@@ -5,7 +5,7 @@ A full-stack photo-sharing social media app that enables users to post photos & 
 
 **Link to project:** https://pictogram.cyclic.app
 
-![pictogram](https://user-images.githubusercontent.com/101529105/193375716-6619770d-a471-49d4-b07c-b5d558ab4d22.png)
+![pictogram](https://user-images.githubusercontent.com/101529105/195208048-b48bc942-e8bd-4cd7-86e8-9c873c1e98c2.png)
 
 ## Tech Stack
 
@@ -50,8 +50,17 @@ To run this project, you will need to add the following environment variables to
 
 ## Other Examples of My Work
 
-**Mailroom:** https://mailroom.cyclic.app
+### Mailroom
+https://mailroom.cyclic.app
 
-**Pictogram:** https://pictogram.cyclic.app
+![mailroom](https://user-images.githubusercontent.com/101529105/195208240-49e71fff-53c6-4d92-86ca-79dc31daccc2.png)
 
-**myPetPal: ** https://mypetpal.onrender.com
+### Pocket
+https://pocket.cyclic.app
+
+![pocket](https://user-images.githubusercontent.com/101529105/195208290-07a5521d-bc47-40a1-9afb-8db5ed959bb8.png)
+
+### myPetPal
+https://mypetpal.onrender.com
+
+![myPetPal](https://user-images.githubusercontent.com/101529105/195208309-45fa413f-58e7-4edc-852c-47d9478b4718.png)

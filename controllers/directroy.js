@@ -1,5 +1,6 @@
 const Contact = require("../models/Contact");
 const Comment = require("../models/Comment");
+const Directory = require("../models/Directory")
 
 
 module.exports = {
@@ -24,8 +25,7 @@ module.exports = {
       },
     createContact: async (req, res)=>{
         try{
-            const contact = await Contact.createOne
-            ({ 
+            const contact = await Contact.create({ 
                title: req.body.title,
                location: req.body.location,
                phoneNr: req.body.phoneNr,

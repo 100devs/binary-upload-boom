@@ -45,7 +45,12 @@ div {
     align-self: end;
 }
 
-.card-body {
+/* .card-body {
     display: flex;
-    flex-direction:  wrap;
+    /* flex-direction:  wrap; */
+    /* height: 80% ; 
+} */
+
+.col-6 > li {
+    border: 2px solid green;
 }

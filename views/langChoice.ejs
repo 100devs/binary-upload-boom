@@ -1,6 +1,7 @@
 <%- include('partials/header') -%>
 <div class="mt-5">
-    <h2>Add a post</h2>
+<!--
+  <h2>Add a post</h2>
     <form action="/post/createPost" enctype="multipart/form-data" method="POST">
       <div class="mb-3">
           <label for="title" class="form-label">Title</label>
@@ -15,6 +16,19 @@
         <input type="file" class="form-control" id="imageUpload" name="file">
       </div>
       <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+      
     </form>
+-->
+    <form action="/langChoice/createTable" method='POST'>
+      <div class="row justify-content-around">
+        <input type="checkbox" name='languages' value="mandarin"> Mandarin
+        <input type="checkbox" name='languages'value="cantonese"> Cantonese
+        <input type="checkbox" name='languages'value="hokkien"> Hokkien
+      </div>
+      <br>
+      <div class="mt-1 row justify-content-around">
+        <input type="submit" class="col-2 btn btn-primary" >
+      </div>
+  </form>
   </div>
 <%- include('partials/footer') -%>

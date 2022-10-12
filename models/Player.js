@@ -22,7 +22,7 @@ const PlayerSchema = new mongoose.Schema({
     require: true,
   },
   league: {
-    type: Array,
+    type: String,
     required: true,
   },
   prefCourt: {
@@ -38,8 +38,7 @@ const PlayerSchema = new mongoose.Schema({
     ref: "User",
   },
   points: {
-    type: Number,
-    required: false,
+    type: mongoose.Schema.Types.Mixed
   },
   createdAt: {
     type: Date,

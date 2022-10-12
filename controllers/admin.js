@@ -42,6 +42,7 @@ module.exports = {
   addMatch: async (req, res) => {
     try {
       await Match.create({
+        season: req.body.season,
         player1: req.body.player1,
         player2: req.body.player2,
         score: req.body.score,
@@ -50,18 +51,30 @@ module.exports = {
       console.log("Match has been added!");
 // how to add 10 points to player1?
 // for player in players.. if player===player1, player[i].league.score +=10
-      res.redirect("/addMatch");
+      const players = await Player.find().sort({ createdAt: "desc" }).lean();
+      let player1 = req.body.player1;
+      const season = req.body.season;
+      const league = req.body.league;
+      let playerMatch = players.find({},{firstName: "Charlie"})
+      console.log(`${player1}, ${season}, ${league}, ${playerMatch}`)
+
+      // update the points. first arg is record that we want to update. second is object with desired properties we want to set it to. third is callback function that takes error and data.
+      players.findOneAndUpdate({name: player1}, {points.league.season: +=10},{new: true},(error,data) =>{
+        if (error){
+          console.log(error)
+        }else{
+          console.log(data)
+        }
+      })
+    console.log("Points added")      
+    res.redirect("/addMatch");
     } catch (err) {
       console.log(err);
     }
-    const players = await Player.find().sort({ createdAt: "desc" }).lean();
-    // let player1 = req.body.player1
-    // for(player in players) {
-    //   return ((player.firstName+" "+player.lastName) == player1.firstName+" "+player1.lastName ? player.league.points +=10 : player.league.points+=0)
-    // }
   },
   // https://www.twitch.tv/videos/1590219170?t=01h20m17s
   // need it to add points to the correct league...
   // req.body.league, req.body.winner===player?
   // can a form POST and PUT at the same time?
 };
+// that just modifies a string... 

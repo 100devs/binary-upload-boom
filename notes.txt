@@ -152,3 +152,19 @@ now make addMatch give 10 points to the winner
                     <% for(player in players) {%>
                 <%return ((player.firstName+" "+player.lastName) == player1.firstName+" "+player1.lastName ? player.league.points +=10 : player.league.points+=0) %>
             <% } %>
+
+            in models change league data type to text. no reason to have array, then you can do league.season.points
+
+            use league.season as keyname and points as value
+            league.season +=10
+
+                  for(player in players) {
+        return ((player.firstName+" "+player.lastName) == player1.firstName+" "+player1.lastName ? player.league +=10 : player.league+=0)
+}
+
+I need a key value pair... 
+findOneAndUpdate: https://www.youtube.com/watch?v=1UnZyC25pt4
+
+points.${league}.${season} = 10
+
+https://www.mongodb.com/community/forums/t/how-can-update-an-item-in-a-nested-array-or-add-to-the-nested-array-if-the-item-is-not-present-if-there-is-no-document-create-one/120664

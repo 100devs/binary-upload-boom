@@ -2,11 +2,12 @@ const cloudinary = require("../middleware/cloudinary");
 const Doctor = require("../models/Doctor");
 // const Contact = require("../models/OldContacts");
 const Comment = require("../models/Comment");
+const Contact = require("../models/Contact");
 
 module.exports = {
   getContacts: async (req, res) => {
     try {
-      const contacts = await COntact.find({ user: req.user.id });
+      const contacts = await Contact.find({ user: req.user.id });
       res.render("contacts.ejs", { contacts: contacts, user: req.user });
     } catch (err) {
       console.log(err);

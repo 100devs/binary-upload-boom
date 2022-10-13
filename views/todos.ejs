@@ -1,0 +1,49 @@
+<%- include('partials/header') -%>
+<div class="container">
+    <div class="row justify-content-center mt-5">
+
+    <h1>Your Healthcare Providers</h1>
+    <p>Contact information for your Care Team</p>
+    </div>
+    <div class="row justify-content-center mt-5">
+
+        <h1>Todos</h1>
+        <ul>
+        <% todos.forEach( el => { %>
+                <li class='todoItem' data-id='<%=el._id%>'>
+                    <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
+                    <span class='del'> Delete </span>
+                </li>
+        <% }) %>    
+        </ul>
+    
+    
+        <form action="/todos/createTodo" method='POST'>
+            <input type="text" placeholder="Enter Todo Item" name='todoItem'>
+            <input type="submit">
+        </form>
+</div>
+<!-- <div class="col-6">
+    <div class="mt-5">
+<form action="/todos/createTodo" enctype="multipart/form-data" method="POST">
+    <div class="mb-3">
+        <label for="todo" class="form-label">Physician Name</label>
+        <input type="text" class="form-control" id="title" name="todoItem">
+    </div> 
+
+      <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+    </form>
+    </div> -->
+</div>
+
+
+    <!-- <form action="/todos/createTodo" method='POST'>
+        <input type="text" placeholder="Enter Todo Item" name='title'>
+        <input type="submit">
+    </form> -->
+    <div class="row justify-content-center mt-5">
+        <a class="btn btn-primary" href="/dashboard">Add a Medication</a>
+        <a class="btn btn-outline-primary" href="/contacts">Your Doctors</a>
+      </div>  
+</div>
+<%- include('partials/footer') -%>

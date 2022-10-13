@@ -1,6 +1,8 @@
 const Contact = require("../models/Contact");
 const Comment = require("../models/Comment");
-const Directory = require("../models/Directory")
+const Directory = require("../models/Directory");
+const Doctor = require("../models/Doctor");
+const Med = require("../models/Med");
 
 
 module.exports = {
@@ -17,8 +19,18 @@ module.exports = {
     },
     getDirectory: async (req, res) => {
         try {
+          const med = await Med.findById({med: req.params.id});
           const contacts = await Contact.find().sort({ createdAt: "desc" }).lean();
           res.render("directory.ejs", { contacts: contacts });
+        } catch (err) {
+          console.log(err);
+        }
+      },
+      getMed: async (req, res) => {
+        try {
+          const med = await Med.findById(req.params.id);
+          const comments = await Comment.find({med: req.params.id}).sort({ createdAt: "desc" }).lean();
+          res.render("med.ejs", { med: med, user: req.user, comments: comments });
         } catch (err) {
           console.log(err);
         }
@@ -26,9 +38,9 @@ module.exports = {
     createContact: async (req, res)=>{
         try{
             const contact = await Contact.create({ 
-               title: req.body.title,
-               location: req.body.location,
-               phoneNr: req.body.phoneNr,
+               title: '',
+               address: req.body.address,
+               phone: req.body.phone,
                user: req.user.id,
             });
 

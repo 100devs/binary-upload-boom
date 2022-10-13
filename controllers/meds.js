@@ -19,6 +19,15 @@ module.exports = {
       console.log(err);
     }
   },
+  getDirectory: async (req, res) => {
+    try {
+      const med = await Med.findById({med: req.params.id});
+      const contacts = await Contact.find().sort({ createdAt: "desc" }).lean();
+      res.render("directory.ejs", { med: med, contacts: contacts });
+    } catch (err) {
+      console.log(err);
+    }
+  },
   getMed: async (req, res) => {
     try {
       const med = await Med.findById(req.params.id);

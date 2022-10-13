@@ -1,56 +1,59 @@
-const cloudinary = require("../middleware/cloudinary");
-const Med = require("../models/Med");
-const Contact = require("../models/Contacts");
+const Contact = require("../models/Contact");
 const Comment = require("../models/Comment")
-const contacts = require("../models/Contacts");
+const Doctor = require("../models/Doctor");
+const cloudinary = require("../middleware/cloudinary");
+
+
 
 module.exports = {
-
-
-getContacts: async (req, res) => {
-    try {
-      const contacts = await Contact.find({ user: req.user.id });
-      res.render("contacts.ejs", { contacts: contacts, user: req.user });
-    } catch (err) {
-      console.log(err);
-    }
-  },
 getDirectory: async (req, res) => {
     try {
-      const doctors = await Doctor.find().sort({ createdAt: "desc" }).lean();
-      res.render("directory.ejs", { doctors: doctors });
+      const contacts = await Contact.find().sort({ createdAt: "desc" }).lean();
+      res.render("directory.ejs", { contacts: contacts });
     } catch (err) {
       console.log(err);
     }
   },
 getContact: async (req, res) => {
+  console.log(req.body)
     try {
-      const contacts = await Contact.findById(req.params.id);
-      const comments = await Comment.find({doctor: req.params.id}).sort({ createdAt: "desc" }).lean();
-      res.render("contacts.ejs", { contacts: contacts, user: req.user, comments: comments });
+      const contact = await Contact.findById(req.params.id);
+      res.render("contact.ejs", {  contact: contact, user: req.user, });
     } catch (err) {
       console.log(err);
     }
   },
 createContact: async (req, res) => {
+  console.log(req.body)
+  console.log(req.user)
     try {
-      // // Upload image to cloudinary
-      // const result = await cloudinary.uploader.upload(req.file.path);
+      
 
-      await Contact.createOne({
-        name: req.body.name,
-        // image: result.secure_url,
-        // cloudinaryId: result.public_id,
+      await Contact.create({
+
+        title: '',
         address: req.body.address,
-        phoneNr: req.body.phoneNr,
-        // provider: req.body.provider,
+        phone: req.body.phone,
         user: req.user.id,
       });
       console.log("Contact has been added!");
-      res.redirect("/contacts");
+      res.redirect("/contact");
     } catch (err) {
       console.log(err);
     }
   },
+  deleteContact: async (req, res)=>{
+    try{
+  // Find contact by id
+  let contact = await Contact.findById({ _id: req.params.id });
+  // Delete the contact from the db
+        await Contact.remove({ _id: req.params.id });
+        console.log('Deleted Contact!');
+        res.json('Deleted Contact');
+    res.redirect("/contact");
+}catch(err){
+    res.redirect("/contact");
+    }
+},
 
 }

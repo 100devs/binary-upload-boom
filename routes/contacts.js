@@ -1,12 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const contactsController = require('../controllers/contacts');
-const { ensureAuth } = require('../middleware/auth');
+const upload = require("../middleware/multer");
+const contactController = require("../controllers/contacts");
+const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
-router.get('/:id', ensureAuth, contactsController.getContact);
+router.get("/:id", ensureAuth, contactController.getContact);
 
-router.post('/createContact', contactsController.createContact);
+router.post("/createContact", contactController.createContact);
+router.post("createContact", upload.single("file"), contactController.createContact);
 
-router.delete('/deleteContact/:id', contactsController.deleteContact);
+
+router.delete("/deleteContact/:id", contactController.deleteContact);
 
 module.exports = router

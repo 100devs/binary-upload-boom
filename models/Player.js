@@ -38,8 +38,8 @@ const PlayerSchema = new mongoose.Schema({
     ref: "User",
   },
   points: {
-    type: mongoose.Schema.Types.Mixed
-  },
+      type: String,
+    },
   createdAt: {
     type: Date,
     default: Date.now,

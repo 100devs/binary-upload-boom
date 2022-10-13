@@ -55,17 +55,21 @@ module.exports = {
       let player1 = req.body.player1;
       const season = req.body.season;
       const league = req.body.league;
-      let playerMatch = players.find({},{firstName: "Charlie"})
-      console.log(`${player1}, ${season}, ${league}, ${playerMatch}`)
+      console.log(`${player1}, ${season}, ${league}`)
 
-      // update the points. first arg is record that we want to update. second is object with desired properties we want to set it to. third is callback function that takes error and data.
-      players.findOneAndUpdate({name: player1}, {points.league.season: +=10},{new: true},(error,data) =>{
-        if (error){
-          console.log(error)
-        }else{
-          console.log(data)
-        }
-      })
+      // update the points. first arg is record that we want to update. second is object with desired properties we want to set it to. third is callback function that takes error and data. can use $inc 2 or 10
+      
+      try {
+        await players.findOneAndUpdate(
+          { firstName: player1 },
+          {
+            $inc: { points.league.season: 10 },
+          }
+        );
+        console.log("Points +1");
+      } catch (err) {
+        console.log(err);
+      }      
     console.log("Points added")      
     res.redirect("/addMatch");
     } catch (err) {

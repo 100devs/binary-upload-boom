@@ -4,9 +4,18 @@ const ContactSchema = new mongoose.Schema({
   title: {
     type: String,
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+  address: {
+    type: String
+  },
+  phone: {
+    type: String
+  },
+  // user: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "User",
+  // },
+  userId: {
+    type: String,
   },
   createdAt: {
     type: Date,
@@ -14,4 +23,4 @@ const ContactSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Contact", ContactSchema);
+module.exports = mongoose.model("Contact", ContactSchema, "contact");

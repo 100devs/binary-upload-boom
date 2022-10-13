@@ -7,7 +7,6 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 router.get("/:id", ensureAuth, contactController.getContact);
 
 router.post("/createContact", contactController.createContact);
-router.post("createContact", upload.single("file"), contactController.createContact);
 
 
 router.delete("/deleteContact/:id", contactController.deleteContact);

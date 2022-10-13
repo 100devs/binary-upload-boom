@@ -4,11 +4,19 @@
       <div class="col-6">
           <div class="mt-5">
             <h2>Add a Doctor</h2>
-            <form action="/contact/createContact" enctype="multipart/form-data"  method="POST">
+            <form action="/contact/createContact"  method="POST">
               <div class="mb-3">
                   <label for="title" class="form-label">Doctor Name</label>
                   <input type="text" class="form-control" id="title" name="title">
               </div>
+              <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" class="form-control" id="address" name="address">
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input type="text" class="form-control" id="phone" name="phone">
+          </div>
               
               <!-- <div class="mb-3">
                 <label for="provider" class="form-label">Prescribing Physician</label>
@@ -21,8 +29,32 @@
               <button type="submit" class="btn btn-primary" value="submit">Submit</button>
             </form>
           </div>
-      </div>
-      
+        </div>
+        
+
+          <% contacts.forEach( el => { %>
+
+            <div class="col-6 ">
+              <!-- <div class="col s12 m6"> -->
+                <!-- <div class="card compHolder red darken-4 z-depth-5"> -->
+                  <!-- <div class="card-content white-text"> -->
+                    <span class="card-title"><%= el.name %></span>
+                    <p class="compCardContent">Name:<span> <%= el.title ? el.title : 'Not Given'%></span></p>
+                    <p class="compCardContent">Address:<span> <%= el.address ? el.address : 'No Address Given'%></span></p>
+                      <p class="compCardContent">Phone:<span> <%= el.phone ? el.phone  : 'No Phone Given'%></span></p>
+                  <!-- </div> -->
+                  <div class="card-action" data-id="<%=el._id%>" id="<%=el.name%>">
+                    <!-- <a href="/comp/viewone/<%=el._id%>" ><button class="waves-effect waves-light btn-small red darken-3 z-depth-3">View Page</button></a> -->
+                    <button class="waves-effect waves-light btn-small red darken-3 z-depth-3 del">DELETE</button>
+                  </div>
+                <!-- </div> -->
+              <!-- </div> -->
+            </div>
+          
+          
+          
+            <% }) %>
+          
       </div>
      
       <div class="row justify-content-center mt-5">

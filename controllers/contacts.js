@@ -15,26 +15,26 @@ getDirectory: async (req, res) => {
     }
   },
 getContact: async (req, res) => {
-  console.log(req.body)
     try {
-      const contact = await Contact.findById(req.params.id);
-      res.render("contact.ejs", {  contact: contact, user: req.user, });
+      let mongoose = require('mongoose')
+      const contacts = await Contact.find( {userId: req.user.id});
+      console.log(req.body)
+
+      
+      res.render("contact.ejs", {  contacts: contacts, user: req.user, });
     } catch (err) {
-      console.log(err);
+      console.log(err); 
     }
   },
 createContact: async (req, res) => {
-  console.log(req.body)
-  console.log(req.user)
     try {
-      
+      console.log(req.body)
 
-      await Contact.create({
-
-        title: '',
+     await Contact.create({
+        title: req.body.title,
         address: req.body.address,
         phone: req.body.phone,
-        user: req.user.id,
+        userId: req.user.id,
       });
       console.log("Contact has been added!");
       res.redirect("/contact");

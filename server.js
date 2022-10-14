@@ -1,11 +1,11 @@
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
-const passport = require("passport");
-const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
-const methodOverride = require("method-override");
-const flash = require("express-flash");
+const mongoose = require("mongoose"); //communicate with mongodb
+const passport = require("passport"); //auth
+const session = require("express-session"); //sessions
+const MongoStore = require("connect-mongo")(session); //store sessions in mongo
+const methodOverride = require("method-override");  //allow client side to use PUT and DELETE methods
+const flash = require("express-flash"); //form notifications like wrong pw, wrong email, etc.
 const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");

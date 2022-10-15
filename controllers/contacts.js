@@ -17,7 +17,7 @@ getDirectory: async (req, res) => {
 getContact: async (req, res) => {
     try {
       let mongoose = require('mongoose')
-      const contacts = await Contact.find( {userId: req.user.id});
+      const contacts = await Contact.find({ userId: req.user.id });
       console.log(req.body)
 
       
@@ -45,7 +45,7 @@ createContact: async (req, res) => {
   deleteContact: async (req, res)=>{
     try{
   // Find contact by id
-  let contact = await Contact.findById({ _id: req.params.id });
+  let contact = await Contact.find({ UserId: req.UserId });
   // Delete the contact from the db
         await Contact.remove({ _id: req.params.id });
         console.log('Deleted Contact!');

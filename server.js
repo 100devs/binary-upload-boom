@@ -57,7 +57,12 @@ app.use(flash());
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 
-//Server Running
+// Server Running
 app.listen(process.env.PORT, () => {
   console.log("Server is running, you better catch it!");
 });
+
+
+// app.listen(8500, () => {
+//   console.log("Server is running, you better catch it!");
+// });

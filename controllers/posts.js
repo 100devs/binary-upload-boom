@@ -4,12 +4,18 @@ const Post = require("../models/Post");
 module.exports = {
   getProfile: async (req, res) => {
     try {
+      // Since we have a session each request (req) contains the logged-in users info: req.user
+      // console.log( req.user )to see everything
+      // Grabbing just the posts of the logged-in user
       const posts = await Post.find({ user: req.user.id });
+      // Sending post data from mongodb and user data to ejs template
       res.render("profile.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
     }
   },
+
+  // no using this // 
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
@@ -20,6 +26,9 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
+      
+      // id is coming from the routes
+      // const posts = await Post.find({ user: req.user.id });
       const post = await Post.findById(req.params.id);
       res.render("post.ejs", { post: post, user: req.user });
     } catch (err) {
@@ -30,7 +39,10 @@ module.exports = {
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
+      // media is stored on cloudinary - the above request responds with url to media and the media id that you will need when deleting content.
 
+      // media is restricted to jpg, jpeg and png for now 
+      // change the restriction in middleware/multer.js
       await Post.create({
         title: req.body.title,
         image: result.secure_url,

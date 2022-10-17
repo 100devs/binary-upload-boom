@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const PostSchema = new mongoose.Schema({
+const PostSchema = new mongoose.Schema({ // schema is a blueprint which tells mongoose how to construct data that goes into DB
   title: {
     type: String,
     required: true,
@@ -23,7 +23,7 @@ const PostSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "User", // referencing user model
   },
   createdAt: {
     type: Date,
@@ -31,4 +31,4 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Post", PostSchema); // model uses schema; first argument is the name of the model; third argument is name of collection (none given will taken first argument and make it plural)

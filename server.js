@@ -1,26 +1,25 @@
-//Use .env file in config folder
-const dotenv = require("dotenv").config({ path: "./config/.env" });
-const path = require('path');
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const client = new MongoClient(process.env.DB_STRING, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-
 const express = require("express");
 const app = express();
-const fs = require('fs');
 const mongoose = require("mongoose");
-const cloudinary = require("cloudinary");
 const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const methodOverride = require("method-override");
 const flash = require("express-flash");
 const logger = require("morgan");
+const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
 const commentRoutes = require("./routes/comments");
 
+//Use .env file in config folder
+require("dotenv").config({ path: "./config/.env" });
+
 // Passport config
 require("./config/passport")(passport);
+
+//Connect To Database
+connectDB();
 
 //Using EJS for views
 app.set("view engine", "ejs");
@@ -60,27 +59,7 @@ app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 app.use("/comment", commentRoutes);
 
-//Connect To Database
-const connectDB = async () => {
-  try {
-    const conn = await client.connect(process.env.DB_STRING, {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useUnifiedTopology: true 
-    });
 
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
-  } catch (err) {
-    console.error(err);
-    process.exit(1);
-  }
-};
-cloudinary.config({ 
-  cloud_name: 'wo1vin', 
-  api_key: dotenv.API_KEY,
-  api_secret: dotenv.API_SECRET
-});
-connectDB();
   //Server Running
   app.listen(process.env.PORT, () => {
     console.log("Server is running, you better catch it!");

@@ -1,7 +1,7 @@
 <%- include('partials/header') -%>
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
 
-<main class="container">
+<main class="">
 <!-- Announcements box -->
 <div class="hero min-h-screen min-w-full"">
   <div class="hero-overlay bg-opacity-60"></div>
@@ -12,7 +12,7 @@
         <ul class="row list-unstyled">
           <!-- loops through each announcement and builds li for each -->
           <% for(var i=0; i<announcements.length; i++) {%>
-            <li class="col-6 justify-content-between mt-5">
+            <li class="justify-content-between mt-5">
               <!-- each of these is an anchor tag to this home route -->
               <a href="/home/<%= announcements[i]._id%>">
                   <%= announcements[i].announcementText%>
@@ -25,11 +25,11 @@
   </div>
 </div>
 
-
+<div class="flex justify-evenly ">
 <!-- Leaderboard box -->
-    <div class="overflow-x-auto">
+    <div class="">
       <h2>4.5 Men's Leaderboard</h2>
-      <table class="table table-zebra w-full">
+      <table class="table table-zebra ">
         <!-- head -->
         <thead>
           <tr>
@@ -65,7 +65,7 @@
       </table>
     </div>
 
-    <div class="overflow-x-auto">
+    <div class="">
       <h2>5.0 Men's Leaderboard</h2>
       <table class="table table-zebra w-full">
         <!-- head -->
@@ -102,6 +102,7 @@
         </tbody>
       </table>
     </div>
+</div>
 </main>
     
 

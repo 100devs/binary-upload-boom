@@ -59,17 +59,17 @@ module.exports = {
 
       // update the points. first arg is record that we want to update. second is object with desired properties we want to set it to. third is callback function that takes error and data. can use $inc 2 or 10
       
-      try {
-        await players.findOneAndUpdate(
-          { firstName: player1 },
-          {
-            $inc: { points.league.season: 10 },
-          }
-        );
-        console.log("Points +1");
-      } catch (err) {
-        console.log(err);
-      }      
+    //   try {
+    //     await players.findOneAndUpdate(
+    //       { firstName: player1 },
+    //       {
+    //         $inc: { points.league.season: 10 },
+    //       }
+    //     );
+    //     console.log("Points +1");
+      // } catch (err) {
+      //   console.log(err);
+      // }      
     console.log("Points added")      
     res.redirect("/addMatch");
     } catch (err) {

@@ -1,20 +1,40 @@
 <%- include('partials/header') -%>
 
+<!-------------------------------------------added Wishlist Title---------------------------->
 <div class="container"></div>
+<div class="block">
+  <div id="item">
+    <div id="highlight"></div>
+    <span>My Wishlist</span>
+    <span class= "ml-5">(<%= wishlist.length %>)</span>
+  </div>
+</div>
+<!---===================================================End---------------------------------------->
+
 <ul class="container">
     
     <% for(var i=0; i<wishlist.length; i++) {%>
       <li class="col-6 justify-content-between mt-5">
-       <%=wishlist[i].postId%>
+       <%=wishlist[i].title%>
         </li>
+        <li>
+          <img src="https://res.cloudinary.com/k1llab33ync/image/upload/v1664241846/<%=wishlist[i].cloudinaryId%>.jpg" alt="#">
+            </li>
+            <form
+            action="/wishlist/deleteWishlist/<%= wishlist[i]._id %>?_method=DELETE"
+            method="POST"
+            class="col-3"
+          >
+            <button class="btn btn-warning fa fa-trash" type="submit"></button>
+          </form> 
+          <i class="bi bi-x">X</i>   
+            
     <% } %>
   </ul>
   
 
 </div>
      
-
-
   
 
     

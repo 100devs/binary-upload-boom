@@ -28,12 +28,31 @@ module.exports = {
   
   createWishlist: async (req, res) => {
     try {
+      // Upload image to cloudinary
+      //const result = await cloudinary.uploader.upload(req.file.path);
+
+      await Wishlist.create({
+        postId: req.params.id,
+        cloudinaryId: req.params.cloudinaryId,
+        caption: req.params.caption,
+        title:req.params.title,
+        user: req.user.id,
+      });
+      
+      console.log("Wishlist has been added!");
+      res.redirect("/profile");
+    } catch (err) {
+      console.log(err);
+    }
+  },
+    
+    /*try {
       //Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
+      //const result = await cloudinary.uploader.upload(req.file.path);
 
       await Wishlist.create({
         postId: req.params.id,//////////////////////////////////////// /////////////changed title to post name
-        image: result.secure_url,
+        //image: result.secure_url,
         //cloudinaryId: result.public_id,
     
         
@@ -45,19 +64,19 @@ module.exports = {
     } catch (err) {
       console.log(err);
     }
-  },
-  deletePost: async (req, res) => {
+  },*/
+  deleteWishlist: async (req, res) => {
     try {
       // Find post by id
-      let post = await Post.findById({ _id: req.params.id });
+      let wishlist = await Wishlist.findById({ _id: req.params.id });
       // Delete image from cloudinary
-      await cloudinary.uploader.destroy(post.cloudinaryId);
+      //await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db
-      await Post.remove({ _id: req.params.id });
-      console.log("Deleted Post");
-      res.redirect("/profile");
+      await Wishlist.remove({ _id: req.params.id });
+      console.log("Deleted Wishlist Item");
+      res.redirect("/wishlist/:id");
     } catch (err) {
-      res.redirect("/profile");
+      res.redirect("/wishlist/:id");
     }
   },
 

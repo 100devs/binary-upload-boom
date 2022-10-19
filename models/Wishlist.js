@@ -1,15 +1,40 @@
 const mongoose = require("mongoose");
 
 const WishlistSchema = new mongoose.Schema({
-  postId: {            /////////////////////changed 'title to post'
+  postId:{
+    type: String,
+  },
+  title: {
+    type: String,
+    
+  },
+  cloudinaryId: {
+    type: String,
+    
+  },
+  caption: {
+    type: String,
+    
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+
+
+
+
+  /* postId: {            /////////////////////changed 'title to post'
         type: String,
         required: true,
       },
-      image: {
-        type: String,
-        require: true,
-      },
-
+      
       user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -20,6 +45,6 @@ const WishlistSchema = new mongoose.Schema({
       },
       
     });
-    
+    */
 
 module.exports = mongoose.model("Wishlist", WishlistSchema);

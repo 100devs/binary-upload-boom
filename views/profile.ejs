@@ -1,43 +1,54 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row mt-6">
-      <div class="col-6">
+      <div class="col-4">
           <div>
+            <div class="boxFit">
               <p><strong>User Name</strong>: <span class="red-text"><%= user.userName%></span></p>
               <p><strong>Email</strong>: <span class="red-text"><%= user.email %></span></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+              </div>
+    <!--LOGOUT BUTTON--------------------------------------------------->          
+            <div class="landingPage">  
+              <a href="/logout"><span>Logout</span></a>
+            </div>  
             <!------------Added a link to wishlist--------------------------------------------------> 
             <form action="/wishlist/:id" method="GET">
               <div class="mb-3">
                   <label for="title" class="form-label"></label>
               </div>
-                <button type="submit" class="col-3 btn btn-success">Wishlist</button>
+              <div>
+                <button type="submit" class="col-5 btn btn-outline-success">My Wishlist</button>
+              </div>  
             </form>
+            
             
             <!-------------------------------------------------------------------------------------->  
           </div>
-          <div class="mt-5">
+
+        
+<div class="mt-5">
             <h2>Add a book</h2>
+  <label class="col-form-label-sm" for="inlineFormInputName2"></label>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
+                  <label class="col-form-label-sm" for="title" class="form-group"></label>
+                  <input type="text" class="form-control" id="title" placeholder="Title" name="title">
               </div>
               <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
+                <label class="col-form-label-sm" for="caption" class="form-label"></label>
+                <textarea class="form-control" id="caption" placeholder="Caption" name="caption"></textarea>
               </div>
               <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
+                <label class= "col-form-label-sm" for="imgUpload" class="form-label"></label>
+                <input type="file" class="form-control" id="imageUpload" placeholder="Image" name="file">
               </div>
                 <div class="mb-5">
-                      <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+                      <button type="submit" class="btn btn-outline-dark" value="Upload">Submit</button>
                 </div>  
             </form>
           </div>
-      </div>
-      <div class="col-6">
+      </div> 
+      <div class="col-md-4 offset-md-4">
         <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
@@ -47,8 +58,8 @@
           </li>
         <% } %>
         </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
+        <div class="landingPage">
+          <a href="/feed"><span>Return to Feed</span></a>
         </div>  
       </div>  
     </div>

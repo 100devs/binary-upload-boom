@@ -5,26 +5,81 @@
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
 
+  <!--   old comment section--------------------------------------------  
       <div class="container border margin">
         <h3>Comments:</h3>
-      <ul class="container">
-        <!--<span class="red-text"><%= post.userName%></span>-->
+      <ul class="container"> 
+      
         <% for(var i=0; i<comments.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
            <%= comments[i].comment%>
             </li>
         <% } %>
       </ul>
-      </div>
+      </div>  
+------------------------------------------------------------------------------->
+<!---------------- New comments box----------------------------------------------------------------------------------------->
 
 
+ 
+    <div class="card p-3">
+
+      <div class="d-flex justify-content-between align-items-center">
+    
+    <div class="user d-flex flex-row align-items-center">
+      <ul class="">
+  <!--<img src="#" width="30" class="user-img rounded-circle mr-2">       -->
+  <% for(var i=0; i<comments.length; i++) {%>
+    
+    <li class="">
+      <span><small class="font-weight-bold text-primary">Name</small><small class="font-weight-bold"><%= comments[i].comment%></small></span>
+      </li>
+  <% } %>
+    
+    
+</div>
+
+
+
+
+</div>
+
+
+<div class="action d-flex justify-content-between mt-2 align-items-center">
+
+  <div class="reply px-4">
+      <small>Remove</small>
+      <span class="dots"></span>
+      <small>Reply</small>
+      
+     
+  </div>
+
+ 
+    
+</div>
+
+
+  
+</div>
+</ul>
+
+
+
+
+
+
+
+
+
+<!----------------------------------------------END---------------------------------------------------------------->
       <div class="row justify-content-between">
         <form
           class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          <button class="btn btn-primary fa fa-heart mt-3" type="submit"></button>
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
         <%if(post.user == user.id){ %>
@@ -33,15 +88,15 @@
           method="POST"
           class="col-3"
         >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
+          <button class="btn btn-primary fa fa-trash mt-3" type="submit"></button> 
+           </form>
         <%}%>
         <!--added a wishlistbutton form (testing)------------------------------------------------------->
-        <form action="/wishlist/createWishlist/<%=post%>" method="POST">
+        <form action="/wishlist/createWishlist/<%=post.id%>-<%=post.title%>-<%=post.caption%>-<%=post.cloudinaryId%>" method="POST">
           <div class="mb-3">
               <label for="title" class="form-label"></label>
           </div>
-            <button type="submit" class="btn btn-success">+Wishlist</button>
+            <button type="submit" class="btn btn-outline-success">+Wishlist</button>
         </form>
 <!----------------------------------------------------------------------------------------------------------->
       </div>
@@ -53,18 +108,18 @@
   <h2>Add a comment</h2>
   <form action="/comment/createComment/<%=post._id%>" method="POST">
     <div class="mb-3">
-        <label for="comment" class="form-label">Comment</label>
-        <input type="text" class="form-control" id="comment" name="comment">
+        <label class="col-form-label-sm" for="comment" class="form-label"></label>
+        <input type="text" class="form-control" id="comment" placeholder="Comment" name="comment">
     </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-outline-dark">Submit</button>
   </form>
 </div>
 
 
 
-    <div class="col-6 mt-5 mb-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
+    <div class="col-6 mt-5 mb-5 landingPage">
+      <a href="/profile"><span>Return to Profile</span></a>
+      <a href="/feed"><span>Return to Feed</span></a>
     </div>
   </div>
 </div>

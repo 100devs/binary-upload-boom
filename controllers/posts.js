@@ -6,7 +6,7 @@ const Wishlist = require("../models/Wishlist");
 
 module.exports = {
   ////////////////////////////////////////////////////////////////////////////////
-  getWishlist: async (req, res) => {
+  /*getWishlist: async (req, res) => {
     try {
       const wishlist = await Wishlist.find({user: req.user});
           
@@ -14,7 +14,7 @@ module.exports = {
     } catch (err) {
       console.log(err);
     }
-  },
+  },*/
   ///////////////////////////////////////////////////////////////////////////////////
 
   getProfile: async (req, res) => {
@@ -91,4 +91,7 @@ module.exports = {
       res.redirect("/profile");
     }
   },
+
+
+
 };

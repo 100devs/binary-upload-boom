@@ -1,11 +1,16 @@
+
+
+
+
+
 body{
     background-color: #FFF;
     color: #000;
 }
-li{
+/*li{
    list-style: none; 
-   color: #ff0000
-}
+   color: yellow;
+}*/
 div .margin{
     margin: 10px 0 10px 0;
 }
@@ -29,3 +34,185 @@ header h1 a{
     text-decoration: none;
     font-size: 50px;
 }
+div .btn .btn-primary{
+    color:#000
+}
+
+/* Landing Page Buttons       ============================================================================*/ 
+/*---------------------------------------------------------------------------------------------------------*/
+.landingPage{
+    position:relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .landingPage a{
+    display: block;
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    font-family: sans-serif;
+    text-decoration: none;
+    color: #333;
+    border: 2px solid #333;
+    letter-spacing: 2px;
+    text-align: center;
+    position: relative;
+    transition: all .35s;
+  }
+  
+ .landingPage a span{
+    position: relative;
+    z-index: 2;
+  }
+  
+  .landingPage a:after{
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: #1aff22;
+    transition: all .35s;
+  }
+  
+  .landingPage a:hover{
+    color: #fff;
+  }
+  
+  .landingPage a:hover:after{
+    width: 100%;
+  }
+
+/*=============================================================================================================
+==== profile ejs / email, username 
+=========================================================================================================*/
+.boxFit{
+  margin-bottom: 50px;
+}
+ 
+
+
+/*---------------------------------------------------------------------------------------------------*/
+/*          Comment Section
+===============================================================================================================*/
+.card {
+    
+  border: none;
+  box-shadow: 5px 6px 6px 2px #e9ecef;
+  border-radius: 4px;
+}
+
+
+.dots{
+
+  height: 4px;
+width: 4px;
+margin-bottom: 2px;
+background-color: #bbb;
+border-radius: 50%;
+display: inline-block;
+}
+
+.badge{
+
+      padding: 7px;
+      padding-right: 9px;
+  padding-left: 16px;
+  box-shadow: 5px 6px 6px 2px #e9ecef;
+}
+
+.user-img{
+
+  margin-top: 4px;
+}
+
+.check-icon{
+
+  font-size: 17px;
+  color: #c3bfbf;
+  top: 1px;
+  position: relative;
+  margin-left: 3px;
+}
+
+.form-check-input{
+  margin-top: 6px;
+  margin-left: -24px !important;
+  cursor: pointer;
+}
+
+
+.form-check-input:focus{
+  box-shadow: none;
+}
+
+
+.icons i{
+
+  margin-left: 8px;
+}
+.reply{
+
+  margin-left: 12px;
+}
+
+.reply small{
+
+  color: #b7b4b4;
+
+}
+
+
+.reply small:hover{
+
+  color: green;
+  cursor: pointer;
+
+}
+small{
+  margin-left: 4px;
+}
+li{
+  list-style: none;
+}
+  
+ /*=========================================================================================*/ 
+/*==========  Added Wishlist Title Span=====================================================*/
+ .block {
+  height: 25vh;
+  width: 25vw;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+#item {
+  font-size: 30px;
+  font-family: 'BioRhyme', serif;
+  width: initial;
+  height: 40px;
+  line-height: 40px;
+}
+
+
+#highlight {
+  display: inline-block;
+  position: absolute;
+  z-index: -1;
+  background-color: #1aff22;
+  height: 40px; 
+  width: 0%;
+  transition: width 0.5s;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+#item:hover #highlight{
+  /* hardcoded */
+  width: 300px; 
+}
+
+/*================================================================================================*/

@@ -17,7 +17,9 @@
       </div>
     </div>
     <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
+      <p><%= post.description %></p>
+      <h2>Fabric:</h2>
+      <p><%= post.fabric %></p>
     </div>
     <div class="mt-5">
       <form action="/comment/createComment/<%=post._id%>" method="POST">

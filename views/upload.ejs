@@ -1,20 +1,19 @@
 <%- include('partials/header') -%>
-      <div class="col-6">
-          <div>
-              <p><strong><%= user.userName %></strong></p>
-              <!-- <p><strong>Email</strong>: <%= user.email %></p> -->
-              <a href="/logout" class="col-3 btn btn-primary">logout</a>
-          </div>
+      <div class="col-6 offset-md-2">
           <div class="mt-5">
             <h2>add a pattern</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
-                  <label for="title" class="form-label">title</label>
+                  <label for="title" class="form-label">pattern name</label>
                   <input type="text" class="form-control" id="title" name="title">
               </div>
               <div class="mb-3">
-                <label for="caption" class="form-label">description</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
+                <label for="description" class="form-label">description</label>
+                <textarea class="form-control" id="description" name="description"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="fabric" class="form-label">fabric</label>
+                <textarea class="form-control" id="fabric" name="fabric"></textarea>
               </div>
               <div class="mb-3">
                 <label for="imgUpload" class="form-label">image</label>
@@ -25,6 +24,11 @@
             <a href="/profile">
               <img class="img-thumbnail" src="/imgs/profile.png" alt="profile" width="100" height="200">
             </a>
+            <p><strong><%= user.userName %></strong></p>
+            <div>
+              <!-- <p><strong>Email</strong>: <%= user.email %></p> -->
+              <a href="/logout" class="col-3 btn btn-primary logoutBtn">logout</a>
+          </div>
           </div>
       </div>
     </div>

@@ -63,5 +63,5 @@ app.use("/comment", commentRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {
-  console.log("Server is running, you better catch it!");
+  console.log("The Server is zipping along!");
 });

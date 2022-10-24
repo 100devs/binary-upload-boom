@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -30,7 +31,9 @@ module.exports = {
       // id is coming from the routes
       // const posts = await Post.find({ user: req.user.id });
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      // use comments model to go to comments collection and find comments that belong to the spacific post
+      const comments = await Comment.find({post:req.params.id}).sort({createdAr:"desc"}).lean();
+      res.render("post.ejs", { post: post, user: req.user, comments:comments });
     } catch (err) {
       console.log(err);
     }

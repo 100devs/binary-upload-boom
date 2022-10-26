@@ -1,0 +1,12 @@
+
+.feed-container {
+    border: 1px solid red;
+}
+
+
+
+.btn-heart {
+    background: orange;
+    border: none;
+    font-size: 0.7em;
+}

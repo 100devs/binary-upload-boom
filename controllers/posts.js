@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -10,6 +11,7 @@ module.exports = {
       console.log(err);
     }
   },
+
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
@@ -18,19 +20,25 @@ module.exports = {
       console.log(err);
     }
   },
+
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      // we're not adding any new fields in the comments because it will automatically grab the two new fields which were created in the Model when it finds the comments associated with a particular post
+      const comments = await Comment.find( { post: req.params.id }).lean();
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });
+      // Because we have updated the Model, it will grab everything from the comments and plonk it in the comments, we dont have to separately add fields here.
     } catch (err) {
       console.log(err);
     }
   },
+
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
+     
       const result = await cloudinary.uploader.upload(req.file.path);
-
+      
       await Post.create({
         title: req.body.title,
         image: result.secure_url,
@@ -45,20 +53,18 @@ module.exports = {
       console.log(err);
     }
   },
+
   likePost: async (req, res) => {
     try {
       await Post.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
-        }
-      );
+        { _id: req.params.id },{ $inc: { likes: 1 }});
       console.log("Likes +1");
       res.redirect(`/post/${req.params.id}`);
     } catch (err) {
       console.log(err);
     }
   },
+
   deletePost: async (req, res) => {
     try {
       // Find post by id
@@ -73,4 +79,10 @@ module.exports = {
       res.redirect("/profile");
     }
   },
+
 };
+ 
+
+  
+ 
+ 

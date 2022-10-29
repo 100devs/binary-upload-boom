@@ -1,0 +1,89 @@
+/* Box Model Hack */
+* {
+    box-sizing: border-box;
+}
+
+/******************************************
+  /* BASE STYLES
+  /*******************************************/
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: "Comic Neue", sans-serif;
+    padding: 10px 0;
+}
+
+/******************************************
+  /* LAYOUT
+  /*******************************************/
+h1 {
+    font-size: 3.5rem;
+}
+
+h2 {
+    font-size: 3.4rem;
+}
+
+h3,
+p {
+    font-size: 3.3rem;
+}
+
+button,
+li,
+a {
+    font-size: 3.25rem;
+}
+
+span {
+    font-size: 2rem;
+}
+
+.form-control {
+    font-size: 2.25rem;
+}
+
+input,
+textarea,
+label {
+    font-size: 2.5rem;
+}
+
+.btn {
+    font-size: 1.5rem;
+}
+
+img {
+    margin-bottom: 10px;
+}
+
+/******************************************
+  /* ADDITIONAL STYLES
+  /*******************************************/
+@media screen and (max-width: 1024px) {
+    body {
+        padding: 5px 0;
+    }
+
+    h1 {
+        font-size: 2.75rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+    }
+
+    h3,
+    p {
+        font-size: 2.25rem;
+    }
+
+    button,
+    li,
+    a {
+        font-size: 1.75rem;
+    }
+}

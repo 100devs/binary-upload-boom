@@ -5,20 +5,12 @@
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
-        <form
-          class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
-          method="POST"
-        >
+        <form class="col-1" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
         <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
+        <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-3">
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
         <%}%>
@@ -26,12 +18,34 @@
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
-    </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
+
+        <h4>Comments</h4>
+
+        <% if (comments.length > 0) { %>
+        <ul>
+          <% for (let comm of comments) { %>
+          <li>
+            <p><small><%= comm.createdAt.toLocaleString() %></small></p>
+            <p>From: <%= comm.user.userName %></p>
+            <p>Message: <%= comm.comment %></p>
+          </li>
+          <% } %>
+        </ul>
+        <% } %>
+
+        <h6>Create comment:</h6>
+
+        <form action="/comment/<%= post.id %>/createComment" method="POST" class="col-3">
+          <textarea name="comment"></textarea>
+          <button class="btn btn-primary" type="submit">Send</button>
+        </form>
+
+      </div>
+      <div class="col-6 mt-5">
+        <a class="btn btn-primary" href="/profile">Return to Profile</a>
+        <a class="btn btn-primary" href="/feed">Return to Feed</a>
+      </div>
     </div>
   </div>
-</div>
 
-<%- include('partials/footer') -%>
+  <%- include('partials/footer') -%>

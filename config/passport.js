@@ -31,19 +31,31 @@ module.exports = function (passport) {
         });
       });
     })
-  );
+    
+    
+    
 
-  passport.serializeUser((user, done) => {
-    done(null, user.id);
-  });
+  )
+    passport.serializeUser((user, done) => {
+      console.log(user)
+      done(null, user.id)
+    })
+    
+    passport.deserializeUser(function(id, done){
+      User.findById(id, function(err, user){
+        if(err) done(err);
+          if(user){
+            done(null, user);
+          } else {
+             GoogleUser.findById(id, function(err, user){
+             if(err) done(err);
+             done(null, user);
+          })
+      }
+   })
+  })
 
-  passport.deserializeUser((id, done) => {
-    User.findById(id, (err, user) => done(err, user));
-  });
-};
 
-
-module.exports = function (passport) {
   passport.use(
     new GoogleStrategy(
       {
@@ -75,12 +87,8 @@ module.exports = function (passport) {
       }
     )
   )
-
-  passport.serializeUser((user, done) => {
-    done(null, user.id)
-  })
-
-  passport.deserializeUser((id, done) => {
-    GoogleUser.findById(id, (err, user) => done(err, user))
-  })
 }
+
+  
+
+ 

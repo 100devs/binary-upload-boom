@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+//schema copiedd from posts and modified
 const CommentSchema = new mongoose.Schema({
   comment: {
     type: String,

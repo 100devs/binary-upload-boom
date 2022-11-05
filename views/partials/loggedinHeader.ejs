@@ -1,0 +1,62 @@
+
+<body class="container mx-auto bg-gradient-to-tl from-green-400  w-full py-2 px-4">
+    <br>
+    <header class="">
+      <div class="2xl:container 2xl:mx-auto">
+        <div class="bg-white dark:bg-gray-800 rounded shadow-lg py-5 px-7">
+          <p class="hidden md:flex flex-auto space-x-2 justify-end  mb-8">Welcome! <span class="ml-2"><strong><%= user.userName %></strong> </span> </p> 
+          <nav class="flex justify-between">
+            <div class="flex items-center space-x-3 lg:pr-16 pr-6">
+              <img class="cursor-pointer dark:bg-white p-1 rounded-full" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/header-1-svg1.svg" alt="circle" />
+              <h2 class="font-normal text-2xl leading-6 text-gray-800 dark:text-white">Vendors</h2>
+            </div>
+  
+            <!-- For medium and plus sized devices -->
+            <!-- <div class="hidden md:flex flex-auto space-x-2 justify-end "><span><strong>User Name</strong>: <%= user.userName %></span></div> -->
+            
+            <ul class="hidden md:flex flex-auto space-x-2 justify-end ">
+              <a href="/logout" class=""> <li onclick="selected()" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white border border-white bg-indigo-600 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 shadow-md rounded">Logout</li></a>
+              <a href="/signup" class=""><li onclick="selected()" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-gray-600 border border-white bg-indigo-300 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 shadow-md rounded"> Signup</li></a>
+            </ul>
+            <!-- CHAT AND NOTIFICATIONS -->
+            <!-- <div class="flex space-x-5 justify-center items-center pl-2">
+              <div class="relative dark:bg-white rounded cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800">
+                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/header-1-svg2.svg" alt="chat" />
+                <div class="animate-ping w-1.5 h-1.5 bg-indigo-700 rounded-full absolute -top-1 -right-1 m-auto duration-200"></div>
+                <div class="w-1.5 h-1.5 bg-indigo-700 rounded-full absolute -top-1 -right-1 m-auto shadow-lg"></div>
+              </div>
+  
+              <img class="cursor-pointer dark:bg-white rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/header-1-svg3.svg" alt="bell" />
+            </div> -->
+  
+  
+            <!-- for smaller devcies -->
+  
+          <div class="relative block md:hidden w-full ">
+            <div onclick="selectNew()" class="cursor-pointer px-4  text-white  rounded flex justify-end items-center w-full">
+              <div class="flex space-x-2 ">
+                
+                <a id="textClicked" href="/logout" class=" focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white bg-indigo-600 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 w-full shadow-md rounded"> Login</a>
+              </div>
+             
+            </div>
+            <div onclick="selectNew()" class="cursor-pointer px-4  text-white  rounded flex justify-end items-center w-full">
+              
+              <div class="flex space-x-2 ">
+                <a id="textClicked" href="/signup" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-gray-600 bg-indigo-50 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3  w-full shadow-md rounded"> Signup</a>
+              </div>
+              
+            </div>
+           
+          </div>
+          </nav>
+          
+        </div>
+      </div>
+       
+    
+
+    </header>
+
+    <br>
+    

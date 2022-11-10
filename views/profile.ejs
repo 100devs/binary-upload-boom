@@ -28,13 +28,14 @@
       </div>
       <div class="col-6">
         <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
+        <% posts.forEach(element => { %>
           <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
+            <a href="/post/<%=element._id%>">
+              <p><%= element.title %></p>
             </a>
+            <img class="img-fluid" src="<%= element.image%>">
           </li>
-        <% } %>
+        <% }) %>
         </ul>
         <div class="row justify-content-center mt-5">
           <a class="btn btn-primary" href="/feed">Return to Feed</a>

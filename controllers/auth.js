@@ -1,6 +1,7 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
+// const googleUser = require('../models/GoogleUser')
 
 exports.getLogin = (req, res) => {
   if (req.user) {
@@ -26,7 +27,7 @@ exports.postLogin = (req, res, next) => {
     gmail_remove_dots: false,
   });
 
-  passport.authenticate("local", (err, user, info) => {
+  passport.authenticate(["local", "google"], (err, user, info) => {
     if (err) {
       return next(err);
     }
@@ -42,6 +43,7 @@ exports.postLogin = (req, res, next) => {
       res.redirect(req.session.returnTo || "/profile");
     });
   })(req, res, next);
+  
 };
 
 exports.logout = (req, res) => {

@@ -1,9 +1,9 @@
 document.querySelector('#getButton').addEventListener('click', langRequest)
 
 async function langRequest() {
-    const langName = document.querySelector('input').value
+    const languageName = document.querySelector('input').value
     try {
-        const res = await fetch(`https://${langName}`)
+        const res = await fetch(`https://g-lang-api.herokuapp.com/api/${languageName}`)
         const data = await res.json()
         console.log(data)
 
@@ -11,3 +11,4 @@ async function langRequest() {
         console.log(error)
     }
 } 
+// does it matter that the const doesn't match the model?

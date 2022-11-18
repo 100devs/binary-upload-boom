@@ -1,6 +1,6 @@
 <%- include('partials/header') -%>
 <div class="mt-5">
-    <form action="/langChoice/createTable" method='POST'>
+    <form>
       <div class="row justify-content-around">
         <input type="checkbox" name='languages' value="mandarin"> Mandarin
         <input type="checkbox" name='languages'value="cantonese"> Cantonese
@@ -11,7 +11,23 @@
         <input type="submit" class="col-2 btn btn-primary" id="#getButton">
       </div>
   </form>
-  </div>
+  <table>
+    <tr>
+       <th>IPA</th><th>Symbols</th><th>Examples</th>
+    </tr>
+ 
+    <% for (var i = 0; i < language.length; i++) { %>
+     <tr>
+       <td><%= language[i].IPA %></td>
+       <td><%= language[i].Symbols %></td>
+       <td><%= language[i].Examples %></td>
+     </tr>    
+    <% } %>
+ </table>
+</div>
+
+
+
   
   <script type="text/javascript" src="js/main.js"></script>
 <%- include('partials/footer') -%>

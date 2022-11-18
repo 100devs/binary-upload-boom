@@ -5,16 +5,13 @@ module.exports = {
     res.render("langChoice.ejs");
   },
   createTable: async (req, res) => {
-    try {
-      await Language.create({
-        comment: req.body.comment,
-        likes: 0,
-        post: req.params.id,
-      });
-      console.log("LangComp has been added!");
-      res.redirect("/post/"+req.params.id);
-    } catch (err) {
-      console.log(err);
-    }
-  },
+        try {
+          const post = await Post.findById(req.params.id);
+          const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+          res.render("post.ejs", { post: post, user: req.user, comments: comments});
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    
 };

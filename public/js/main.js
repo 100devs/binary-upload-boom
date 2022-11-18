@@ -6,6 +6,7 @@ async function langRequest() {
         const res = await fetch(`https://g-lang-api.herokuapp.com/api/${languageName}`)
         const data = await res.json()
         console.log(data)
+        data.render('langTable.ejs')
 
     } catch(error) {
         console.log(error)

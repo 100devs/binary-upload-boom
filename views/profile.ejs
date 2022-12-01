@@ -1,6 +1,6 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
+<div class="container ">
+  <div class="row mt-5 text-yellow-400">
       <div class="col-6">
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
@@ -8,7 +8,7 @@
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
           <div class="mt-5">
-            <h2>Add a post</h2>
+            <h2 class="text-yellow-400">Add a post</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
                   <label for="title" class="form-label">Title</label>

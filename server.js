@@ -7,7 +7,7 @@ const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
-const methodOverride = require("method-override");
+const methodOverride = require("method-override"); // overrides post methods
 const flash = require("express-flash");
 const logger = require("morgan");
 

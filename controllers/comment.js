@@ -17,4 +17,21 @@ module.exports = {
       console.log(err);
     }
   },
+  likeComment: async (req, res) => {
+    try{
+      const comment = await Comment.findById(req.params.id);
+      await comment.updateOne(
+        // { _id: req.params.id},
+        { $inc: { likes: 1} }
+      );
+      console.log(`comment id: ${req.params.id} has been liked ! ${comment.likes + 1}`);
+
+
+      res.redirect('/post/' + comment.post)
+
+    }catch(error){
+      console.log(err);
+    }
+  },
+
 };

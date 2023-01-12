@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Binary Upload Boom</title>
-    <!-- <link
+    <title>Marketing Network</title>
+    <link
       rel="icon"
       type="image/png"
       sizes="32x32"
@@ -22,15 +22,71 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
       integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
       crossorigin="anonymous"
-    /> -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    
   </head>
   <body>
-    <header class="container text-yellow-400">
-      <div class="text-center">
-        <h1 class=""><a href="/profile">Binary Upload Boom</a></h1>
-        <span>The #100Devs Social Network</span>
-      </div>
+    <header class="shadow fixed-top"
+    style="
+    background-color:white;
+    "
+    >
+      
+      <navbar class="navbar justify-content-around">
+        <h1 class=""><a href="/feed" 
+        style=
+        "font-family: 'Anton';
+          text-decoration: none;
+          color: black;
+          "
+          >Inspire</a></h1>
+
+        <span class="text-dark" 
+        style=
+        "font-family: 'Anton';
+        font-size: large;
+        "
+        >Digital Marketing Network</span>
+
+        <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#reg-modal">
+          <img src="/imgs/plus.svg" alt="" width="50" height="50">
+        </button>
+
+        
+      </navbar>
+      
     </header>
+
+    <!-- Modal itself -->
+    <div class="modal fade" id="reg-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-title">Add a post</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="">
+              <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+                <div class="mb-3">
+                    <label for="title" class="form-label text-dark">Title</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <div class="mb-3">
+                  <label for="caption" class="form-label text-dark">Caption</label>
+                  <textarea class="form-control" id="caption" name="caption"></textarea>
+                </div>
+                <button type="submit" class="btn btn-outline-dark btn-lg shadow" value="Upload">Submit</button>
+              </form>
+            </div>
+        </div>
+            
+          </div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>

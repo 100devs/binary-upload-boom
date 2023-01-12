@@ -1,6 +1,10 @@
 <%- include('partials/header') -%>
 
-<main class="container">
+<main class="container bg-gradient"
+style="
+background-color: black;
+height: 100vh;
+">
   <div class="row justify-content-center">
     <section class="col-6 mt-5">
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
@@ -9,9 +13,9 @@
       messages.info.forEach( el => { %>
       <div class="alert alert-info"><%= el.msg %></div>
       <% }) %> <% } %>
-      <form action="/login" method="POST">
+      <form class="mt-5" action="/login" method="POST">
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
+          <label for="exampleInputEmail1" class="form-label text-light"
             >Email address</label
           >
           <input
@@ -23,7 +27,7 @@
           />
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <label for="exampleInputPassword1" class="form-label text-light">Password</label>
           <input
             type="password"
             class="form-control"
@@ -31,7 +35,7 @@
             name="password"
           />
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-outline-light bg">Submit</button>
       </form>
     </section>
   </div>

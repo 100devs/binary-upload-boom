@@ -1,7 +1,7 @@
 {
-  "name": "binary-upload-boom",
+  "name": "fullstack-template",
   "version": "1.0.0",
-  "description": "100Devs Social Network",
+  "description": "Starter template for future fullstack projects",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",

@@ -1,5 +1,5 @@
 const Post = require("../models/Post");
-const Comment = require("../models/Comment")
+const Comment = require("../models/Comment");
 
 module.exports = {
   createComment: async (req, res) => {
@@ -13,7 +13,7 @@ module.exports = {
         userName: req.user.userName,
       });
       console.log("Comment has been added!");
-      res.redirect("/post/"+req.params.id);
+      res.redirect("/post/" + req.params.id);
     } catch (err) {
       console.log(err);
     }
@@ -27,7 +27,7 @@ module.exports = {
         }
       );
       console.log("Likes +1");
-      res.redirect("/post/"+req.params.postId);
+      res.redirect("/post/" + req.params.postId);
     } catch (err) {
       console.log(err);
     }
@@ -37,9 +37,9 @@ module.exports = {
       // Delete comment from db
       await Comment.deleteOne({ _id: req.params.commentId });
       console.log("Deleted Comment");
-      res.redirect("/post/"+req.params.postId);
+      res.redirect("/post/" + req.params.postId);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   },
 };

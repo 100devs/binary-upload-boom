@@ -39,12 +39,12 @@ app.use(methodOverride("_method"));
 
 // Setup Sessions - stored in MongoDB
 app.use(
-    session({
-        secret: "keyboard cat",
-        resave: false,
-        saveUninitialized: false,
-        store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    })
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  })
 );
 
 // Passport middleware
@@ -61,8 +61,8 @@ app.use("/comment", commentRoutes);
 
 // Set up server to listen
 app.listen(process.env.PORT, () => {
-    console.log(`Server running on port ${process.env.PORT}`);
-    console.log(`
+  console.log(`Server running on port ${process.env.PORT}`);
+  console.log(`
     You can now view JSON responses in the browser.
 
       Local:            http://localhost:${process.env.PORT}

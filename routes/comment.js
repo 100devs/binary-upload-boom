@@ -8,6 +8,9 @@ router.post("/createComment/:id", commentController.createComment);
 
 router.put("/likeComment/:postId/:commentId", commentController.likeComment);
 
-router.delete("/deleteComment/:postId/:commentId", commentController.deleteComment);
+router.delete(
+  "/deleteComment/:postId/:commentId",
+  commentController.deleteComment
+);
 
 module.exports = router;

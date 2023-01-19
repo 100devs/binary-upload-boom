@@ -3,3 +3,4 @@ node_modules
 .vscode
 notes
 views/partials/comment-old.ejs
+.DS_Store

@@ -26,6 +26,14 @@
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
+      <% comments.forEach(comments => { %>
+        <p><%= comments.userName%>: <%= comments.comment %></p>
+
+      <% }) %>
+
+      <form action="addComment/<%= post.id %>" method="POST">
+        <input type="text" name="comment">
+      </form>
     </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>

@@ -21,7 +21,7 @@ module.exports = {
   },
   deleteComment: async (req, res) => {
     try {
-      // Find comment by id
+      // Find comment by id not needed
       //let comment = await Comment.findById({ _id: req.params.id });
       // Delete comment from db
       //await Comment.remove({ _id: req.params.id });

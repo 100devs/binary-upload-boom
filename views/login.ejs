@@ -5,6 +5,7 @@
     <section class="col-6 mt-5">
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
       <div class="alert alert-danger"><%= el.msg %></div>
+      <!-- If there are flash errors, display them to the user. -->
       <% }) %> <% } %> <% if (locals.messages.info) { %> <%
       messages.info.forEach( el => { %>
       <div class="alert alert-info"><%= el.msg %></div>
@@ -36,5 +37,6 @@
     </section>
   </div>
 </main>
+ <!-- Login form using email and password alongside a submit button. -->
 
 <%- include('partials/footer') -%>

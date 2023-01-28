@@ -3,12 +3,15 @@
 <main class="container">
   <div class="row justify-content-center">
     <section class="col-6 mt-5">
+      <!-- if there are flash errors, display them to the user -->
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
       <div class="alert alert-danger"><%= el.msg %></div>
       <% }) %> <% } %> <% if (locals.messages.info) { %> <%
       messages.info.forEach( el => { %>
       <div class="alert alert-info"><%= el.msg %></div>
       <% }) %> <% } %>
+
+      <!-- form for logging in, inout for email and password -->
       <form action="/login" method="POST">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label"
@@ -31,6 +34,8 @@
             name="password"
           />
         </div>
+        
+        <!-- submit button -->
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </section>

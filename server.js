@@ -1,13 +1,20 @@
+// using express
 const express = require("express");
 const app = express();
+//manages DB
 const mongoose = require("mongoose");
+// authentication
 const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const methodOverride = require("method-override");
+// shows log in errors
 const flash = require("express-flash");
+// console logs the request
 const logger = require("morgan");
+// points to our DB config files
 const connectDB = require("./config/database");
+// our routes
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
 

@@ -1,5 +1,7 @@
+// using mongoose
 const mongoose = require("mongoose");
 
+// schema- tells us the blueprint of the DB
 const PostSchema = new mongoose.Schema({
   title: {
     type: String,

@@ -5,7 +5,7 @@ const Comment = require("../models/Comment");
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id });
+      const posts = await Post.find({ user: req.user.id }); //heads up that this is why I keep seeing posts in the ejs, we put it in a const, i was thinking it new posts from Post model, but really, we just set that here 
       res.render("profile.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
@@ -21,7 +21,8 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
+      const post = await Post.findById(req.params.id);//Post is the name we gave the model for each post, then mongoose created a collection called Posts so Post is one of the posts in Posts 
+      //below use comments model to go to comments collection and find all of the comments that have a post property of the current post we are actually on 
       const comments = await Comment.find({ post: req.params.id }).sort({ createdAt: "asc" }).lean();
       res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
@@ -31,18 +32,18 @@ module.exports = {
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
+      const result = await cloudinary.uploader.upload(req.file.path); //rascal said this is the filepath to the file in this case image, in your temp directory where multer saved it - in the request
 
-      await Post.create({
+      await Post.create({  //Post is the mongoose model, the Post model is building the new document with the schema
         title: req.body.title,
-        image: result.secure_url,
-        cloudinaryId: result.public_id,
+        image: result.secure_url, //from cloudinary above
+        cloudinaryId: result.public_id, //from cloudinary above
         caption: req.body.caption,
-        likes: 0,
+        likes: 0, //set likes to 0 as default to start
         user: req.user.id,
       });
       console.log("Post has been added!");
-      res.redirect("/profile");
+      res.redirect("/profile"); //redirecting to the profile ROUTE which is a GET request on the mainRoutes/profile in server.js and we need to follow that get request on that route all the way through too.
     } catch (err) {
       console.log(err);
     }

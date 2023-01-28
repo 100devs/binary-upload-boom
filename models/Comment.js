@@ -9,7 +9,7 @@ const CommentSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  post: {
+  post: { //what post does this comment come from
     type: mongoose.Schema.Types.ObjectId,
     ref: "Post",
   },
@@ -27,4 +27,4 @@ const CommentSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Comment", CommentSchema);
+module.exports = mongoose.model("Comment", CommentSchema); //this is where your mongoDB collection names come from, your model. We call this Comment, and mongoose/mongoDb then pluralizes it and creates a collection name Comments

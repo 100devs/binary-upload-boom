@@ -6,10 +6,10 @@ const PostSchema = new mongoose.Schema({
     required: true,
   },
   image: {
-    type: String,
+    type: String, //will be the cloudinary url
     require: true,
   },
-  cloudinaryId: {
+  cloudinaryId: { //we're going to need this when we want to delete any post
     type: String,
     require: true,
   },
@@ -23,7 +23,7 @@ const PostSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "User", //this is referencing the User MODEL, it's pulling in the user id from the user schema 
   },
   createdAt: {
     type: Date,
@@ -31,4 +31,4 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Post", PostSchema); //by default the Post model specifices that we will be talking to the Posts collection, the model is the construction worker that builds the Post and it uses the blueprint of the PostSchema, mongoose decides to make the place WHERE we build the document, which is the plural of whatever we call the model, so here it would be posts, then mongoose and mongodb create a collection in the db called posts.

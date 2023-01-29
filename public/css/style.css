@@ -1,0 +1,12 @@
+.comment-likes {
+    width: 300px;
+    height: auto;
+    display: flex;
+    justify-content: left;
+    
+}
+
+.comments {
+    list-style: none;
+    margin: 20px 0;
+}

@@ -1,23 +1,16 @@
-// using express
 const express = require("express");
 const app = express();
-//manages DB
 const mongoose = require("mongoose");
-// authentication
 const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
-// allows us to override the default form method in the EJS
 const methodOverride = require("method-override");
-// shows log in errors
 const flash = require("express-flash");
-// console logs the request
 const logger = require("morgan");
-// points to our DB config files
 const connectDB = require("./config/database");
-// our routes
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
+const commentRoutes = require("./routes/comment");
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -64,6 +57,7 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
+app.use("/comment", commentRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {

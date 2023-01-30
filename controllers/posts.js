@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -15,7 +16,8 @@ module.exports = {
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-       // Tells the model to grab all posts from the database. An array of objects is created due to the lean and they are sorted in descendings order based on date/time.
+       // Tells the model to grab all posts from the database. An array of objects is created and they are sorted in descendings order based on date/time.
+       //Lean is mongoose and states give me the object and take the extra document stuff away. This improves speed.
       res.render("feed.ejs", { posts: posts });
       // Tells the feed.ejs to render the posts.
     } catch (err) {
@@ -26,8 +28,9 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
+      const comment = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
       // Finding the post by the post ID which comes from the get request route.
-      res.render("post.ejs", { post: post, user: req.user });
+      res.render("post.ejs", { post: post, user: req.user, comment: comment, });
       // Sends the information to the post.ejs view which will render it. Req.user is the current session and relates to cookies stored in the database.
     } catch (err) {
       console.log(err);
@@ -37,11 +40,13 @@ module.exports = {
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
+      // We need cloudinary to respond with the URL
 
       await Post.create({
         title: req.body.title,
         image: result.secure_url,
         cloudinaryId: result.public_id,
+        // We may need the ID to delete it. 
         caption: req.body.caption,
         likes: 0,
         user: req.user.id,
@@ -70,11 +75,11 @@ module.exports = {
   },
   deletePost: async (req, res) => {
     try {
-      // Find post by id
+      // Find post by id and make sure it exists.
       let post = await Post.findById({ _id: req.params.id });
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);
-      // Delete post from db
+      // Delete post from db 
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
       res.redirect("/profile");

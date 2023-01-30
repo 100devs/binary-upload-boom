@@ -14,7 +14,7 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      // uses the model to grab all posts in the DB and sorts in descending order according to creation date. .lean() returns a JS object instead of mongoose documents
+      // uses the model to grab all posts in the DB and sorts in descending order according to creation date. .lean() returns a JS object instead of the whole mongoose document
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
       //tells the view to render the above posts in the EJS
       res.render("feed.ejs", { posts: posts });

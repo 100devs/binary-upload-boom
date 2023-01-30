@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+// multer helps handle our images
 const upload = require("../middleware/multer");
 const postsController = require("../controllers/posts");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");

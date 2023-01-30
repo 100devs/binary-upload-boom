@@ -9,6 +9,7 @@
       <div class="row justify-content-between">
 
         <!-- like button -->
+        <!-- Cannot natively do put and delete requests, therefore we are using a form rather than an event listener, means that it will work even if our client's browser does not support the fetch API -->
         <form
           class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"

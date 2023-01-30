@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
+// allows us to override the default form method in the EJS
 const methodOverride = require("method-override");
 // shows log in errors
 const flash = require("express-flash");

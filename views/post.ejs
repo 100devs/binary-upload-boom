@@ -12,6 +12,13 @@
         >
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
+        <form
+          class="col-1"
+          action="/recipe/favoritePost/<%= post.id %>"
+          method="POST"
+        >
+          <button class="btn btn-primary fa fa-star" type="submit"></button>
+        </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
         <%if(post.user == user.id){ %>
         <form

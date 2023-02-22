@@ -1,12 +1,29 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
+const Favorite = require("../models/Favorite");
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.user.id });
       res.render("profile.ejs", { posts: posts, user: req.user });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  getFavorites: async (req, res) => { 
+    console.log(req.user)
+    try {
+      //Since we have a session each request (req) contains the logged-in users info: req.user
+      //console.log(req.user) to see everything
+      //Grabbing just the posts of the logged-in user
+      const posts = await Favorite.find({ user: req.user.id });
+      populate('post');
+
+      console.log(posts)
+      //Sending post data from mongodb and user data to ejs template
+      res.render("favorite.ejs", { posts: posts.post, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -22,7 +39,7 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" });
       res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
@@ -56,6 +73,18 @@ module.exports = {
         }
       );
       console.log("Likes +1");
+      res.redirect(`/post/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  favoritePost: async (req, res) => {
+    try {
+      await Favorite.create({
+        user: req.user.id,
+        post: req.params.id,
+      });
+      console.log("Favorite has been added!");
       res.redirect(`/post/${req.params.id}`);
     } catch (err) {
       console.log(err);

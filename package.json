@@ -1,7 +1,7 @@
 {
-  "name": "binary-upload-boom",
+  "name": "anigram",
   "version": "1.0.0",
-  "description": "100Devs Social Network",
+  "description": "The #1 Social Network For Anime Fans.",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",

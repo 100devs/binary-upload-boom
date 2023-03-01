@@ -4,6 +4,7 @@ const Post = require("../models/Post");
 module.exports = {
   getProfile: async (req, res) => {
     try {
+      // grab all posts by the logged in user
       const posts = await Post.find({ user: req.user.id });
       res.render("profile.ejs", { posts: posts, user: req.user });
     } catch (err) {
@@ -12,6 +13,7 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
+      // grab all posts & sort by createdAt then return normal JS object
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
       res.render("feed.ejs", { posts: posts });
     } catch (err) {

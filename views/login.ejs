@@ -3,6 +3,7 @@
 <main class="container">
   <div class="row justify-content-center">
     <section class="col-6 mt-5">
+      <!-- locals comes from res.locals -->
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
       <div class="alert alert-danger"><%= el.msg %></div>
       <% }) %> <% } %> <% if (locals.messages.info) { %> <%
@@ -11,9 +12,9 @@
       <% }) %> <% } %>
       <form action="/login" method="POST">
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
+          <label for="exampleInputEmail1" class="form-label"></label>
+            Email address
+          </label>
           <input
             type="email"
             class="form-control"

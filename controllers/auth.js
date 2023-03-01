@@ -1,8 +1,10 @@
 const passport = require("passport");
+// validator is a string validation package
 const validator = require("validator");
 const User = require("../models/User");
 
 exports.getLogin = (req, res) => {
+  // passport puts a user object on the request object, objects in boolean are true
   if (req.user) {
     return res.redirect("/profile");
   }
@@ -17,8 +19,10 @@ exports.postLogin = (req, res, next) => {
     validationErrors.push({ msg: "Please enter a valid email address." });
   if (validator.isEmpty(req.body.password))
     validationErrors.push({ msg: "Password cannot be blank." });
-
+  // errors >= 1 trigger if
   if (validationErrors.length) {
+    // sends the array of errors to flash
+    // flash will display all of them
     req.flash("errors", validationErrors);
     return res.redirect("/login");
   }
@@ -46,8 +50,8 @@ exports.postLogin = (req, res, next) => {
 
 exports.logout = (req, res) => {
   req.logout(() => {
-    console.log('User has logged out.')
-  })
+    console.log("User has logged out.");
+  });
   req.session.destroy((err) => {
     if (err)
       console.log("Error : Failed to destroy the session during logout.", err);

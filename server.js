@@ -15,6 +15,8 @@ const postRoutes = require("./routes/posts");
 require("dotenv").config({ path: "./config/.env" });
 
 // Passport config
+// passport library returns a single object called passport, we pass that in here
+// to use passport methods on that object
 require("./config/passport")(passport);
 
 //Connect To Database
@@ -37,8 +39,10 @@ app.use(logger("dev"));
 app.use(methodOverride("_method"));
 
 // Setup Sessions - stored in MongoDB
+// session creates a req.session property
 app.use(
   session({
+    // secret ran against encryption
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: false,
@@ -51,6 +55,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Use flash messages for errors, info, ect...
+// places a flash method on the request object
 app.use(flash());
 
 //Setup Routes For Which The Server Is Listening

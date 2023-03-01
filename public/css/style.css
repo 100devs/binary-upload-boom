@@ -1,0 +1,14 @@
+.comment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  list-style-type: none;
+}
+
+.comment-container li {
+  border: 2px solid #888;
+}
+
+.comment-container li:last-child {
+  border: unset;
+}

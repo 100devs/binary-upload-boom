@@ -27,6 +27,21 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <ul class="comment-container">
+      <%for(let i=0; i< comments.length; i++) {%>
+      <li>
+        <%= commentUsers.find((user)=> String(user._id) ===
+        String(comments[i].user))?.userName%>: <%= comments[i].comment%>
+      </li>
+      <%}%>
+      <li>
+        <form action="/post/comment/<%= post.id %>" method="post">
+          <label for="new-comment-input">Comment</label>
+          <input type="text" name="newComment" id="new-comment-input" />
+          <button type="submit">Add</button>
+        </form>
+      </li>
+    </ul>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

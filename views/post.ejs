@@ -42,17 +42,19 @@
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
           <%= comments[i].createdByUsername%> says: "<%= comments[i].comment%>"
-        </li>
 
-        <%if(comments[i].createdById == user.id){ %>
+          <%if (comments[i].createdById == user.id){ %>
           <form
-            action="/comment/deleteComment/<%= post.id %>?_method=DELETE"
+            action="/comment/deleteComment/<%= post.id %>/<%= comments[i]._id %>?_method=DELETE"
             method="POST"
-            class="col-3"
+           
           >
-            <button class="btn btn-primary fa fa-trash" type="submit"></button>
+            <button class="btn btn-outline-danger" type="submit">Delete</button>
           </form>
           <%}%>
+        </li>
+
+        
       <% } %>
     </ul>
     

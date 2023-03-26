@@ -1,0 +1,8 @@
+/* PLaying around with styling */
+#butLog {
+    background-color: red;
+    border: none;
+}
+    #butLog:hover {
+        background-color: blue;
+    }

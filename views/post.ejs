@@ -21,12 +21,24 @@
         >
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
+        <div class="mt-5">
+          <h2>Add a comment</h2>
+          <form action="/post/commentPost/<%= post.id %>" method="POST">
+            <div class="mb-3">
+                <label for="title" class="form-label">Comment</label>
+                <input type="text" class="form-control" id="title" name="caption">
+            <button type="submit" class="btn btn-primary" value="Comment">Submit</button>
+          </form>
+        </div>
         <%}%>
       </div>
-    </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
-    </div>
+      <ul class="row list-unstyled">
+        <% for(var i=0; i<comments.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <%= comments[i].caption%>
+          </li>
+        <% } %>
+        </ul>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

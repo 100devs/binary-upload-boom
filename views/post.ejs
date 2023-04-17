@@ -27,6 +27,25 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <div class="mt-5">
+      <h2>Add a Comment</h2>
+      <form action="/comment/createComment/<%=post._id%>" method="POST">
+
+        <div class="mb-3">
+          <label for="comment" class="form-labe">Comment Below</label>
+          <input type="text" name="comment" id="comment">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <ul class="list-unstyled">
+      <% for (let i = 0; i < comment.length; i++) {%>
+        <li>
+          <%= comment[i].comment%>
+        </li>
+        <% } %>
+    </ul>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

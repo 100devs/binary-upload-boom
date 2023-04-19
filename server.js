@@ -1,28 +1,16 @@
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
-const passport = require("passport");
-const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
-const methodOverride = require("method-override");
-const flash = require("express-flash");
-const logger = require("morgan");
+const cors = require('cors')
 const connectDB = require("./config/database");
-const mainRoutes = require("./routes/main");
-const postRoutes = require("./routes/posts");
-const commentRoutes = require("./routes/comments")
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
 
-// Passport config
-require("./config/passport")(passport);
-
 //Connect To Database
-connectDB();
+const db = connectDB();
 
-//Using EJS for views
-app.set("view engine", "ejs");
+// Cors
+app.use(cors())
 
 //Static Folder
 app.use(express.static("public"));
@@ -31,33 +19,21 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//Logging
-app.use(logger("dev"));
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+});
 
-//Use forms for put / delete
-app.use(methodOverride("_method"));
-
-// Setup Sessions - stored in MongoDB. Allows users to stay logged in even if the browser is closed
-app.use(
-  session({
-    secret: "keyboard cat",
-    resave: false,
-    saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  })
-);
-
-// Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
-
-//Use flash messages for errors, info, ect...
-app.use(flash());
-
-//Setup Routes For Which The Server Is Listening
-app.use("/", mainRoutes);
-app.use("/post", postRoutes);
-app.use('/comment', commentRoutes)
+app.get('/api/:playerName', (request, response) => {
+  const infoCollection = db.collection('player-info')
+  const playerName = request.params.playerName.toLowerCase()
+  
+  infoCollection.findOne({name: playerName})
+    .then(result => {
+      console.log(result)
+      response.json(result)
+    })
+    .catch(error => console.error(error))
+})
 
 //Server Running
 app.listen(process.env.PORT, () => {

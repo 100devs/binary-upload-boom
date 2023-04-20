@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comments = require("../models/Comments");//import comments schema
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -73,4 +74,18 @@ module.exports = {
       res.redirect("/profile");
     }
   },
+  addComment: async (req, res) => {
+    try {
+      await Comments.create({
+        comment: req.body.comment,
+        user: req.user.id,
+      })
+  
+      console.log("Comment has been added!");
+      res.redirect("/post/${req.params.id}");
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
 };

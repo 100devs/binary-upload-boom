@@ -22,6 +22,7 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
+
       res.render("post.ejs", { post: post, user: req.user });
     } catch (err) {
       console.log(err);
@@ -75,14 +76,16 @@ module.exports = {
     }
   },
   addComment: async (req, res) => {
+    console.log(req.params.id);
     try {
+      
       await Comments.create({
         comment: req.body.comment,
-        user: req.user.id,
+        postID: req.params.id,
       })
   
       console.log("Comment has been added!");
-      res.redirect("/post/${req.params.id}");
+      res.redirect(`/post/${req.params.id}`);
     } catch (err) {
       console.log(err);
     }

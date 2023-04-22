@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const PostSchema = new mongoose.Schema({
+const CommentsSchema = new mongoose.Schema({
   comment: {
     type: String,
     required: true,
@@ -9,9 +9,9 @@ const PostSchema = new mongoose.Schema({
 //     type: Number,
 //     required: true,
 //   },
-  user: {
+  postID: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "PostID",
   },
   createdAt: {
     type: Date,

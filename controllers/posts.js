@@ -22,8 +22,8 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comments.find({postID: req.params.id});
+      res.render("post.ejs", { post: post, comments: comments, user: req.user });
     } catch (err) {
       console.log(err);
     }

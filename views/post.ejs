@@ -23,10 +23,29 @@
         </form>
         <%}%>
       </div>
+
+      
+      <form action="/comment/createComment/<%=post._id%>" method="POST">
+        <div class="mb-3">
+            <label for="comment" class="form-label">Add a comment</label>
+            <input type="text" class="form-control" id="comment" name="comment">
+            <button class="btn btn-primary" >Submit comment</button>
+        </div>
+      </form>
+
+   
+
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+
+    <ul>
+      <%- include('partials/comments') -%>
+    </ul>
+
+        
+
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

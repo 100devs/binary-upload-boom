@@ -5,19 +5,11 @@ const CommentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  likes: {
-    type: Number,
-    required: true,
-  },
-  dislikes: {
-    type: Number,
-    required:true,
-  },
-  user: {
+  createdById: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  post: {
+  postId: {
     type: mongoose.Schema.Types.ObjectId,
     ref:"Post",
   },
@@ -27,4 +19,4 @@ const CommentSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Comment", CommentSchema); 
+module.exports = mongoose.model("Comments", CommentSchema); 

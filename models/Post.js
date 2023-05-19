@@ -29,6 +29,10 @@ const PostSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  // comments: [{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref:"Comments",
+  // }]
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Post", PostSchema); //post is the collection and mongodb will pluralize it

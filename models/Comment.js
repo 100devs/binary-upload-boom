@@ -17,6 +17,10 @@ const CommentSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  likes: {
+    type: Number,
+    required:true,
+  }
 });
 
 module.exports = mongoose.model("Comments", CommentSchema); 

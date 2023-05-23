@@ -30,9 +30,18 @@
     <h2>Comments:</h2>
     <ul class="list-unstyled">
       <% for (let i = 0; i < comments.length; i++) {%>
-        <%= console.log(comments[i]) %>
         <li class="col-6 justify-content-between mt-5">
           <%=user.userName%>: <%=comments[i].comment%>
+          <div>
+            <span class="comment--likes"><%= comments[i].likes %></span>
+            <form
+            class="col-1 comment--like--icon"
+            action="/comment/likeComment/<%= post.id %>/<%= comments[i].id %>?_method=PUT"
+            method="POST"
+          >
+            <button class="btn btn-primary fa-solid fa fa-thumbs-up" type="submit"></button>
+          </form>
+          </div>
         </li>
         <% } %>
     </ul>

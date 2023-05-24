@@ -29,6 +29,20 @@ module.exports = {
     } catch (error) {
       console.log(error)
     }
+  },
+  dislikeComment: async (req,res) => {
+    try {
+      await Comment.findOneAndUpdate(
+        { _id: req.params.commentId },
+        {
+          $inc: { likes: -1 },
+        }
+      )
+      console.log('Likes -1')
+      res.redirect(`/post/${req.params.postId}`)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 }

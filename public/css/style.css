@@ -2,6 +2,13 @@
   display: inline-block;
 }
 
-.comment--likes {
+.comment--dislike--icon {
+  display: inline;
+}
+.comment--likes--positive {
   color: green;
+}
+
+.comment--likes--negative {
+  color: red;
 }

@@ -31,4 +31,4 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Post", PostSchema); //Post is the model, posts it he collection (automatically set by mongoose). Or a third argument can specify the collection name

@@ -48,9 +48,9 @@ module.exports = {
   likePost: async (req, res) => {
     try {
       await Post.findOneAndUpdate(
-        { _id: req.params.id },
+        { _id: req.params.id }, //finds post that has the id in the URL
         {
-          $inc: { likes: 1 },
+          $inc: { likes: 1 }, //Increment the likes property by 1
         }
       );
       console.log("Likes +1");

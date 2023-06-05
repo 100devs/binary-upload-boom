@@ -17,7 +17,7 @@ const CommentSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  likes: {
+  commentLikes: {
     type: Number,
     required:true,
   }

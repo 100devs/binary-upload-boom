@@ -7,7 +7,7 @@ module.exports = {
         comment: req.body.comments,
         createdById: req.user.id,
         postId:req.params.id,
-        likes:0,
+        commentLikes:0,
       });
       console.log("Comment has been added!");
       res.redirect(`/post/${req.params.id}`);
@@ -21,7 +21,7 @@ module.exports = {
       await Comment.findOneAndUpdate(
         { _id: req.params.commentId },
         {
-          $inc: { likes: 1 },
+          $inc: { commentLikes: 1 },
         }
       );
       console.log("Likes +1");
@@ -35,7 +35,7 @@ module.exports = {
       await Comment.findOneAndUpdate(
         { _id: req.params.commentId },
         {
-          $inc: { likes: -1 },
+          $inc: { commentLikes: -1 },
         }
       )
       console.log('Likes -1')

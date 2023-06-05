@@ -28,12 +28,12 @@
       <p><%= post.caption %></p>
     </div>
     <h2>Comments:</h2>
-    <ul class="list-unstyled">
+    <ul class="list-unstyled comment--btn--container">
       <% for (let i = 0; i < comments.length; i++) {%>
-        <li class="col-6 justify-content-between mt-5">
+        <li class="col-6 justify-content-between mt-5 ">
           <%=user.userName%>: <%=comments[i].comment%>
-          <div class="comment--btn--container">
-              <span class="likeCount"><%= comments[i].likes %></span>
+          <div>
+              <span class="likeCount"><%= comments[i].commentLikes %></span>
               <form
               class="col-1 comment--like--icon"
               action="/comment/likeComment/<%= post.id %>/<%= comments[i].id %>?_method=PUT"

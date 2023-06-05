@@ -23,7 +23,8 @@ module.exports = {
     try {
       const post = await Post.findById(req.params.id);
       const comments = await Comment.find({postId: req.params.id})
-      res.render("post.ejs", { post: post, user: req.user, comments: comments });
+      console.log(comments)
+      res.render("post.ejs", { post: post, user: req.user, comments: comments,});
     } catch (err) {
       console.log(err);
     }
@@ -56,7 +57,7 @@ module.exports = {
         }
       );
       console.log("Likes +1");
-      // res.redirect(`/post/${req.params.id}`);
+      res.redirect(`/post/${req.params.id}`);
     } catch (err) {
       console.log(err);
     }

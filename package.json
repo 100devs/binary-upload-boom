@@ -1,13 +1,13 @@
 {
-  "name": "binary-upload-boom",
+  "name": "kidney-hydration-hub",
   "version": "1.0.0",
-  "description": "100Devs Social Network",
+  "description": "daily fluid tracker for dialysis patients",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Martha Martinez",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.1",

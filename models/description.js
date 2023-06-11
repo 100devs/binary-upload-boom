@@ -1,13 +1,8 @@
 const mongoose = require("mongoose");
 
-const CommentSchema = new mongoose.Schema({
-  comment: {
+const DescriptionSchema = new mongoose.Schema({
+  description: {
     type: String,
-    required: true,
-  },
-  
-  likes: {
-    type: Number,
     required: true,
   },
   post: {
@@ -20,4 +15,4 @@ const CommentSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Comment", CommentSchema);
+module.exports = mongoose.model("Description", DescriptionSchema);

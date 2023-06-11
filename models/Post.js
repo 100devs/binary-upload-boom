@@ -1,24 +1,9 @@
+const { Timestamp } = require("mongodb");
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true,
-  },
-  image: {
-    type: String,
-    require: true,
-  },
-  cloudinaryId: {
-    type: String,
-    require: true,
-  },
-  caption: {
-    type: String,
-    required: true,
-  },
-  likes: {
-    type: Number,
     required: true,
   },
   user: {
@@ -28,7 +13,9 @@ const PostSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-  },
+    Timestamp: true,
+    get: time => time.toDateString()
+  }
 });
 
 module.exports = mongoose.model("Post", PostSchema);

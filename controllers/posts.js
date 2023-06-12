@@ -22,6 +22,7 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
+      console.log(req.params.id)
       const comments = await Comment.find().find({post: req.params.id }).sort({createdAt: "desc" }).lean(); //grabs all comments from mongoDB on the post
       res.render("post.ejs", { post: post, user: req.user, comments: comments });   //renders posts as well as corresponding comments for that post
     } catch (err) {

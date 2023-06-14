@@ -30,7 +30,7 @@
     <ul class="row list-unstyled">
       <% for(var i=0; i<comments.length; i++) {%>
         <li>
-          <p><%=comments[i].comment%></p>
+          <p><span class="fw-bold"><%=userNames[i]%></span> <%=comments[i].comment%></p>
         </li>
       <% } %>
       </ul>

@@ -1,3 +1,5 @@
+// imports to access the router from express and the controllers, aswell as auth middleware
+
 const express = require("express");
 const router = express.Router();
 const authController = require("../controllers/auth");

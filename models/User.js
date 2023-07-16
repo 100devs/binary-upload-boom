@@ -1,6 +1,8 @@
+// import bcrypt for password hashing
 const bcrypt = require("bcrypt");
+// import mongoose to create the schemas
 const mongoose = require("mongoose");
-
+// create the User schema using username, email and password.
 const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
@@ -30,10 +32,7 @@ UserSchema.pre("save", function save(next) {
 
 // Helper method for validating user's password.
 
-UserSchema.methods.comparePassword = function comparePassword(
-  candidatePassword,
-  cb
-) {
+UserSchema.methods.comparePassword = function comparePassword(candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
     cb(err, isMatch);
   });

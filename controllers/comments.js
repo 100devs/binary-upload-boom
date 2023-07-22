@@ -10,25 +10,25 @@ module.exports = {
         post: req.params.id,
       });
       console.log("Comment has been added!");
-      res.redirect("/post/"+req.params.id);
+      res.redirect(`/post/${req.params.id}`);
     } catch (err) {
       console.log(err);
     }
   },
-//   likePost: async (req, res) => {
-//     try {
-//       await Post.findOneAndUpdate(
-//         { _id: req.params.id },
-//         {
-//           $inc: { likes: 1 },
-//         }
-//       );
-//       console.log("Likes +1");
-//       res.redirect(`/post/${req.params.id}`);
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   },
+  likeComment: async (req, res) => {
+    try {
+      await Comment.findOneAndUpdate(
+        { _id: req.params.commentId },
+        {
+          $inc: { likes: 1 },
+        }
+      );
+      console.log("Comment likes +1");
+      res.redirect(`/post/${req.params.postId}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
 //   deletePost: async (req, res) => {
 //     try {
 //       // Find post by id

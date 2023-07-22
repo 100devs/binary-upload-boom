@@ -43,6 +43,12 @@
         <li class="col-6 justify-content-between mt-5">
           <p><%=comments[i].user.userName%>:</p>
           <p><%=comments[i].comment%></p>
+          <form class="col-1"
+          action="/comment/likeComment/<%= post.id %>/<%= comments[i]._id %>?_method=PUT"
+          method="POST">
+          <button class="btn btn-primary fas fa-thumbs-up" type="submit"></button>
+        </form>
+        <span class="col-3">Likes: <%= comments[i].likes %></span>
         </li>
       <%}%>
     </ul>

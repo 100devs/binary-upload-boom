@@ -2,6 +2,7 @@
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
+      <h6><%= post.user.userName%></h6>
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
@@ -40,6 +41,7 @@
     <ul>
       <% for(let i=0; i<comments.length; i++){%>
         <li class="col-6 justify-content-between mt-5">
+          <p><%=comments[i].user.userName%>:</p>
           <p><%=comments[i].comment%></p>
         </li>
       <%}%>

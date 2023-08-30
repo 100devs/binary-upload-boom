@@ -1,3 +1,4 @@
+// Core Modules
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 
@@ -39,7 +40,7 @@ module.exports = {
         likes: 0,
         user: req.user.id,
       });
-      console.log("Post has been added!");
+      console.log("Post has been added!"); // post added console log
       res.redirect("/profile");
     } catch (err) {
       console.log(err);

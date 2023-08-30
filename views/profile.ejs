@@ -1,46 +1,46 @@
-<%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-          </div>
-          <div class="mt-5">
-            <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
-              </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
-          </div>
-      </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>  
-      </div>  
-    </div>
-  </div>
-</div>
-<%- include('partials/footer') -%>
+<%- include('partials/header') -%> <!-- Insert Header Partial-->
+<div class="container"> <!-- Opening Container Tag-->
+  <div class="row mt-5"> <!-- Opening Div Tags -->
+      <div class="col-6"> <!-- Opening Div Tag-->
+          <div><!-- Opening Div Tag-->
+              <p><strong>User Name</strong>: <%= user.userName %></p> <!-- p Tag Holding the Username given from Database-->
+              <p><strong>Email</strong>: <%= user.email %></p> <!-- p tag holding Email given from Database-->
+              <a href="/logout" class="col-3 btn btn-primary">Logout</a> <!-- Logout 'Button'-->
+          </div> <!-- Closing Tags -->
+          <div class="mt-5"> <!-- 'Add a Post' Form Holding Div-->
+            <h2>Add a post</h2> <!-- h2 Opening Tag -->
+            <form action="/post/createPost" enctype="multipart/form-data" method="POST"> <!-- Form Opening Tag-->
+              <div class="mb-3"> <!-- Opening Div Container Holding Input-->
+                  <label for="title" class="form-label">Title</label> <!-- Title Label for Input -->
+                  <input type="text" class="form-control" id="title" name="title"> <!-- Input for adding the Post Title -->
+              </div> <!-- Closing Tags -->
+              <div class="mb-3"> <!-- Opening Div Container Holding Input-->
+                <label for="caption" class="form-label">Caption</label> <!-- Caption Label for Input -->
+                <textarea class="form-control" id="caption" name="caption"></textarea> <!-- Text Area for Adding Photo Caption -->
+              </div> <!-- Closing Tags -->
+              <div class="mb-3"> <!-- Opening Div Container Holding Input-->
+                <label for="imgUpload" class="form-label">Image</label> <!-- Image Label for Input-->
+                <input type="file" class="form-control" id="imageUpload" name="file"> <!-- Input Area for Image Upload-->
+              </div> <!-- Closing Tags -->
+              <button type="submit" class="btn btn-primary" value="Upload">Submit</button> <!-- Submit Button Element-->
+            </form> <!-- Closing Tags -->
+          </div> <!-- Closing Tags -->
+      </div> <!-- Closing Tags -->
+      <div class="col-6"> <!-- Opening -->
+        <ul class="row list-unstyled"> <!-- Opening ul tag -->
+        <% for(var i=0; i<posts.length; i++) { %> <!-- For Loop Getting All Posts -->
+          <li class="col-6 justify-content-between mt-5"> <!-- Opening li tag -->
+            <a href="/post/<%= posts[i]._id%>"> <!-- Anchor Tag Holding Each Post -->
+              <img class="img-fluid" src="<%= posts[i].image%>"> <!-- Image Element That Holds 'Posts' -->
+            </a> <!-- Closing Tags -->
+          </li> <!-- Closing Tags -->
+        <% } %> <!-- End of the For Loop -->
+        </ul> <!-- Closing Tags -->
+        <div class="row justify-content-center mt-5"> <!-- Div Element Tag Holding Button-->
+          <a class="btn btn-primary" href="/feed">Return to Feed</a> <!-- Anchor Tag that Returns to Feed -->
+        </div> <!-- Closing Tags-->  
+      </div> <!-- Closing Tags-->  
+    </div> <!-- Closing Tags-->
+  </div> <!-- Closing Tags-->
+</div> <!-- Closing Tags-->
+<%- include('partials/footer') -%> <!-- Insert Footer Partial -->

@@ -27,6 +27,28 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <!-- Comments -->
+  <div>
+    <ul class="row list-unstyled">
+    <% comments.forEach(({content, user}) => {%>
+      <li class="mt-5">
+        <span><a class="text-decoration-none" href="/profile/<%= user._id %>"><%= user.userName %></a>:</span>
+        <p class="card card-body"><%=content%></p>
+      </li>
+    <% }) %>
+    </ul>
+  </div>  
+  <!-- Adding a Comment -->
+  <div class="mt-5">
+    <h2>Add a comment</h2>
+    <form action="/comment/createComment/<%= post.id%>" method="POST">
+      <div class="mb-3">
+          <label for="title" class="form-label"></label>
+          <textarea type="text" class="form-control" id="title" name="content" placeholder="Write a comment... Let others know what you think!"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+    </form>
+  </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

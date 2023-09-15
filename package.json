@@ -1,7 +1,7 @@
 {
-  "name": "binary-upload-boom",
+  "name": "imitari-social-network",
   "version": "1.0.0",
-  "description": "100Devs Social Network",
+  "description": "AI Image Social Network",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",

@@ -1,15 +1,15 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row mt-5">
-      <div class="col-6 border">
+      <div class="col-6">
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
           <div class="mt-5">
-            <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+            <!-- <h2>Add a post</h2> -->
+            <!-- <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
                   <label for="title" class="form-label">Title</label>
                   <input type="text" class="form-control" id="title" name="title">
@@ -24,15 +24,15 @@
               </div>
               <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
             </form>
-          </div>
+          </div> -->
       </div>
       <div class="col-6">
         <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>" class=" text-dark text-decoration-none">
-              <img class="img-fluid view" src="<%= posts[i].image%>">
-              <p class=""><%= formatDate(posts[i].createdAt) %></p>
+            <a href="/post/<%= posts[i]._id%>">
+              <img class="img-fluid" src="<%= posts[i].image%>">
+              <p><%= formatDate(posts[i].createdAt) %></p>
               <% function formatDate(date) { %>
                 <% const options = { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' }; %>
                 <% const formattedDate = new Date(date).toLocaleString(undefined, options); %>

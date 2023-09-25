@@ -1,8 +1,18 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row justify-content-center mt-5">
-    <div class="col-6">
-      <h2><%= post.title %></h2>
+    <p><%= user.userName %>: <strong>is logged in.</strong></p>
+    <div class="col-6 border">
+      <!-- <h1><a href="/profile"><%= post.user.toString() %></a></h1> -->
+      <!-- <h1><a href="/profile"><%= user._id  %></a></h1> -->
+      <!-- <span><%= user %></span>
+      <span><%= post %></span>
+      <span><%= comments %></span> -->
+
+      <!-- Added an ternary operator to check if user._id is equal to post.user. Turned each value into string to compare. if true return's user.userName's post. if false. not your post -->
+      <h1><a href="/profile" class="text-dark"><%= user._id.toString() === post.user.toString() ? `${user.userName}'s post` : `not your post` %></a></h1>
+      <!-- <h2><%= post.title %></h2> -->
+      
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
         <form
@@ -10,23 +20,93 @@
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          <button class="btn btn-success fa fa-thumbs-up" type="submit"></button>
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
+        <form
+          class="col-1"
+          action="/post/dislikePost/<%= post.id %>?_method=PUT"
+          method="POST"
+        >
+          <button class="btn btn-danger fa fa-thumbs-down" type="submit"></button>
+        </form>
+        <h3 class="col-3">Dislikes: <%= post.dislikes %></h3>
         <%if(post.user == user.id){ %>
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
           method="POST"
           class="col-3"
         >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
+          <button class="btn btn-warning fa fa-trash" type="submit"></button>
         </form>
         <%}%>
       </div>
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
+      <div>
+        <!-- document of all users -->
+        <%= userInfo %>
+
+
+        <!-- User that is logged in. -->
+        <!-- <%= user.id %> -->
+
+
+
+        <%= post.user %>
+    
+    
+      </div>
+      <!-- <p><%= post.createdAt %></p>
+      <p><%= post %></p>
+      <p><%= user.userName %></p>
+      <p><%= comments %></p> -->
+      <% for(var i=0; i<post.length; i++) {%>
+        <p class="text-dark"><%= formatDate(post[i].createdAt) %></p>
+              <% function formatDate(date) { %>
+                <% const options = { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' }; %>
+                <% const formattedDate = new Date(date).toLocaleString(undefined, options); %>
+                <% return formattedDate; %>
+              <% } %>
+        <% } %>
     </div>
+  <div class="mt-5 border w-50 p-3">
+    <h2>Add a comment</h2>
+    <form action="/comment/createComment/<%= post._id%>" method="POST">
+      <div class="mb-3">
+          <label for="comment" class="form-label">Comment</label>
+          <input type="text" class="form-control" id="comment" name="comment">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <ul>
+     <% for(var i=0; i<comments.length; i++) {%>
+       <li class="col-6 justify-content-between mt-5">
+         <%= comments[i].comment%> <br>
+         By: <strong><%= comments[i].post == post.id ? user.userName : 'unknown'%>
+         </strong>
+
+       </li>
+     <% } %>
+    </ul>
+    <ul class="text-light">
+     <% for(var i=0; i<comments.length; i++) {%>
+       <li class="col-6 justify-content-between mt-5">
+         <%= comments[i].comment%> <br>
+         By: <strong><%= comments[i].createdAt %>
+         </strong>
+
+       </li>
+     <% } %>
+    </ul>
+  </div>
+  <div>
+    <%= post.id %>
+   
+
+
+  </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

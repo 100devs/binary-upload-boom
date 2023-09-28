@@ -1,4 +1,4 @@
-# notes about the views the front-end of the 
+# notes about the views the front-end 
 
 
 # Partials

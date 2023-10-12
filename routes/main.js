@@ -5,6 +5,8 @@ const homeController = require("../controllers/home");
 const postsController = require("../controllers/posts");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
+// TODO: Separate routes into distinct files
+
 //Main Routes - simplified for now
 router.get("/", homeController.getIndex);
 router.get("/profile", ensureAuth, postsController.getProfile);

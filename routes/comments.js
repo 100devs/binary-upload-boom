@@ -12,4 +12,10 @@ router.post("/createComment/:id", commentsController.createComment);
 // router.put("updateComment/:id", commentsController.updateComment);
 
 
+
+//the : means that there are variables
+//two parameters are being passed in at the same time
+router.delete("/deleteComment/:postid/:commentid", commentsController.deleteComments)
+
+
 module.exports = router;

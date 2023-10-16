@@ -14,6 +14,8 @@ router.get("/login", authController.getLogin);
 router.post("/login", authController.postLogin);
 router.get("/logout", authController.logout);
 router.get("/signup", authController.getSignup);
+router.get("/my-recipes", ensureAuth, postsController.getRecipes);
+router.get("/bookmarks", ensureAuth, postsController.getBookmarks);
 router.post("/signup", authController.postSignup);
 
 module.exports = router;

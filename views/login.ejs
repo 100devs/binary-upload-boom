@@ -1,8 +1,9 @@
 <%- include('partials/header') -%>
 
-<main class="container">
+<main class="container card-container">
   <div class="row justify-content-center">
     <section class="col-6 mt-5">
+      <h1>Sign in with email</h1>
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
       <div class="alert alert-danger"><%= el.msg %></div>
       <% }) %> <% } %> <% if (locals.messages.info) { %> <%
@@ -31,10 +32,22 @@
             name="password"
           />
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Sign In</button>
       </form>
     </section>
   </div>
 </main>
+
+<div class="list-of-userNames">
+  <ul class="list-unstyled">
+    <h3>list of users</h3>
+    <li>nadi@nadi.com nadi1234 </li>
+    <li>jr@jr.com  jonathan1</li>
+    <li>b@b.com bentleybentley </li>
+    <li>frank@frank.com frankfrank </li>
+    <li>test@test.com testtest </li>
+    <li>p@p.com popcorn1 </li>
+  </ul>
+</div>
 
 <%- include('partials/footer') -%>

@@ -1,23 +1,60 @@
-<%- include('partials/header') -%>
-  <div class="container">
-    <div class="row justify-content-center mt-5">
-      <ul class="row list-unstyled">
-        <p><%= user.userName %>: <strong>is logged in.</strong></p>
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-          
-            <a href="/post/<%= posts[i]._id%>" class="text-decoration-none">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-              <p class="text-dark"><%= formatDate(posts[i].createdAt) %></p>
-              <% function formatDate(date) { %>
+<%- include('partials/logged-in-header') -%>
+
+  <!-- <div class="container card-container"> -->
+    <!-- <h1>Explore</h1> -->
+    <!-- <div class="row "> -->
+      <!-- <ul class="row list-unstyled"> -->
+        <!-- <p><%= user.userName %>: <strong>is logged in.</strong></p> -->
+        <!-- <% for(var i=0; i<posts.length; i++) {%> -->
+          <!-- <li class="col-6 justify-content-between mt-5"> -->
+            <!-- <a href="/post/<%= posts[i]._id%>" class="text-decoration-none"> -->
+              <!-- <img class="img-fluid" src="<%= posts[i].image%>"> -->
+              <!-- <p class="text-dark"><%= formatDate(posts[i].createdAt) %></p> -->
+              <!-- <% function formatDate(date) { %>
                 <% const options = { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' }; %>
                 <% const formattedDate = new Date(date).toLocaleString(undefined, options); %>
                 <% return formattedDate; %>
-              <% } %>
-            </a>
-          </li>
-        <% } %>
-        </ul>
+              <% } %> -->
+            <!-- </a> -->
+          <!-- </li> -->
+        <!-- <% } %> -->
+        <!-- </ul> -->
+    <!-- </div> -->
+  <!-- </div>  -->
+  
+  
+
+
+
+
+
+  <div class="container card-container">
+    <h1>Explore</h1>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% for(var i=0; i<posts.length; i++) {%>
+    <div class="col">
+      <div class="card h-100">
+        <strong><%= posts.createdBy %></strong>
+        <a href="/post/<%= posts[i]._id%>" class="card h-100">
+          <img src="<%= posts[i].image%>" class="card-img-top" alt="...">
+        </a>
+        <div class="card-body">
+          <h5 class="card-title"><%= posts[i].title%></h5>
+          <p class="card-text"><i class="px-1 bi bi-heart"></i><%= posts[i].likes.length - 1 %></p>
+          <p class="card-text"><small class="text-muted">By: <%= userName[i]%></small></p>
+          <p class="card-text"><%= posts[i].caption %></p>
+          <a href="/post/<%= posts[i]._id%>" class="btn btn-outline-primary">View Post</a>
+        </div>
+        <div class="card-footer">
+          <span class="badge bg-primary"><%= posts[i].country%></span>
+          <span class="badge rounded-pill bg-secondary"><%= posts[i].dish%></span>
+        </div>
+      </div>
     </div>
-  </div>  
+    <% } %>
+  </div>
+</div>
+
+
+
 <%- include('partials/footer') -%>

@@ -1,28 +1,33 @@
-<%- include('partials/header') -%>
-<div class="container">
+<%- include('partials/logged-in-header') -%>
+<div class="container card-body">
   <div class="row justify-content-center mt-5">
-    <p><%= user.userName %>: <strong>is logged in.</strong></p>
     <div class="col-6 border">
-      <!-- <h1><a href="/profile"><%= post.user.toString() %></a></h1> -->
-      <!-- <h1><a href="/profile"><%= user._id  %></a></h1> -->
-      <!-- <span><%= user %></span>
-      <span><%= post %></span>
-      <span><%= comments %></span> -->
 
-      <!-- Added an ternary operator to check if user._id is equal to post.user. Turned each value into string to compare. if true return's user.userName's post. if false. not your post -->
-      <h1><a href="/profile" class="text-dark"><%= user._id.toString() === post.user.toString() ? `${user.userName}'s post` : `not your post` %></a></h1>
-      <!-- <h2><%= post.title %></h2> -->
+      <strong><%= post.createdBy %></strong>
+      <!-- <strong><%= post.createdAt %></strong> -->
+      <strong><%= Math.floor(Math.ceil(new Date() - post.createdAt) / (1000 * 60 * 60 *24))%> days ago</strong>
+
+      
       
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
         <form
-          class="col-1"
+          class="col-2"
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
-          <button class="btn btn-success fa fa-thumbs-up" type="submit"></button>
+          <button class=" <%if(post.likes.includes(user.id)){ %> btn-liked <%} %>
+            btn btn-primary fa fa-heart" type="submit"></button>
         </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
+        <h3 class="col"><%= post.likes.length - 1 %></h3>
+        <form
+            class="col justify-content-end"
+            action="/post/bookmarkPost/<%= post.id %>?_method=PUT"
+            method="POST"
+          >
+          <button class="<%if(post.bookmarks.includes(user.id)){ %> bi bi-bookmark-fill<%} else { %> bi bi-bookmark <% }%>
+            btn btn-primary" type="submit"></button>
+          </form>
         <form
           class="col-1"
           action="/post/dislikePost/<%= post.id %>?_method=PUT"
@@ -30,7 +35,7 @@
         >
           <button class="btn btn-danger fa fa-thumbs-down" type="submit"></button>
         </form>
-        <h3 class="col-3">Dislikes: <%= post.dislikes %></h3>
+        <h3 class="col-3"><%= post.dislikes.length - 1 %></h3>
         <%if(post.user == user.id){ %>
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
@@ -40,28 +45,51 @@
           <button class="btn btn-warning fa fa-trash" type="submit"></button>
         </form>
         <%}%>
+        <div class="col-3 mt-5">
+          <p><%= post.caption %></p>
+          <div>
       </div>
     </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
-      <div>
-        <!-- document of all users -->
-        <%= userInfo %>
+        <p class="d-inline-flex gap-1">
+          <a class="btn btn-primary fa-regular fa-code" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Comment
+          </a>
 
-
-        <!-- User that is logged in. -->
-        <!-- <%= user.id %> -->
-
-
-
-        <%= post.user %>
-    
+        </p>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            <div class="mt-5 border w-50 p-3 card-container">
+              <h2>Add a comment</h2>
+              <form action="/comment/createComment/<%= post._id%>" method="POST">
+                <div class="mb-3">
+                    <label for="comment" class="form-label">Comment</label>
+                    <input type="text" class="form-control" id="comment" name="comment">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+              <ul class="list-unstyled">
+                <!--TODO add: username and delete button-->
+               <% for(var i=0; i<comments.length; i++) {%>
+                 <li class="col-6 justify-content-between mt-5">
+                   <strong><a href="/post/profile"><%= comments[i].createdBy %></a>
+                   </strong> <%= comments[i].comment%>
+                   <%if(comments[i].createdByID == user.id) {%>
+                   <form
+                   action="/comment/deleteComment/<%= post.id %>/<%=comments[i]._id %>?_method=DELETE"
+                   method="POST"
+                   class="col-3"
+                   >
+                   <button class="btn btn-outline-danger fa fa-trash" type="submit"></button>
+                  </form>
+                  <%}%>
+                </li>
+               <% } %>
+              </ul>
     
       </div>
       <!-- <p><%= post.createdAt %></p>
-      <p><%= post %></p>
+      <p><%= more %></p>
       <p><%= user.userName %></p>
-      <p><%= comments %></p> -->
+      <p><%= comments %></p>
       <% for(var i=0; i<post.length; i++) {%>
         <p class="text-dark"><%= formatDate(post[i].createdAt) %></p>
               <% function formatDate(date) { %>
@@ -69,49 +97,17 @@
                 <% const formattedDate = new Date(date).toLocaleString(undefined, options); %>
                 <% return formattedDate; %>
               <% } %>
-        <% } %>
+        <% } %> -->
     </div>
-  <div class="mt-5 border w-50 p-3">
-    <h2>Add a comment</h2>
-    <form action="/comment/createComment/<%= post._id%>" method="POST">
-      <div class="mb-3">
-          <label for="comment" class="form-label">Comment</label>
-          <input type="text" class="form-control" id="comment" name="comment">
+
+
+
+
+        </div>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-    <ul>
-     <% for(var i=0; i<comments.length; i++) {%>
-       <li class="col-6 justify-content-between mt-5">
-         <%= comments[i].comment%> <br>
-         By: <strong><%= comments[i].post == post.id ? user.userName : 'unknown'%>
-         </strong>
-
-       </li>
-     <% } %>
-    </ul>
-    <ul class="text-light">
-     <% for(var i=0; i<comments.length; i++) {%>
-       <li class="col-6 justify-content-between mt-5">
-         <%= comments[i].comment%> <br>
-         By: <strong><%= comments[i].createdAt %>
-         </strong>
-
-       </li>
-     <% } %>
-    </ul>
-  </div>
-  <div>
-    <%= post.id %>
-   
-
-
-  </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
-  </div>
-</div>
+
+
+    
 
 <%- include('partials/footer') -%>

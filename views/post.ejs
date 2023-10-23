@@ -6,6 +6,7 @@
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
         <div class="caption-profile">
+            <p><strong>Username</strong>: <%= user.userName %></p>
             <p><%= post.caption %></p>
         </div>
         <form
@@ -30,6 +31,7 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
       <ul>
+        <p><strong>Comments</strong>:</p>
         <% for(var i=0; i<comments.length; i++) {%>
           <li id ="comments" class="col-6 justify-content-between mt-5">
             <%= comments[i].comment%>

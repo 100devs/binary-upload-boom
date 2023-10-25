@@ -29,7 +29,18 @@ module.exports = {
     try {
       // Gets post from id.
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      //Get comments for post.
+      const comments = await Comment.find({ questionId: question._id });
+      //Add matching username to each comment
+      for (let comment of comments) {
+        const writer = await User.findById(comment.madeBy);
+        comment.userName = writer.userName;
+      }
+      res.render("post.ejs", {
+        post: post,
+        user: req.user,
+        comments: comments,
+      });
     } catch (err) {
       console.log(err);
     }

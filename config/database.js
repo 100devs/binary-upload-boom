@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
+// MongoDB config.
+
 const connectDB = async () => {
   try {
+    // Connect to MongoDB using connection stirng.
     const conn = await mongoose.connect(process.env.DB_STRING, {
       useNewUrlParser: true,
       useUnifiedTopology: true,

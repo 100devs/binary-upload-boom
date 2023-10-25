@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+// Post Mongoose schema, consisting of a title, an image (stored as a URL string), a cloudinary Id, a caption, number of likes, owner (stored as the id of the user posting), and the date of creation.
+
 const PostSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -7,11 +9,11 @@ const PostSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    require: true,
+    required: true,
   },
   cloudinaryId: {
     type: String,
-    require: true,
+    required: true,
   },
   caption: {
     type: String,

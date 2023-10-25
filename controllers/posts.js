@@ -1,36 +1,46 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 
+// Posts Controller
+
 module.exports = {
+  // Renders profile page with user's posts.
   getProfile: async (req, res) => {
     try {
+      // Grab posts made by user to display on profile page.
       const posts = await Post.find({ user: req.user.id });
       res.render("profile.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
     }
   },
+  // Renders feed page from all posts.
   getFeed: async (req, res) => {
     try {
+      // Gets all posts and sorts them by creation date.
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
       res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
     }
   },
+  // Renders post page from single post.
   getPost: async (req, res) => {
     try {
+      // Gets post from id.
       const post = await Post.findById(req.params.id);
       res.render("post.ejs", { post: post, user: req.user });
     } catch (err) {
       console.log(err);
     }
   },
+  // Creates new post.
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
 
+      // Create post in database.
       await Post.create({
         title: req.body.title,
         image: result.secure_url,
@@ -45,6 +55,7 @@ module.exports = {
       console.log(err);
     }
   },
+  // Adds like to post.
   likePost: async (req, res) => {
     try {
       await Post.findOneAndUpdate(
@@ -59,13 +70,14 @@ module.exports = {
       console.log(err);
     }
   },
+  // Delete post from database.
   deletePost: async (req, res) => {
     try {
-      // Find post by id
+      // Find post by id.
       let post = await Post.findById({ _id: req.params.id });
-      // Delete image from cloudinary
+      // Delete image from cloudinary.
       await cloudinary.uploader.destroy(post.cloudinaryId);
-      // Delete post from db
+      // Delete post from db.
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
       res.redirect("/profile");

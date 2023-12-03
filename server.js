@@ -1,15 +1,15 @@
-const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
-const passport = require("passport");
-const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
-const methodOverride = require("method-override");
-const flash = require("express-flash");
-const logger = require("morgan");
-const connectDB = require("./config/database");
-const mainRoutes = require("./routes/main");
-const postRoutes = require("./routes/posts");
+const express = require("express"); // helps build our api easily
+const app = express(); 
+const mongoose = require("mongoose"); // used to easily talk to our MongoDB database
+const passport = require("passport"); // enables strategies for authentication
+const session = require("express-session"); // used to create sessions to stay logged in
+const MongoStore = require("connect-mongo")(session); // used to store sessions in MongoDB
+const methodOverride = require("method-override"); // overrides POST and GET methods.
+const flash = require("express-flash"); // used to show any errors
+const logger = require("morgan"); // used to display info in the console in a nicer way
+const connectDB = require("./config/database"); // connects to database
+const mainRoutes = require("./routes/main"); // routes for the homepage, login, signup
+const postRoutes = require("./routes/posts"); // routes for posting, feed, etc.
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });

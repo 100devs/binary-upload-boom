@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const postsController = require('../controllers/comments');
+const commentsController = require('../controllers/comments');
 const { ensureAuth, ensureGuest } = require('../middleware/auth');
 
 //Comment Routes - simplified for now
-router.get('/', ensureAuth, postsController.getComment);
+router.get('/', ensureAuth, commentsController.getComment);
 
-router.post('/createComment', postsController.createComment);
+router.post('/createComment', commentsController.createComment);
 
 module.exports = router;

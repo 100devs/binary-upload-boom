@@ -31,7 +31,36 @@
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
-  </div>
+    <div class="row justify-content-center mt-5">
+      <ul class="row list-unstyled">
+        <% for(var i=0; i<post.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <a href="/post/<%= post._id%>">
+              <p><%= post.comments %></p>
+            </a>
+          </li>
+        <% } %>
+        </ul>
+    </div>
+<div class=""><p class="lead">Add a comment:</p>
+  <form action="/addComment" method="POST">
+    <div class="mb-3">
+      <label for="postCommentForm" class="form-label"
+        >Comment Text:</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="postCommentForm"
+        aria-describedby="commentHelp"
+        name="comment"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </div>
+
+    </div>
+  </div>
 
 <%- include('partials/footer') -%>

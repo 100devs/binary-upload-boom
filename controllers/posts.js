@@ -73,4 +73,17 @@ module.exports = {
       res.redirect("/profile");
     }
   },
+  addComment: async (req, res) => {
+    try {
+      await Post.create({
+        comment: req.body.comments,
+        postid: req.params.id,
+        user: req.user.id,
+      });
+      console.log("Comment has been added!");
+      res.redirect("/post/${req.params.id}");
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };

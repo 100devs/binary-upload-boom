@@ -76,13 +76,16 @@ module.exports = {
   },
   addComment: async (req, res) => {
     try {
-      await Post.create({
-        comment: req.body.comments,
-        postid: req.params.id,
-        user: req.user.id,
-      });
+      console.log("ID:", req.params.id); // Log the ID
+      console.log("Request Method:", req.method); // Log the request method
+      await Post.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          $push: { comments: req.body.comment },
+        }
+      );
       console.log("Comment has been added!");
-      res.redirect("/post/${req.params.id}");
+      res.redirect(`/post/${req.params.id}`);
     } catch (err) {
       console.log(err);
     }

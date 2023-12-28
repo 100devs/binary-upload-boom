@@ -31,19 +31,17 @@
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
-    <div class="row justify-content-center mt-5">
-      <ul class="row list-unstyled">
+    <div class="row justify-content-center mt-5 ">
+      <ul class="list-group">
         <% for(var i=0; i<post.comments.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= post._id%>">
-              <p><%= post.comments %></p>
-            </a>
+          <li class="list-group-item">
+              <p><%= post.comments[i] %></p>
           </li>
         <% } %>
         </ul>
     </div>
 <div class=""><p class="lead">Add a comment:</p>
-  <form action="/addComment" method="POST">
+  <form action="/post/addComment/<%= post.id %>" method="POST">
     <div class="mb-3">
       <label for="postCommentForm" class="form-label"
         >Comment Text:</label

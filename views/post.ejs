@@ -14,23 +14,37 @@
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
         <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
+          <form
+            action="/post/deletePost/<%= post.id %>?_method=DELETE"
+            method="POST"
+            class="col-3"
+          >
+            <button class="btn btn-primary fa fa-trash" type="submit"></button>
+          </form>
         <%}%>
       </div>
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <ul class="row list-unstyled">
+      <% for (let i = 0; i < comments.length; i++) {%>
+        <li class="col-6 justify-content-between mt-5">
+          <%= comments[i].comment %>
+        </li>
+      <% } %>
+      </ul>
     <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
+        <a class="btn btn-primary" href="/profile">Return to Profile</a>
+        <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
+    <form
+    action="/comments/createComment"
+    method="POST"
+  >
+    <input type="text" name="comment" id="comment">
+    <button class="btn btn-primary" type="submit">Add Comment</button>
+  </form>
   </div>
 </div>
 

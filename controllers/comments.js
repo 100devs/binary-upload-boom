@@ -6,12 +6,12 @@ module.exports = {
     try {
       await Comment.create({
         comment: req.body.comment,
-        post: req.param.id,
+        post: req.params.id,
         likes: 0,
         user: req.user.id,
       });
-      console.log("Post has been added!");
-      res.redirect("/profile");
+      console.log("Comment has been added!");
+      res.redirect("back");
     } catch (err) {
       console.log("Error on createComment: ", err);
     }
@@ -45,7 +45,8 @@ module.exports = {
   },
 };
 /* 
-- Comments model, route, controller added
--  TODO: Add comments form and comments list to EJS
+TODO:
+- Comments are being posted but without the post and createdBy fields, ??? (How is Mongoose even allowing this?)
+
 - Add trashcan and heart to comments and figure out how to hook them up
 */

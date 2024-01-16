@@ -36,7 +36,7 @@ app.use(logger("dev"));
  
 //Use forms for put / delete
 app.use(methodOverride("_method"));
-
+ 
 // Setup Sessions - stored in MongoDB
 app.use(
   session({
@@ -46,7 +46,7 @@ app.use(
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
-
+ 
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
@@ -57,8 +57,9 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
+app.use("/comments", commentRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {
   console.log("Server is running, you better catch it!");
-});
+}); 

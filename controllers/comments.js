@@ -3,8 +3,8 @@ const Comment = require('../models/Comments');
 module.exports = {
   getComment: async (req, res) => {
     try {
-      const posts = await Comment.find().sort({ createdAt: 'desc' }).lean();
-      res.render('post.ejs', { comments: comments });
+      const comments = await Comment.find().sort({ createdAt: 'desc' }).lean();
+      res.render('post.ejs', { comments });
     } catch (err) {
       console.log(err);
     }

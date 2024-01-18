@@ -18,13 +18,6 @@ module.exports = {
     }
   },
   likeComment: async (req, res) => {
-    /*
-    - Check if this user has already liked this comment
-    - If yes, remove from LikedBy array
-    - 
-    - If no, add to likedBy array
-    - Should probs change the colour on that icon based on state or turn it into a broken heart or summin
-    */
     try {
       const currentUser = req.user.id;
       let comment = await Comment.findById(req.params.id);

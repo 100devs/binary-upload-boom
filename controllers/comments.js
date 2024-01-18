@@ -8,8 +8,8 @@ module.exports = {
       await Comment.create({
         comment: req.body.comment,
         post: req.params.id,
-        likes: 0,
         createdBy: req.user.id,
+        likedBy: []
       });
       console.log("Comment has been added!");
       res.redirect("back");
@@ -18,17 +18,26 @@ module.exports = {
     }
   },
   likeComment: async (req, res) => {
+    /*
+    - Check if this user has already liked this comment
+    - If yes, remove from LikedBy array
+    - 
+    - If no, add to likedBy array
+    - Should probs change the colour on that icon based on state or turn it into a broken heart or summin
+    */
     try {
-      await Comment.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
-        }
-      );
-      console.log("Comment Likes +1");
+      const currentUser = req.user.id;
+      let comment = await Comment.findById(req.params.id);
+      if (comment.likedBy.includes(currentUser)) {
+        comment.likedBy.pull(currentUser)
+        await comment.save();
+      } else {
+        comment.likedBy.push(currentUser);
+        await comment.save();
+      }
       res.redirect("back");
     } catch (err) {
-      console.log("Error on comment like: ", err);
+      console.log("Error on comment like/dislike: ", err);
     }
   },
   deleteComment: async (req, res) => {
@@ -47,10 +56,11 @@ module.exports = {
 };
 /* 
 - Comments are working - posting, display under appropriate post, delete and like
+- The like button now works as a toggle like in the real world
+
 - To do: 
-  - Keep same user from liking something more than once IF that doesn't require overhauling all the db schemas which it PROBABLY does
-    (add a LikedByUsers array to posts and comments, or an array of everything they liked to the user?)
   - Clean up the layout
   - Make sure everything actually works and add more ducks
+  - Make some kind of graphical change to like button to indicate toggle state
 
 */

@@ -47,13 +47,3 @@ module.exports = {
     }
   },
 };
-/* 
-- Comments are working - posting, display under appropriate post, delete and like
-- The like button now works as a toggle like in the real world
-
-- To do: 
-  - Clean up the layout
-  - Make sure everything actually works and add more ducks
-  - Make some kind of graphical change to like button to indicate toggle state
-
-*/

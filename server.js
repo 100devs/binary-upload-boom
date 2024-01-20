@@ -11,15 +11,15 @@ const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
 const commentRoutes = require("./routes/comments");
-
+ 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
-
+  
 // Passport config
 require("./config/passport")(passport);
-
+                                  
 //Connect To Database
-connectDB();
+connectDB(); 
    
 //Using EJS for views
 app.set("view engine", "ejs");

@@ -27,10 +27,34 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
+    <div class="mt-5">
+      <h2>Add a comment</h2>
+      <form action="/comment/createComment/<%=post._id%>" method="POST">
+        <div class="mb-3">
+            <label for="comment" class="form-label">Comment</label>
+            <input type="text" class="form-control" id="comment" name="comment">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>
+
+    <% if (comments && comments.length > 0) { %>
+      <ul class="list-unstyled">
+        <% comments.forEach(function(comment) { %>
+          <li class="justify-content-between mt-5">
+            <span><%= user.userName %>: </span>
+            <span><%= comment.comment %></span>
+            <br>
+            Posted on: 
+            <%
+              const date = new Date(comment.createdAt);
+              const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+            %>
+            <%= formattedDate %>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
   </div>
 </div>
 

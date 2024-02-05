@@ -70,6 +70,9 @@ module.exports = {
       await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db
       await Post.remove({ _id: req.params.id });
+      //Deletes all comments associated with that post, just tested it works :D
+      await Comment.remove({ postId: req.params.id });
+
       console.log("Deleted Post");
       res.redirect("/profile");
     } catch (err) {

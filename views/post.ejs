@@ -37,12 +37,19 @@
       </form>
     </div>
     <div class="comments-wrapper">
-      <ul>
+      <ul class="list-unstyled">
         <% comments.forEach(function(comment, i) { %>
         <li>
           <span><%= comments[i].comment %></span>
           <span><%= comments[i].user.userName %></span>
           <span><%= comments[i].likes %></span>
+          <form
+          class="col-1"
+          action="/comment/likeComment/<%= comment._id %>?_method=PUT"
+          method="POST"
+        >
+          <button class="btn-like-comment btn btn-primary fa fa-heart" type="submit"></button>
+        </form>
         </li>
         <% }); %>
       </ul>

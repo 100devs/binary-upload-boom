@@ -14,5 +14,17 @@ module.exports = {
     } catch (err) {
       console.error(err);
     }
+  },
+  likeComment: async function(req, res) {
+    try {
+      const comment = await Comment.findOneAndUpdate({_id: req.params.id}, {
+        $inc: { likes: 1},
+      }).populate('postId').lean();
+      
+      console.log(`Liked post ` + comment.postId.title)
+      res.redirect('back');
+    } catch (err) {
+      console.error(err);
+    }
   }
 }

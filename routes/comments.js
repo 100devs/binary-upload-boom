@@ -7,4 +7,6 @@ router.post('/:id', ensureAuth, commentsController.postComment);
 
 router.put('/likeComment/:id', ensureAuth, commentsController.likeComment);
 
+router.delete('/deleteComment/:id', ensureAuth, commentsController.deleteComment);
+
 module.exports = router

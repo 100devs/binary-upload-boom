@@ -50,6 +50,15 @@
         >
           <button class="btn-like-comment btn btn-primary fa fa-heart" type="submit"></button>
         </form>
+        <%if(comment.user._id == user.id){ %>
+          <form
+            action="/comment/deleteComment/<%= comment._id %>?_method=DELETE"
+            method="POST"
+            class="col-3"
+          >
+            <button class="btn btn-primary btn-delete-comment fa fa-trash" type="submit"></button>
+          </form>
+          <%}%>
         </li>
         <% }); %>
       </ul>

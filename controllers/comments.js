@@ -26,5 +26,14 @@ module.exports = {
     } catch (err) {
       console.error(err);
     }
+  },
+  deleteComment: async function(req, res) {
+    try {
+      const comment = await Comment.findOneAndDelete({ _id: req.params.id })
+      console.log(comment);
+      res.redirect('back');
+    } catch (err) {
+      console.error(err);
+    }
   }
 }

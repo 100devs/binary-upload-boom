@@ -1,3 +1,4 @@
-.btn-like-comment {
+.btn-like-comment,
+.btn-delete-comment {
   scale: 0.6;
 }

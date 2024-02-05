@@ -18,3 +18,6 @@
 # Run
 
 `npm start`
+
+### Knowledge gained from this project
+Learned how to define new schemas upon existing ones, such as the comments schema, and integrate into existing views. 

@@ -28,3 +28,4 @@ Make it possible to add a post in the feed page.
 
 ### Knowledge gained from this project
 Learned how to define new models, as well as routes and controllers for this model, upon existing ones, such as the comments model, and integrate into existing views. 
+Learned how to compare values to the objectIds on mongoose documents, done by conversion to a string first.

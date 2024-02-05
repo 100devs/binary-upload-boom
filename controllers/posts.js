@@ -1,5 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require('../models/Comment');
+
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -20,8 +22,10 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const fetches = await Promise.all([Post.findById(req.params.id), Comment.find({postId: req.params.id}).populate('user').lean()]);
+      // const post = await Post.findById(req.params.id);
+      console.log(fetches[1][1]);
+      res.render("post.ejs", { post: fetches[0], user: req.user, comments:fetches[1] });
     } catch (err) {
       console.log(err);
     }

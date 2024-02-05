@@ -27,6 +27,26 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <div class="comments-form-wrapper">
+      <form action="/comment/<%= post.id %>" method="POST" class="addComment">
+        <label for="comment" class="form-label">Comment</label>
+        <input type="text" id="comment" class="form-control my-2" name="comment">
+        <button class="btn btn-primary">
+          add Comment
+        </button>
+      </form>
+    </div>
+    <div class="comments-wrapper">
+      <ul>
+        <% comments.forEach(function(comment, i) { %>
+        <li>
+          <span><%= comments[i].comment %></span>
+          <span><%= comments[i].user.userName %></span>
+          <span><%= comments[i].likes %></span>
+        </li>
+        <% }); %>
+      </ul>
+    </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

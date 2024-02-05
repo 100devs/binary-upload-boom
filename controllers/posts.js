@@ -14,17 +14,16 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      const fetches = await Promise.all([Post.find().sort({ createdAt: "desc" }).lean(), Comment.find().lean().sort({ createdAt: "desc"})])
+      console.log(fetches[0], fetches[1].filter(comment => comment.postId == '65c1304fd4dbfb37b0719954'));
+      res.render("feed.ejs", { posts: fetches[0], comments: fetches[1] });
     } catch (err) {
       console.log(err);
     }
   },
   getPost: async (req, res) => {
     try {
-      const fetches = await Promise.all([Post.findById(req.params.id), Comment.find({postId: req.params.id}).populate('user').lean()]);
-      // const post = await Post.findById(req.params.id);
-      console.log(fetches[1][1]);
+      const fetches = await Promise.all([Post.findById(req.params.id), Comment.find({postId: req.params.id}).populate('user').sort({ createdAt: "desc" }).lean()]);
       res.render("post.ejs", { post: fetches[0], user: req.user, comments:fetches[1] });
     } catch (err) {
       console.log(err);

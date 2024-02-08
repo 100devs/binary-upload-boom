@@ -21,7 +21,7 @@
 
 ### Planned Optimizations
 Implement individual user profile views, not just the current user.
-Migrate likes from a numeric type to a collection of users who liked the post itself, to which we can count and get the numeric representation that way, but also lets users of the web app see who liked their post.
+Migrate likes from a numeric type to a collection of users who liked the post itself, to which we can count and get the numeric representation that way, but also lets users of the web app see who liked their post. This would also allow us to keep our likes unique in that a single user cannot like a post or comment multiple times. Also allows for unliking functionality.
 Add a friend system
 Restyle for a more robust UI.
 Make it possible to add a post in the feed page.

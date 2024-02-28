@@ -1,22 +1,22 @@
 const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
-const passport = require("passport");
-const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
-const methodOverride = require("method-override");
-const flash = require("express-flash");
-const logger = require("morgan");
-const connectDB = require("./config/database");
-const mainRoutes = require("./routes/main");
-const postRoutes = require("./routes/posts");
-const commentRoutes = require("./routes/comments");
+const app = express(); // allows us to use express() with only typig 'app'
+const mongoose = require("mongoose"); // used for constructing schemas (Model)
+const passport = require("passport"); // authentication
+const session = require("express-session"); // for storing a user's session info
+const MongoStore = require("connect-mongo")(session); 
+const methodOverride = require("method-override"); // for overriding POSTs to PUTs n DELETEs
+const flash = require("express-flash"); // believe this is for rendering without submitting GET reqs
+const logger = require("morgan"); // for logging?
+const connectDB = require("./config/database"); // for connecting mongo db
+const mainRoutes = require("./routes/main"); // importing routes/main.js file
+const postRoutes = require("./routes/posts"); // importing routes/posts.js file
+const commentRoutes = require("./routes/comments"); // importing routes/comments.js file
 
 //Use .env file in config folder
-require("dotenv").config({ path: "./config/.env" });
+require("dotenv").config({ path: "./config/.env" }); 
 
-// Passport config
-require("./config/passport")(passport);
+// Passport config  
+require("./config/passport")(passport); 
 
 //Connect To Database
 connectDB();

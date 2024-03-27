@@ -3,6 +3,7 @@
   <div class="row justify-content-center mt-5">
     <div class="col-6">
       <h2><%= post.title %></h2>
+      <h2><%= post.userName %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
         <form
@@ -24,10 +25,32 @@
         <%}%>
       </div>
     </div>
-    <div class="col-3 mt-5">
+    <div class="col-4 mt-5">
       <p><%= post.caption %></p>
+    
+    <h4>Comments:</h4>
+    <ul class="list-unstyled">
+      <% for(var i=0; i<comments.length; i++) {%>
+        <li class="col justify-content-between mt-2">
+          <%= comments[i].userName + ":" %>
+          <%= comments[i].comment%>
+        </li>
+      <% } %>
+    </ul>
+    <div>
+      <h2>Add a Comment</h2>
+        <form action="/post/createComment/<%= post.id %>?_method=POST"
+          method="POST"
+          class="col-3">
+          <div>
+            <label class="form-label" for="userComment">Comment</label>
+            <input id="userComment" type="text" name="userComment">
+          </div>
+          <button class="btn btn-primary my-3" type="submit">Add Comment</button>
+        </form>
     </div>
-    <div class="col-6 mt-5">
+    </div>
+    <div class="col-6 m-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>

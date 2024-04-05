@@ -1,6 +1,9 @@
 {
   "name": "binary-upload-boom",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=20.11.0"
+  },
   "description": "100Devs Social Network",
   "main": "server.js",
   "scripts": {
@@ -12,6 +15,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cloudinary": "^1.25.1",
+    "compression": "^1.7.4",
     "connect-mongo": "^3.2.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",

@@ -4,29 +4,45 @@
     <div class="col-6">
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
+
       <div class="row justify-content-between">
-        <form
-          class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
-          method="POST"
-        >
+        <form class="col-1" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
+          <!-- The Like Button -->
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
+
         <h3 class="col-3">Likes: <%= post.likes %></h3>
+
+        <!--THE DELETE BUTTON -->
         <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
+        <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-3">
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
         <%}%>
       </div>
+
+      <!-- COMMENT SECTION -->
+      <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+        <div class="mb-3">
+          <label for="title" class="form-label">Comments</label>
+          <input type="text" class="form-control" id="title" name="title" />
+        </div>
+        <div class="mb-3">
+          <label for="caption" class="form-label">Caption</label>
+          <textarea class="form-control" id="caption" name="caption"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="imgUpload" class="form-label">Image</label>
+          <input type="file" class="form-control" id="imageUpload" name="file" />
+        </div>
+        <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+      </form>
     </div>
+
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

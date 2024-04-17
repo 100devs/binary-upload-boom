@@ -10,6 +10,15 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
+const compression = require("compression");
+
+
+app.use(compression()); // Compress all routes
+
+app.use(express.static("public"));
+
+// …
+
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });

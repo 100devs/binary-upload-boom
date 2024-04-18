@@ -22,13 +22,28 @@
       </div>
 
       <!-- COMMENT SECTION -->
-      <form action="/post/createComment" method="POST">
+      <form action="/post/createComment/<%= post._id %>" method="POST">
         <div class="mb-3">
           <label for="comment" class="form-label">Comments</label>
           <input type="text" class="form-control" id="comment" name="comment" />
           <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
         </div>
       </form>
+      <!-- comment display -->
+      <section class="comments">
+        <% comments.forEach(comment => { %>
+          <div class="comment-item col-12 justify-content-between mt-3">
+            <div class="comment-user">
+              <strong>User:</strong> <%= comment.user.userName %>
+            </div>
+            <div class="comment-content">
+              <p><%= comment.comment %></p>
+            </div>
+          </div>
+        <% }); %>
+      </section>
+      
+      </section>
     </div>
 
     <div class="col-3 mt-5">

@@ -22,6 +22,18 @@
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
         <%}%>
+        <ul class="row list-unstyled">
+          <% for(var i=0; i<comments.length; i++) {%>
+            <li>
+              <p><%= comments[i].comment%></p>
+            </li>
+          <% } %>
+        </ul>
+        <form action="/comment/<%= post.id %>" method="post">
+          <label for="comment">Comment this post</label>
+          <input type="text" id="comment" name="comment">
+          <button type="submit">Submit</button>
+        </form>
       </div>
     </div>
     <div class="col-3 mt-5">

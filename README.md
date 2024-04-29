@@ -18,3 +18,11 @@
 # Run
 
 `npm start`
+
+# Updated
+1. Displayed user names on post and link to their profiles
+2. Change the profile view to only display the add post form when on your own profile
+3. Allowed comments to be added to posts, and comments have their own likes and deletes
+4. Made it so that you cannot spam like a picture, just like or unlike it (change needs to be implemented on comments still)
+5. Made user available everywhere in ejs with locals to link to the proper user page in the header
+6. commented code line by line

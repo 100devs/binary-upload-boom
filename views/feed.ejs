@@ -2,9 +2,12 @@
   <div class="container">
     <div class="row justify-content-center mt-5">
       <ul class="row list-unstyled">
+        <!-- loops through the posts and displays them -->
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
+            <!-- uses post id to like to the individual post page -->
             <a href="/post/<%= posts[i]._id%>">
+              <!-- uses post image id to display it -->
               <img class="img-fluid" src="<%= posts[i].image%>">
             </a>
           </li>

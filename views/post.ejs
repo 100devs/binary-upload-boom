@@ -2,20 +2,23 @@
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
+      <!-- displays post title  -->
       <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
+      <img class="img-fluid" src="<%=post.image%>" />
       <div class="row justify-content-between">
         <form
           class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
+          action="/post/likePost/<%=post.id%>?_method=PUT"
           method="POST"
         >
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
+        <!-- shows number of likes  -->
         <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
+        <!-- if the user that made the poster is the same person viewing then show delete button  -->
+        <%if(post.user == viewer.id) {%>
         <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
+          action="/post/deletePost/<%=post.id%>?_method=DELETE"
           method="POST"
           class="col-3"
         >
@@ -25,12 +28,52 @@
       </div>
     </div>
     <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
+      <!-- shows the username and links to their profile  -->
+      <a href="/profile/<%=post.user%>"><%=owner%></a>
+      <!-- shows post caption  -->
+      <p><%=post.caption%></p>
     </div>
     <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
+      <a class="btn btn-primary" href="/profile/<%=post.user%>">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
+  </div>
+  <form action="/post/createComment/<%=post.id%>" method="POST">
+    <div class="mb-3">
+        <label for="comment" class="form-label">Comment</label>
+        <textarea class="form-control" id="comment" name="comment"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+  </form>
+  <div class="row justify-content-between">
+    <!-- loops through the comments and displays them  -->
+    <%for(let i = 0; i < comments.length; i++) {%>
+      <!-- shows commenter username and links to their profile  -->
+      <a href="/profile/<%=comments[i].madeBy%>"><%=commenters[i].userName%></a>
+      <!-- displays comment  -->
+      <p><%=comments[i].comment%></p>
+      <div class="row justify-content-between">
+      <form
+        class="col-1"
+        action="/post/likeComment/<%=comments[i]._id%>?_method=PUT"
+        method="POST"
+      >
+        <button class="btn btn-primary fa fa-heart" type="submit"></button>
+      </form>
+      <!-- shows comment likes  -->
+      <h3 class="col-3">Likes: <%= comments[i].likes %></h3>
+      <!-- if the comment was made by the viewer show delete button  -->
+      <%if(comments[i].madeBy == viewer.id) {%>
+      <form
+        action="/post/deleteComment/<%=comments[i]._id%>?_method=DELETE"
+        method="POST"
+        class="col-3"
+      >
+        <button class="btn btn-primary fa fa-trash" type="submit"></button>
+      </form>
+      <%}%>
+      </div>
+    <%}%>
   </div>
 </div>
 

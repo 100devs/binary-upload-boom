@@ -3,6 +3,7 @@
 <main class="container">
   <div class="row justify-content-center">
     <section class="col-6 mt-5">
+      <!-- if theres errors loop through and display them (part of flash) -->
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
       <div class="alert alert-danger"><%= el.msg %></div>
       <% }) %> <% } %> <% if (locals.messages.info) { %> <%

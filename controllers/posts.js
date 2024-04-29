@@ -1,5 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require('../models/Comment');
+
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -12,16 +14,20 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      const fetches = await Promise.all([Post.find().sort({ createdAt: "desc" }).lean(), Comment.find().lean().sort({ createdAt: "desc"})])
+      console.log(fetches[0], fetches[1].filter(comment => comment.postId == '65c1304fd4dbfb37b0719954'));
+      res.render("feed.ejs", { posts: fetches[0], comments: fetches[1] });
     } catch (err) {
       console.log(err);
     }
   },
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      // const fetches = await Promise.all([Post.findById(req.params.id), Comment.find({postId: req.params.id}).populate('user').sort({ createdAt: "desc" }).lean()]);
+      // res.render("post.ejs", { post: fetches[0], user: req.user, comments:fetches[1] });
+      //Some practice destructuring! :D
+      const [post, comments] = await Promise.all([Post.findById(req.params.id), Comment.find({postId: req.params.id}).populate('user').sort({ createdAt: "desc" }).lean()]);
+      res.render("post.ejs", { post, user: req.user, comments });
     } catch (err) {
       console.log(err);
     }
@@ -67,6 +73,9 @@ module.exports = {
       await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db
       await Post.remove({ _id: req.params.id });
+      //Deletes all comments associated with that post, just tested it works :D
+      await Comment.remove({ postId: req.params.id });
+
       console.log("Deleted Post");
       res.redirect("/profile");
     } catch (err) {

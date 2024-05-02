@@ -4,30 +4,38 @@ const User = require("../models/User");
 
 module.exports = function (passport) {
   passport.use(
-    new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
-      User.findOne({ email: email.toLowerCase() }, (err, user) => {
-        if (err) {
-          return done(err);
-        }
+    new LocalStrategy({ usernameField: "email" }, async (email, password, done) => {
+      try {
+        // Find the user based on the email
+        const user = await User.findOne({ email: email.toLowerCase() });
+
         if (!user) {
+          // No user found with that email
           return done(null, false, { msg: `Email ${email} not found.` });
         }
+
         if (!user.password) {
+          // User registered using a sign-in provider
           return done(null, false, {
             msg:
               "Your account was registered using a sign-in provider. To enable password login, sign in using a provider, and then set a password under your user profile.",
           });
         }
-        user.comparePassword(password, (err, isMatch) => {
-          if (err) {
-            return done(err);
-          }
-          if (isMatch) {
-            return done(null, user);
-          }
+
+        // Compare passwords if the user is found
+        const isMatch = await user.comparePassword(password);
+
+        if (isMatch) {
+          // Successful login
+          return done(null, user);
+        } else {
+          // Password does not match
           return done(null, false, { msg: "Invalid email or password." });
-        });
-      });
+        }
+      } catch (err) {
+        // Error occurred during user lookup or password comparison
+        return done(err);
+      }
     })
   );
 
@@ -35,7 +43,12 @@ module.exports = function (passport) {
     done(null, user.id);
   });
 
-  passport.deserializeUser((id, done) => {
-    User.findById(id, (err, user) => done(err, user));
+  passport.deserializeUser(async (id, done) => {
+    try {
+      const user = await User.findById(id);
+      done(null, user);
+    } catch (err) {
+      done(err);
+    }
   });
 };

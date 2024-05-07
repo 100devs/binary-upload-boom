@@ -1,0 +1,59 @@
+<section id="commentSection">
+  <!-- comment On Post -->
+  <h2>Comments</h2>
+  <% for(var i=0; i<comments.length; i++) {%>
+    <div class="card mb-4">
+      <div class="card-body">
+        <%= comments[i].comment%>
+          <div class="d-flex justify-content-between">
+            <!-- User Name/Pic -->
+            <div class="d-flex flex-row align-items-center">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(31).webp" alt="avatar" width="25"
+                height="25" />
+              <p class="small mb-0 ms-2">
+                <%=comments[i].userName%>
+              </p>
+            </div>
+
+            <!-- Like and Delete Buttons -->
+            <div class="d-flex flex-column align-items-center text-primary">
+
+              <!-- <div class="likeButton"> -->
+              <form action="/comment/likeComment/<%= post.id %>/<%=comments[i]._id%>?_method=PUT" method="POST">
+                <button class="btn btn-primary">
+                  <i class="fas fa-heart"></i>
+                </button>
+              </form>
+              <p class="small mb-0">
+                Likes: <%= comments[i].likes%>
+              </p>
+              <!-- </div> -->
+
+              <div class="deleteButton">
+                <%if(comments[i].user==user.id){ %>
+                  <form action="/comment/deleteComment/<%= post.id %>/<%=comments[i]._id%>?_method=DELETE" method="POST"
+                    class="col-3">
+                    <button class="btn btn-danger .btn-sm" type="submit">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </form>
+                  <%}%>
+              </div>
+
+            </div>
+          </div>
+      </div>
+    </div>
+    <% } %>
+
+      <!-- Form to add a comment -->
+      <div class="mt-5">
+        <h2>Add a Comment</h2>
+        <form action="/comment/createComment/<%= post._id%>" method="POST">
+          <div class="mb-3">
+            <input type="text" class="form-control" id="comment" name="comment">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+</section>

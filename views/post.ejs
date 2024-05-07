@@ -4,6 +4,8 @@
     <div class="col-6">
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
+
+      <!-- Like Post -->
       <div class="row justify-content-between">
         <form
           class="col-1"
@@ -13,7 +15,7 @@
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
+        <%if(post.user==user.id){ %>
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
           method="POST"
@@ -23,10 +25,17 @@
         </form>
         <%}%>
       </div>
+
+      <!-- Comment Section -->
+      <%- include('partials/comments') -%>
     </div>
-    <div class="col-3 mt-5">
+
+    <!-- POST CAPTION -->
+    <div class="col-3 mt-5" id="postCaption">
       <p><%= post.caption %></p>
     </div>
+
+    <!-- RETURN BUTTONS -->
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

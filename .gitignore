@@ -1,3 +1,6 @@
 node_modules
 .env
 .vscode
+notes
+views/partials/comment-old.ejs
+.DS_Store

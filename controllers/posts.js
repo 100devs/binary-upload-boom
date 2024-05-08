@@ -36,6 +36,7 @@ module.exports = {
         image: result.secure_url,
         cloudinaryId: result.public_id,
         caption: req.body.caption,
+        comments: [],
         likes: 0,
         user: req.user.id,
       });
@@ -71,6 +72,22 @@ module.exports = {
       res.redirect("/profile");
     } catch (err) {
       res.redirect("/profile");
+    }
+  },
+  addComment: async (req, res) => {
+    try {
+      console.log("ID:", req.params.id); // Log the ID
+      console.log("Request Method:", req.method); // Log the request method
+      await Post.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          $push: { comments: req.body.comment },
+        }
+      );
+      console.log("Comment has been added!");
+      res.redirect(`/post/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
     }
   },
 };

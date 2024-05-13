@@ -1,10 +1,13 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
+      //find all post for this user
       const posts = await Post.find({ user: req.user.id });
+      //render it on profile page with data from db users post
       res.render("profile.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
@@ -12,7 +15,9 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
+      //search Post model search post by its id
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      //render post on feed
       res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
@@ -20,26 +25,42 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
+      //search Post model search post by its id-req.params.id = request id parameter
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({ post: req.params.id })
+        .sort({ createdAt: "desc" })
+        .lean();
+      //render post on post page-req.user user currently logged in
+      res.render("post.ejs", {
+        post: post,
+        user: req.user,
+        comments: comments,
+      });
     } catch (err) {
       console.log(err);
     }
   },
   createPost: async (req, res) => {
     try {
-      // Upload image to cloudinary
+      // Upload file image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
-
+      //create new post in db
       await Post.create({
+        //grab title from form
         title: req.body.title,
+        //grab url from image
         image: result.secure_url,
+        //
         cloudinaryId: result.public_id,
+        //grab caption from form
         caption: req.body.caption,
+        //hard code likes
         likes: 0,
+        //what user logged in ids
         user: req.user.id,
       });
       console.log("Post has been added!");
+      //redirect back to profile route
       res.redirect("/profile");
     } catch (err) {
       console.log(err);
@@ -54,6 +75,7 @@ module.exports = {
         }
       );
       console.log("Likes +1");
+      //redirect back to the post they were on
       res.redirect(`/post/${req.params.id}`);
     } catch (err) {
       console.log(err);

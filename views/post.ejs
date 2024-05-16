@@ -23,6 +23,19 @@
         </form>
         <%}%>
       </div>
+      <form action="/comment/createComment/<%= post.id %>" method="POST">
+        <div class="mb-3">
+          <label for="comment" class="form-label">Comment on this post</label>
+          <textarea class="form-control" id="comment" name="comment"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <% for(var i=0; i<comments.length; i++) {%>
+        <div class="col-6 justify-content-between mt-5">
+            <h6><%= comments[i].user.userName%></h6>
+            <span><%= comments[i].comment%></span>
+        </div>
+      <% } %>
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>

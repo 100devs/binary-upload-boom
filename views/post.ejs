@@ -27,6 +27,35 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <div class="mt-5">
+      <h2>Add a comment</h2>
+<<<<<<< HEAD
+      <form action="/comment/createComment/<%=post._id%>"  method="POST">
+=======
+      <form action="/comment/createComment/<%=post._id%>" method="POST">
+>>>>>>> 4129bedfe93ac30e728fa18acb1dfb96632d4d30
+        <div class="mb-3">
+            <label for="comment" class="form-label">Comment</label>
+            <input type="text" class="form-control" id="comment" name="comment">
+        </div>
+<<<<<<< HEAD
+        <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+=======
+        <button type="submit" class="btn btn-primary">Submit</button>
+>>>>>>> 4129bedfe93ac30e728fa18acb1dfb96632d4d30
+      </form>
+    </div>
+    <ul>
+      <% for(var i=0; i<comments.length; i++) {%>
+        <li class="col-6 justify-content-between mt-5">
+          <%= comments[i].comment%>
+<<<<<<< HEAD
+          </a>
+=======
+>>>>>>> 4129bedfe93ac30e728fa18acb1dfb96632d4d30
+        </li>
+      <% } %>
+    </ul>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

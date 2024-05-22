@@ -1,29 +1,26 @@
 const mongoose = require("mongoose");
 
-const PostSchema = new mongoose.Schema({
-  title: {
+const CommentSchema = new mongoose.Schema({
+  comment: {
     type: String,
     required: true,
   },
-  image: {
-    type: String,
-    require: true,
-  },
-  //When we delete the post we want to delete the image from cloudinary
-  cloudinaryId: {
-    type: String,
-    require: true,
-  },
-  caption: {
-    type: String,
-    required: true,
-  },
+ 
   likes: {
     type: Number,
     required: true,
   },
-  user: {
+ 
+  post:{
     type: mongoose.Schema.Types.ObjectId,  //referencing the 'User' model
+    ref: "Post",
+  },
+  createdBy:{
+    type:String,
+    ref:"User",
+  },
+  createdById:{  
+    type:mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
   createdAt: {
@@ -35,4 +32,4 @@ const PostSchema = new mongoose.Schema({
 
 
 //Exporting the schema as a model.'Post' is the name of the model, and assigning PostSchema to that model.We can add a third argument, mongoose will automatically make one, the plural of Post- this will be the collection name.
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Comment", CommentSchema);

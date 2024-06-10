@@ -26,6 +26,14 @@ module.exports = {
       console.log(err);
     }
   },
+  // getComment: async (req, res) => {
+  //   try {
+  //     const post = await Post.findById(req.params.id);
+  //     res.render("post.ejs", { post: posts, user: req.user, comments: []});
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // },
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary

@@ -1,6 +1,7 @@
-const passport = require("passport");
-const validator = require("validator");
-const User = require("../models/User");
+// Core Modules
+const passport = require("passport"); // require passport
+const validator = require("validator"); // require validator
+const User = require("../models/User"); // requiring model path for User.js
 
 exports.getLogin = (req, res) => {
   if (req.user) {
@@ -46,8 +47,8 @@ exports.postLogin = (req, res, next) => {
 
 exports.logout = (req, res) => {
   req.logout(() => {
-    console.log('User has logged out.')
-  })
+    console.log("User has logged out.");
+  });
   req.session.destroy((err) => {
     if (err)
       console.log("Error : Failed to destroy the session during logout.", err);
@@ -109,10 +110,10 @@ exports.postSignup = (req, res, next) => {
         req.logIn(user, (err) => {
           if (err) {
             return next(err);
-          }
+          } // closing tag for err conditional
           res.redirect("/profile");
-        });
-      });
-    }
-  );
-};
+        }); // Closing bracket for Login
+      }); // closing bracket for user.save
+    } // closing bracket findOne return
+  ); // closing bracket for findOne
+}; // closing bracket for postsignup

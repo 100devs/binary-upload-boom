@@ -1,3 +1,5 @@
+// Authentication middleware, redirect the user according to auth state.
+
 module.exports = {
   ensureAuth: function (req, res, next) {
     if (req.isAuthenticated()) {

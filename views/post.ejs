@@ -27,6 +27,24 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <div>
+      <h2>Comments</h2>
+      <ul>
+        <% comments.forEach(comment => { %>
+        <li data-id="<%= comment._id %>">
+          <p><%= comment.userName %></p>
+          <p><%= comment.comment %></p>
+          <% if(user.id === comment.madeBy) { %>
+          <button>🗑️</button>
+          <% } %>
+        </li>
+        <% }) %>
+      </ul>
+      <form id="addCommentForm" action="submit" data-id="<%= post.id %>">
+        <textarea id="comment" placeholder="Add a comment"></textarea>
+        <button id="add-comment">Add Comment</button>
+      </form>
+    </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

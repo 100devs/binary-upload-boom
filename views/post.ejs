@@ -21,7 +21,32 @@
         >
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
+
+        
+        
         <%}%>
+      </div>
+
+      <div class="mt-5">
+        <h2>Comments</h2>
+        <form action="/comment/createComment/<%= post.id %>" method="POST">
+          <div class="mb-3">
+              <label for="comment" class="form-label">Leave a comment</label>
+              <input type="text" class="form-control" id="comment" name="comment">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <div class="row justify-content-center mt-5">
+        <ul class="row list-unstyled">
+          <% for(var i=0; i < comments.length; i++) {%>
+            <li class="border-bottom">
+              <span>User:  <%=comments[i].userName%> </span>
+                <p><%=comments[i].comment%></p>
+              
+            </li>
+          <% } %>
+          </ul>
       </div>
     </div>
     <div class="col-3 mt-5">

@@ -1,0 +1,111 @@
+/*
+ * Globals
+ */
+
+img{
+  height:50%;
+  width:25%;
+}
+/* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+}
+
+
+/*
+ * Base structure
+ */
+
+.cover-container {
+  max-width: 42em;
+}
+
+
+/*
+ * Header
+ */
+
+.nav-masthead .nav-link {
+  color: rgba(255, 255, 255, .5);
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+.nav-masthead .active {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+
+
+html,
+body {
+    height: 100%;
+    font-size: 1rem;
+    text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+    box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+.card-container{
+  margin-top: 10rem;  
+}
+
+.page-header {
+    margin-top: 4rem;
+    font-size: 1.25rem;
+}
+
+/* .page-section {
+    background-color: red;
+    height: 40%;
+} */
+
+.btn-nav{
+    margin-right: .5rem;
+}
+
+
+
+.home{
+    border: 2px solid black;
+    min-height: 80vh;
+}
+
+.card-img-top{
+    width: 100%;
+    height: 80%;
+}
+
+.btn-liked{
+    color: #f03566;
+  }
+
+.btn-bookmarked{
+    background: #ffff;
+}
+
+.btn-sign-in{
+    background-color: #e94135;
+    color: #ffff;
+}
+
+p{
+  font-size: 50px;
+}

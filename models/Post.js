@@ -14,7 +14,7 @@ const PostSchema = new mongoose.Schema({
     require: true,
   },
   caption: {
-    type: String,
+    type: [String],
     required: true,
   },
   likes: {
@@ -29,6 +29,7 @@ const PostSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+
 });
 
 module.exports = mongoose.model("Post", PostSchema);

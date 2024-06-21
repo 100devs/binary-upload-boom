@@ -1,18 +1,21 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-6">
-      <h2><%= post.title %></h2>
+<div class="container card-container">
+  <div class="row">
+    
+    
+      <div class="col-md-6">
+
       <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
+      <div class="row row-cols-3">
         <form
-          class="col-1"
+          class="col-2"
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
+        <h3 class="col-3 display-6">Likes: <%= post.likes %></h3>
+
         <%if(post.user == user.id){ %>
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
@@ -22,15 +25,47 @@
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
         <%}%>
+        <p class="display-6">  
+          <strong>
+            By: <%= user.userName %>
+        </strong>
+      </p>
+    
       </div>
     </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
+    <div class="col-md-6">
+      <h3 class="display-4"> Workout Summary</h3>
+      <h2 class="display-6">Muscle Group Targeted: <%= post.title %></h2>
+      <h3 class="display-6">Reps and Sets</h3>
+      <ul class="list-unstyled lead">
+        <% for(var i=0; i<post.caption.length; i++) {%>
+            <li class="p-1 g-2"><%= post.caption[i] %></li>
+            <% } %>
+          </ul>
+     <h2 class="display-6">Comment Section</h2>
+      <!--Comment Section-->
+      <hr class="style1">
+      <ul>
+        <% for(var i=0; i<comments.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5 lead">
+            User <%= user.userName %> commented:
+         <%= comments[i].comment%>
+          </li>
+        <% } %>
+      </ul>
     </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
+    <div class="mt-5">
+      <h2 class="display-5">Add a comment</h2>
+      <form action="/comment/createComment/<%=post._id%>"" method="POST">
+        <div class="mb-3">
+            <label for="title" class="form-label lead">Comment</label>
+            <input type="text" class="form-control" id="comment" name="comment">
+        </div>
+     
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>
+   
   </div>
 </div>
 

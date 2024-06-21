@@ -23,6 +23,31 @@
         </form>
         <%}%>
       </div>
+      
+      <!-- Form for adding comment to post -->
+      <form action="/comment/createComment/<%= post.id %>" method="POST">
+        <div class="mb-3">
+            <label for="comment" class="form-label">Comment</label>
+            <input type="text" class="form-control" id="comment" name="comment">
+        </div>
+        <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+      </form>
+
+      <ul class="row list-unstyled mt-4">
+        <% for (let comment of comments) { %>
+          <li class="list-group-flush">
+            <%= comment.createdBy %> says: <%= comment.comment %>
+          </li>
+          <% if (user.id == comment.createdById) { %>
+            <form
+            action="/comment/deleteComment/<%=post.id%>/<%= comment._id %>?_method=DELETE"
+            method="POST"
+            class="col-3">
+            <button class="btn btn-outline-danger fa fa-trash" type="submit"></button>
+          </form>
+          <% } %>
+        <% } %>
+      </ul>
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>

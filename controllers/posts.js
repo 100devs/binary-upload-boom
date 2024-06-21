@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment")
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -21,7 +22,9 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      console.log(req.params.id)
+      const comments = await Comment.find().find({post: req.params.id }).sort({createdAt: "desc" }).lean(); //grabs all comments from mongoDB on the post
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });   //renders posts as well as corresponding comments for that post
     } catch (err) {
       console.log(err);
     }
@@ -30,7 +33,7 @@ module.exports = {
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
-
+      console.log(result)
       await Post.create({
         title: req.body.title,
         image: result.secure_url,
@@ -48,9 +51,9 @@ module.exports = {
   likePost: async (req, res) => {
     try {
       await Post.findOneAndUpdate(
-        { _id: req.params.id },
+        { _id: req.params.id }, //finds post that has the id in the URL
         {
-          $inc: { likes: 1 },
+          $inc: { likes: 1 }, //Increment the likes property by 1
         }
       );
       console.log("Likes +1");

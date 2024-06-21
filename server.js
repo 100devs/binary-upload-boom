@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const PORT = 2121
 const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
@@ -10,6 +11,8 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
+const commentRoutes = require("./routes/comments");
+
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -56,8 +59,10 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
+app.use("/comment", commentRoutes )
+
 
 //Server Running
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
   console.log("Server is running, you better catch it!");
 });

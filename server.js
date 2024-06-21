@@ -10,6 +10,8 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
+//This is the Route for Comment Section Assignment (See post.ejs)
+const commentRoutes = require("./routes/comments");
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -61,3 +63,6 @@ app.use("/post", postRoutes);
 app.listen(process.env.PORT, () => {
   console.log("Server is running, you better catch it!");
 });
+
+//Comments Route for Comment Section Assignment (See post.ejs)
+app.use("/comment", commentRoutes);

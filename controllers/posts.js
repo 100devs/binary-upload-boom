@@ -38,6 +38,7 @@ module.exports = {
         caption: req.body.caption,
         likes: 0,
         user: req.user.id,
+        userName: req.user.userName,
       });
       console.log("Post has been added!");
       res.redirect("/profile");
@@ -73,4 +74,24 @@ module.exports = {
       res.redirect("/profile");
     }
   },
+  commentPost: async (req, res) => {
+    console.log(req.body.comment);
+    try {
+      await Post.findOneAndUpdate(
+        { _id: req.params.id },
+        { $push: {
+          comments: {
+            message: req.body.comment,
+            userName: req.user.userName,
+            user: req.user.id,
+          }}
+        }
+      );
+      console.log("Comment added");
+      res.redirect(`/post/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+      res.redirect(`/post/${req.params.id}`);
+    }
+  }
 };

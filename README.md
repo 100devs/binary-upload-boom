@@ -1,20 +1,66 @@
-# Install
 
-`npm install`
+# Pictogram
 
----
+A full-stack photo-sharing social media app that enables users to post photos & comment on posts.
 
-# Things to add
+**Link to project:** https://pictogram.cyclic.app
 
-- Create a `.env` file in config folder and add the following as `key = value`
-  - PORT = 2121 (can be any port example: 3000)
-  - DB_STRING = `your database URI`
-  - CLOUD_NAME = `your cloudinary cloud name`
-  - API_KEY = `your cloudinary api key`
-  - API_SECRET = `your cloudinary api secret`
+![pictogram](https://user-images.githubusercontent.com/101529105/195208048-b48bc942-e8bd-4cd7-86e8-9c873c1e98c2.png)
 
----
+## Tech Stack
 
-# Run
+**Client:** JavaScript, EJS, TailwindCSS
 
-`npm start`
+**Server:** Node, Express, MongoDB
+
+**Dependencies:** bcrypt, connect-mongo, dotenv, ejs, express, express-flash, express-session, mongodb, mongoose, morgan, nodemon, passport, passport-local, validator
+
+## Features
+
+- Secure login with Passport Auth
+- Upload photo posts with title and caption
+- See other users posts in the photo feed
+- Like and comment on other posts
+
+
+## Installation
+
+Install with npm
+
+```bash
+  npm install bcrypt connect-mongo dotenv ejs express express-flash express-session mongodb mongoose morgan nodemon passport passport-local validator
+```
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your `.env` file
+
+`PORT = <port>` (can be any port, ex: 3000)
+
+### Database
+
+`DB_STRING = <your MongoDB uri>`
+## Optimizations
+
+- Added collapsable nested comments
+
+**Planned Features & Improvements:**
+
+- Make posts shareable
+- Create friends list
+
+## Other Examples of My Work
+
+### Mailroom
+https://mailroom.cyclic.app
+
+![mailroom](https://user-images.githubusercontent.com/101529105/195208240-49e71fff-53c6-4d92-86ca-79dc31daccc2.png)
+
+### Pocket
+https://pocket.cyclic.app
+
+![pocket](https://user-images.githubusercontent.com/101529105/195208290-07a5521d-bc47-40a1-9afb-8db5ed959bb8.png)
+
+### myPetPal
+https://mypetpal.onrender.com
+
+![myPetPal](https://user-images.githubusercontent.com/101529105/195208309-45fa413f-58e7-4edc-852c-47d9478b4718.png)

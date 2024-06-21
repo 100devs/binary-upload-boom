@@ -1,37 +1,62 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-6">
-      <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
+
+<div style="display: flex; justify-content: center">
+  <div class="card w-96 bg-base-100 shadow-xl" style="width: 70%">
+    <figure><img src="<%= post.image%>" /></figure>
+    <div class="card-body">
+      <div class="mb-3" style="display: flex; justify-content: space-between">
         <form
           class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+        <button class="fa fa-heart btn btn-primary btn-sm" type="submit" style="border: none; font-size: 2rem;"></button>
         </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
+        <span class="col-3">Likes: <%= post.likes %></span>
+      </div>
+      <h2 class="card-title"><%= post.title %></h2>
+      <span class="badge"><%= post.user.userName %></span>
+      <p><%= post.caption %></p>
+
+      <div style="display: flex; justify-content: flex-end">
+        <%if(post.user.id == user.id){ %>
+          <form
+            action="/post/deletePost/<%= post.id %>?_method=DELETE"
+            method="POST"
+            class="col-3"
+          >
+            <button class="btn btn-primary btn-lg fa fa-trash" type="submit" style="border: none"></button>
+          </form>
+          <%}%>
+      </div>
+      
+      <!-- Add comment -->
+      <div class="mt-5">
+        <h2 class="font-bold mb-1">Add a comment</h2>
+        <form action="/comments/createComment/<%= post.id %>" method="POST">
+          <div class="mb-3">
+              <textarea type="text" class="form-control input input-bordered" id="text" name="text" style="width: 100%"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <%}%>
+      </div>
+
+      <!-- Show comment -->
+      <div class="container">
+        <div class="row justify-content-center mt-5">
+          <ul class="row list-unstyled">
+            <% for(var i=0; i<comments.length; i++) {%>
+              <%- include('partials/comment', { postId: post.id, comment: comments[i], depth: 0 }) -%>
+            <% } %>
+            </ul>
+        </div>
       </div>
     </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
-    </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
-    </div>
   </div>
+</div>
+
+<div class="mt-5 mb-5" style="display: flex; justify-content: center">
+  <a class="btn btn-primary" href="/feed">Return to Feed</a>
 </div>
 
 <%- include('partials/footer') -%>

@@ -1,15 +1,31 @@
 <%- include('partials/header') -%>
-  <div class="container">
-    <div class="row justify-content-center mt-5">
-      <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
+<div style="display: flex; flex-direction: column; align-items: center">
+  <% for(var i=0; i<posts.length; i++) {%>
+    <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mb-3.5">
+      <figure>
+        <a href="/post/<%= posts[i]._id%>">
+          <img class="img-fluid" src="<%= posts[i].image%>">
+        </a>
+      </figure>
+      <div class="card-body">
+        <div class="mb-3" style="display: flex; justify-content: space-between">
+          <form
+            class="col-1"
+            action="/post/likePost/<%= posts[i].id %>?_method=PUT"
+            method="POST"
+          >
+          <button class="fa fa-heart btn btn-primary btn-sm" type="submit" style="border: none; font-size: 2rem;"></button>
+          </form>
+          <span class="col-3">Likes: <%= posts[i].likes %></span>
+        </div>
+        <h2 class="card-title"><%= posts[i].title %></h2>
+        <p><%= posts[i].caption %></p>
+        <div class="card-actions justify-end">
+          <a href="/post/<%= posts[i]._id%>" class="btn btn-primary">View post</a>
+        </div>
+      </div>
     </div>
-  </div>  
+  <% } %>
+</div>
+   
 <%- include('partials/footer') -%>

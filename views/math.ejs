@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rockit Math</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/imgs/favicon-32x32.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/math.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    
+      <!-- NavBar -->
+      <div class="navbar bg-primary">
+        <div class="flex-1">
+          <a class="btn btn-lg btn-primary normal-case text-xl" href="/profile"
+            >Rock-It Math</a
+          >
+        </div>
+        <div class="w-1/4 flex-center invisible lg:visible">
+          <img
+            class="w-1/3"
+            src="https://res.cloudinary.com/dc7suro3y/image/upload/v1664327869/robotNoBG_tlbtgl.png"
+            alt="Robot Logo"
+          />
+        </div>
+        <div class="flex-end">
+          <ul class="menu menu-horizontal p-0">
+            <li>
+              <a
+                href="/feed"
+                class="btn btn-lg btn-primary text-white normal-case text-xl"
+                >Feed</a
+              >
+            </li>
+            <li>
+              <a
+                href="/profile"
+                class="btn btn-lg btn-primary text-white normal-case text-xl"
+                >Profile</a
+              >
+            </li>
+            <li>
+              <a
+                href="/math"
+                class="btn btn-lg btn-primary text-white normal-case text-xl"
+                >Math Practice</a
+              >
+            </li>
+            <li>
+              <a
+                href="/logout"
+                class="btn btn-lg btn-primary text-white normal-case text-xl"
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    
+
+    <h1 class="appTitle">Rock-It Math</h1>
+
+    <!-- /* ***********Practice Times Tables************ */ -->
+    <section class="multiplication-section">
+      <div class="multiplication-div">Multiplication</div>
+    </section>
+
+    <h2 id="testing-facts">7 x 7</h2>
+
+    <section class="multiplication-game">
+      <label for="practice-multiplying">
+        <!-- <h1 class="multiplication-fact">7x7 =</h1> -->
+      </label>
+      <input type="text" id="practice-multiplying-input" placeholder="Answer" />
+      <button id="practice-multiplying-button">Submit</button>
+    </section>
+
+    <section class="score-section">
+      <span
+        >Correct:
+        <h1 id="number-correct">0</h1></span
+      >
+      <span
+        >Wrong:
+        <h1 id="number-wrong">0</h1></span
+      >
+    </section>
+
+    <!-- /* ***********Flip Card with JS************ */ -->
+    <!-- <section class="scene scene--card">
+      <div class="card">
+        <div class="card__face card__face--front">? x ?</div>
+        <div class="card__face card__face--back">Answer</div>
+      </div>
+    </section>  
+    <button class="newCardButton">New Card</button> -->
+
+    <script src="/js/math.js"></script>
+  </body>
+</html>
+
+<%- include('partials/footer') -%>

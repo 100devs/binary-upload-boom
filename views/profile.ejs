@@ -1,5 +1,173 @@
 <%- include('partials/header') -%>
-<div class="container">
+
+<!-- NavBar -->
+<!-- <div class="navbar bg-primary">
+  <div class="flex-1">
+    <a class="btn btn-lg btn-primary normal-case text-xl" href="/profile"
+      >Rock-It Math</a
+    >
+  </div>
+  <div class="flex-end">
+    <ul class="menu menu-horizontal p-0">
+      <li>
+        <a href="/feed" class="btn btn-lg btn-primary normal-case text-xl"
+          >Feed</a
+        >
+      </li>
+      <li>
+        <a href="/math" class="btn btn-lg btn-primary normal-case text-xl"
+          >Math Practice</a
+        >
+      </li>
+      <li>
+        <a href="/logout" class="btn btn-lg btn-primary normal-case text-xl"
+          >Logout</a
+        >
+      </li>
+    </ul>
+  </div>
+</div> -->
+
+<!-- Welcome Section -->
+<div class="py-10 min-h-min bg-base-100">
+  <div class="py-6 text-center">
+    <h1 class="text-5xl font-bold">
+      Welcome Back <span><%= user.userName %></span>
+      <!-- <p><strong>Email</strong>: <%= user.email %></p> -->
+    </h1>
+    <!-- <div class="py-6 text-center">
+      <a href="/feed" class="btn btn-primary">Feed</a>
+      <a href="/math" class="btn btn-primary">Math Practice</a>
+      <a href="/logout" class="btn btn-primary">Logout</a>
+    </div> -->
+  </div>
+</div>
+<!-- ####################################### -->
+<!-- NEW POST FORMS -->
+
+<!--
+  This example requires Tailwind CSS v2.0+ 
+  
+  This example requires some changes to your config:
+  
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+
+<!-- UPLOAD INFO HERE -->
+<div class="md:grid md:grid-cols-2 md:gap-6">
+  <div class="md:col-span-1 flex justify-center">
+    <div class="px-4 sm:px-0">
+      <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-white">
+        Add a Post
+      </h3>
+      <div class="mt-5">
+        <form
+          action="/post/createPost"
+          enctype="multipart/form-data"
+          method="POST"
+        >
+          <div class="mb-3">
+            <!-- <label for="title" class="form-label">Title</label> -->
+            <input
+              type="text"
+              placeholder="Title"
+              class="input input-bordered input-primary w-full max-w-xs"
+              id="title"
+              name="title"
+            />
+          </div>
+          <div class="mb-3">
+            <textarea
+              class="textarea textarea-primary w-full max-w-xs"
+              id="caption"
+              name="caption"
+              placeholder="Caption"
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="imgUpload" class="form-label">Image</label>
+            <input
+              type="file"
+              class="form-control"
+              id="imageUpload"
+              name="file"
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-outline btn-primary"
+            value="Upload"
+          >
+            Upload
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- display images here -->
+  <div class="grid">
+    <% for(var i=posts.length-1; i>=0; i--) {%>
+    <div class="mt-5 flex justify-center">
+      <div class="w-1/2">
+        <a href="/post/<%= posts[i]._id%>">
+          <img src="<%= posts[i].image%>" />
+        </a>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<!-- <div class="mt-5 md:col-span-1 md:mt-0">
+      <div class="col-6">
+        <ul class="row list-unstyled">
+        <% for(var i=0; i<posts.length; i++) {%>
+          <li class="col-3 justify-content-between mt-5">
+            <a href="/post/<%= posts[i]._id%>">
+              <img class="w-1/4" src="<%= posts[i].image%>">
+            </a>
+          </li>
+        <% } %>
+        </ul>
+        <div class="row justify-content-center mt-5">
+          <a class="btn btn-primary" href="/feed">Return to Feed</a>
+        </div>  
+        <div class="row justify-content-center mt-5">
+          <a class="btn btn-primary" href="/math">Math Practice</a>
+        </div>  
+      </div> 
+    </div> -->
+
+<div class="hidden sm:block" aria-hidden="true">
+  <div class="py-5">
+    <div class="border-t border-gray-200"></div>
+  </div>
+</div>
+
+<%- include('partials/footer') -%>
+
+<!-- OLD CODE IGNORE ####################################### -->
+<!-- <textarea
+  class="textarea textarea-primary textarea-bordered h-24"
+  placeholder="Caption"
+></textarea>
+
+
+
+
+
+ <div class="container">
   <div class="row mt-5">
       <div class="col-6">
           <div>
@@ -25,8 +193,8 @@
               <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
             </form>
           </div>
-      </div>
-      <div class="col-6">
+      </div> -->
+<!-- <div class="col-6">
         <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
@@ -39,8 +207,10 @@
         <div class="row justify-content-center mt-5">
           <a class="btn btn-primary" href="/feed">Return to Feed</a>
         </div>  
-      </div>  
-    </div>
+        <div class="row justify-content-center mt-5">
+          <a class="btn btn-primary" href="/math">Math Practice</a>
+        </div>  
+      </div>   -->
+<!-- </div>
   </div>
-</div>
-<%- include('partials/footer') -%>
+</div> -->

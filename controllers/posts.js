@@ -1,5 +1,6 @@
-const cloudinary = require("../middleware/cloudinary");
+const cloudinary = require('cloudinary').v2;
 const Post = require("../models/Post");
+const Comment = require("../models/Comment")
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -13,7 +14,8 @@ module.exports = {
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      res.json({ posts: posts });
+      console.log(posts)
     } catch (err) {
       console.log(err);
     }
@@ -21,44 +23,53 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
     }
   },
-  createPost: async (req, res) => {
-    try {
-      // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
 
-      await Post.create({
-        title: req.body.title,
-        image: result.secure_url,
-        cloudinaryId: result.public_id,
-        caption: req.body.caption,
-        likes: 0,
-        user: req.user.id,
-      });
-      console.log("Post has been added!");
-      res.redirect("/profile");
-    } catch (err) {
-      console.log(err);
-    }
-  },
+// ...
+
+createPost: async (req, res) => {
+  try {
+    // Upload image to Cloudinary
+    const result = await cloudinary.uploader.upload(req.file.path);
+
+    await Post.create({
+      title: req.body.title,
+      image: result.secure_url, // Use the Cloudinary image URL
+      cloudinaryId: result.public_id, // Save the Cloudinary public ID for further operations if needed
+      caption: req.body.caption,
+      likes: 0,
+      user: 'test',
+    });
+    console.log("Post has been added!");
+    res.redirect("/profile");
+  } catch (err) {
+    console.log(err);
+  }
+},
+
   likePost: async (req, res) => {
     try {
-      await Post.findOneAndUpdate(
+      const updatedPost = await Post.findOneAndUpdate(
         { _id: req.params.id },
         {
           $inc: { likes: 1 },
-        }
+        },
+        { new: true } // Add this option to return the updated document
       );
+  
       console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
+      res.json({ likes: updatedPost.likes }); // Return the updated number of likes
     } catch (err) {
       console.log(err);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   },
+  
   deletePost: async (req, res) => {
     try {
       // Find post by id

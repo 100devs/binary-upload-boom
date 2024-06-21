@@ -1,5 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
+const User = require("../models/User");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -21,7 +23,16 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({post: req.params.id}).lean();
+      let commentUsers = [];
+      let dates = [];
+      for (let comment of comments) {
+        const currentUser = await User.findById(comment.createdBy);
+        const userNamePretty = currentUser.userName;
+        commentUsers.push(userNamePretty);
+        const currentDate = String(comment.createdAt);
+      }
+      res.render("post.ejs", { post: post, user: req.user, comments: comments, commentUsers: commentUsers, commentDates: dates });
     } catch (err) {
       console.log(err);
     }
@@ -36,8 +47,8 @@ module.exports = {
         image: result.secure_url,
         cloudinaryId: result.public_id,
         caption: req.body.caption,
-        likes: 0,
         user: req.user.id,
+        likedBy: []
       });
       console.log("Post has been added!");
       res.redirect("/profile");
@@ -47,16 +58,18 @@ module.exports = {
   },
   likePost: async (req, res) => {
     try {
-      await Post.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
-        }
-      );
-      console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
+      const currentUser = req.user.id;
+      let post = await Post.findById(req.params.id);
+      if (post.likedBy.includes(currentUser)) {
+        post.likedBy.pull(currentUser)
+        await post.save();
+      } else {
+        post.likedBy.push(currentUser);
+        await post.save();
+      }
+      res.redirect("back");
     } catch (err) {
-      console.log(err);
+      console.log("Error on post like/dislike: ", err);
     }
   },
   deletePost: async (req, res) => {

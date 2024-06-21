@@ -1,35 +1,70 @@
 <%- include('partials/header') -%>
 <div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-6">
-      <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
-        <form
-          class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
-          method="POST"
-        >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
-        </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
-        <%}%>
-      </div>
-    </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
-    </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
+  <div class="row justify-content-center">
+      <div class="col-6">
+        <h2><%= post.title %></h2>
+        <img class="img-fluid" src="<%= post.image%>" />
+        <p><%= post.caption %></p>
+          <div class="row" style="margin-top:3%;margin-bottom:3%">
+            <form
+              class="col"
+              action="/post/likePost/<%= post.id %>?_method=PUT"
+              method="POST"
+            >
+              <button class="btn btn-primary fa fa-heart" type="submit"></button>
+            </form>
+            <h3 class="col" style="text-align:center">Likes: <%= post.likedBy.length %></h3>
+            <!-- Inline CSS violates separation of concerns and we don't do this. Buut we're also not doing an external CSS file for this project specifically, for the sake of it,
+            and understanding Bootstrap well enough to turn this page into not an eyesore is currently out of scope. -->
+            <% if (post.user == user.id) { %>
+              <form
+                action="/post/deletePost/<%= post.id %>?_method=DELETE"
+                method="POST"
+                class="col"
+                style="text-align:right"
+              >
+                <button class="btn btn-primary fa fa-trash" type="submit"></button>
+              </form>
+            <%}%>
+          </div>
+
+
+        <% for (let i = 0; i < comments.length; i++) {%>
+          <div class="row">
+            <p><%= commentUsers[i] %>, <%= String(comments[i].createdAt).replace(/\+.*/, "") %> </p>
+            <p><%= comments[i].comment %></p>
+          </div>
+          <div class="row">
+            <form
+              class="col"
+              action="/comments/likeComment/<%= comments[i]._id %>?_method=PUT"
+              method="POST"
+            >
+              <button class="btn btn-secondary fa fa-heart" type="submit"></button>
+            </form>
+            <h4 class="col" style="text-align:center">Likes: <%= comments[i].likedBy.length %></h3>
+            <% if (comments[i].createdBy == user.id) { %>
+              <form
+                action="/comments/deleteComment/<%= comments[i]._id %>?_method=DELETE"
+                method="POST"
+                class="col"
+                style="text-align:right"
+              >
+                <button class="btn btn-secondary fa fa-trash" type="submit"></button>
+              </form>
+            <%}%>
+          </div>
+        <% } %>
+        <div class="row">
+          <form action="/comments/createComment/<%= post.id %>" method="POST" style="display:flex" class="justify-content-center">
+            <input type="text" name="comment" id="comment">
+            <button class="btn btn-primary" type="submit">Add Comment</button>
+          </form>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col"><a class="btn btn-primary" href="/profile">Return to Profile</a></div>
+            <div class="col" style="text-align:right"><a class="btn btn-primary" href="/feed">Return to Feed</a></div>
+        </div>
     </div>
   </div>
 </div>

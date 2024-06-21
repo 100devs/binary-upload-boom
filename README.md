@@ -18,3 +18,9 @@
 # Run
 
 `npm start`
+
+
+# Optimization 
+
+- Add user name to comment field
+  - Keep getting errors when trying

@@ -1,0 +1,49 @@
+1 - Add a delete button and delete ability to each comment which is only visible to the user who submitted the comment.
+
+What is needed:
+// Done    - The user/userID of who created the comment
+// Done    - a button
+// Done    - a conditional statement in the view that compares the logged in user with the comment userID
+// Done    - add a controller with a delete method 
+// Done    - need route to this controller
+// Done    - DB storage of the user who created the comment // Models//Backend
+
+
+2 - Add the username associated with each comment to the comment text.
+
+What is needed:
+// Done    - find by username based on the userID attached to comment
+// Done    - display in DOM 
+
+-------------------
+-------------------
+-------------------
+
+3 - Add button/link in Profile to edit char sheet
+    - Add button to increase skill form by 1 row
+    - Add Model and Controller js files
+4 - Add button/link in Profile to view char sheet
+    - Add Model and Controller js files
+    - Add button/link for the following in their own ejs views:
+        - Money/Gear
+        - Personal Notes
+        - Current Job/Quest
+        - Vehicles/Mounts
+        - Misc system/game specific stuff
+    - Add button/link to the RULES
+        - Have display in feed?
+    - Add button/link to vehicle
+//Done        - Link to shared notes?
+//Done        - Displayed in feed via image upload
+        - Link to vehicle inventory
+    - Add button/link to npc members/crew
+5 - Display Char Sheet in feed for active user and superUser (myself/DM)
+    - Add Model and Controller js files
+6 - Super User (DM) view in Profile/Feed - Add the following Links
+    - Add Model and Controller js files
+    - RULES
+    - List of NPCs and Locations
+        - Includes statblocks and basic RP info
+    - Tables
+        - Will need a button from a tables.ejs view to add a new table to keep it system agnostic
+7 - Make it pretty...

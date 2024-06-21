@@ -5,6 +5,7 @@
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
+              <p>Member since <%= user.createdAt.toISOString().split('T')[0] %>.</p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
           <div class="mt-5">

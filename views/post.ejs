@@ -27,6 +27,30 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <ul>
+      <% for(var i=0; i<comments.length; i++) {%>
+        <li class="col-6 justify-content-between mt-5 comment">
+          <p><%= comments[i].userName %>:</p>
+          <p><%= comments[i].comment %></p>
+          <%if(comments[i].user == user.id){ %>
+            <form
+              action="/comment/deleteComment/<%= comments[i]._id %>?_method=DELETE"
+              method="POST"
+              class="col-3"
+            >
+              <button class="btn fa fa-trash" type="submit"></button>
+            </form>
+          <%}%>
+        </li>
+      <% } %>
+    </ul>
+    <form action="/comment/createComment/<%= post.id %>" method="POST">
+      <div class="mb-3">
+          <label for="comment" class="form-label">Comment</label>
+          <input type="text" class="form-control" id="comment" name="comment">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

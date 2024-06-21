@@ -1,0 +1,14 @@
+.comment p {
+    margin: 0;
+}
+
+.comment p:first-of-type {
+    font-weight: 700;
+}
+
+.comment {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 8px;
+    list-style: none;
+}

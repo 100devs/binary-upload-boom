@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -21,7 +22,9 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+      // Use Comment model to find the post query params id and sort like you would posts
+      res.render("post.ejs", { post: post, user: req.user, comment: comments });
     } catch (err) {
       console.log(err);
     }
@@ -47,12 +50,41 @@ module.exports = {
   },
   likePost: async (req, res) => {
     try {
+      //grab the unique post id and put it in a variable
+      const post = await Post.findById(req.params.id)
+      // true/false if that specific Post property likedBy contains the objectId already
+      const likedPost = post.likedBy.includes(req.user.id)
+      if (likedPost) {
+        //find the post w/ the req.params.id and change the # of likes in the database to -1
+        await Post.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+            $inc: { likes: -1 },
+          }
+        );
+        // also find the post w/the req.param.id and remove the user objectId from the likedBy array
+        await Post.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+            $pull: { likedBy: req.user.id },
+          }
+        );
+      } else {
+        //find the post w/ the req.params.id and likes ++
       await Post.findOneAndUpdate(
         { _id: req.params.id },
         {
           $inc: { likes: 1 },
         }
       );
+      // also find the post with the req.params.id and add the user to the likedBy array
+      await Post.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          $push: { likedBy: req.user.id },
+        }
+      );
+    }
       console.log("Likes +1");
       res.redirect(`/post/${req.params.id}`);
     } catch (err) {

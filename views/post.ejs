@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
-      <h2><%= post.title %></h2>
+      <h2><%=post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
         <form
@@ -27,6 +27,55 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+
+    <div class="mt-5">
+      <h2>Add a comment</h2>
+      <!-- form action was missing the specific post to bind the comments to -->
+      <form action="/comments/createComment/<%=post._id%>" method="POST">
+
+        <div class="mb-3">
+          <label for="comment" class="form-label">Comment</label>
+          <textarea class="form-control" id="caption" name="comment"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+      <ul class="row list-unstyled">
+        <% for(var i=0; i<comment.length; i++) {%>
+
+          <li class="col-6 justify-content-between mt-5">
+            <span class="bold"><%=comment[i].userName%> :</span>
+            <!-- grab the object from our controller, and pull off the comment property to insert in our ejs -->
+            <%=comment[i].comment%>  
+            <div class="row justify-content-between">
+              <form
+                class="col-1"
+                action="/comments/likeComment/<%=comment[i]._id %>?_method=PUT"
+                method="POST"
+              >
+                <button class="btn btn-primary fa fa-heart" type="submit"></button>
+              </form>
+              <h3 class="col-3">Likes: <%= comment[i].likes %></h3>
+              <!-- we are using the properties/data passed from the controller to the views -->
+              <%if(comment[i].createdById == user.id){ %>
+              <!--form paths come from our routes, in the order they exist in the routes -->
+              <form
+                action="/comments/deleteComment/<%=post._id%>/<%=comment[i]._id %>?_method=DELETE"
+                method="POST"
+                class="col-3"
+              >
+                <button class="btn btn-primary fa fa-trash" type="submit"></button>
+              </form>
+              <%}%>
+            </div>
+          </li>
+        <% } %>
+        </ul>    
+    </div>
+
+
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

@@ -1,11 +1,34 @@
-<%- include('partials/header') -%>
+<!DOCTYPE html>
+<html lang="en" data-theme="aqua">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HìnH</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
+</head>
 
-<main class="container">
-    <div class="row justify-content-around mt-5">
-        <a href="/login" class="col-3 btn btn-primary"> Login</a>
-        <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
+<body>
+<div class="hero min-h-screen bg-base-200">
+    <div class="hero-content text-center">
+      <div class="max-w-md">
+        <h1 class="text-5xl font-bold">Hello there</h1>
+        <p class="py-6">Welcome to the Nguyen family's social media site</p>
+        <div class="container">
+            <div class="row justify-content-around mt-5 loginAndSignUp">
+                <a href="/login" class="col-3 btn btn-primary"> Login</a>
+                <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
+            </div>
+        </div>
+      </div>
     </div>
-</main>
-    
+  </div>
+</body>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</html>
+      
 
 <%- include('partials/footer') -%>

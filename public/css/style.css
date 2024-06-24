@@ -1,0 +1,160 @@
+
+img{
+    width: 100%;
+    max-height: 500px;
+}
+
+.rowRow{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.row{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.spicy {
+
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+.rounded-box{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.profileBtn{
+    padding-left: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.btn{
+    width: 88px;
+    height: 35px;
+}
+
+.userNameSpan{
+    width: 25%;
+}
+
+h3{
+    max-width: 40%;
+}
+
+.userNameFont{
+    color: white;
+    font-size: 1.8em;
+    text-decoration: none;
+}
+
+.captionFont{
+    max-width: 40%;
+    color: white;
+    font-size: 1.5em;
+    text-decoration: none;
+}
+
+.commentFont{
+    font-size: 1.5em;
+}
+
+.commentCaptionFont{
+    font-size: 1.7em;
+}
+
+.credentials  {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.creCre{
+    width: 388px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+
+}
+
+.w-50{
+    width: 388px;
+    height: 100px;
+}
+
+.proPro{
+    width: 388px;
+    height: 50px;
+}
+.w-96{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.loginAndSignUp{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.form-control{
+    width: 450px;
+}
+
+.justify-content-center, .col-6mt-5{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.rowRowRow{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 50px;
+    height: 740px;
+}
+
+.mega{
+    padding-top: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.bg-base-100{
+    display: flex;
+    justify-content: center;
+}
+
+.megaMega{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.addAComment, .commentsSU, .justify-content-between{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 15px 0;
+}
+
+.contol{
+    width: 55%;
+}
+
+.flex-col{
+    width: 1060px;
+}

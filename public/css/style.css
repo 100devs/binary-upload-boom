@@ -1,0 +1,18 @@
+#email{
+    position: absolute;
+    top: 0px;
+    right: 15px;
+}
+#user{
+    position: absolute;
+    top: 0px;
+    right: 200px;
+}
+.col-3{
+    position: absolute;
+    top: 30px;
+    right: 15px;
+}
+.col-3, .btn{
+    width: 150px;
+}

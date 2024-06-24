@@ -1,6 +1,7 @@
+// multer is used to upload files
 const multer = require("multer");
 const path = require("path");
-
+// set the multer config so that only jpg jpeg and png can get uploaded
 module.exports = multer({
   storage: multer.diskStorage({}),
   fileFilter: (req, file, cb) => {

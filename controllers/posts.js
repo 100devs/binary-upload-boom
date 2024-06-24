@@ -1,7 +1,10 @@
+// import cloudinary for image hosting management
+// import Post for Mongoose Post Schema
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 
 module.exports = {
+  // when requesting the profile page, get the posts related to the user in the DB and render the page with them
   getProfile: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.user.id });
@@ -10,6 +13,8 @@ module.exports = {
       console.log(err);
     }
   },
+  // request the feed page, get all the posts in the DB and put them in descending order
+  // according to their creation date.  Render the feed with the posts.
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
@@ -18,6 +23,8 @@ module.exports = {
       console.log(err);
     }
   },
+  // when requesting a specific post, get that specific post in the DB (using the post ID)
+  // render the post to the user and also pass in the user info to know if the post is his. (delete button)
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
@@ -26,6 +33,9 @@ module.exports = {
       console.log(err);
     }
   },
+  // request to create a new post
+  // uploads picture to cloudinary, then using the file path from cloudinary and info from user-filled form
+  // create the post and save it to DB, then redirect to profile.
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
@@ -45,6 +55,8 @@ module.exports = {
       console.log(err);
     }
   },
+  // like a post.  Find the post in the DB using its ID (provided in the url)
+  // +1 its number of likes.  Redirect to that same post, so the like number gets updated.
   likePost: async (req, res) => {
     try {
       await Post.findOneAndUpdate(
@@ -59,6 +71,7 @@ module.exports = {
       console.log(err);
     }
   },
+  // request to delete a post
   deletePost: async (req, res) => {
     try {
       // Find post by id

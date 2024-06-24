@@ -1,5 +1,7 @@
+// import mongoose to create the schemas
 const mongoose = require("mongoose");
 
+// create the post schema with the required params and export it under "Post"
 const PostSchema = new mongoose.Schema({
   title: {
     type: String,

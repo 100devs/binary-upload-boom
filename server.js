@@ -1,13 +1,25 @@
+// required modules
+
+// express for back-end management
 const express = require("express");
 const app = express();
+// mongoose for interaction with mongodb
 const mongoose = require("mongoose");
+// passport for authentification
 const passport = require("passport");
+// session management and store it in DB
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
+// make PUT/DELETE methods available in HTML forms
 const methodOverride = require("method-override");
+// flash messages
 const flash = require("express-flash");
+// request logger
 const logger = require("morgan");
+// info to connect to DB
 const connectDB = require("./config/database");
+
+// routing files
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
 

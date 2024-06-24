@@ -1,24 +1,28 @@
+<!--bootstrap styling for header-->
 <%- include('partials/header') -%>
 
     <h1>Todos</h1>
     <ul>
+        <!--for each el in the todo list, see if el has the class of completed. if so , mark completed, if not mark it with class of todo-->
     <% todos.forEach( el => { %>
             <li class='todoItem' data-id='<%=el._id%>'>
                 <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
+                <!--delete button for todo-->
                 <span class='del'> Delete </span>
             </li>
-    <% }) %>    
+    <% }) %>     <!--end loop-->
     </ul>
-
+<!--shows the user how many todos they have left-->
     <h2><%= user.userName %> has <%= left %> things left to do.</h2>
-
+<!--form to post todo-->
     <form action="/todos/createTodo" method='POST'>
         <input type="text" placeholder="Enter Todo Item" name='todoItem'>
         <input type="submit">
     </form>
-
+<!--link to log out page-->
     <a href="/logout">Logout</a>
-
+<!--link jsr-->
     <script src="js/main.js"></script>
 
 <%- include('partials/footer') -%>
+<!--bootstrap styling for footer-->

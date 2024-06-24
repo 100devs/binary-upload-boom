@@ -27,6 +27,36 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+
+<!-- Add New Comments -->
+<div class="row">
+  <div class="col-12 text-center form-floating">
+      <form action="/comment/createComment/<%=post.id %>" method="POST" id="comments">
+          <textarea class="form-control" name="text" placeholder="Leave a comment..." id="text" required></textarea>
+            <label for="text">Leave a Comment</label>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+</div>
+
+  <!-- Display Comments -->
+<div class="row">
+<h5>Comments</h5>
+<ul>
+  <% for(let i=0; i < comments.length; i++) { %>
+    <li>
+      <span>User <%= comments[i].createdBy%>:  <%=comments[i].text %> </span>
+     <!-- If comment was created by current user, then show the DELETE button -->
+      <% if(comments[i].createdById == user.id || post.user == user.id) { %>
+        <form action="/comment/deleteComment/<%=post.id%>/<%=comments[i].id %>?_method=DELETE" method="POST">
+          <button type="submit">Delete</button>
+        </form>
+        <%}%>
+    </li>
+    <% } %>
+  </ul>
+</div>
+
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

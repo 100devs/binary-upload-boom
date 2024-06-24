@@ -1,0 +1,29 @@
+<!-- <%- include('partials/header') -%>
+<div class="container">
+  <div class="row justify-content-center mt-5">
+  <h1>Your HealthCare Providers</h1>
+  <p>A look at your care team.</p>
+  </div>
+  <div class="mt-5">
+    <h1>Todos</h1>
+    <ul>
+    <% contacts.forEach( el => { %>
+            <li class='contactItem' data-id='<%=el.title%>'>
+                <span <%= el.title %> </span>
+                <span class='del'> Delete </span>
+            </li>
+    <% }) %>    
+    </ul>
+  </div>
+  <div class="mt-5">
+  <form action="/directory/createContact" method='POST'>
+    <input type="text" placeholder="Enter Todo Item" name='todoItem'>
+    <input type="submit">
+</form>
+  </div>
+  <div class="row justify-content-center mt-5">
+      <a class="btn btn-primary" href="/dashboard">Add a Medication</a>
+      <a class="btn btn-outline-primary" href="/contact">Your Doctors</a>
+    </div>  
+</div>  
+<%- include('partials/footer') -%> -->

@@ -1,0 +1,23 @@
+<%- include('partials/header') -%>
+<div class="container">
+<div class="row justify-content-center mt-5">
+  <h1>Your Cabinet</h1>
+  <p>A look at all your current medications.</p>
+</div>
+    <div class="row justify-content-center mt-5">
+      <ul class="row list-unstyled">
+        <% for(var i=0; i<meds.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <a href="/med/<%= meds[i]._id%>">
+              <img class="img-fluid" src="<%= meds[i].image%>">
+            </a>
+          </li>
+        <% } %>
+        </ul>
+    </div>
+    <!-- <div class="row justify-content-center mt-5">
+      <a class="btn btn-primary" href="/dashboard">Add a Medication</a>
+      <a class="btn btn-outline-primary" href="/contact">Your Providers</a>
+    </div>   -->
+  </div>  
+<%- include('partials/footer') -%>

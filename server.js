@@ -9,7 +9,13 @@ const flash = require("express-flash");
 const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
-const postRoutes = require("./routes/posts");
+const medRoutes = require("./routes/meds");
+const commentRoutes = require("./routes/comments");
+const doctorRoutes = require("./routes/doctors");
+const bodyParser = require("body-parser");
+const contactRoutes = require("./routes/contacts");
+// const directoryRoutes = require("./routes/directory");
+
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -39,7 +45,7 @@ app.use(methodOverride("_method"));
 // Setup Sessions - stored in MongoDB
 app.use(
   session({
-    secret: "keyboard cat",
+    secret: "taco cat",
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
@@ -55,7 +61,13 @@ app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
-app.use("/post", postRoutes);
+app.use("/med", medRoutes); //This is post routes for me. 
+app.use("/comment", commentRoutes);
+app.use("/doctors", doctorRoutes);
+app.use("/contact", contactRoutes);
+// app.use("/directory", directoryRoutes);
+// app.use("/dashboard", dashboardRoutes);
+
 
 //Server Running
 app.listen(process.env.PORT, () => {

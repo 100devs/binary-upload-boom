@@ -1,0 +1,58 @@
+<%- include('partials/header') -%>
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-6">
+      <h2><%= med.title %></h2>
+      <img class="img-fluid" src="<%= med.image%>" />
+      <div class="row justify-content-between">
+        <form
+          class="col-1"
+          action="/med/likeMed/<%= med.id %>?_method=PUT"
+          method="POST"
+        >
+        </form>
+        <%if(med.user == user.id){ %>
+        <form
+          action="/med/deleteMed/<%= med.id %>?_method=DELETE"
+          method="POST"
+          class="col-3"
+        >
+          <button class="btn btn-primary fa fa-trash" type="submit"></button>
+        </form>
+        <%}%>
+      </div>
+    </div>
+    <div class="col-3 mt-5">
+      <label for="caption" class="form-label">Dosage:</label>
+      <p><%= med.caption %></p>
+    </div>
+    <div class="col-3 mt-5">
+      <label for="provider" class="form-label">Prescribing Physician:</label>
+      <a href="/directory"><p><%= med.provider %></p></a>
+    </div>
+    <div class="mt-5">
+      <h2>Add a note:</h2>
+      <form action="/comment/createComment/<%=med._id%>" method="POST">
+        <div class="mb-3">
+            <label for="comment" class="form-label">Add any notes about this medication, or questions you'd like to ask your doctor</label>
+            <input type="text" class="form-control" id="comment" name="comment">
+        </div>
+       
+        <button type="submit" class="btn btn-primary">Add note</button>
+      </form>
+    </div>
+    <ul>
+      <% for(var i=0; i<comments.length; i++) {%>
+        <li class="col-6 justify-content-between mt-5 messges">
+         <%= comments[i].comment%>
+        </li>
+      <% } %>
+    </ul>
+    <!-- <div class="bottom-nav row justify-content-center mt-5">
+      <a class="btn btn-primary" href="/dashboard">Add a New Medication</a>
+      <a class="btn btn-outline-primary" href="/cabinet">Medicine Cabinet</a>
+    </div> -->
+  </div>
+</div>
+
+<%- include('partials/footer') -%>

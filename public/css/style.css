@@ -1,0 +1,52 @@
+/* Layout Styling */
+.navbar{
+    display: flex;
+    flex-direction: row;
+    color: white;
+}
+ul {
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    list-style: none;
+}
+.list-group-flush{
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-bottom: none;
+    border-top: none;
+}
+.likes{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px 10px 10px 10px;
+}
+.comment-section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.post-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* General Styling */
+.header-nav{
+    font-size: 2rem;
+    margin-right: 20px;
+}
+.btn {
+    margin: 10px 10px 10px 10px;
+}
+img {
+    height: 600px;
+    width: 600px;
+}
+.header{
+    width: 100%;
+}

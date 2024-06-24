@@ -1,0 +1,52 @@
+ul {
+    padding-left: 0rem;
+}
+
+li {
+    list-style-type: none;
+    list-style-position: outside;
+}
+.feed{
+    background-color: #F9F3EE
+}
+.navbar, .comments{ 
+    background: linear-gradient(to bottom, #A0BCC2, #C4D7E0);
+}
+.navbar a{
+    font-family: 'Reem Kufi Fun', sans-serif;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    font-size: 2em;
+}
+.navbar a:hover{
+    color: #748DA6;
+}
+.feed-img{
+    width: 292px;
+    height: 292px
+}
+
+.fa-trash{
+    color: rgb(237, 105, 94);
+    background: inherit;
+    border: none;
+}
+.fa-trash:hover{
+    color: white !important;
+    background: rgb(237, 105, 94) !important;
+}
+
+header.container{
+    max-width: 100%;
+    padding: 0;
+}
+
+.comments {
+    border-radius: 8px;
+}
+
+hr {
+    margin: 2px 5px;
+    padding: 1px 0;
+}

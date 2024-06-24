@@ -27,5 +27,14 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "validator": "^13.6.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamspersonaldeveloping/binary-upload-boom.git"
+  },
+  "bugs": {
+    "url": "https://github.com/adamspersonaldeveloping/binary-upload-boom/issues"
+  },
+  "homepage": "https://github.com/adamspersonaldeveloping/binary-upload-boom#readme"
 }

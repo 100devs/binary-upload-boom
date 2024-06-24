@@ -1,0 +1,92 @@
+<%- include('partials/header') -%>
+
+<link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
+<div class="navbar bg-base-100">
+  <div class="flex-none">
+    <ul class="menu menu-horizontal p-0">
+      <li tabindex="0">
+        <a a href="/admin">
+          Select a function
+          <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
+        </a>
+        <ul class="p-2 bg-base-100">
+          <li><a href="/addAnnouncement">Add Announcement</a></li>
+          <li><a href="/addPlayer">Add Player</a></li>
+          <li><a href="/addMatch">Add Match</a></li>
+          <li><a href="/newSeason">Start New Season</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- Beginning of add match tab -->
+<form action="/admin/addMatch" method="POST">
+    <div class="flex justify-center">
+      <div class="mb-3 xl:w-96">
+        <label class="block text-left" style="max-width: 300px">
+          <span class="text-gray-700">Season</span>
+          <br>
+          <select class="select select-bordered w-full max-w-xs" multiple name="season">
+            <option>Spring 2022</option>
+            <option>Winter 2022</option>
+          </select>
+        </label> 
+        <br>
+        <label class="block text-left" style="max-width: 300px">
+          <span class="text-gray-700">League</span>
+          <br>
+          <select class="select select-bordered w-full max-w-xs" multiple name="league">
+            <option>5.0 Men</option>
+            <option>4.5 Men</option>
+            <option>4.0 Men</option>
+            <option>3.5 Men</option>
+            <option>4.5+ Women</option>
+            <option>4.0 Women</option>
+          </select>
+        </label> 
+        <br>
+        <!-- change this input type to option and use loop through -->
+        <label class="block text-left" style="max-width: 500px" padding="50px">
+          <span class="text-gray-700">Winner</span>
+          <br>
+          <select class="select select-bordered w-full max-w-xs" multiple name="player1">
+            <!-- loops through each announcement and builds li for each -->
+          <% for(var i=0; i<players.length; i++) {%>
+              <option><%= players[i].firstName +" "+ players[i].lastName%></option> <% } %>
+          </select>
+        </label> 
+      </div>
+    </div>
+
+    <label class="block text-left" style="max-width: 500px" padding="50px">
+      <span class="text-gray-700">Player 2</span>
+      <br>
+      <select class="select select-bordered w-full max-w-xs" multiple name="player2">
+        <!-- loops through each announcement and builds li for each -->
+      <% for(var i=0; i<players.length; i++) {%>
+          <option><%= players[i].firstName +" "+ players[i].lastName%></option> <% } %>
+      </select>
+    </label> 
+
+    
+    <div class="flex justify-center">
+      <div class="mb-3 xl:w-96">
+        <label for="exampleFormControlInput1" class="form-label inline-block mb-2 text-gray-700"
+          >Scoreline</label>
+          <br>
+        <input
+          type="text"
+          class="input input-bordered w-full max-w-xs"
+          id="score"
+          placeholder="Score"
+          name="score"
+        />
+      </div>
+    </div>
+    <div class="flex space-x-2 justify-center">
+      <button type="Submit" class="btn">Submit Match</button>
+    </div>
+  </form>
+    
+
+<%- include('partials/footer') -%>

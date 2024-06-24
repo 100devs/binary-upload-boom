@@ -1,0 +1,172 @@
+-------------------
+get mongo and cloudinary working
+
+start with model
+copy post model
+create comment.js, paste post model
+change post schema to comment schema
+
+nred a comment that is a string
+keep likes
+yeet stuff we don't need
+
+change user:{ 
+to post:{ 
+aka what post does this comment come from
+
+that way we know where the comment belongs
+
+change line 22 to "comment" and CommentSchema to export
+
+now - we will see this in the post ejs..
+
+go to the post controller
+we need to add a line to load the comment model.
+const Comment = require(".../models/comment")
+
+there are going to be a lot of comments.
+
+see getFeed - re-use that get posts line (one with sort)
+
+so under getPost:...
+add const comments = await Comment.find({post: req.params.id}).sort({createdAt: "desc" }).lean();
+this finds all comments w/ post property of the post we are currently on.
+
+look at the feed.ejs
+look for the loop code,
+yoink it for post.ejs 
+change to i<comments.length
+get rid of stuff until it's comments[i].comment
+now the loop will pull off all the comments.
+
+will also have to make a collection for database comments.
+
+
+now - how do we get users to add comments?
+need a form
+take the form from the profile.ejs
+
+change the code for add a comment.
+change form action , take out the thing next to it.
+change "title" instances to "comment"
+remove the unnecessary divs
+
+don't need the "upload" value
+
+create a route for comments.
+/comment/createComment on the same form.
+but need the comment to go to the correct post.
+plug in the post ID to the form. <%=post._id%>
+
+in server.js
+add the route
+requrire the comment route
+
+then make a comments.js file
+copy the stuff from posts.js
+change to commentsController
+we only need a post route.
+createComment/:id , commentsController.createComment 
+
+create a comments controller
+copy the stuff from the posts controller
+delete the cloudinary stuff because we don't need it
+
+under createComment 
+change to req.body.comment
+delete other stuff you don't need
+add post: req.params.id
+this is just like in the post controller in line 24
+
+redirect back to the same post. "/post/"+req.params.id
+
+This is from admin.ejs
+<section></section>
+<h2>Add player</h2>
+<!-- Create player form -->
+<form action="/addPlayer" method="POST">
+    <input type="text" placeholder="First Name" name="firstNameS">
+    <input type="text" placeholder="Last Name" name="lastNameS">
+    <select type="gender" placeholder="M/F" name="gender">
+        <option value="M">men</option>
+        <option value="W">women</option>
+    </select>
+    <select type="text" placeholder="level" name="level">
+        <option value="3.5">3.5</option>
+        <option value="4.0">4.0</option>
+        <option value="4.5">4.5</option>
+        <option value="5.0">5.0</option>
+    </select>
+    <input type="text" placeholder="email" name="email">
+    <input type="text" placeholder="Preferred Locations" name="prefLocation">
+    <input type="text" placeholder="Preferred Times" name="prefTime">
+    <input type="submit" value = "Submit">
+</form>
+</section>
+
+<h2>Edit players</h2>
+<section>
+    <table class="pure-table pure-table-horizontal">
+        <tr>
+          <th>Name</th>
+          <th>Food</th>
+          <th>Host</th>
+          <th>MM/YY</th>
+        </tr>
+        <% for(var i=0; i < info.length; i++) { %>
+        <tr>
+            <td><%= info[i].firstName %></td>
+            <td class='fa fa-trash'></td>
+        </tr>
+         <% } %>
+      </table>
+
+    <h2>Add a movie!</h2>
+</section>
+
+How to show different ladders on the index page?
+create each ladder table as tab
+
+why are announcements links?
+
+yo.. you can change classes to edit the layout and customize sizes, etc
+https://tailwindcss.com/docs/margin
+
+work on add match!
+
+I need to make addMatch fill players from the db...try to use the code from announcements..
+
+
+findOneAndUpdate: https://www.twitch.tv/videos/1590219170?t=01h38m37s
+
+now make addMatch give 10 points to the winner
+
+          <% for(player in players) {%>
+              <%return (player == player1 ? player.league.points +=10 : player.league.points+=0) %>
+          <% } %>
+
+          Where should something like this go?
+
+          maybe add it to another await function in addMatch. I'll have to see if the it has access to the db...
+
+                    <% for(player in players) {%>
+                <%return ((player.firstName+" "+player.lastName) == player1.firstName+" "+player1.lastName ? player.league.points +=10 : player.league.points+=0) %>
+            <% } %>
+
+            in models change league data type to text. no reason to have array, then you can do league.season.points
+
+            use league.season as keyname and points as value
+            league.season +=10
+
+                  for(player in players) {
+        return ((player.firstName+" "+player.lastName) == player1.firstName+" "+player1.lastName ? player.league +=10 : player.league+=0)
+}
+
+I need a key value pair... 
+findOneAndUpdate: https://www.youtube.com/watch?v=1UnZyC25pt4
+
+points.${league}.${season} = 10
+
+https://www.mongodb.com/community/forums/t/how-can-update-an-item-in-a-nested-array-or-add-to-the-nested-array-if-the-item-is-not-present-if-there-is-no-document-create-one/120664
+
+

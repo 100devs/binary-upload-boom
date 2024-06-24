@@ -1,0 +1,33 @@
+<%- include('partials/header') -%>
+<div class="mt-5">
+    <form>
+      <div class="row justify-content-around">
+        <input type="checkbox" name='languages' value="mandarin"> Mandarin
+        <input type="checkbox" name='languages'value="cantonese"> Cantonese
+        <input type="checkbox" name='languages'value="hokkien"> Hokkien
+      </div>
+      <br>
+      <div class="mt-1 row justify-content-around">
+        <input type="submit" class="col-2 btn btn-primary" id="#getButton">
+      </div>
+  </form>
+  <table>
+    <tr>
+       <th>IPA</th><th>Symbols</th><th>Examples</th>
+    </tr>
+ 
+    <% for (var i = 0; i < language.length; i++) { %>
+     <tr>
+       <td><%= language[i].IPA %></td>
+       <td><%= language[i].Symbols %></td>
+       <td><%= language[i].Examples %></td>
+     </tr>    
+    <% } %>
+ </table>
+</div>
+
+
+
+  
+  <script type="text/javascript" src="js/main.js"></script>
+<%- include('partials/footer') -%>

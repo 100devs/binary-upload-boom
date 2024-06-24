@@ -3,6 +3,7 @@
   <div class="row justify-content-center mt-5">
     <div class="col-6">
       <h2><%= post.title %></h2>
+      <h3 class="text-muted">By: <%= post.user.userName %></h3>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
         <form
@@ -13,7 +14,7 @@
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
+        <%if(post.user._id == user.id){ %>
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
           method="POST"
@@ -27,6 +28,38 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <div class="mt-5">
+      <h2>Add a comment</h2>
+      <form action="/comment/createComment/<%= post._id %>" method="post">
+        <div class="mb-3">
+          <label for="comment" class="form-label">Comment</label>
+          <input type="text" class="form-control" name="comment" id="comment">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <% comments.forEach(comment => { %>
+      <div class="card mt-2">
+        <div class="card-body">
+          <h5 class="cart-title"><%= comment.userID.userName %></h5>
+          <h6 class="card-subtitle text-muted mb-2"><%= comment.createdAt.toLocaleString() %></h6>
+          <h6 class="card-subtitle text-muted mb-2">Likes: <%= comment.likes %></h6>
+          <div class="card-text">
+            <%= comment.commentBody %>
+            <div class="row">
+              <form class="col-1" action="/comment/likeComment/<%= post._id %>/<%= comment._id %>?_method=PUT" method="post">
+                <button class="btn btn-primary mt-2 fa fa-heart"></button>
+              </form>
+              <% if (user.id == comment.userID._id) { %>
+                <form class="col-1" action="/comment/deleteComment/<%= post._id %>/<%= comment._id %>?_method=DELETE" method="post">
+                  <button class="btn btn-primary mt-2 fa fa-trash"></button>
+                </form>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% }) %>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

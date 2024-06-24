@@ -10,12 +10,24 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
-
-//Use .env file in config folder
-require("dotenv").config({ path: "./config/.env" });
-
+const commentRoutes = require("./routes/comments");
+const livereload = require("livereload");
+const connectLiveReload = require("connect-livereload");
+const path =
+	//Use .env file in config folder
+	require("dotenv").config({ path: "./config/.env" });
 // Passport config
 require("./config/passport")(passport);
+
+// init livereload to HMR the browser on file change
+const liveReloadServer = livereload.createServer();
+liveReloadServer.watch(__dirname + "views");
+liveReloadServer.server.once("connection", () => {
+	setTimeout(() => {
+		liveReloadServer.refresh("/");
+	}, 50);
+});
+app.use(connectLiveReload());
 
 //Connect To Database
 connectDB();
@@ -38,12 +50,12 @@ app.use(methodOverride("_method"));
 
 // Setup Sessions - stored in MongoDB
 app.use(
-  session({
-    secret: "keyboard cat",
-    resave: false,
-    saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  })
+	session({
+		secret: "keyboard cat",
+		resave: false,
+		saveUninitialized: false,
+		store: new MongoStore({ mongooseConnection: mongoose.connection }),
+	})
 );
 
 // Passport middleware
@@ -56,8 +68,8 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
-
+app.use("/comment", commentRoutes);
 //Server Running
 app.listen(process.env.PORT, () => {
-  console.log("Server is running, you better catch it!");
+	console.log(`Server is running on ${process.env.PORT}, you better catch it!`);
 });

@@ -12,6 +12,7 @@
                         <div class="alert alert-info"><%= el.msg %></div>
                     <% }) %>    
                 <% } %>
+                <!-- For each to iterate through an array of error messages and insert them into the divs and therefore the DOM. -->
                 <form action="/signup" method="POST">
                     <div class="mb-3">
                         <label for="userName" class="form-label">User Name</label>
@@ -35,5 +36,6 @@
             </section>
         </div>
     </main>
+    <!-- Form to sign up to the social media site. It has an input for user name, email address, password, confirm email address and confirm password. There is a div which states we will not share your email with anyone and a button for submitting the form. -->
 
 <%- include('partials/footer') -%>

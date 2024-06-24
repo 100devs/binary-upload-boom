@@ -4,11 +4,15 @@
       <div class="col-6">
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
+              <!-- Shows user's username from the user collection. Pulls it with every request and displays in the DOM. -->
               <p><strong>Email</strong>: <%= user.email %></p>
+              <!-- Shows user's email address from the user collection. Pulls it with every request and displays in the DOM. -->
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+              <!-- Button to log out -->
           </div>
           <div class="mt-5">
             <h2>Add a post</h2>
+            <!-- Add a post heading -->
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
                   <label for="title" class="form-label">Title</label>
@@ -24,20 +28,25 @@
               </div>
               <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
             </form>
+            <!-- Form to upload title, caption and image alongside a button to submit the post. -->
           </div>
       </div>
       <div class="col-6">
         <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
+          <!-- Loops through all the users posts and put them in LIs and anchor tags the image. -->
           <li class="col-6 justify-content-between mt-5">
             <a href="/post/<%= posts[i]._id%>">
+              <!-- Building LIs using ID -->
               <img class="img-fluid" src="<%= posts[i].image%>">
+              <!-- Plugging in to build the profile -->
             </a>
           </li>
         <% } %>
         </ul>
         <div class="row justify-content-center mt-5">
           <a class="btn btn-primary" href="/feed">Return to Feed</a>
+          <!-- Button to return to the feed. -->
         </div>  
       </div>  
     </div>

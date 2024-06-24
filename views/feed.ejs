@@ -1,8 +1,11 @@
+<!-- Partials folder allows us to input the header and footer into each EJS file which makes the code dryer and more readable. -->
+
 <%- include('partials/header') -%>
   <div class="container">
     <div class="row justify-content-center mt-5">
       <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
+          <!-- For loop iterating through the posts array and spitting out each image and anchor tag on the feeds page. -->
           <li class="col-6 justify-content-between mt-5">
             <a href="/post/<%= posts[i]._id%>">
               <img class="img-fluid" src="<%= posts[i].image%>">

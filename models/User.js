@@ -1,14 +1,16 @@
 const bcrypt = require("bcrypt");
+// Encrypts the password
 const mongoose = require("mongoose");
+// Uses Mongoose
 
 const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
   password: String,
 });
+// Sets us the schema for username, email and password.
 
 // Password hash middleware.
-
 UserSchema.pre("save", function save(next) {
   const user = this;
   if (!user.isModified("password")) {

@@ -3,6 +3,9 @@
   <div class="row justify-content-center mt-5">
     <div class="col-6">
       <h2><%= post.title %></h2>
+      <span class="text-muted">
+        <%= post.createdAt %>
+      </span>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
         <form
@@ -26,6 +29,45 @@
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
+    </div>
+    <div>
+      <form action="/comment/createComment/<%= post.id %>" method="POST">
+        <div>
+          <label for="comment" class="form-label">Comment</label>
+          <textarea class="form-control" name="commentText" id="comment" cols="30" rows="10"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+    <div>
+      <ul class="col-6 list-unstyled">
+        <span>Comments: 
+          <%= comments.length %>
+        </span>
+        <% for(var i=0; i<comments.length; i++) {%>
+          <li class="row justify-content-between mt-5">
+            <span>Posted by:
+              <%= comments[i].submittedBy %>
+            </span>
+            <p><%= comments[i].commentText %></p>
+            <span>Likes:
+              <%= comments[i].likes %>
+            </span>
+            <span class="text-muted">posted at: 
+              <%= comments[i].createdAt %>
+            </span>
+          <% if(comments[i].user != user.id){ %>
+            <form class="col-1" action="/comment/likeComment/<%= comments[i]._id %>?_method=PUT" method="POST">
+              <button class="btn btn-primary fa fa-heart" type="submit">Like</button>
+            </form>
+          <% } else { %>
+            <form class="col-1" action="/comment/deleteComment/<%= comments[i]._id %>?_method=DELETE" method="POST">
+              <button class="btn btn-primary fa fa-trash" type="submit">Delete</button>
+            </form>
+            <% } %>
+          </li>
+        <% } %>
+      </ul>
     </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>

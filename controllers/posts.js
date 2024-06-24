@@ -1,27 +1,30 @@
 const cloudinary = require("../middleware/cloudinary");
+const timestamp = require("../middleware/timestamp")
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
+const User = require("../models/User")
 
 module.exports = {
-  getProfile: async (req, res) => {
-    try {
-      const posts = await Post.find({ user: req.user.id });
-      res.render("profile.ejs", { posts: posts, user: req.user });
-    } catch (err) {
-      console.log(err);
-    }
-  },
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      res.render("feed.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
     }
   },
   getPost: async (req, res) => {
     try {
+      const commentsUsers = []
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      commentsUsers.push(post.user)  // Push the poster's ID into the array
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+      const timestamps = comments.map(el => timestamp.postedTime(el.createdAt))
+      for (let comment of comments) {
+        commentsUsers.push(comment.user) // Iterate through comments and pushing all user IDs into the array
+      }
+      const users = await User.find({_id: commentsUsers}).lean();
+      res.render("post.ejs", { post: post, user: req.user, comments: comments, users: users, timestamps: timestamps });
     } catch (err) {
       console.log(err);
     }
@@ -40,7 +43,7 @@ module.exports = {
         user: req.user.id,
       });
       console.log("Post has been added!");
-      res.redirect("/profile");
+      res.redirect(`/profile/${req.user.id}`);
     } catch (err) {
       console.log(err);
     }
@@ -68,9 +71,9 @@ module.exports = {
       // Delete post from db
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
-      res.redirect("/profile");
+      res.redirect(`/profile/${req.user.id}`);
     } catch (err) {
-      res.redirect("/profile");
+      res.redirect(`/profile/${req.user.id}`);
     }
   },
 };

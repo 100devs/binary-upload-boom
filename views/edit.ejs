@@ -1,0 +1,66 @@
+<%- include('partials/header') -%>
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="card p-5">
+      <h2><%= post.title %></h2>
+      <img class="img-fluid" src="<%= post.image%>" />
+      <div class="row p-5 justify-content-between">
+        <form
+          class="col-1"
+          action="/post/likePost/<%= post.id %>?_method=PUT"
+          method="POST"
+        >
+          <button class="btn btn-danger fa fa-heart" type="submit"></button>
+        </form>
+        <h3 class="col-3">Likes: <%= post.likes %></h3>
+        <%if(post.user == user.id){ %>
+        <form
+          action="/post/deletePost/<%= post.id %>?_method=DELETE"
+          method="POST"
+          class="col-3"
+        >
+          <button class="btn btn-primary fa fa-trash" type="submit"></button>
+        </form>
+        <form
+        action="/post/editPostPage/<%= post.id %>"
+      
+        class="col-3"
+      >
+        <button class="btn btn-primary  fa-user-pen" type="submit">edit</button>
+      </form>
+
+
+        <%}%>
+      </div>
+    
+      <div class="text-center p-5">
+        <p><%= post.caption %></p>
+      </div>
+  </div>
+
+ <div class="mt-5">
+    <h2>Edit your post</h2>
+    <form action="/post/editPost/<%= post.id %>?_method=PUT"  method="POST">
+      <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" class="form-control" id="title" value="<%=post.title%>" name="title">
+      </div>
+      <div class="mb-3">
+        <label for="caption" class="form-label">Caption</label>
+        <textarea class="form-control" id="caption" name="caption"><%=post.caption%></textarea>
+      </div>
+     
+      <button type="submit" class="btn btn-primary" value="">Submit</button>
+    </form>
+  </div>
+
+  <div class="col-6 mt-5">
+    <a class="btn btn-primary " href="/profile">Return to Profile</a>
+    <div class="py-3"></div>
+    <a class="btn btn-primary " href="/feed">Return to Feed</a>
+    <div class="py-3"></div>
+    <a href="/logout" class=" btn btn-primary ">Logout</a>
+    <div class="py-5"></div>
+  </div>
+
+<%- include('partials/footer') -%>

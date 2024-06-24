@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -13,7 +14,7 @@ module.exports = {
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      res.render("feed.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -21,7 +22,9 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({ post: req.params.id }).sort({ createdAt: "desc" }).lean();
+      console.log(comments);
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
     }
@@ -63,13 +66,18 @@ module.exports = {
     try {
       // Find post by id
       let post = await Post.findById({ _id: req.params.id });
+      let comments = await Comment.find({ post: req.params.id });
+      console.log("THIS MANY COMMENTS: ", comments);
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);
+      // Delete associated comments
+      await Comment.deleteMany({ post: req.params.id });
       // Delete post from db
       await Post.remove({ _id: req.params.id });
-      console.log("Deleted Post");
-      res.redirect("/profile");
+      console.log("Deleted Post serverside");
+      res.json("Deleted Post");
     } catch (err) {
+      console.log("ERROR in deletePost", err);
       res.redirect("/profile");
     }
   },

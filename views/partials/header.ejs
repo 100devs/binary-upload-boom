@@ -11,12 +11,19 @@
       sizes="32x32"
       href="/imgs/favicon-32x32.png"
     />
-    <link
+    <!-- <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
       crossorigin="anonymous"
+    /> -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css"
+    rel="stylesheet"
     />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -27,10 +34,183 @@
   </head>
   <body>
     <header class="container">
-      <div class="text-center">
-        <h1 class=""><a href="/profile">Binary Upload Boom</a></h1>
-        <span>The #100Devs Social Network</span>
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <div class="container-fluid">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#navbarExample01"
+            aria-controls="navbarExample01"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarExample01">
+            
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item active">
+                <a class="nav-link" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed">Feed</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/profile">Profile</a>
+              </li>
+            </ul>
+            <a class="navbar-brand" href="/feed">#100Devs Image Post</a>
+            <ul class="navbar-nav ms-auto">
+              <% if (user) { %>
+                <li class="nav-item">
+                  <a class="btn btn-primary" href="/logout">Logout</a>
+                </li>
+              <%} else { %>
+                <li>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#loginModal">
+                    Login
+                  </button>
+                </li>
+              <% } %>
+            </ul>
+              
+              
+              
+            </ul>
+          </div>
+        </div>
+        <!-- <div class="text-center">
+          <h1 class=""><a href="/profile">Binary Upload Boom</a></h1>
+          <span>The #100Devs Social Network</span>
+        </div> -->
+      </nav>
+      <!-- /Navbar -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Sign in or register to participate!</h5>
+              <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+              <!-- Pills navs -->
+              <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
+                    aria-controls="pills-login" aria-selected="true">Login</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
+                    aria-controls="pills-register" aria-selected="false">Register</a>
+                </li>
+              </ul>
+              <!-- Pills navs -->
+
+              <!-- Pills content -->
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+                  <form action="/login" method="POST">
+                    <div class="text-center mb-3">
+                      <p>Sign in with:</p>
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                      <input type="email" id="loginEmail" class="form-control" name="email" />
+                      <label class="form-label" for="loginEmail">Email</label>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                      <input type="password" id="loginPassword" class="form-control" name="password" />
+                      <label class="form-label" for="loginPassword">Password</label>
+                    </div>
+
+                    <!-- 2 column grid layout -->
+                    <div class="row mb-4">
+                      <div class="col-md-6 d-flex justify-content-center">
+                        <!-- Checkbox -->
+                        <div class="form-check mb-3 mb-md-0">
+                          <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
+                          <label class="form-check-label" for="loginCheck"> Remember me </label>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6 d-flex justify-content-center">
+                        <!-- Simple link -->
+                        <a href="#!">Forgot password?</a>
+                      </div>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+                  </form>
+                </div>
+                <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+                  <form action="/signup" method="POST">
+                    <div class="text-center mb-3">
+                      <p>Sign up with:</p>
+                    </div>
+
+                    <!-- Name input -->
+
+                    <!-- Username input -->
+                    <div class="form-outline mb-4">
+                      <input type="text" id="registerUsername" class="form-control" name="userName"/>
+                      <label class="form-label" for="registerUsername">Username</label>
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                      <input type="email" id="registerEmail" class="form-control" name="email" />
+                      <label class="form-label" for="registerEmail">Email</label>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                      <input type="password" id="registerPassword" class="form-control" name="password"/>
+                      <label class="form-label" for="registerPassword">Password</label>
+                    </div>
+
+                    <!-- Repeat Password input -->
+                    <div class="form-outline mb-4">
+                      <input type="password" id="confirmPassword" class="form-control" name="confirmPassword"/>
+                      <label class="form-label" for="confirmPassword">Repeat password</label>
+                    </div>
+
+                    <!-- Checkbox -->
+                    <div class="form-check d-flex justify-content-center mb-4">
+                      <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked
+                        aria-describedby="registerCheckHelpText" />
+                      <label class="form-check-label" for="registerCheck">
+                        I have read and agree to the terms
+                      </label>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
+                  </form>
+                </div>
+              </div>
+              <!-- Pills content -->
+
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+          </div>
+        </div>
       </div>
+      <!-- /Modal -->
+
     </header>
   </body>
 </html>

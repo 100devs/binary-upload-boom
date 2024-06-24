@@ -1,0 +1,11 @@
+.under-nav {
+  color: black;
+  padding-top: 30px;
+  margin-top: 30px;
+  background-image: url("/imgs/seamless-paper.png");
+}
+
+.post-img {
+  width: 400px;
+  height: 400px;
+}

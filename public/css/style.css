@@ -1,0 +1,23 @@
+#post-photos-profile, #user-info, #post-photos-post, #return-buttons{
+    width: 100%;
+}
+#caption-profile{
+    margin-top: 0;
+}
+#comments{
+    width: 100%;
+    font-size: 25px;
+    list-style: inside;
+}
+#like-button{
+    color:white;
+    background-color: red;
+    border-color: red;
+}
+#photo-album{
+    text-decoration: none;
+    color: black;
+    font-style: oblique;
+    font-size: 50px;
+    
+}

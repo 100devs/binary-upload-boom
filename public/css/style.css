@@ -1,0 +1,9 @@
+/* comments */
+.comment{
+    list-style-type: none;
+    background: lightblue;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 10px;
+}
+/*  */

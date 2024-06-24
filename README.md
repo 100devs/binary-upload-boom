@@ -1,3 +1,6 @@
+# Binary-Upload-Boom
+This is a full stack application made to represent a template for a website like Instagram with posts, pictures, comments, and etc.
+
 # Install
 
 `npm install`

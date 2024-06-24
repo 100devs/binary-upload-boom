@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -12,7 +13,7 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      const posts = await Post.find().sort({ createdAt: "desc" }).lean(); //lean (mongoose) because you only want the object only and not the other extra stuff
       res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
@@ -21,7 +22,8 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({postID: req.params.id}).sort({ createdAt: "desc" }).lean();
+      res.render("post.ejs", {post: post, user: req.user, comments: comments});
     } catch (err) {
       console.log(err);
     }
@@ -29,12 +31,12 @@ module.exports = {
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
+      const result = await cloudinary.uploader.upload(req.file.path); //grab file from req.file.path and upload to cloudinary
 
       await Post.create({
         title: req.body.title,
-        image: result.secure_url,
-        cloudinaryId: result.public_id,
+        image: result.secure_url, //picture URL
+        cloudinaryId: result.public_id, //id used for deleting since we grab the picture VIA URL
         caption: req.body.caption,
         likes: 0,
         user: req.user.id,
@@ -50,7 +52,7 @@ module.exports = {
       await Post.findOneAndUpdate(
         { _id: req.params.id },
         {
-          $inc: { likes: 1 },
+          $inc: { likes: 1 }, //increment likes by 1
         }
       );
       console.log("Likes +1");
@@ -74,3 +76,13 @@ module.exports = {
     }
   },
 };
+
+
+/*
+      const result = await cloudinary.uploader.upload(req.file.path); //grab file from req.file.path and upload to cloudinary
+
+      await Post.create({
+        title: req.body.title,
+        image: result.secure_url, //picture URL
+        cloudinaryId: result.public_id, //id used for deleting since we grab the picture VIA URL
+*/

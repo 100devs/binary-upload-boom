@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment")
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -20,12 +21,18 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
+      // Find the post document by ID
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+
+      // Find the comments for the post
+      const comments = await Comment.find({ post: post._id }).populate('user');
+
+      // Render the post view with the post and comments data
+      res.render("post.ejs", { post: post, comments: comments, user: req.user });
     } catch (err) {
       console.log(err);
     }
-  },
+},
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
@@ -72,5 +79,5 @@ module.exports = {
     } catch (err) {
       res.redirect("/profile");
     }
-  },
+  }
 };

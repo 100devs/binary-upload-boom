@@ -27,6 +27,34 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+
+    <div class="mt-5">
+      <h2>Add a Comment</h2>
+      <form action="/comment/createComment/<%= post._id%>" method="POST">
+        <div class="mb-3">
+            <label for="comment" class="form-label">Comment Below</label>
+            <input type="text" class="form-control" id="comment" name="comment">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <ul class=" list-unstyled">
+      <% for(var i=0; i<comment.length; i++) {%>
+        <li>
+          <!-- comparing the creator of the comment ID with the user model ID to get the Username. Matching ID's equal false -->
+          <% for(var b=0; b<name.length; b++) {%>
+            <% console.log(name[b]._id == comment[i].user )  %>
+            <% if( name[b]._id.toString() == comment[i].user.toString()){ %>              
+              <%= name[b].userName%>: <%= comment[i].comment%>
+            
+            <%}%>
+          
+          <% } %>
+        </li>
+      <% } %>
+      </ul>
+
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

@@ -21,8 +21,12 @@ const PostSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+	likedUsers:  [{
+		type : mongoose.Types.ObjectId,
+		ref: 'User'
+	}],
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Types.ObjectId,
     ref: "User",
   },
   createdAt: {

@@ -1,46 +1,101 @@
-<%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-          </div>
-          <div class="mt-5">
-            <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
-              </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
-          </div>
-      </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>  
-      </div>  
-    </div>
-  </div>
+<% let profileTitle = (typeof(title) !== 'undefined') ? title : site.pages['profile'].title %>
+<% page = (typeof(page) !== 'undefined') ? page : site.pages['profile'].page %>
+
+
+
+<%- include('layouts/head', { title: profileTitle }) -%>
+<%=site.pages['profile'].page%>
+
+
+<div class="d-flex border w-100 w-lg-50 align-items-center p-3">
+		<div>
+			<p><strong>User Name</strong>: <%= user.userName %></p>
+			<p><strong>Email</strong>: <%= user.email %></p>
+		</div>
+		<div class="ms-auto">
+			<a
+				class="btn btn-primary"
+				href="#!"
+				data-bs-toggle="modal"
+				data-bs-target="#myModal"
+				data-modalTitle="Add a new post"
+				data-formContent = "postForm"
+				data-submitButton="Add post"
+				data-formAction="/post/createPost"
+				data-enctype="multipart/form-data"
+			>Add post</a>
+		</div>
 </div>
-<%- include('partials/footer') -%>
+<div class="row mt-5">
+	<div class="col-md">
+		<h2>My posts</h2>
+		<div class="row">
+			<div class="col-lg mb-4 mb-lg-0">
+				<% const mid = posts.length > 2 ? Math.floor(posts.length / 2) : 1 %>
+				<% for(var i=0; i<posts.length; i ++) {%>
+					<a href="/post/<%= posts[i]._id%>">
+						<img class="w-100 shadow-1-strong rounded mb-4" src="<%= posts[i].image%>">
+					</a>
+					<% if (i === mid) { %>
+						</div>
+						<div class="col-lg mb-4 mb-lg-0">
+					<% } %>
+				<% } %>
+			</div>
+		</div>
+	</div>
+	<div class="col-md">
+		<h2>My drafts</h2>
+		<div id="drafts">
+			<% for(let i=0; i<drafts.length; i++) {%>
+				<div class="border p-3 mb-lg-0 mb-3">
+					<h4 class="postTitle"><%= drafts[i].title %></h4>
+					<p class="postCaption"><%= drafts[i].caption %></p>
+					<button
+						type="button"
+						class="btn btn-primary"
+						data-bs-toggle="modal"
+						data-bs-target="#myModal"
+						data-modalTitle="Edit your post"
+						data-formContent = "postForm"
+						data-submitButton="Edit post"
+						data-formAction="/post/editPost/<%=drafts[i].id %>?method=PUT"
+						data-title="<%= drafts[i].title %>"
+						data-caption="<%= drafts[i].caption %>"
+						data-enctype="multipart/form-data"
+					>Edit</button>
+					<button
+							type="button"
+							class="btn btn-primary"
+							data-bs-toggle="modal"
+							data-bs-target="#myModal"
+							data-modalTitle="Delete your post"
+							data-formContent = "deleteForm"
+							data-submitButton="Delete post"
+							data-deleteType="post"
+							data-formAction="/post/deletePost/<%=drafts[i].id %>?method=DELETE"
+						>Delete</button>
+				</div>
+			<% } %>
+		</div>
+	</div>
+</div>
+
+<div id="postForm" style="display:none">
+	<input type="hidden" id="user" name="user" value="<%= user.id %>" />
+	<div class="mb-3">
+		<label for="title" class="form-label">Title</label>
+		<input type="text" class="form-control" id="title" name="title">
+	</div>
+	<div class="mb-3">
+		<label for="caption" class="form-label">Caption</label>
+		<textarea class="form-control" id="caption" name="caption"></textarea>
+	</div>
+	<div class="mb-3">
+		<label for="imgUpload" class="form-label">Image</label>
+		<input type="file" class="form-control" id="imageUpload" name="file" />
+	</div>
+</div>
+
+<%- include('partials/modal') %>
+<%- include('layouts/foot', {script: '/js/modal.js'}) %>

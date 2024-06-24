@@ -1,15 +1,16 @@
 <%- include('partials/header') -%>
-  <div class="container">
-    <div class="row justify-content-center mt-5">
-      <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <ul class="row list-unstyled">
+                <% for(var i=0; i<posts.length; i++) {%>
+                    <li class="col-6 justify-content-between mt-5">
+                        <a href="/post/<%= posts[i]._id%>">
+                            <!-- grabbed ID of post, plugged it into this href, then grab the image to show in the feed by grabbing the image property in the collection (the cloudinary link in the mongodb), and plugged it in as the source of the image.  -->
+                            <img class="img-fluid" src="<%= posts[i].image%>">
+                        </a>
+                    </li>
+                    <% } %>
+            </ul>
+        </div>
     </div>
-  </div>  
-<%- include('partials/footer') -%>
+    <%- include('partials/footer') -%>

@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/multer");
+//postController also acts as controller for comments, which are associated with a post but reside in a separate collection.
 const postsController = require("../controllers/posts");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
+
 
 //Post Routes - simplified for now
 router.get("/:id", ensureAuth, postsController.getPost);

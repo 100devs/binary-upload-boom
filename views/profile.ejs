@@ -1,45 +1,182 @@
-<%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+<%- include('partials/navbarHeader') -%>
+
+<div class="profile-container container">
+  <div class="row mt-3">
+    <div class="col-12 col-md-8">
+      <div class="card h-100 text-center">
+        <h4 class="profile-title">Profile</h4>
+        <div class="d-flex flex-row justify-content-evenly">
+          <div class="profile-pic-container">
+            <img
+              class="profile-pic-image"
+              src="<%= profile == undefined  || profile.image == undefined ? 'https://images.dog.ceo/breeds/shiba/shiba-13.jpg' : profile.image%>"
+              alt=""
+            />
           </div>
-          <div class="mt-5">
-            <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
-              </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
+          <div
+            class="d-flex flex-column justify-content-center align-items-center"
+          >
+            <p class="h2 fw-bold"><%= user.userName %></p>
+            <p class="fst-italic">Following: <%= user.following.length %></p>
+            <p class="fst-italic">Followers: <%= user.followers.length %></p>
           </div>
+        </div>
+        <figure class="mt-3">
+          <audio controls="controls">
+            <source
+              src="<%= profile == undefined || profile.profileSong == undefined ? 'https://docs.google.com/uc?export=download&id=0B-klwLEjaXWcZHR5SmJJWEwtYnc' : profile.profileSong %>"
+            />
+          </audio>
+        </figure>
       </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="card mt-3 mt-md-0 text-center">
+        <h4 class="profile-title">Change Profile Pic</h4>
+        <form
+          class="mx-2"
+          action="<%= !profile ? '/post/createProfilePic?_method=POST' : '/post/createProfilePic?_method=PUT' %>"
+          enctype="multipart/form-data"
+          method="POST"
+        >
+          <div class="form-group text-center">
+            <input
+              type="file"
+              class="form-control form-control-file"
+              name="file"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-outline-primary btn-sm"
+            value="Upload"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+      <div class="card mt-3 text-center">
+        <h4 class="profile-title">Change Profile Music</h4>
+        <form
+          class="mx-2"
+          action="<%= !profile ? '/post/createProfileSong?_method=POST' : '/post/createProfileSong?_method=PUT' %>"
+          enctype="multipart/form-data"
+          method="POST"
+        >
+          <div class="form-group text-center">
+            <input
+              type="file"
+              class="form-control form-control-file"
+              name="file"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-outline-primary btn-sm"
+            value="Upload"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12 col-md-6">
+      <div class="card">
+        <h4 class="profile-title">Add A Post</h4>
+        <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => {
+        %>
+        <div class="alert alert-danger mx-2"><%= el.msg %></div>
+        <% }) %> <% } %> <% if (locals.messages.info) { %> <%
+        messages.info.forEach( el => { %>
+        <div class="alert alert-danger mx-2"><%= el.msg %></div>
+        <% }) %> <% } %>
+        <form
+          class="mx-2"
+          action="/post/createPost"
+          enctype="multipart/form-data"
+          method="POST"
+        >
+          <div class="mb-3">
+            <label
+              for="title"
+              class="form-label"
+              >Title</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              name="title"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="caption"
+              class="form-label"
+              required
+              >Caption</label
+            >
+            <textarea
+              class="form-control"
+              id="caption"
+              name="caption"
+              required
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label
+              for="imgUpload"
+              class="form-label"
+              >Image: required</label
+            >
+            <input
+              type="file"
+              class="form-control"
+              id="imageUpload"
+              name="file"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              value="Upload"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="card mt-3 mb-3">
+        <h4 class="profile-title">Friends</h4>
+        <div class="row">
+          <div class="col-12"><%- include('partials/following') -%></div>
+          <div class="col-12"><%- include('partials/followers') -%></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="card mt-3 mt-md-0 mb-3">
+        <h4 class="profile-title">Feed</h4>
+        <% for(var i=0; i < posts.length; i++) {%>
+        <div class="col-12">
+          <div class="card my-2">
+            <a href="/post/<%= posts[i]._id %>">
+              <img
+                class="img-fluid"
+                src="<%= posts[i].image%>"
+              />
             </a>
-          </li>
+          </div>
+        </div>
         <% } %>
-        </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>  
-      </div>  
+      </div>
     </div>
   </div>
 </div>

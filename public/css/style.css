@@ -1,0 +1,21 @@
+body{
+    font-family: 'Playfair Display', serif;
+}
+
+a {
+    color: #333366;
+}
+a:hover {
+    color: #333366;
+}
+
+.btn {
+    background-color: #333366;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #333366;
+    text-decoration: none;
+}
+

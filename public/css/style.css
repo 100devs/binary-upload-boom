@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
+
+*{
+   font-family: 'Source Sans Pro',sans-serif; 
+}
+
+#title{
+   font-weight: 700 !important;
+}
+#title a{
+   text-decoration: none;
+   color: #3198F4;
+}
+#title a:hover{
+   transition-duration: 200ms;
+   color: #3199f4a2;
+}
+
+#feedImage:hover{
+   transition: 50ms ease-in-out;
+   transform: scale(105%);
+}
+
+div .caption{
+   font-size: large !important; 
+}
+
+
+@media screen and (max-width: 900px) {
+   div div ul li{
+      width: 90vw !important;
+      margin: 10px auto;
+   }
+   div div .content-container{
+      width: 100vw;
+      padding: 0 !important;
+   }
+   .container div .content-container #postImage{
+      width: 100vw !important;
+      margin: 10px auto !important;
+   }
+   #title{
+      font-size: xx-large;
+   }
+}
+

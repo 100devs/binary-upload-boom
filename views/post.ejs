@@ -2,17 +2,17 @@
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
-      <h2><%= post.title %></h2>
+      <h2 class="font-weight-bold text-center"><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
+      <div class="row justify-content-between mt-3">
         <form
           class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          <button class="btn btn-primary fa fa-heart" type="submit"></button> 
         </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
+        <h4 class="col-3">Likes: <%= post.likes %></h4>
         <%if(post.user == user.id){ %>
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
@@ -25,11 +25,42 @@
       </div>
     </div>
     <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
+      <h5 class="caption font-lg"><%= post.caption %></h5>
     </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
+    <div class="mt-4">
+      <h3>Add a comment</h3> 
+      <form action="/comment/createComment/<%=post._id%>"  method="POST">
+        <div class="mb-3">
+            <label for="comment" class="form-label">Comment</label> 
+            <input type="text" class="form-control" id="comment" name="comment">
+        </div>
+        <button type="submit" class="btn btn-primary" value="Upload">Submit</button> 
+      </form>
+    </div>
+    <ul>
+      <% for(var i=0; i<comments.length; i++) {%>
+        <%/* <!--get posts from our server db pulling from our controller-->
+                  <!--controller works with view, view doesnt communicate with others--> */%>
+
+        <li class="justify-content-around justify-content-sm-between d-flex mt-5">
+          <%= comments[i].comment%>
+         <br> Comment Id: <%= comments[i]._id%>
+
+          <%if(comments[i].user == user.id){ %>
+            <form
+              action="/comment/deleteComment/<%= comments[i]._id%>?_method=DELETE"
+              method="POST"
+              class="col-3"
+            >
+              <button class="btn btn-primary fa fa-trash ml-2" type="submit"></button>
+            </form>
+            <%}%>
+        </li>
+      <% } %>
+    </ul>
+    <div class="mt-4 d-flex justify-content-around">
+      <a class="btn btn-primary mb-3" href="/profile">Return to Profile</a>
+      <a class="btn btn-primary mb-3" href="/feed">Return to Feed</a>
     </div>
   </div>
 </div>

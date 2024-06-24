@@ -27,6 +27,29 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <h4>Comments</h4>
+    <form action="/comments/createComment/<%= post._id %>" method='POST'>
+      <input type="text" placeholder="Enter Comment Here" name='comment'>
+      <input type="submit">
+  </form>
+    <ul>
+    <% comments.forEach( el => { %>
+            <li class='comment' data-id='<%=el._id%>'>
+                <span><%= el.comment %></span>
+                <% if (user.id == el.user) { %>
+                  <form
+                  action="/comments/deleteComment/<%= el._id %>?_method=DELETE"
+                  method="POST"
+                  class="col-3"
+                >
+                  <button class="btn btn-primary fa fa-trash" type="submit"></button>
+                </form>
+              <% } %>
+              <span>- <%= el.userName %></span>
+            </li>
+    <% }) %>    
+    </ul>
+
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

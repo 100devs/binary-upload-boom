@@ -1,6 +1,13 @@
 const mongoose = require("mongoose");
 
 const connectDB = async () => {
+  
+  if (!process.env.DB_STRING) {
+    throw new Error('Missing DB_STRING environment variable');
+  }
+  
+  // now you can safely use the variable
+  
   try {
     const conn = await mongoose.connect(process.env.DB_STRING, {
       useNewUrlParser: true,

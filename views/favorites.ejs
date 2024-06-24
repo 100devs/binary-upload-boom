@@ -1,0 +1,32 @@
+<%- include('partials/header') -%>
+<div class="container">
+  <div class="row mt-5">
+      <div class="col-6">
+          <div>
+              <p><strong>User Name</strong>: <%= user.userName %></p>
+              <p><strong>Email</strong>: <%= user.email %></p>
+              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+          </div>
+      
+      </div>
+      <div class="col-6">
+        <ul class="row list-unstyled">
+        <% for(var i=0; i<recipes.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <a href="/recipe/<%= recipes[i]._id%>">
+              <h2><%= recipes[i].name%></h2>
+              <img class="img-fluid" src="<%= recipes[i].image%>">
+              <p><%= recipes[i].ingredients%></p>
+              <p><%= recipes[i].directions%></p>
+            </a>
+          </li>
+        <% } %>
+        </ul>
+        <div class="row justify-content-center mt-5">
+          <a class="btn btn-primary" href="/feed">Return to Feed</a>
+        </div>  
+      </div>  
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') -%>

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const PostSchema = new mongoose.Schema({
-  title: {
+const RecipeSchema = new mongoose.Schema({
+  name: {
     type: String,
     required: true,
   },
@@ -13,9 +13,13 @@ const PostSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  caption: {
+  indgredients: {
     type: String,
     required: true,
+  },
+directions:{    
+  type: String,
+  required: true,
   },
   likes: {
     type: Number,
@@ -31,4 +35,6 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+
+// MongoDB collection name here  will give lowercase plural of name
+module.exports = mongoose.model("Recipe", RecipeSchema);

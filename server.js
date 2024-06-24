@@ -10,6 +10,7 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
+const commentRoutes = require('./routes/comment');
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -53,9 +54,25 @@ app.use(passport.session());
 //Use flash messages for errors, info, ect...
 app.use(flash());
 
+app.use( function( req, res, next ) {
+  // this middleware will call for each requested
+  // and we checked for the requested query properties
+  // if _method was existed
+  // then we know, clients need to call DELETE request instead
+  if ( req.query._method == 'DELETE' ) {
+      // change the original METHOD
+      // into DELETE method
+      req.method = 'DELETE';
+      // and set requested url to /user/12
+      req.url = req.path;
+  }       
+  next(); 
+});
+
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
+app.use('/comment',commentRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {

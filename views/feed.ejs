@@ -2,10 +2,10 @@
   <div class="container">
     <div class="row justify-content-center mt-5">
       <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
+        <% for(var i=0; i<posts.length; i++) {%> <!--looping through all the posts from the controller and rerouting back to the view-->
           <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
+            <a href="/post/<%= posts[i]._id%>"> <!--for every post it loops through it creates a link. it passes the id of the post to the server so the server knows which info to retrieve and how to render the individual page of the route-->
+              <img class="img-fluid" src="<%= posts[i].image%>"> <!---->
             </a>
           </li>
         <% } %>

@@ -1,10 +1,11 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id });
+      const posts = await Post.find({ user: req.user.id }); //check if they are an account by their id and then render their profile
       res.render("profile.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
@@ -13,15 +14,16 @@ module.exports = {
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      res.render("feed.ejs", { posts: posts});
     } catch (err) {
       console.log(err);
     }
   },
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const post = await Post.findById(req.params.id); //referencing the specific post model, the specific id passed up 
+      const comments = await Comment.find({post:req.params.id}).sort({ createdAt: "desc" }).lean();  //already have the post we want to be one by (req.params.id) line24 . Find all the comments that have a post property cuorrent pst we are on and sort bt desc order
+      res.render("post.ejs", { post: post, user: req.user , comments:comments}); //render another view(post.ejs), taking the data from the db and sending the elements grabbed so the view can use. comments will be found in the post.ejs
     } catch (err) {
       console.log(err);
     }

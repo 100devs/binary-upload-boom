@@ -1,46 +1,64 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+<div class="h-auto w-screen flex flex-col items-center mt-10">
+          <div class="flex justify-between w-screen px-10 ">
+              <div>
+                <p><strong>User Name</strong>: <%= user.userName %></p>
+                <p><strong>Email</strong>: <%= user.email %></p>
+              </div>
+              <a href="/logout" class="col-3 btn btn-accent">Logout</a>
           </div>
-          <div class="mt-5">
-            <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
+
+
+          <div class="flex justify-between w-screen h-auto px-10 ">
+
+            <div class="w-1/4">
+                <div class="card mt-5 h-auto w-auto bg-accent shadow-xl">
+                  <div class="card-body text-accent-content items-center text-center">
+                    <h2 class="card-title text-2xl font-silk">Add a post</h2>
+                      <form action="/post/createPost" enctype="multipart/form-data" method="POST" class="w-11/12">
+                        <div class="form-control m-3">
+                          <label class="input-group input-group-sm">
+                            <span class="text-xs w-1/4">Title</span>
+                            <input  type="text" id="title" name="title" class="w-3/4 input input-bordered input-sm" />
+                          </label>
+                        </div>
+                        <div class="form-control  m-3">
+                          <label class="input-group input-group-sm">
+                            <textarea class="textarea textarea-bordered" placeholder="Caption" id="caption" name="caption"></textarea>
+                          </label>
+                        </div>
+                        <div class="form-control ml-10 mt-5 w-6/7 flex justify-center">
+                          <span class="sr-only text-secondary-content">Choose Image</span>
+                          <input type="file" id="imageUpload" name="file" class="block text-sm text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-base-100 file:text-accent-content hover:file:bg-base-300"/>
+                        </div>
+                        <button type="submit" class="btn btn-accent mt-5" value="Upload">Submit</button>
+                      </form>
+                  </div>
+                </div>
               </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
+
+            <div class="flex flex-col items-center">
+              <div class="flex">
+                <div class="">
+                <ul class="grid grid-cols-3 gap-3 items-center justify-center">
+                <% for(var i=0; i<posts.length; i++) {%>
+                  <li class="col-6 justify-content-between mt-5">
+                    <a href="/post/<%= posts[i]._id%>">
+                      <img class="img-fluid w-60" src="<%= posts[i].image%>">
+                    </a>
+                  </li>
+                <% } %>
+                </ul> 
+                </div> 
               </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
+              <div class="row justify-content-center mt-10 mb-5">
+                <a class="btn btn-primary" href="/feed">Return to Feed</a>
+              </div>  
+
+            </div>
+      
           </div>
-      </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>  
-      </div>  
-    </div>
-  </div>
+          
+
 </div>
 <%- include('partials/footer') -%>

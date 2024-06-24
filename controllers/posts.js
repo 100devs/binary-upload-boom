@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require('../models/Comment')
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -20,8 +21,9 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({postId: req.params.id})
+      const posts = await Post.findById(req.params.id);
+      res.render("post.ejs", { posts: posts, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
     }
@@ -32,9 +34,9 @@ module.exports = {
       const result = await cloudinary.uploader.upload(req.file.path);
 
       await Post.create({
-        title: req.body.title,
+        title: req.body.title,//comes from the form
         image: result.secure_url,
-        cloudinaryId: result.public_id,
+        cloudinaryId: result.public_id,//needed so we can delete it if we want to.
         caption: req.body.caption,
         likes: 0,
         user: req.user.id,

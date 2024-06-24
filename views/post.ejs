@@ -27,6 +27,30 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <div class="comments col-1 mt-5">
+      <ul>
+          <% for(let i = 0; i < comments.length; i++) {%> 
+            <li>
+              <span><b><%= comments[i].commentByUser %></b></span>
+              <p><%= comments[i].comment %></p>
+
+              <form action="/post/likeComment/<%= comments[i]._id %>?_method=PUT" method="POST">
+              <button class="btn btn-primary fa fa-thumbs-up"></button></form>
+
+              <% if(comments[i].commentById == user.id) { %>
+              <form action="/post/deleteComment/<%= comments[i]._id %>?_method=DELETE" method="POST">
+              <button class="btn btn-primary fa fa-trash"></button></form>
+              <% } %>
+              <span><i>Likes:</i> <%= comments[i].likes %></span>
+            </li>
+          <%} %>
+      </ul>
+          <form action="/post/createComment/<%= post.id %>" method="POST">
+            <label for="comment">Add comment:</label>
+            <input type="text" id="comment" name="comment" placeholder="Add comment">
+            <button>Submit</button>
+          </form>
+    </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

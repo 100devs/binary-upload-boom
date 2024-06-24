@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require('../models/Comment');
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -20,8 +21,9 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const post = await Post.findById(req.params.id); // Grab a post with ID
+      const comments = await Comment.find({postId: req.params.id}).sort({ createdAt: "asc" }).lean(); // Grab all comments with postId of req.params.id, sort in ascending order
+      res.render("post.ejs", { post: post, user: req.user, comments: comments }); // Render in 'post.ejs', post(variable in ejs): post(const post), user(variable in ejs): req.user, comments(variable name in ejs): comments(const comments)
     } catch (err) {
       console.log(err);
     }
@@ -71,6 +73,44 @@ module.exports = {
       res.redirect("/profile");
     } catch (err) {
       res.redirect("/profile");
+    }
+  },
+  createComment: async (req, res) => {
+    try {
+      await Comment.create({
+        commentById: req.user.id,
+        commentByUser: req.user.userName,
+        postId: req.params.id,
+        comment: req.body.comment,
+        likes: 0,
+      });
+      console.log('Comment has been added');
+      // res.redirect(`/post/${req.params.id}`);
+      res.redirect('back'); // same as above
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  likeComment: async (req, res) => {
+    try {
+      const comments = await Comment.findOneAndUpdate(
+        { _id: req.params.id },
+        { $inc: {likes: 1} }
+      );
+      console.log('Comment liked');
+      res.redirect(`back`);
+    } catch (error) {
+      console.log(err);
+    }
+  },
+  deleteComment: async (req, res) => {
+    try {
+      let comments = await Comment.findById({ _id: req.params.id });
+      await Comment.remove({ _id: req.params.id });
+      console.log('Comment deleted');
+      res.redirect(`back`);
+    } catch (err) {
+      console.log(err);
     }
   },
 };

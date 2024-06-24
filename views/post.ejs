@@ -1,37 +1,83 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-6">
-      <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
-        <form
-          class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
-          method="POST"
-        >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
-        </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
-        <%}%>
-      </div>
-    </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
-    </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
+  <div class="container">
+    <div class="col-12 mt-3 d-flex justify-content-end">
+      <a class="btn btn-primary me-3" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
-  </div>
-</div>
+    <div class="row mt-5">
+      <div class="col-12 d-flex justify-content-center">
+        <img class="img-fluid" src="<%= post.image%>" />
+      </div>
+      <div class="col-12">
+        <div class="row mt-5">
+          <div class="col-md-9 col-sm-12 ">
+            <h2>
+              <%= post.title %>
+            </h2>
+            <p>
+              <%= post.caption %>
+            </p>
+          </div>
+          <div class="col-md-3 col-sm-12">
+            <div class="row">
+              <h4 class="col-8 d-flex justify-content-end">Likes: <%= post.likes %>
+              </h4>
+              <form class="col-1 mx-2" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
+                <button class="btn btn-primary fa fa-heart" type="submit"></button>
+              </form>
+              <%if(post.user==user.id){ %>
+                <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-1 mx-2">
+                  <button class="btn btn-primary fa fa-trash" type="submit"></button>
+                </form>
+                <%}%>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<%- include('partials/footer') -%>
+      <div class="col-12" style="border: 5px solid white;">
+        <h4>Comments</h4>
+        <form action="/comment/createComment/<%= post.id %>" method="POST" class="">
+          <div class="row ">
+            <label for="comment" class="sr-only">Comments</label>
+            <input type=" text" class="col-md-10 col-sm-12 " id="comment" placeholder="New comment" name="comment">
+            <button type="submit" class="btn btn-primary col-md-2 col-sm-12 ">Submit</button>
+          </div>
+        </form>
+        <div class="row justify-content-center ">
+          <ul class="row list-unstyled">
+            <% for(var i=0; i<comments.length; i++) {%>
+              <li class="col-12 justify-content-between mt-4 p-3 border border-light rounded">
+
+                <div style="position: relative;">
+                  <form style="position: absolute;
+  bottom: 0;
+  left: 0;" href="#right-panel" action="/comment/likeComment/<%= post.id %>/<%= comments[i]._id %>?_method=PUT"
+                    method="POST">
+                    <button class="btn btn-outline-success rounded fa fa-thumbs-up" type="submit">
+                      <%= comments[i].likes %>
+                    </button>
+                  </form>
+
+                </div>
+                <h6 class="mt-3">
+                  <%= comments[i].comment %>
+                </h6>
+                <small class="d-flex justify-content-end">
+                  By: <%= comments[i].user.userName %>
+                </small>
+                <small class="d-flex justify-content-end">
+                  At: <%= comments[i].createdAt.toLocaleDateString(undefined, { year: 'numeric' , month: 'short' ,
+                    day: 'numeric' })%> -- <%= comments[i].createdAt.toLocaleTimeString([], { hour: '2-digit' ,
+                      minute: '2-digit' })%>
+                </small>
+              </li>
+              <% } %>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <%- include('partials/footer') -%>

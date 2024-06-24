@@ -1,37 +1,61 @@
 <%- include('partials/header') -%>
+<%- include('partials/nav') -%>
 <div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-6">
-      <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
-        <form
-          class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
-          method="POST"
-        >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+    <!-- post -->
+    <section class="mt-5 mb-5">
+        <div class="d-flex justify-content-center gap-3">
+            <div class="w-50">
+                <img class="img-fluid" src="<%= post.image %>">
+
+                <div class="d-flex gap-2 justify-conotent-start align-items-center mt-2">
+                    <div>
+                        <form class="col-1" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
+                            <button class="btn bub-blue fa fa-heart text-white" type="submit"></button>
+                        </form>
+                    </div>
+                    <div class="mb-0">
+                        <span><%= post.likes %></span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h2><%= post.title %></h2>
+                <div class="badge bub-blue"><%= post.user.userName %></div>
+                <div class="badge bub-blue"><%= String(post.createdAt).slice(0,15) %></div>
+
+                <p class="mt-4"><%= post.caption %></p>
+                <%if(post.user == user.id){ %>
+                    <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-3">
+                        <button class="btn bub-blue fa fa-trash text-white" type="submit"></button>
+                    </form>
+                <%}%>
+            </div>
+        </div>
+    </section>
+
+    <!-- comments -->
+    <section class="mt-5 mb-5">
+        <h2>Comments</h2>
+        <form action="/comments/add-comment/<%= post.id %>" method="POST">
+        <div class="mb-3">
+            <label for="title" class="form-label">Add a comment</label>
+            <input type="text" class="form-control" id="comment" name="comment">
+        </div>
+        <button type="submit" class="btn bub-blue text-white">Comment</button>
         </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
-        <%}%>
-      </div>
-    </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
-    </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
-    </div>
-  </div>
+
+        <!-- list of comments -->
+        <div class="mt-5 mb-5">
+            <% for(comment of comments) { %> 
+                <div class="card bg-dark mb-2">
+                    <div class="card-body">
+                        <div class="card-subtitle text-white-50"><%= comment.user.userName %></div>
+                        <div clas="card-text"><%= comment.comment %></div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </section>
 </div>
 
 <%- include('partials/footer') -%>

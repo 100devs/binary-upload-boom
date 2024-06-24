@@ -26,6 +26,22 @@
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
+<!---This is where comments will be dropped in-->
+      <ul>
+        <% comments.forEach(comment =>{ %>
+          <li><%= userList[comment.madeBy] %>:<%= comment.body %></li>
+        <% });%>
+      </ul>
+    </div>
+    <div class="col-3 mt-5">
+      <form 
+      action="/comment/makeComment/<%= post.id %>"
+      method="POST"
+      >
+        <label for="comment" class="form-label">Comment</label>
+        <textarea class="form-control" id="comment" name="comment"></textarea>
+        <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+      </form>
     </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>

@@ -1,40 +1,58 @@
 <%- include('partials/header') -%>
-
-<main class="container">
-  <div class="row justify-content-center">
-    <section class="col-6 mt-5">
-      <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
-      <div class="alert alert-danger"><%= el.msg %></div>
-      <% }) %> <% } %> <% if (locals.messages.info) { %> <%
-      messages.info.forEach( el => { %>
-      <div class="alert alert-info"><%= el.msg %></div>
-      <% }) %> <% } %>
-      <form action="/login" method="POST">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            name="email"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-            name="password"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </section>
+<nav class="navbar sticky-top navbar-expand-lg">
+  <div class="container-fluid">
+      <a class="navbar-brand mb-0 h1 wobble-hor-bottom logo" href="/">The Art Lounge
+        <img src="/imgs/logo.png" alt="The Art Lounge Logo">
+      </a>
   </div>
+</nav>
+<main class="login intro container">
+  <h2 class="mb-3">Sign in</h2>
+  <!-- display error messages -->
+  <% if (locals.messages.errors || locals.messages.info) { %>
+    <div class="errMsgs">
+      <div class="alert alert-danger">
+        <% if (locals.messages.errors) { %> 
+          <% messages.errors.forEach( el => { %>
+            <span><%= el.msg %></span>
+          <% }) %>
+        <% } %> 
+        <% if (locals.messages.info) { %> 
+          <% messages.info.forEach( el => { %>
+            <span><%= el.msg %></span>
+          <% }) %> 
+        <% } %>
+      </div>
+    </div>
+  <% } %>
+        
+  <!--form-->
+  <form action="/login" method="POST">
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        name="email" placeholder="bob@100devs.com"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="exampleInputPassword1"
+        name="password" placeholder="One00D3vsR0cks!"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <p>Don't have an account?</p>
+  <a href="/signup">Sign up</a>
+    <!-- </section> -->
+  <!-- </div> -->
 </main>
 
 <%- include('partials/footer') -%>

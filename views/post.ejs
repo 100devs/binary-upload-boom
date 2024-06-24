@@ -3,6 +3,7 @@
   <div class="row justify-content-center mt-5">
     <div class="col-6">
       <h2><%= post.title %></h2>
+      <span>from: <%= post.userName %></span>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
         <form
@@ -13,20 +14,57 @@
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
+        <% if(post.user == user.id){ %>
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
           method="POST"
-          class="col-3"
+          class="col-4"
         >
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
-        <%}%>
+        <% } %>
       </div>
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <div class="mt-5">
+      <h3>Add a comment</h3>
+      <form action="/comment/createComment/<%= post._id %>" method="POST">
+        <div class="mb-3">
+            <!-- <label for="comment" class="form-label">Keep it classy!</label> -->
+            <input type="text" class="form-control" id="comment" name="comment">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <div class="mt-5">
+      <h3>Comments</h3>
+      <% if(comments.length===0) { %>
+            <p><em>There are no comments yet for this post. Be the first to add one!</em></p>
+        <% } %>
+      <ul class="col-8 list-group list-group-flush"> 
+        <% for(var i=0; i<comments.length; i++) { %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <%= comments[i].createdBy %> wrote: <%= comments[i].comment %>
+            
+            <!-- For the next statement, the post controller is passing the user to this view, so we can use "user.id" -->
+            <% if(comments[i].createdById==user.id){ %>
+              <!--For the next statement, look at the controller and pass this method exactly what it expects to receive -->
+              <span><form
+                action="/comment/deleteComment/<%= post.id %>/<%= comments[i]._id %>?_method=DELETE"
+                method="POST"
+                class="col-3"
+              >
+                <button class="btn btn-primary fa fa-trash" type="submit"></button>
+              </form></span>
+              <% } %>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

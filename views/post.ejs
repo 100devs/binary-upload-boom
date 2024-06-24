@@ -32,6 +32,28 @@
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
   </div>
+
+
+  <form class="comment-form"
+    action="/post/comment/addComment/<%= post.id %>"
+    method="POST"
+  >
+    <input type="text" name="comment" placeholder="Add Comment">
+    <input type="submit" value="Comment">
+  </form>
+  <ul class="render-comments">
+    <% for(let i=0; i<comments.length; i++) {%>
+      <li >
+        <span><%= comments[i].user %>:</span>
+        <p><%= comments[i].comment %></p>
+        <!-- if post.user == user.id or if comment.user == user.userName 
+          render delete comment button
+        -->
+      </li>
+    <% } %>
+  </ul>
+
+
 </div>
 
 <%- include('partials/footer') -%>

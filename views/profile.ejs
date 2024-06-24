@@ -1,26 +1,26 @@
-<%- include('partials/header') -%>
+<%- include('partials/header') -%> <!--using code from the partials folder to generate the header-->
 <div class="container">
   <div class="row mt-5">
       <div class="col-6">
           <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+              <p><strong>User Name</strong>: <%= user.userName %></p> <!--rendering the user's name-->
+              <p><strong>Email</strong>: <%= user.email %></p> <!--rendering the user's email-->
+              <a href="/logout" class="col-3 btn btn-primary">Logout</a> <!--uses its own route for logging out-->
           </div>
           <div class="mt-5">
             <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+            <form action="/post/createPost" enctype="multipart/form-data" method="POST"> <!--whenever someone submits the form, the route that will be used is /post/createPost. We are not using method override instead of method="POST" because forms can handle a POST request by default. First place this request will go is to the server.js-->
               <div class="mb-3">
                   <label for="title" class="form-label">Title</label>
                   <input type="text" class="form-control" id="title" name="title">
               </div>
               <div class="mb-3">
                 <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
+                <textarea class="form-control" id="caption" name="caption"></textarea> <!--textarea is a larger textbox-->
               </div>
               <div class="mb-3">
                 <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
+                <input type="file" class="form-control" id="imageUpload" name="file"> <!--type="file" allows you to select a file and upload it-->
               </div>
               <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
             </form>
@@ -28,7 +28,7 @@
       </div>
       <div class="col-6">
         <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
+        <% for(var i=0; i<posts.length; i++) {%> <!--getting the posts, looping through them, and displaying the posts in a list to the user-->
           <li class="col-6 justify-content-between mt-5">
             <a href="/post/<%= posts[i]._id%>">
               <img class="img-fluid" src="<%= posts[i].image%>">
@@ -43,4 +43,4 @@
     </div>
   </div>
 </div>
-<%- include('partials/footer') -%>
+<%- include('partials/footer') -%> <!--using code from the partials folder to generate the footer-->

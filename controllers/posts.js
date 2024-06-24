@@ -1,5 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+//load the comment model
+const Comment = require("../models/Comment")
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -19,9 +21,16 @@ module.exports = {
     }
   },
   getPost: async (req, res) => {
+    console.log(req)
+    console.log(req.params)
+    console.log(req.user)
+    //added function to grab function 
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({ post: req.params.id }).sort({ createdAt: "desc" }).lean();
+      //grab the post id, and all the comments that match that post. 
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });
+      //render the grabbed comments
     } catch (err) {
       console.log(err);
     }

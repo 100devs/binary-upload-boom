@@ -17,6 +17,7 @@
       integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -25,19 +26,27 @@
     />
     <link rel="stylesheet" href="/css/style.css" />
   </head>
-  <body class="d-flex h-100s">
-      <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <body class="d-flex h-100">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ffff">
         <div class="container">
-          <a class="navbar-brand" href="/">
-            <img src="imgs/movie.png" alt="" width="100" height="100">
+          <a class="navbar-brand" href="/feed">
+            <img src="/imgs/movie.png" alt="" width="100" height="100">
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-              <a class="btn btn-outline-dark btn-nav" href="/login" role="button">Login</a>
-              <a class="btn-sign-in btn btn-nav" href="/signup" role="button">Sign up</a>
+              <!-- <a class="btn btn-outline-dark btn-nav" href="/login" role="button">Login</a>
+              <a class="btn btn-dark btn-nav" href="/signup" role="button">Sign up</a> -->
+              <span class="navbar-text">Hello, <%= user.userName %></span>
+              <a class="nav-link active" aria-current="page" href="/feed">Explore</a>
+              <a class="nav-link" href="/my-movies">My Movies</a>
+              <a class="nav-link" href="/bookmarks">Favorite Movies</a>
+              <a class="nav-link" href="/profile">Add Movie</a>
+              <!-- <a class="btn btn-primary" href="/feed" role="button"><i class="bi bi-house-door-fill"></i></a> -->
+              <!-- <a class="btn btn-primary" href="/profile" role="button"><i class="bi bi-person-fill"></i></a> -->
+              <a href="/logout" class="btn btn-dark btn-nav" role="button">Logout</a>
               <!-- <button href="/login" class="btn btn-outline-dark" type="submit">Login</button> -->
               <!-- <button href="/signup" class="btn btn-dark" type="submit">Sign up</button> -->
           </div>

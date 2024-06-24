@@ -1,7 +1,8 @@
 <%- include('partials/header') -%>
-    <main class="container">
+    <main class="container card-container">
         <div class="row justify-content-center">
             <section class="col-6 mt-5">
+              <h1>Sign up with email</h1>
                 <% if (locals.messages.errors) { %>
                     <% messages.errors.forEach( el => { %>
                         <div class="alert alert-danger"><%= el.msg %></div>
@@ -30,7 +31,7 @@
                         <label for="confirmPassword" class="form-label">Confirm Password</label>
                         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
                       </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Create my account</button>
                   </form>
             </section>
         </div>

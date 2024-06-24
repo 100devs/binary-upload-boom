@@ -11,7 +11,9 @@
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "bootstrap": "^5.2.1",
     "cloudinary": "^1.25.1",
+    "cloudinary-core": "^2.13.0",
     "connect-mongo": "^3.2.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
@@ -27,5 +29,8 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "validator": "^13.6.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.1.8"
   }
 }

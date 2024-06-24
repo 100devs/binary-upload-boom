@@ -1,22 +1,62 @@
-<%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
+<%- include('partials/logged-in-header') -%>
+<div class="container card-container">
+  <div class="row justify-content-center">
       <div class="col-6">
-          <div>
+          <!-- <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-          </div>
+              <!-- <a href="/logout" class="col-3 btn btn-primary">Logout</a> -->
+          <!-- </div> --> 
           <div class="mt-5">
-            <h2>Add a post</h2>
+            <h2>Add a Movie</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
+                  <label for="title" class="form-label">Movie Title</label>
                   <input type="text" class="form-control" id="title" name="title">
               </div>
               <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
+              <label for="country" class="form-label">What category is the movie</label>
+              <select class="form-select" aria-label="Default select example" id="country" name="country">
+                <option selected>Select Category</option>
+                <option value="Action 🇦c">Action</option>
+                <option value="Horror">Horror</option>
+                <option value="Western">Western</option>
+                <option value="Drama">Drama</option>
+                <option value="Crime Film">Crime Film</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Comedy Horror">Comedy Horror</option>
+                <option value="Cartoon">Cartoon</option>
+                <option value="Romantic">Romantic</option>
+                <option value="Anime">Anime</option>
+                <option value="Romatic Comedy">Romatic Comedy</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Mystery">Mystery</option>
+                <option value="Sports">Sports</option>
+                <option value="Indie Film">Indie Film</option>
+                <option value="Shorts">Shorts</option>
+                <option value="Musicals">Musicals</option>
+                <option value="Fiction">Fiction</option>
+                <option value="Fantasy">Fantasy</option>
+              </select>
+              </div>
+              <div class="mb-3">
+                <label for="basic-url" class="form-label">Rating</label>
+                <select class="form-select" aria-label="Default select example" id="dish" name="dish">
+                  <option selected>Please Select</option>
+                  <option value="One Star">One Star</option>
+                  <option value="Two Star">Two Star</option>
+                  <option value="Three Star">Three Star</option>
+                  <option value="Four Star">Four Star</option>
+                  <option value="Five Star">Five Star</option>
+                </select>
+                </div>
+              <div class="mb-3">
+                <label for="caption" class="form-label">Description</label>
                 <textarea class="form-control" id="caption" name="caption"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="ingredients" class="form-label">Reason</label>
+                <textarea class="form-control" id="ingredients" name="ingredients" placeholder="Why do you like the Movie." rows="5"></textarea>
               </div>
               <div class="mb-3">
                 <label for="imgUpload" class="form-label">Image</label>
@@ -26,7 +66,7 @@
             </form>
           </div>
       </div>
-      <div class="col-6">
+      <!-- <div class="col-6">
         <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
@@ -39,8 +79,7 @@
         <div class="row justify-content-center mt-5">
           <a class="btn btn-primary" href="/feed">Return to Feed</a>
         </div>  
-      </div>  
+      </div>   -->
     </div>
   </div>
-</div>
-<%- include('partials/footer') -%>
+<!-- <%- include('partials/footer') -%> -->

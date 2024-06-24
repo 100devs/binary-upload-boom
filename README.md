@@ -18,3 +18,8 @@
 # Run
 
 `npm start`
+
+# Demo User
+
+- email: tester1234@gmail.com
+- password: tester1234

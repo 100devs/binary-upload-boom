@@ -1,10 +1,13 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
+      // retrieve all the posts belonging to the user
       const posts = await Post.find({ user: req.user.id });
+      // render to profile.ejs and pass in the post and user data
       res.render("profile.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
@@ -12,7 +15,9 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
+      // retieve all the posts in the db
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      // render the template and pass in the all posts data
       res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
@@ -20,8 +25,12 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
+      // retrieve specific post in db based on the post id
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      // retrieve comments tied to the specific post
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+      // render template and pass in the specific post data and user data
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
     }
@@ -47,6 +56,7 @@ module.exports = {
   },
   likePost: async (req, res) => {
     try {
+      // Update the like counter by one
       await Post.findOneAndUpdate(
         { _id: req.params.id },
         {
@@ -54,6 +64,7 @@ module.exports = {
         }
       );
       console.log("Likes +1");
+      // return the user to the same post page
       res.redirect(`/post/${req.params.id}`);
     } catch (err) {
       console.log(err);
@@ -61,7 +72,7 @@ module.exports = {
   },
   deletePost: async (req, res) => {
     try {
-      // Find post by id
+      // Find the specific post by id
       let post = await Post.findById({ _id: req.params.id });
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);

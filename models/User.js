@@ -39,4 +39,6 @@ UserSchema.methods.comparePassword = function comparePassword(
   });
 };
 
+
+// store the UserSchema object to the users collection in the database
 module.exports = mongoose.model("User", UserSchema);

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Post schema 
 const PostSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -21,6 +22,7 @@ const PostSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  // grab the user's id by referencing the user schema
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

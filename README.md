@@ -18,3 +18,27 @@
 # Run
 
 `npm start`
+
+# Features
+- [ ] CSS Styling - Chavis
+- [X] Implement delete comment functionality - Jonathan
+- [ ] Add profile pic to user profiles - Ryan
+- [ ] Allow users to follow other users - John
+- [ ] show username and number of likes on feed page - Nic
+- [ ] Allow photos to be public/private - Jonathan
+- [ ] implement like functionality for individual comments - Nic
+- [ ] add music widget to profiles - Sabrina
+
+# Contributors
+
+**:point_right: John Malapit**
+:e-mail: [contact@johnmal.dev](mailto:contact@johnmal.dev)
+:computer: [Github](https://github.com/johnmal-dev/)
+
+**:point_right: Jonathan Mani**
+:e-mail: [email@email.com](mailto:social.chapters@simplelogin.com)
+:computer: [Github](https://github.com/jonathanmani/)
+
+**:point_right: Chavis T. Gill**
+:e-mail: [chavistgill@gmail.com](mailto:chavistgill@gmail.com)
+:computer: [Github](https://github.com/chavgill/)

@@ -1,15 +1,27 @@
-<%- include('partials/header') -%>
-  <div class="container">
-    <div class="row justify-content-center mt-5">
-      <ul class="row list-unstyled">
+<%- include('partials/navbarHeader') -%>
+<div class="container">
+    <div>
+      <div class="card p-3 mt-3 mb-2 likes-card mx-auto">
+        <p class="text-center mb-0">Your photos have gotten a total of <b><%= likes %></b> likes!</p>
+      </div>
+      <div class="post-card-container">
         <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
+          <div class="card post-card">
+            <div class="card-img-container">
+              <a href="/post/<%= posts[i]._id%>">
+                <img src="<%= posts[i].image%>" alt="<%= posts[i].title %>">
+              </a>
+            </div>
+            <div class="card-text-container">
+              <p><%= posts[i].likes %> likes</p>
+              <p><a href="/publicProfile/<%=posts[i].user._id%>"><%= posts[i].user.userName%></a></p>
+              <p class="fw-bold"><%= posts[i].title %></p>
+              <p class="fst-italic"><%= posts[i].caption %></p>
+              <p class="fst-italic"><%= posts[i].createdAt.toString().slice(0, 15) %></p>
+            </div>
+          </div>
         <% } %>
-        </ul>
+        </div>
     </div>
   </div>  
 <%- include('partials/footer') -%>

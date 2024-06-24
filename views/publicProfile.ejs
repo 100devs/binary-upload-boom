@@ -1,0 +1,63 @@
+<%- include('partials/navbarHeader') -%>
+
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-12 col-md-8">
+      <div class="card h-100 text-center">
+        <h4 class="profile-title">Profile</h4>
+        <div class="d-flex flex-row justify-content-evenly">
+          <div class="profile-pic-container">
+            <img
+              class="profile-pic-image"
+              src="<%= profile == undefined ? 'https://images.dog.ceo/breeds/shiba/shiba-13.jpg' : profile.image%>"
+              alt=""
+            />
+          </div>
+          <div
+            class="d-flex flex-column justify-content-center align-items-center"
+          >
+            <p class="h2 fw-bold"><%= user.userName %></p>
+            <p class="fst-italic">Following: <%= user.following.length %></p>
+            <p class="fst-italic">Followers: <%= user.followers.length %></p>
+          </div>
+        </div>
+        <figure class="mt-3">
+          <audio controls="controls">
+            <source
+              src="<%= !profile || profile.profileSong === undefined ? 'https://docs.google.com/uc?export=download&id=0B-klwLEjaXWcZHR5SmJJWEwtYnc' : profile.profileSong %>"
+            />
+          </audio>
+        </figure>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="card mb-3">
+        <h4 class="profile-title">Friends</h4>
+        <div class="row">
+          <div class="col-12"><%- include('partials/following') -%></div>
+          <div class="col-12"><%- include('partials/followers') -%></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12">
+      <div class="card mt-3 mt-md-0 mb-3">
+        <h4 class="profile-title">Feed</h4>
+        <% for(var i=0; i < posts.length; i++) {%>
+        <div class="col-12">
+          <div class="card my-2">
+            <a href="/post/<%= posts[i]._id %>">
+              <img
+                class="img-fluid"
+                src="<%= posts[i].image%>"
+              />
+            </a>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') -%>

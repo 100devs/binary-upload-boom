@@ -1,0 +1,31 @@
+<%- include('partials/header') -%>
+<div>
+    <h2>Check out this rad comment!</h2>
+    <p><%= comment.text %></p>
+    <p>By: <%= comment.user.userName %></p>
+    <p>On: <%= comment.createdAt.toLocaleString() %></p>
+    <form
+        action="/comment/deleteComment/<%= comment.id %>?_method=DELETE"
+        method="POST"
+        class="col-3"
+    >
+        <button class="btn btn-primary fa fa-trash" type="submit"></button>
+    </form>
+    <form
+        action="/comment/createReply/<%= comment.id %>/"
+        method="POST"
+    >
+        <div class="mb-3">
+            <label for="text" class="form-label">Reply to this comment</label>
+            <textarea class="form-control" id="text" name="text"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+    <% if(comment.replies.length < 1) {%>
+        <p></p>
+    <% } else {%>
+    <%- include('partials/replies', { replies: comment.replies, user: user }) %>
+    <% } %>
+</div>
+
+<%- include('partials/footer') -%>

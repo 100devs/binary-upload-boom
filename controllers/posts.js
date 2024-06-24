@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -21,7 +22,7 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      res.render("post.ejs", { post: post, user: req.user});
     } catch (err) {
       console.log(err);
     }
@@ -36,25 +37,63 @@ module.exports = {
         image: result.secure_url,
         cloudinaryId: result.public_id,
         caption: req.body.caption,
-        likes: 0,
+        voteCount: 0,
         user: req.user.id,
       });
-      console.log("Post has been added!");
+      console.log(`Comment has been added by ${req.user.userName}!`);
       res.redirect("/profile");
     } catch (err) {
       console.log(err);
     }
   },
-  likePost: async (req, res) => {
+  upvotePost: async (req, res) => {
     try {
-      await Post.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
-        }
-      );
-      console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
+      const post = await Post.findById(req.params.id);
+      if (post.votes.includes(req.user.id)) {
+        console.log("You already upvoted this post!");
+        res.redirect("/post/" + req.params.id);
+      } else {
+        post.votes.push(req.user.id);
+        post.voteCount++;
+        await post.save();
+        console.log("Upvote successful!");
+        res.redirect("/post/" + req.params.id);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  downvotePost: async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.id);
+      if (post.votes.includes(req.user.id)) {
+        post.votes.pull(req.user.id);
+        post.voteCount--;
+        await post.save();
+        console.log("Downvote successful!");
+        res.redirect("/post/" + req.params.id);
+      } else {
+        console.log("You haven't upvoted this post yet!");
+        res.redirect("/post/" + req.params.id);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  editPost: async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.id);
+      if (post.user == req.user.id) {
+        post.title = req.body.title;
+        post.caption = req.body.caption;
+        post.isEdited = true;
+        await post.save();
+        console.log("Post has been edited!");
+        res.redirect("/profile");
+      } else {
+        console.log("You can't edit this post!");
+        res.redirect("/profile");
+      }
     } catch (err) {
       console.log(err);
     }

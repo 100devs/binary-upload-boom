@@ -17,10 +17,24 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  likes: {
+  voteCount: {
     type: Number,
     required: true,
   },
+  votes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: [],
+    },
+  ],
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment",
+      default: [],
+    },
+  ],
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -29,6 +43,24 @@ const PostSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  isEdited: {
+    type: Boolean,
+    default: false,
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  },
 });
+
+const autoPopulateAll = function (next) {
+  this.populate("user");
+  this.populate("comments");
+  this.populate("votes");
+  next();
+};
+
+PostSchema.pre("find", autoPopulateAll);
+PostSchema.pre("findOne", autoPopulateAll);
 
 module.exports = mongoose.model("Post", PostSchema);

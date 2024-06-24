@@ -1,15 +1,16 @@
-const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
-const passport = require("passport");
-const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
-const methodOverride = require("method-override");
-const flash = require("express-flash");
-const logger = require("morgan");
-const connectDB = require("./config/database");
-const mainRoutes = require("./routes/main");
-const postRoutes = require("./routes/posts");
+const express = require("express"); //help build out api
+const app = express(); //wherever you see app that is us using express
+const mongoose = require("mongoose"); //help talk to our MongoDB database
+const passport = require("passport"); //using for authentication, off the shelf strategies
+const session = require("express-session"); //need for users to stay logged in across the app, uses cookies
+const MongoStore = require("connect-mongo")(session); //storing our session in MongoDB, keeps you logged in
+const methodOverride = require("method-override"); //override methods to be what we want, still using GET/POST
+const flash = require("express-flash"); //show us our notifications 
+const logger = require("morgan"); //logger, shows us all logged requests in termainal
+const connectDB = require("./config/database"); //connect to database
+const mainRoutes = require("./routes/main"); // routes for main page
+const postRoutes = require("./routes/posts"); //routes for posts
+const commentRoutes = require("./routes/comments"); //routes for comments
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -26,7 +27,7 @@ app.set("view engine", "ejs");
 //Static Folder
 app.use(express.static("public"));
 
-//Body Parsing
+//Body Parsing - pull stuff out of reqests
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -56,6 +57,7 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
+app.use("/comment", commentRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {

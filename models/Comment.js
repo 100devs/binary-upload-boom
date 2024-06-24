@@ -1,24 +1,16 @@
 const mongoose = require("mongoose");
 
-const PostSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  image: {
-    type: String,
-    require: true,
-  },
-  cloudinaryId: {
-    type: String,
-    require: true,
-  },
-  caption: {
+const CommentSchema = new mongoose.Schema({
+  comment: {
     type: String,
     required: true,
   },
   likes: {
     type: Number,
+    required: true,
+  },
+  parentPost: {
+    type: String,
     required: true,
   },
   user: {
@@ -35,4 +27,4 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Comment", CommentSchema);

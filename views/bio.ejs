@@ -1,0 +1,81 @@
+<%- include('partials/header') -%>
+<div class="container">
+  <div class="row mt-5">
+      <div class="col-6">
+          <div>
+              <h2>Tell us more about yourself, <%= user.userName %></h2>
+              <p><strong>Email</strong>: <%= user.email %></p>
+              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+          </div>
+
+          <div class="mt-5">
+          
+            <form action="/bio/createBio" method="POST">
+              <div class="mb-3">
+                  <label for="currentRead" class="form-label">Currently Reading</label>
+                  <input type="text" class="form-control" id="currentRead" name="currentRead">
+              </div>
+
+              <div class="mb-3">
+                <label for="currentProject" class="form-label">Current Project</label>
+                <textarea class="form-control" id="currentProject" name="currentProject"></textarea>
+              </div>
+
+              <div class="mb-3">
+                <label for="hobbies" class="form-label">Hobbies</label>
+                <textarea class="form-control" id="hobbies" name="hobbies"></textarea>
+              </div>
+        
+
+              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+            </form>
+          </div>
+
+      </div>
+
+      
+    
+      <div>
+        <ul class="row list-unstyled">
+            <% for(var i=0; i<bio.length; i++) {%>
+              <li class="col-6 justify-content-between mt-5">
+                <p>Currently Reading</p>
+                <span><%= bio[i].currentReading %></span>
+              </li>
+            <% } %>
+            </ul>
+
+            <ul class="row list-unstyled">
+                <% for(var i=0; i<bio.length; i++) {%>
+                  <li class="col-6 justify-content-between mt-5">
+                    <p>Current Project</p>
+                    <span><%= bio[i].reading %></span>
+                  </li>
+                <% } %>
+                </ul>
+
+                <ul class="row list-unstyled">
+                    <% for(var i=0; i<bio.length; i++) {%>
+                      <li class="col-6 justify-content-between mt-5">
+                        <p>Hobbies</p>
+                        <span><%= bio[i].hobbies %></span>
+                      </li>
+                    <% } %>
+                    </ul>
+        
+    </div>
+        
+
+
+   
+
+        <div class="row justify-content-center mt-5">
+          <a class="btn btn-primary" href="/feed">Return to Feed</a>
+        </div>  
+
+      </div>  
+
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') -%>

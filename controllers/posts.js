@@ -1,5 +1,8 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require('../models/Comment')
+const InventoryItem = require('../models/InventoryItem')
+const Todo = require('../models/Todo') 
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -21,7 +24,11 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({post:req.params.id}).sort({ createdAt: "desc" }).lean();
+      const inventory = await InventoryItem.find({post:req.params.id}).sort({ createdAt: "desc"}).lean();
+      const todo = await Todo.find({post:req.params.id}).sort({createdAt: "desc"}).lean();
+      console.log(todo)
+      res.render("post.ejs", { post: post, user: req.user, comments: comments, inventory:inventory, todo:todo });
     } catch (err) {
       console.log(err);
     }
@@ -34,6 +41,7 @@ module.exports = {
       await Post.create({
         title: req.body.title,
         image: result.secure_url,
+        address: req.body.address,
         cloudinaryId: result.public_id,
         caption: req.body.caption,
         likes: 0,

@@ -9,6 +9,10 @@ const PostSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  address: {
+    type: String,
+    require: true,
+  },
   cloudinaryId: {
     type: String,
     require: true,
@@ -24,7 +28,7 @@ const PostSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-  },
+  }, 
   createdAt: {
     type: Date,
     default: Date.now,

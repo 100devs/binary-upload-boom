@@ -1,0 +1,11 @@
+.completed{
+    text-decoration: line-through;
+    color: gray;
+}
+.not{
+    text-decoration: underline;
+}
+
+.img-fluid {
+    width:30vw;
+}

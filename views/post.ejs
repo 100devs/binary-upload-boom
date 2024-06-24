@@ -23,7 +23,35 @@
         </form>
         <%}%>
       </div>
+      <h2>Add a Comment</h2>
+      <form action="/comment/createComment/<%= post.id %>" method="POST">
+        <div class="mb-3">
+          <label for="caption" class="form-label">Comment</label>
+          <textarea class="form-control" id="comment" name="comment"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+      </form>
+
+      <ul class="col list-unstyled">
+        <h2>Comment Section</h2>
+        <% for(var i=0; i<comment.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <%= comment[i].comment %>
+          </li>
+          <%if(comment[i].user == user.id){ %>
+            <form
+              action="/comment/deleteComment/<%= comment[i]._id %>?_method=DELETE"
+              method="POST"
+              class="col-3"
+            >
+              <button class="btn btn-primary fa fa-trash" type="submit"></button>
+            </form>
+            <%}%>
+        <% } %>
+      </ul>
+
     </div>
+
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>

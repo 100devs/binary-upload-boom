@@ -4,6 +4,7 @@
     <div class="col-6">
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
+
       <div class="row justify-content-between">
         <form
           class="col-1"
@@ -22,6 +23,21 @@
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
         <%}%>
+      </div>
+      <div>
+        <form action="/post/createComment/<%= post.id %>" method="POST">
+          <h3>Comments</h3>
+          <label for="comment">Add Comment: </label>
+          <input id="comment" name="comment" type="text" required>
+          <input type="submit">
+        </form>
+      </div>
+      <div>
+        <ul>
+        <% for(let i=0; i < comments.length; i++) {%>
+          <li><%= comments[i].comment %></li>
+        <% } %>
+        </ul>
       </div>
     </div>
     <div class="col-3 mt-5">

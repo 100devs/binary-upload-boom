@@ -5,6 +5,10 @@
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
+        <div class="caption-profile">
+            <p><strong>Username</strong>: <%= user.userName %></p>
+            <p><%= post.caption %></p>
+        </div>
         <form
           class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"
@@ -26,6 +30,22 @@
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
+      <ul>
+        <p><strong>Comments</strong>:</p>
+        <% for(var i=0; i<comments.length; i++) {%>
+          <li id ="comments" class="col-6 justify-content-between mt-5">
+            <%= comments[i].comment%>
+          </li>
+        <% } %>
+      </ul>
+      <div class="mt-5">
+        <form action="/comment/createComment/<%=post._id%>" method="POST">
+          <div class="mb-3">
+              <label for="comment" class="form-label">Add a Comment</label>
+              <input type="text" class="form-control" id="comment" name="comment">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>

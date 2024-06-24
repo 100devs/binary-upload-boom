@@ -1,0 +1,174 @@
+/********* Style for the SignUp EJS ***********/
+.container-form {
+    margin-top: 50px;
+    text-align: center;
+  }
+  
+  /* Style for the Alerts */
+  .alert {
+    margin-bottom: 10px;
+  }
+  
+  /* Style for the Signup Form */
+  form.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  
+  /* Style for Form Inputs */
+  form.form-container .form-control {
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  /* Style for the Submit Button */
+  form.form-container .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  form.form-container .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Style for Labels */
+  form.form-container .form-label {
+    font-weight: bold;
+  }
+  
+
+
+/************** Styles for Profile Page *****************/
+/* Style for the images in the list */
+.list-unstyled img {
+    max-width: 100%; /* To ensure the image fits within the container */
+    height: 200px; /* Adjust the height as needed */
+    width: 200px; /* Adjust the width as needed */
+    object-fit: cover; /* This ensures the image maintains its aspect ratio */
+    border: 1px solid #ccc; /* Optional: Add a border for separation */
+  }
+  
+  /* Style for the profile page container */
+/* Style for the profile page container */
+.container {
+    background-color: #f5f5f5; /* Light gray background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  
+  /* Style for the "Add a post" section */
+  .col-6:first-child .mt-5 {
+    background-color: #fff; /* White background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Style for the images in the list */
+  .list-unstyled img {
+    max-width: 100%;
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Rounded corners */
+    transition: transform 0.2s; /* Add a smooth hover effect */
+  }
+  
+  .list-unstyled img:hover {
+    transform: scale(1.05); /* Zoom in on hover */
+  }
+  
+
+
+  /************** Posts page styles *****************/
+  /* Round the corners of the picture */
+.img-fluid {
+    border-radius: 10px;
+  }
+  
+  /* Separate the buttons */
+  .col-1, .col-3 {
+    margin: 10px; /* Add spacing between buttons */
+  }
+  
+  /* Style the comments section */
+  #comments {
+    background-color: #f5f5f5; /* Light gray background */
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Style the comment input form */
+  form[action^="/comment/createComment"] {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f5f5f5; /* Light gray background */
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Add spacing to the buttons in the last div */
+  .col-6 .btn {
+    margin: 5px;
+  }
+  
+  /* Style the "Return to Profile" and "Return to Feed" buttons */
+  .col-6 .btn.btn-primary {
+    background-color: #007bff; /* Blue background color */
+    color: #fff; /* White text color */
+    border: none;
+  }
+  
+  .col-6 .btn.btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+
+  
+
+
+/**************** Feed Page *****************/
+/* Center the content on the page */
+.container {
+    text-align: center;
+  }
+  
+  /* Style the list of images */
+  .list-unstyled {
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* Style each image item */
+  .list-unstyled li {
+    display: inline-block;
+    margin: 10px;
+  }
+  
+  /* Style the images */
+  .img-fluid {
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+  }
+  
+  /* Add hover effect to the images */
+  .img-fluid:hover {
+    transform: scale(1.05);
+  }
+  
+  
+

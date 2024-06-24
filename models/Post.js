@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+// pull in Comment Schema to add comments array,
+// which is an array of Comments
+const Comment = require("./Comment");
 
 const PostSchema = new mongoose.Schema({
   title: {
@@ -25,6 +28,10 @@ const PostSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  comments: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Comment"
+  }],
   createdAt: {
     type: Date,
     default: Date.now,

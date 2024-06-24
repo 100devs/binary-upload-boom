@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const { createComment } = require("./comments");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -20,13 +21,14 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
+      const post = await Post.findById(req.params.id)
+        .populate('comments');
       res.render("post.ejs", { post: post, user: req.user });
     } catch (err) {
       console.log(err);
-    }
+    } 
   },
-  createPost: async (req, res) => {
+  createPost: async (req, res) => { 
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);

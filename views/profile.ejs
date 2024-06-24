@@ -1,33 +1,55 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+<div class="col mt-3">
+  <!-- <div class="d-flex flex-row p-2"> -->
+    <div class="col">
+      <a class="text-secondary mx-5" href="/feed">Return to Feed</a>
+    </div>
+    <div class="row-2 mt-0">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-dark m-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Create New Post
+      </button>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">New Post</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <div class="mb-3">
+                  <label for="caption" class="form-label">Caption</label>
+                  <textarea class="form-control" id="caption" name="caption"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="imgUpload" class="form-label">Image</label>
+                  <input type="file" class="form-control" id="imageUpload" name="file">
+                </div>
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button> -->
+                <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary" value="Upload">Submit</button> -->
+            </div>
           </div>
-          <div class="mt-5">
-            <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
-              </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
-          </div>
+        </div>
       </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
+    </div>
+</div>
+
+<div class="container mt-0">
+  <div class="row mt-0">
+    <div class="col">
+      <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
             <a href="/post/<%= posts[i]._id%>">
@@ -36,11 +58,57 @@
           </li>
         <% } %>
         </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>  
-      </div>  
+    </div>
+    <div class="col col-md-2 justify-content-end align-items-end">
+        <a href="/profile" class="text-decoration-none fw-bold text-dark"><p> <%= user.userName %></p></a>
+        <a href="/logout" class="col-7 btn btn-secondary">Logout</a>
     </div>
   </div>
 </div>
+</div>
+
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="col">
+      Column
+    </div>
+    <div class="col">
+      Column
+    </div>
+  </div>
+</div> -->
+
+
+
+
+
+<!-- <div class="container">
+  <div class="row mt-5">
+      <div class="col-6"> -->
+          <!-- <div>
+              <p><strong>User Name</strong>: <%= user.userName %></p>
+              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+          </div> -->
+          <!-- <div class="mt-5">
+           
+          </div>
+      </div>
+      <div class="col-6"> -->
+        <!-- <ul class="row list-unstyled">
+        <% for(var i=0; i<posts.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <a href="/post/<%= posts[i]._id%>">
+              <img class="img-fluid" src="<%= posts[i].image%>">
+            </a>
+          </li>
+        <% } %>
+        </ul> -->
+        <!-- <div class="row justify-content-center mt-5">
+          <a class="btn btn-primary" href="/feed">Return to Feed</a>
+        </div>   -->
+      <!-- </div>  
+    </div>
+  </div>
+</div> -->
 <%- include('partials/footer') -%>

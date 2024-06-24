@@ -1,0 +1,34 @@
+@import "../node_modules/bootstrap/scss/functions";
+// custom theme colors 
+    $light:      #fcf6d3;
+    $dark:       #0f0703;
+    $primary:    #59310d;
+    $secondary:  #714435;
+    $info:       #b46d0f;
+    $success:    #4c9507;
+    $warning:    #ffba38;
+    $danger:     #ea035e;
+
+// // importing the functions first to use map.merge()
+// @import "../node_modules/bootstrap/scss/functions";
+
+// import the variables beforehand to use the variable $grid-breakpoints.
+// Otherwise, compiler will show error - '$grid-breakpoints not defined.'
+@import '../node_modules/bootstrap/scss/variables';
+@import "../node_modules/bootstrap/scss/mixins";
+
+$new-breakpoints: (
+    xl: 1280px,
+    xxl:1600px
+);
+
+$grid-breakpoints: map-merge($grid-breakpoints, $new-breakpoints);
+
+$new-container-max-widths: (
+  xl: 1220px,
+  xxl:1520px
+);
+
+$container-max-widths: map-merge($container-max-widths, $new-container-max-widths);
+
+@import "../node_modules/bootstrap/scss/bootstrap";

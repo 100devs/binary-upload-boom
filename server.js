@@ -10,6 +10,7 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
+const commentsRoutes = require("./routes/comments")
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -17,8 +18,6 @@ require("dotenv").config({ path: "./config/.env" });
 // Passport config
 require("./config/passport")(passport);
 
-//Connect To Database
-connectDB();
 
 //Using EJS for views
 app.set("view engine", "ejs");
@@ -57,7 +56,13 @@ app.use(flash());
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 
-//Server Running
-app.listen(process.env.PORT, () => {
+// Routes for comments
+app.use("/comments", commentsRoutes);
+
+
+//Connecting to DB, Setting up and Running Server
+connectDB().then(() => {
+  app.listen(process.env.PORT, () => {
   console.log("Server is running, you better catch it!");
+  })
 });

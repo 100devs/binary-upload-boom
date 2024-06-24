@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tailwindcss -i public/src/input.css -o public/css/main.css",
+    "watch": "tailwindcss -i public/src/input.css -o public/css/main.css --watch"
   },
   "author": "",
   "license": "MIT",
@@ -27,5 +29,8 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "validator": "^13.6.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.2.1"
   }
 }

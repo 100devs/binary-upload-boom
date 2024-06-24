@@ -1,0 +1,74 @@
+<%- include('partials/logged-in-header') -%>
+
+<div class="container card-container">
+  <h1>My Bookmarked Recipes</h1>
+  <!-- <h1><%= user %></h1>
+  <h1><%= posts.bookmarks %></h1> -->
+  <!-- <% console.log(posts[0]) %>  -->
+  <!-- <% console.log(posts[0]) %>  -->
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% for(var i=0; i<posts.length; i++) {%>
+      <% if(posts[i].bookmarks.includes(user.id)) {%>
+        <%= posts %>
+    <div class="col">
+      <div class="card h-100">
+        <img src="<%= posts[i].image%>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= posts[i].title%></h5>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          <a href="/post/<%= posts[i]._id%>" class="btn btn-primary">View Recipe</a>
+          <a href="/post/<%= posts[i]._id%>" class="btn btn-primary">Edit</a>
+        </div>
+        <div class="card-footer">
+          <!-- <span class="badge rounded-pill bg-primary"><%= posts[i].country%></span>
+          <span class="badge rounded-pill bg-secondary"><%= posts[i].dish%></span> -->
+        </div>
+      </div>
+    </div>
+    <% } %>
+    <% } %>
+  </div>
+  
+
+
+
+
+
+
+
+
+
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% for(var i=0; i<posts.length; i++) {%>
+      <% if(posts[i].bookmarks.includes(user.id)) {%>
+        <%= posts %>
+    <div class="col">
+      <div class="card h-100">
+        <img src="<%= posts[i].image%>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= posts[i].title%></h5>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          <a href="/post/<%= posts[i]._id%>" class="btn btn-primary">View Recipe</a>
+          <a href="/post/<%= posts[i]._id%>" class="btn btn-primary">Edit</a>
+        </div>
+        <div class="card-footer">
+          <!-- <span class="badge rounded-pill bg-primary"><%= posts[i].country%></span>
+          <span class="badge rounded-pill bg-secondary"><%= posts[i].dish%></span> -->
+        </div>
+      </div>
+    </div>
+    <% } %>
+    <% } %>
+  </div>
+
+
+
+
+
+
+
+</div>
+
+
+<%- include('partials/footer') -%>

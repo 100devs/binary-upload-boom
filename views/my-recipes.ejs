@@ -1,0 +1,36 @@
+<%- include('partials/logged-in-header') -%>
+
+<div class="container card-container mt-auto">
+  <h1>My Posts</h1>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% for(var i=0; i<posts.length; i++) {%>
+    <div class="col">
+      <div class="card h-100">
+        <img src="<%= posts[i].image%>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= posts[i].title%></h5>
+          <p class="card-text"><%= posts[i].caption %>.</p>
+          <a href="/post/<%= posts[i]._id%>" class="btn btn-primary">View Post</a>
+          <!-- <a href="/post/<%= posts[i]._id%>" class="btn btn-primary">Edit</a> -->
+          <%if(posts.user == user.id){ %>
+          <form
+            action="/post/deletePost/<%= post.id %>?_method=DELETE"
+            method="POST"
+            class="col-3"
+          >
+            <button class="btn btn-primary fa fa-trash" type="submit"></button>
+          </form>
+          <%}%>
+        </div>
+        <div class="card-footer">
+          <span class="badge rounded-pill bg-primary"><%= posts[i].country%></span>
+          <span class="badge rounded-pill bg-secondary"><%= posts[i].dish%></span>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+
+<%- include('partials/footer') -%>

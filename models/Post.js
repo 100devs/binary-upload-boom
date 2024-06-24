@@ -18,12 +18,24 @@ const PostSchema = new mongoose.Schema({
     required: true,
   },
   likes: {
-    type: Number,
+    type: Array,
+    required: true,
+  },
+  dislikes: {
+    type: Array,
+    required: true,
+  },
+  bookmarks: {
+    type: Array,
     required: true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+  },
+  createdBy: {
+    type: String,
+    ref: "User"
   },
   createdAt: {
     type: Date,

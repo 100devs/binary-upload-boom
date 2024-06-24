@@ -1,7 +1,7 @@
-<%- include('partials/header') -%>
-<div class="container">
+<%- include('partials/logged-in-header') -%>
+<div class="container card-container">
   <div class="row mt-5">
-      <div class="col-6">
+      <div class="col-6 border">
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
@@ -30,8 +30,14 @@
         <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
+            <a href="/post/<%= posts[i]._id%>" class=" text-dark text-decoration-none">
+              <img class="img-fluid view" src="<%= posts[i].image%>">
+              <p class=""><%= formatDate(posts[i].createdAt) %></p>
+              <% function formatDate(date) { %>
+                <% const options = { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' }; %>
+                <% const formattedDate = new Date(date).toLocaleString(undefined, options); %>
+                <% return formattedDate; %>
+              <% } %>
             </a>
           </li>
         <% } %>

@@ -1,17 +1,23 @@
 <%- include('partials/header') -%>
 <div class="container">
+  
   <div class="row mt-5">
       <div class="col-6">
           <div>
+            <!-- pull this info from the user collection (sends with every request) and displays it in the DOM -->
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
+              <!-- button to log out -->
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
+
           <div class="mt-5">
             <h2>Add a post</h2>
+            <!-- form to upload images/create a new post -->
+            <!-- encytype is needed for multer to work -->
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
+                  <label for="comment" class="form-label">Title</label>
                   <input type="text" class="form-control" id="title" name="title">
               </div>
               <div class="mb-3">
@@ -26,11 +32,15 @@
             </form>
           </div>
       </div>
+
       <div class="col-6">
         <ul class="row list-unstyled">
+          <!-- loops through all the user's posts and displays them in an li, includes a link to that post and the image itself -->
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
+            <!-- link to the individual post -->
             <a href="/post/<%= posts[i]._id%>">
+              <!-- the image stored on cloudinary -->
               <img class="img-fluid" src="<%= posts[i].image%>">
             </a>
           </li>

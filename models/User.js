@@ -1,6 +1,8 @@
+// encrypts password so we do not store raw data
 const bcrypt = require("bcrypt");
+// using mongoose
 const mongoose = require("mongoose");
-
+// user schema which tells us how the info is stored in the DB
 const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
   email: { type: String, unique: true },

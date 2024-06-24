@@ -2,6 +2,8 @@
     <main class="container">
         <div class="row justify-content-center">
             <section class="col-6 mt-5">
+
+              <!-- if error message then display to user -->
                 <% if (locals.messages.errors) { %>
                     <% messages.errors.forEach( el => { %>
                         <div class="alert alert-danger"><%= el.msg %></div>
@@ -12,6 +14,8 @@
                         <div class="alert alert-info"><%= el.msg %></div>
                     <% }) %>    
                 <% } %>
+
+                <!-- sign up form allowing you to input user name, email address, password and confirm password -->
                 <form action="/signup" method="POST">
                     <div class="mb-3">
                         <label for="userName" class="form-label">User Name</label>
@@ -30,6 +34,7 @@
                         <label for="confirmPassword" class="form-label">Confirm Password</label>
                         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
                       </div>
+                      <!-- submit button -->
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
             </section>

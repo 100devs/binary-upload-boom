@@ -59,5 +59,9 @@ app.use("/post", postRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {
-  console.log("Server is running, you better catch it!");
+  console.log(`Server is running on ${process.env.PORT}, you better catch it!`);
 });
+
+/*melt username
+password fate24** 
+email melt@fgo.com */

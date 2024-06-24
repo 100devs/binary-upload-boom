@@ -1,3 +1,24 @@
+Hi!
+
+Things I added - 
+
+Added notes/comments to better understand the code.
+Added comments
+
+Things still need to add - 
+
+CSS
+Make it a more fishing themed social media site.
+
+
+
+
+
+
+
+
+<--------------------------->
+
 # Install
 
 `npm install`

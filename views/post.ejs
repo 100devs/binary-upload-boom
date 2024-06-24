@@ -1,8 +1,10 @@
-<%- include('partials/header') -%>
+<%- include('partials/navbarHeader') -%>
+
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
       <h2><%= post.title %></h2>
+      <a href="/publicProfile/<%=post.user._id%>"><%= post.user.userName%></a>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
         <form
@@ -13,7 +15,7 @@
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
+        <%if(post.user._id == user.id){ %>
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
           method="POST"
@@ -23,6 +25,44 @@
         </form>
         <%}%>
       </div>
+      <!-- form to submit comment -->
+          <form action = "/comment/createComment/<%= post.id %>" method="POST">
+          <input type="text" placeholder="Submit comment" name="comment">
+          <button type="submit">Submit</button>
+          </form>
+          <!--end of form -->
+          
+      <!-- start of comments -->
+      <div>
+      <% for(var i=0; i<comments.length; i++) {%>
+        <span class="col-6 justify-content-between mt-5">
+          <%= comments[i].comment %>
+          <br>
+            Posted:  <%= comments[i].createdAt %>
+            <br>
+            Likes:  <%= comments[i].likes %>
+          
+          <form
+          class="col-1"
+          action="/comment/likeComment/<%= comments[i]._id %>?_method=PUT"
+          method="POST"
+        >
+          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+        </form>
+        <form
+          class="col-1"
+          action="/comment/deleteComment/<%= comments[i]._id %>?_method=DELETE"
+          method="POST"
+        >
+          <button class="btn btn-primary fa fa-trash" type="submit"></button>
+        </form>
+          </span>
+          <p> _______________________________________________ </p>
+      <% } %>
+    </div>
+      <!-- end of comments -->
+      
+        
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>

@@ -1,11 +1,24 @@
-<%- include('partials/header') -%>
+<%- include('partials/indexHeader') -%>
 
-<main class="container">
-    <div class="row justify-content-around mt-5">
-        <a href="/login" class="col-3 btn btn-primary"> Login</a>
-        <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
-    </div>
+<main
+  class="container d-flex flex-column flex-sm-row justify-content-center align-items-center h-100 gap-5"
+>
+  <%- include('partials/logo') -%>
+
+  <div class="d-flex flex-column align-items-stretch">
+    <a
+      href="/login"
+      class="btn btn-primary my-2 mx-2"
+    >
+      Login</a
+    >
+    <a
+      href="/signup"
+      class="btn btn-primary my-2 mx-2"
+    >
+      Signup</a
+    >
+  </div>
 </main>
-    
 
 <%- include('partials/footer') -%>

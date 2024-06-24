@@ -10,6 +10,7 @@
           <div class="mt-5">
             <h2>Add a post</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+              <!-- if we want this form to work with multer we need to put enctype blah blah or else we won't be able to submit this form with image?? -->
               <div class="mb-3">
                   <label for="title" class="form-label">Title</label>
                   <input type="text" class="form-control" id="title" name="title">

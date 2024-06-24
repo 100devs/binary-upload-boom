@@ -5,11 +5,16 @@
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
-        <form
+        <form 
           class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
+        <!-- wait! put liking a post is a put request not a post request? forms are always post requests, but we can override the post as a put in the action
+        notice the '?_method=PUT'
+        this is initialized in our server.js
+        'const methodOverride = require("method-override");'
+        -->
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
@@ -27,6 +32,28 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    
+    <form action="/post/createComment/<%=post.id%>" method="POST">
+      <input type="text" name="comment" id="comment" placeholder="post comment">
+      <button class="btn btn-primary" type="submit">Post</button>
+    </form>
+
+    <div class="container">
+      <% for(let i of comments) {%>
+        <div class="row">
+          <span><%=i.userName%>:</span><span><%=i.comment%></span>
+          <%console.log(i.user, user.id)%>
+          <%if (String(i.user) === String(user.id)) {%>
+            <form action="/post/deleteComment/<%=i.id%>/<%=post.id%>?_method=DELETE" method="POST">
+              <button class="btn btn-primary fa fa-trash" type="submit"></button>
+            </form>
+          <%}%>
+        </div>          
+        
+
+      <%}%>
+    </div>
+
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
+
+// this overrides the post requests that come form our ejs forms
 const methodOverride = require("method-override");
 const flash = require("express-flash");
 const logger = require("morgan");
@@ -34,6 +36,7 @@ app.use(express.json());
 app.use(logger("dev"));
 
 //Use forms for put / delete
+// applying our override..._method can be anything, but it's just telling our server to look for _method query parameter
 app.use(methodOverride("_method"));
 
 // Setup Sessions - stored in MongoDB

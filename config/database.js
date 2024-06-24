@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.DB_STRING, {
-      useNewUrlParser: true,
+      useNewUrlParser: true, // this is the default option in mongoose now, don't need them
       useUnifiedTopology: true,
       useFindAndModify: false,
       useCreateIndex: true,

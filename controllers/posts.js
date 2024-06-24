@@ -1,9 +1,14 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+//load comment model
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
+
+      //console.log(req.user)
+      //go to post, find a document user prop of logged in user
       const posts = await Post.find({ user: req.user.id });
       res.render("profile.ejs", { posts: posts, user: req.user });
     } catch (err) {
@@ -12,16 +17,31 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
+      //find posts sort in descending order
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
       res.render("feed.ejs", { posts: posts });
     } catch (err) {
-      console.log(err);
+      console.log(err); 
     }
   },
-  getPost: async (req, res) => {
+  //post controller
+  getPost: async (req, res) => {  
+    //console.log(req)
+    //console.log(req.params)
+    //console.log(req.user)
     try {
+      //find specfic doc based on id
+      //req.params.id grab value that in url
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+      //const post = await Post.findById(req.params.rainbowUnicorn);
+
+      //
+      
+
+      //property of comments = to match id of collection we are on
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
     }
@@ -62,6 +82,7 @@ module.exports = {
   deletePost: async (req, res) => {
     try {
       // Find post by id
+      //confirm post exisits
       let post = await Post.findById({ _id: req.params.id });
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);

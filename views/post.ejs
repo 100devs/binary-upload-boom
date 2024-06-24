@@ -14,6 +14,7 @@
         </form>
         <h3 class="col-3">Likes: <%= post.likes %></h3>
         <%if(post.user == user.id){ %>
+         <!-- <%if(post.user == user.rainbowUnicorn){ %>-->
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
           method="POST"
@@ -27,6 +28,28 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <div class="mt-5">
+      <h2>Add a comment</h2>
+      <!--make a route for comments, build route in server.js to make comments-->
+      <form action="/comment/createComment/<%=post._id%>" enctype="multipart/form-data" method="POST">
+        <div class="mb-3">
+            <label for="comment" class="form-label">Comment</label>
+            <input type="text" class="form-control" id="comment" name="comment">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <ul>
+      <% for(var i=0; i<comments.length; i++) {%>
+        <li class="col-6 justify-content-between mt-5">
+          <!--look at post model, comment property--> 
+          <%= comments[i].comment%>
+           
+        </li>
+      <% } %>
+    </ul>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

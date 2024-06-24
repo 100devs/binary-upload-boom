@@ -27,6 +27,29 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+
+    <form action="/comments/createComment/<%=post.id%>" method="post">
+      <input type="text" name="comment" placeholder="Your Comment">
+      <input type="submit">
+    </form>
+    <% console.log(users) %>
+    <% for(var i=0; i<comments.length; i++) {%>
+      <li class="col-6 justify-content-between mt-5">
+        <% for(let n=0; n<users.length; n++) { %>
+          <% console.log(`${users[n]._id} - ${comments[i].user}`) %>
+          <% if(String(users[n]._id) === String(comments[i].user)) { %>
+            <p><%= users[n].userName %></p>
+          <% } %>
+          
+        <%} %>
+         
+     
+        <p>
+          <%= comments[i].comment %>
+        </p>
+      </li>
+    <% } %>
+
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

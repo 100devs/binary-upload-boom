@@ -1,37 +1,68 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-6">
-      <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
-        <form
-          class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
-          method="POST"
-        >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
-        </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
-        <%}%>
+<%- include('partials/navbar') -%>
+
+    
+    <div class="container pt-2 pb-2 shadow bg-light align-items-center justify-content-center">
+      <div class="row p-2 justify-content-center mt-2">
+          <div class="card col-sm-6 col-md-6 col-lg-4 shadow-lg">
+            <a href="" class="card-img-top">
+              <img class="justify-content-center img-fluid rounded-bottom" src="<%= post.image%>">
+              <div class="card-body">
+                  <div>
+                      <div class="d-inline-block justify-content-end">
+
+                          <h5 class="card-title"><%=post.title%></h5>
+                          <form class="col-1" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
+                              <button class="btn-sm btn-danger fa fa-heart" type="submit"><%=  post.likes%></button>
+                          </form>
+                          <!--<form class="btn-sm" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">-->
+                              <!--<button class="btn btn-primary fa fa-heart" type="submit"></button>-->
+                              <!--<h3 class=""><%= post.likes %></h3>-->
+                          <!--</form>-->
+                      </div>
+                  </div>
+
+                <p class="card-text"><%=post.caption%></p>
+                <p class="card-text"><small class="text-muted"><%=post.createdAt%></small></p>
+              </div>
+            </a>
+          </div>
+          <div class="card col-sm-6 col-md-6 col-lg-6 shadow-md pb-2">
+            <h4 class="container justify-content-end border-bottom mt-2">Comments</h4>
+
+            <div class=" container justify-content-end">
+              <form action="/comment/createComment/<%= post._id%>" method="POST">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="comment" name="comment">
+                </div>
+                <button class="btn-sm btn-light btn-outline-dark" type="submit">Comment</button>
+              </form>
+              <ul>
+                  <% for(var i= comments.length -1; i>0; i--) {%>
+                  <li class="col-12 mt-1 border border-1 border-primary rounded bg-dark text-white">
+                      <div class="p-1 text-monospace font-weight-light"><%= comments[i].comment %></div>
+                      <div class="row justify-content-end">
+                          <form></form>
+                          <form class="col-1" action="/comment/likeComment/<%= comments[i]._id %>?_method=PUT" method="POST">
+                              <button class="btn-sm btn-danger fa fa-heart" type="submit"><%=  comments[i].likes%></button>
+                          </form>
+                          <!--<h6 class="col-3 mt-1"><%= comments[i].likes %></h6>-->
+                          <%if(post.user == user.id){ %>
+                          <form action="/comment/deleteComment/<%= comments[i]._id %>?_method=DELETE" method="POST" class="col-3">
+                              <button class="btn btn-primary fa fa-trash" type="submit"></button>
+                          </form>
+                          <%}%>
+                      </div>
+                  </li>
+                  <% } %>
+              </ul>
+            </div>
+          </div>
+          <!--comments section-->
+          <div class="d-flex col-12 mt-5 justify-content-around">
+              <a class="btn btn-primary" href="/profile">Return to Profile</a>
+              <a class="btn btn-primary" href="/feed">Return to Feed</a>
+          </div>
+
       </div>
     </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
-    </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
-    </div>
-  </div>
-</div>
-
-<%- include('partials/footer') -%>

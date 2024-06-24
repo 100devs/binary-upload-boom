@@ -1,11 +1,103 @@
 <%- include('partials/header') -%>
 
-<main class="container">
-    <div class="row justify-content-around mt-5">
-        <a href="/login" class="col-3 btn btn-primary"> Login</a>
-        <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
-    </div>
-</main>
-    
 
+<section class="background-radial-gradient overflow-hidden">
+    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+      <div class="row gx-lg-5 align-items-center mb-5">
+        <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+          <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+            The best
+            <span style="color: hsl(218, 81%, 75%)">Social Network</span>
+          </h1>
+          <p class="mb-4 opacity-70 text-light lead">
+       Join the 100Devs Community. Connect with old friends and meet new folks #Community Taught
+          </p>
+        </div>
+  
+        <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+          <div class="card bg-glass">
+            <div class="card-body px-4 py-5 px-md-5">
+                <form action="/signup" method="POST">
+                    <!-- 2 column grid layout with text inputs for the first and last names -->
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <label for="userName" class="form-label">User Name</label>
+                          <input type="text" class="form-control" id="userName" name="userName">
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <label for="exampleInputEmail1" class="form-label">First Name</label>
+                          <input type="name" class="form-control" id="firstName" aria-describedby="emailHelp" name="firstName">
+                        </div>
+                      </div>
+                    </div>
+  
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                      <label for="exampleInputEmail1" class="form-label">Email address</label>
+                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                    </div>
+  
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                      <label for="password" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="password" name="password">
+                    </div>
+  
+                    <!-- Password confirm input -->
+                    <div class="form-outline mb-4">
+                      <label for="confirmPassword" class="form-label">Confirm Password</label>
+                      <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+                    </div>
+  
+                    <!-- Checkbox -->
+                    <div class="form-check d-flex justify-content-center mb-4">
+                      <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
+                      <label class="form-check-label" for="form2Example33">
+                        Subscribe to our newsletter
+                      </label>
+                    </div>
+ 
+                    <div class="d-flex justify-content-center"> 
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary btn-block mb-4">
+                          Sign up
+                        </button>
+
+                        <!-- Login button -->
+                        <a href="/login" class="ms-2 btn btn-primary btn-block mb-4">Login</a>
+                    </div>
+                  </form>
+  
+                <!-- If we want to addd facebook, google etc authentication -->
+                <!-- <div class="text-center">
+                  <p>or sign up with:</p>
+                  <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-facebook-f"></i>
+                  </button>
+  
+                  <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-google"></i>
+                  </button>
+  
+                  <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-twitter"></i>
+                  </button>
+  
+                  <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-github"></i>
+                  </button>
+                </div> -->
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+    
 <%- include('partials/footer') -%>
+
+

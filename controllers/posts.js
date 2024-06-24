@@ -1,5 +1,8 @@
 const cloudinary = require("../middleware/cloudinary");
+const { remove } = require("../models/Post");
 const Post = require("../models/Post");
+const User = require("../models/User");
+const Comments = require("../models/Comments")
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -13,15 +16,17 @@ module.exports = {
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      res.render("feed.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
     }
   },
   getPost: async (req, res) => {
+    console.log('entered get')
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comments.find({ postId: req.params.id})
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
     }
@@ -68,9 +73,15 @@ module.exports = {
       // Delete post from db
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
+      // delete all comments associated with that post
+      await Comments.deleteMany({ postId: req.params.id})
+      console.log('deleted comments')
+
+      
       res.redirect("/profile");
     } catch (err) {
       res.redirect("/profile");
     }
+    
   },
 };

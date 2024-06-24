@@ -1,6 +1,8 @@
 <%- include('partials/header') -%>
-    <main class="container">
-        <div class="row justify-content-center">
+
+  <main class="container">
+
+    <div class="row justify-content-center">
             <section class="col-6 mt-5">
                 <% if (locals.messages.errors) { %>
                     <% messages.errors.forEach( el => { %>
@@ -12,7 +14,9 @@
                         <div class="alert alert-info"><%= el.msg %></div>
                     <% }) %>    
                 <% } %>
-                <form action="/signup" method="POST">
+            </section>
+        </div>
+                <!-- <form action="/signup" method="POST">
                     <div class="mb-3">
                         <label for="userName" class="form-label">User Name</label>
                         <input type="text" class="form-control" id="userName" name="userName">
@@ -33,7 +37,99 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
             </section>
+        </div> -->
+
+        <!-- Section: Design Block -->
+    <section class="text-center text-lg-start container d-flex flex-column min-vh-100">
+      <style>
+        .cascading-right {
+          margin-right: -50px;
+        }
+
+        @media (max-width: 991.98px) {
+          .cascading-right {
+            margin-right: 0;
+          }
+        }
+      </style>
+
+      <div class="container py-4">
+        <div class="row g-0 align-items-center">
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="card cascading-right" style="
+                background: hsla(0, 0%, 100%, 0.55);
+                backdrop-filter: blur(30px);
+                ">
+              <div class="card-body p-5 shadow-5 text-center">
+                <h2 class="fw-bold mb-5">Sign up now</h2>
+                
+                <form action="/signup" method="POST">
+                  <!-- 2 column grid layout with text inputs for the first and last names -->
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <label for="userName" class="form-label">User Name</label>
+                        <input type="text" class="form-control" id="userName" name="userName">
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <label for="exampleInputEmail1" class="form-label">First Name</label>
+                        <input type="name" class="form-control" id="firstName" aria-describedby="emailHelp" name="firstName">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Email input -->
+                  <div class="form-outline mb-4">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                  </div>
+
+                  <!-- Password input -->
+                  <div class="form-outline mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                  </div>
+
+                  <!-- Password confirm input -->
+                  <div class="form-outline mb-4">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+                  </div>
+
+                  <!-- Checkbox -->
+                  <div class="form-check d-flex justify-content-center mb-4">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
+                    <label class="form-check-label" for="form2Example33">
+                      Subscribe to our newsletter
+                    </label>
+                  </div>
+
+                  <!-- Submit button -->
+                  <button type="submit" class="btn btn-primary btn-block mb-4">
+                    Sign up
+                  </button>
+                </form>
+                <div class="">
+                    <p>Already Have an account ?</p>
+                    <a href="/login" class="btn btn-primary btn-block mb-4"> Login</a>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <img src="../imgs/hero-image.jpg" class="w-100 rounded-4 shadow-4"
+              alt="" />
+          </div>
         </div>
-    </main>
+      </div>
+    </section>
+    <!-- Section: Design Block -->
+    
+</main>
 
 <%- include('partials/footer') -%>

@@ -4,6 +4,7 @@
     <div class="col-6">
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
+      <!-- Like and Delete -->
       <div class="row justify-content-between">
         <form
           class="col-1"
@@ -23,6 +24,17 @@
         </form>
         <%}%>
       </div>
+      <!-- Comments -->
+      <div class="row justify-content-between">
+          <form
+            class="col-1"
+            action="/comment/createComment/<%= post.id %>"
+            method="POST"
+          >
+          <input name="comment" type="text-area">
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+      </div>
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
@@ -31,7 +43,23 @@
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
+    <div>
+      <ul>
+        <% comments.forEach(comment => {%>
+          <li>
+            <p><%= comment.comment %></p>
+            <%if (comment.user == user.id){ %>
+                <form 
+                  action="/comment/deleteComment/<%= comment._id %>.<%= post.id %>?_method=DELETE"
+                  method="POST"
+                >
+                  <button class="btn btn-primary fa fa-trash" type="submit"></button>
+                </form>
+            <%}%>
+          </li>
+        <%})%>
+      </ul>
+    </div>
   </div>
 </div>
-
 <%- include('partials/footer') -%>

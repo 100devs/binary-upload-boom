@@ -1,3 +1,14 @@
 node_modules
-.env
+config/.env
 .vscode
+
+#Pycharm gitingore
+.idea
+*.iml
+*.ipr
+*.iws
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+$py.class

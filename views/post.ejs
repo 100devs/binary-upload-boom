@@ -27,6 +27,47 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <div>
+      <div class="mt-5">
+        <h2>Add a comment</h2>
+        <form action="/comment/add/<%=post._id%>" method="POST">
+          <div class="mb-3">
+            <label for="comment" class="form-label">Comment</label>
+            <input
+              type="text"
+              class="form-control"
+              id="comment"
+              name="comment"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <ul>
+        <% for( let i = 0; i < comments.length; i++ ) { %>
+        <li>
+          User <%= user.userName[0].toUpperCase() + user.userName.slice(1) %>
+          says: <%= comments[i].comment %>
+        </li>
+
+        <!-- Code to add likes to comments -->
+        <!-- <form
+          class=""
+          action="/comment/likeComment/<%= comments[i]._id %>?_method=PUT&commentId=<%= comments[i]._id %>&postid=<%= post._id %>"
+          method="POST"
+        >
+          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+        </form>
+        <h3 class="">Likes: <%= comments[i].likes %></h3> -->
+        <form
+          action="/comment/delete/<%= comments[i]._id %>?_method=DELETE&postid=<%= post._id %> "
+          method="POST"
+        >
+          <button type="submit" class="btn btn-primary fa fa-trash"></button>
+        </form>
+        <% } %>
+      </ul>
+    </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

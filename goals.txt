@@ -1,0 +1,2 @@
+1) Add user validation to be able to delete own comment. 
+

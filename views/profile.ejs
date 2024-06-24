@@ -5,7 +5,7 @@
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+              
           </div>
           <div class="mt-5">
             <h2>Add a post</h2>
@@ -22,7 +22,7 @@
                 <label for="imgUpload" class="form-label">Image</label>
                 <input type="file" class="form-control" id="imageUpload" name="file">
               </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+              <button type="submit" class="col-4 btn btn-primary shadow-none" value="Upload">Submit</button>  <a href="/logout" class="col-4 btn btn-primary shadow-none">Logout</a>
             </form>
           </div>
       </div>
@@ -37,7 +37,7 @@
         <% } %>
         </ul>
         <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
+          <a class="btn btn-primary shadow-none" href="/feed">Return to Feed</a>
         </div>  
       </div>  
     </div>

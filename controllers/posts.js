@@ -1,5 +1,8 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
+const User = require("../models/User");
+
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -18,10 +21,33 @@ module.exports = {
       console.log(err);
     }
   },
+
+//todo get all posts by user
+  getUserAllPost:async (req, res) => {
+    try {
+      const allPost = await Post.find({user:req.params.id});// get all post by user ID from req
+      const createdBy = await User.findOne({_id:req.params.id}) // get the user affiliated with ID from req
+      console.log(`posts found: `,allPost)
+
+      //render all posts and the user who created all the posts 
+      res.render("feed.ejs", { posts:allPost,title:`All post by: ${createdBy.userName}`});
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const commentList = await Comment.find({post:req.params.id})
+      /// todo get post user name 
+      const createdBy = await User.findOne({_id:post.user})
+
+      console.log(`created by: `,createdBy)
+
+      ///
+      res.render("post.ejs", { post: post, user: req.user, comments:commentList, postOwner:createdBy });
     } catch (err) {
       console.log(err);
     }

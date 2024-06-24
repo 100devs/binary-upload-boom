@@ -1,0 +1,19 @@
+<ul class="list-unstyled col-6 mt-5">
+  <h3>User comments: <%= comments.length%></h3>
+  <% for(var i=0; i<comments.length; i++) {%>
+    <li class="col-6 justify-content-between mt-5">
+      <p><em><%= comments[i].user.userName%>: </em><%= comments[i].comment%></p>
+    </li>
+  <% } %>
+
+  <div class="mt-5">
+    <form action="/post/createComment/<%= post.id %>" enctype="application/x-www-form-urlencoded" method="POST">
+      <div class="mb-3">
+          <label for="comment" class="form-label">Add a comment:</label>
+          <input type="text" class="form-control" id="comment" name="comment" placeholder="comment">
+      </div>
+      <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+    </form>
+  </div>
+ 
+</ul>

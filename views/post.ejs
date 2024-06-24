@@ -27,6 +27,33 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <h2>Comment</h2>
+            <form action="/comments/createComment/<%=post._id%>" method="POST">
+              <div class="mb-3">
+                  <input type="text" class="form-control" id="comment" name="comment">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+              </div>
+              <div class="row justify-content-left">
+                <div class="row justify-content-center mt-5">
+                  <ul class="column list-unstyled">
+                    <% for(var i=0; i<comments.length; i++) {%>
+                      <li class="col-6 row justify-content-between mt-5">
+                        <h3><%= comments[i].userName %></h3>
+                        <p> <%= comments[i].comment %></p>
+                        <form
+                        class="col-1"
+                        action="/comments/likeComment/<%= comments[i]._id %>?_method=PUT"
+                        method="POST"
+                      >
+                        <button class="btn btn-primary fa fa-heart" type="submit"></button>
+                      </form>
+                      <h3 class="col-3">Likes: <%= comments[i].likes %></h3>
+                      </li>
+                    <% } %>
+                    </ul>
+                </div>
+              </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

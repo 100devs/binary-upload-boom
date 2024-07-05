@@ -32,6 +32,25 @@
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
   </div>
+  <dl>
+    <% comments.forEach(e=>{%>
+      <dt><%= e.createdAt %></dt>
+      <dd>"<%= e.comment%>"</dd> <!--Wanted to add "by <%=e.madeBy%>" to show userName however am not sure what's the best efficient way to pull this value-->
+      <form action="/comment/likeComment/<%=e._id%>?_method=PUT" method="POST">
+        <button>Like</button>
+      </form>
+      <%if(user.id === e.madeBy){%>
+        <form action="/comment/deleteComment/<%=e._id%>?_method=DELETE" method="POST">
+          <button>Delete</button>
+        </form>
+      <%}%>
+
+    <%})%>
+    </dl>
+  <form action="/comment/createComment/<%=post.id%>" method="POST">
+    <input name="comment" placeholder="Enter your comment">
+    <button>Submit</button>
+  </form>
 </div>
 
 <%- include('partials/footer') -%>

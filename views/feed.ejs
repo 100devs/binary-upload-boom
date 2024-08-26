@@ -1,15 +1,59 @@
 <%- include('partials/header') -%>
-  <div class="container">
-    <div class="row justify-content-center mt-5">
-      <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-    </div>
-  </div>  
+<div class="container mt-5">
+  <div class="row justify-content-center mt-5">
+    <ul class="list-unstyled">
+      <% for(var i = 0; i < posts.length; i++) { %>
+        <li class="ol-12 d-flex justify-content-center mt-5">
+          <div class="card">
+            <div class="card-top d-flex align-items-center p-3">
+              <div class="profile_img d-flex align-items-center">
+                <img src="https://media.geeksforgeeks.org/wp-content/uploads/20220609093229/g-200x200.png" alt="Profile Picture" class="rounded-circle me-2" height="50">
+                <h3><%= posts[i].user.userName %></h3>
+              </div>
+            </div>
+            <div class="imgBx">
+              <a href="/post/<%= posts[i]._id %>">
+                <img class="img-fluid" src="<%= posts[i].image %>" alt="Post Image">
+              </a>
+            </div>
+            <div class="bottom p-3">
+              <div class="actionBtns d-flex justify-content-between align-items-center">
+                <!-- Left Section: Like, Comment, Share -->
+                <div class="left d-flex align-items-center">
+                  <!-- Like Button -->
+                
+                  <span><i class="btn btn-primary fa fa-heart"></i></span>
+                  
+                  <!-- Likes Count -->
+                  <span class="ml-2"><%= posts.likes %></span>
+                  <!-- Comment Icon -->
+                  <span class="ml-3"><i class="fa-regular fa-comment"></i></span>
+                  <!-- Share Icon -->
+                  <span class="ml-3"><i class="fa-regular fa-paper-plane"></i></span>
+                </div>
+              
+                <!-- Right Section: Bookmark -->
+                <div class="right">
+                  <span><i class="fa-regular fa-bookmark"></i></span>
+                </div>
+              </div>
+              
+              <p class="message"><b><%= posts[i].userName %></b></p>
+              
+              <h5 class="postTime"><%= posts[i].createdAt.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %></h5>
+              <div class="addComments d-flex align-items-center">
+                <div class="reaction me-2">
+                  <i class="far fa-smile"></i>
+                </div>
+                <input type="text" class="form-control me-2" placeholder="Add a comment...">
+                <a href="#" class="btn btn-primary">Post</a>
+                
+              </div>
+            </div>
+          </div>
+        </li>
+      <% } %>
+    </ul>
+  </div>
+</div>
 <%- include('partials/footer') -%>

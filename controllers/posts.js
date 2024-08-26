@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -20,8 +21,9 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const post = await Post.findById(req.params.id).populate('user').lean();
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+      res.render("post.ejs", { post: post, user: req.user , comments: comments});
     } catch (err) {
       console.log(err);
     }
@@ -38,6 +40,7 @@ module.exports = {
         caption: req.body.caption,
         likes: 0,
         user: req.user.id,
+        userName: req.user.userName,
       });
       console.log("Post has been added!");
       res.redirect("/profile");
@@ -47,18 +50,33 @@ module.exports = {
   },
   likePost: async (req, res) => {
     try {
-      await Post.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
-        }
-      );
-      console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
+      const postId = req.params.id;
+      const userId = req.user.id;
+      
+      const post = await Post.findById(postId);
+      
+      // Check if the user has already liked the post
+      if (post.likedBy.includes(userId)) {
+        // If already liked, remove the like
+        await Post.findByIdAndUpdate(postId, {
+          $pull: { likedBy: userId },
+          $inc: { likes: -1 }
+        });
+      } else {
+        // Otherwise, add the like
+        await Post.findByIdAndUpdate(postId, {
+          $push: { likedBy: userId },
+          $inc: { likes: 1 }
+        });
+      }
+  
+      res.redirect(`/post/${postId}`);
     } catch (err) {
       console.log(err);
+      res.redirect(`/post/${req.params.id}`);
     }
   },
+  
   deletePost: async (req, res) => {
     try {
       // Find post by id

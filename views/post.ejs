@@ -1,37 +1,133 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row justify-content-center mt-5">
-    <div class="col-6">
-      <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
-        <form
-          class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
-          method="POST"
-        >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
-        </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
-        <%}%>
+    <div class="card">
+      <div class="top">
+          <div class="userDetails">
+              <div class="profilepic">
+                  <div class="profile_img">
+                      <div class="image">
+                          <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20220609093229/g-200x200.png" 
+                              alt="img8">
+                      </div>
+                  </div>
+              </div>
+              <span><%= post.user.userName %></span>
+          </div>
+          <div>
+            <div>
+              <!-- Conditionally show delete button if user is the post owner -->
+              <% if (user && post.user._id.toString() === user._id.toString()) { %>
+                <form action="/post/deletePost/<%= post._id %>?_method=DELETE" method="POST" class="mt-3">
+                  <button class="btn btn-danger" type="submit">Delete Post</button>
+                </form>
+              <% } else { %>
+                <span class="dot">
+                  <i class="fas fa-ellipsis-h"></i>
+                </span>
+              <% } %>
+            </div>
+             
+              
+          </div>
       </div>
-    </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
-    </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
+      <div class="imgBx">
+        <img class="img-fluid" src="<%= post.image%>" />
+      </div>
+      <div class="bottom">
+        <div class="actionBtns d-flex justify-content-between align-items-center">
+          <!-- Left Section: Like, Comment, Share -->
+          <div class="left d-flex align-items-center">
+            <!-- Like Button -->
+            <form class="col" action="/post/likePost/<%= post._id %>?_method=PUT" method="POST">
+              <button class="btn btn-primary fa fa-heart" type="submit"></button>
+            </form>
+            <!-- Likes Count -->
+            <span class="ml-2"><%= post.likes %></span>
+            <!-- Comment Icon -->
+            <span class="ml-3"><i class="fa-regular fa-comment"></i></span>
+            <!-- Share Icon -->
+            <span class="ml-3"><i class="fa-regular fa-paper-plane"></i></span>
+          </div>
+        
+          <!-- Right Section: Bookmark -->
+          <div class="right">
+            <span><i class="fa-regular fa-bookmark"></i></span>
+            
+          </div>
+        </div>
+          
+          <a href="#">
+              <p class="message">
+                <b><%= post.user.userName %></b> <%= post.caption %>
+              </p>
+
+          </a>
+          <!-- <a href="#">
+              <h4 class="comments">View all 32 comments</h4>
+          </a> -->
+          <a href="#">
+              <h5 class="postTime"><%= new Date(post.createdAt).toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %>
+              </h5>
+          </a>
+          <div class="addComments">
+              <!-- <div class="reaction">
+                  <h3>
+                    <i class="far fa-smile"></i>
+                  </h3>
+              </div> -->
+              
+              <form action="/comment/createComment/<%= post._id%>"  method="POST">
+                
+                  <input type="text"
+                          class="form-control" 
+                          id="comment" 
+                          name="comment" 
+                          placeholder="Add a comment...">
+                
+                  <button type="submit" class="btn btn-primary" value="Upload">Post</button>
+              </form>
+          </div>
+          <div class="commentList">
+              <ul class="list-unstyled">
+                <% comments.forEach(comment => { %>
+                  <li class="commentBox d-flex align-items-center justify-content-between">
+                    <!-- Column 1: Profile Picture -->
+                    <!-- <div class="profilepic col-2 d-flex justify-content-center">
+                      <div class="profile_img">
+                        <div class="image">
+                          <img src="https://media.geeksforgeeks.org/wp-content/uploads/20220609093229/g-200x200.png" alt="img8" class="img-fluid rounded-circle">
+                        </div>
+                      </div>
+                    </div> -->
+                    
+                    <!-- Column 2: Comment Text -->
+                    <div class="col-8 comment-text">
+                      <strong><%= comment.userName %></strong>: <%= comment.comment %>
+                    </div>
+
+                  <!-- Column 3: Like Button -->
+                  <div class="col-2 d-flex align-items-center justify-content-end">
+                    <form class="d-inline" action="/comment/likeComment/<%= comment._id %>" method="POST">
+                      <button class="btn btn-primary fa fa-heart" id="likeHeart" type="submit"></button>
+                    </form>
+                    <span class="ml-2"><%= comment.likes %></span>
+                  </div>
+                </li>
+              <% }) %>
+            </ul>
+          </div>
+  </div>
+    
+    
+
+   
+  </div> 
+  <div class="col-12 d-flex justify-content-center mt-5">
+      <a class="btn btn-primary me-2" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
-  </div>
 </div>
 
 <%- include('partials/footer') -%>

@@ -21,10 +21,14 @@ const PostSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  likedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // Array of user IDs who liked the post
+  
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  
+  
   createdAt: {
     type: Date,
     default: Date.now,

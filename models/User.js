@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 
+// Setting up Schema for Model
 const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
@@ -28,7 +29,7 @@ UserSchema.pre("save", function save(next) {
   });
 });
 
-// Helper method for validating user's password.
+// Helper method for validating user's password for comparison 
 
 UserSchema.methods.comparePassword = function comparePassword(
   candidatePassword,
@@ -39,4 +40,5 @@ UserSchema.methods.comparePassword = function comparePassword(
   });
 };
 
+// Exporting out model to be used in controllers
 module.exports = mongoose.model("User", UserSchema);

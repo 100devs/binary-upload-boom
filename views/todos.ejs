@@ -1,4 +1,5 @@
 <%- include('partials/header') -%>
+<!-- For Todo list that will show each todo and if it has been completed or not with a delete button -->
 
     <h1>Todos</h1>
     <ul>
@@ -11,12 +12,12 @@
     </ul>
 
     <h2><%= user.userName %> has <%= left %> things left to do.</h2>
-
+<!-- create a todo (POST) -->
     <form action="/todos/createTodo" method='POST'>
         <input type="text" placeholder="Enter Todo Item" name='todoItem'>
         <input type="submit">
     </form>
-
+<!-- logout (GET) -->
     <a href="/logout">Logout</a>
 
     <script src="js/main.js"></script>

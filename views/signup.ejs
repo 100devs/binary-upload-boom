@@ -2,6 +2,7 @@
     <main class="container">
         <div class="row justify-content-center">
             <section class="col-6 mt-5">
+              <!-- Signup validation errors -->
                 <% if (locals.messages.errors) { %>
                     <% messages.errors.forEach( el => { %>
                         <div class="alert alert-danger"><%= el.msg %></div>
@@ -12,6 +13,7 @@
                         <div class="alert alert-info"><%= el.msg %></div>
                     <% }) %>    
                 <% } %>
+                <!-- Post/Creating a user: most important is input name  -->
                 <form action="/signup" method="POST">
                     <div class="mb-3">
                         <label for="userName" class="form-label">User Name</label>

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+// Post schema to talk to data base and includes coludinary id and image link and reference to User model for who created it. 
 const PostSchema = new mongoose.Schema({
   title: {
     type: String,

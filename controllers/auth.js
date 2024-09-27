@@ -2,6 +2,7 @@ const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
 
+//If they are already logged in, take them to their profile when they try to click login in, if render the login page and give title value of Login
 exports.getLogin = (req, res) => {
   if (req.user) {
     return res.redirect("/profile");
@@ -11,6 +12,7 @@ exports.getLogin = (req, res) => {
   });
 };
 
+// Validators and display error message if not successful login. Checks to see if login info matches a user, if it does successfully login redirects to /profile
 exports.postLogin = (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
@@ -44,6 +46,7 @@ exports.postLogin = (req, res, next) => {
   })(req, res, next);
 };
 
+// Destroys the session and the client is redirected to the home route 
 exports.logout = (req, res) => {
   req.logout(() => {
     console.log('User has logged out.')
@@ -56,6 +59,8 @@ exports.logout = (req, res) => {
   });
 };
 
+// If user is already logged in, redirects to /profile page if user tries to signup
+// If not signedup/logged in, renders a signup page 
 exports.getSignup = (req, res) => {
   if (req.user) {
     return res.redirect("/profile");
@@ -65,6 +70,9 @@ exports.getSignup = (req, res) => {
   });
 };
 
+// Validations and errors 
+// Adds to the Users Collection using User Model and info from the req.body
+// Checks to see if user doesn't already exist, if user already exists will redirect to /signup, if not adds a new document and redirects to /profile
 exports.postSignup = (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))

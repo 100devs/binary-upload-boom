@@ -1,42 +1,54 @@
+//  Use express package
 const express = require("express");
+// Use app instead of having to say require("express") every time using express
 const app = express();
+// Use mongoose package for Object data modeling library
 const mongoose = require("mongoose");
+// Use passport package for auth
 const passport = require("passport");
+// Use express sesssion package to create sessions
 const session = require("express-session");
+// Use connect-mongo package to save sessions into mongoDB using mongoStore
 const MongoStore = require("connect-mongo")(session);
+// Use methodOveride package to make PUT and DELETE req with forms 
 const methodOverride = require("method-override");
+// Use express-flash package to display flash content when logging in/signing up 
 const flash = require("express-flash");
+// Use morgan package to log the server and debug
 const logger = require("morgan");
+// Use the database configuration file to connect to DB
 const connectDB = require("./config/database");
+//use the routes/main file for mainRoutes
 const mainRoutes = require("./routes/main");
+//use the routes/posts file for postRoutes
 const postRoutes = require("./routes/posts");
 
-//Use .env file in config folder
+//Use the .env secret key config 
 require("dotenv").config({ path: "./config/.env" });
 
-// Passport config
+// Use the passport config 
 require("./config/passport")(passport);
 
-//Connect To Database
+// connect to the db
 connectDB();
 
-//Using EJS for views
+// make ejs the views 
 app.set("view engine", "ejs");
 
-//Static Folder
+// Use the static files in the public folder
 app.use(express.static("public"));
 
-//Body Parsing
+// Body parser so only show important parts of the request
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//Logging
+//Use morgan to log in console for debubbing
 app.use(logger("dev"));
 
-//Use forms for put / delete
+//Use methodOverrride to change form POST req to PUT or DELETE
 app.use(methodOverride("_method"));
 
-// Setup Sessions - stored in MongoDB
+// Create cookies that are random and save these into the DB as sessions using MongoStore
 app.use(
   session({
     secret: "keyboard cat",
@@ -46,18 +58,20 @@ app.use(
   })
 );
 
-// Passport middleware
+// Start passport and start session
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Use flash messages for errors, info, ect...
+// Use flash for notifications on login/signup
 app.use(flash());
 
-//Setup Routes For Which The Server Is Listening
+// using express
+// on "/", direct to the mainRoutes which the pathway is given above
+// on "/post", direct to the postRoutes which the pathway is given above
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 
-//Server Running
+// tell the server to run on the port that the hosting environment is requiring and display the server is running
 app.listen(process.env.PORT, () => {
   console.log("Server is running, you better catch it!");
 });

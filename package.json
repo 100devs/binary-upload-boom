@@ -1,31 +1,53 @@
+// List of packages used for the app, versions, dependencies, 
+
 {
-  "name": "binary-upload-boom",
+  "name": "binary-upload",
   "version": "1.0.0",
   "description": "100Devs Social Network",
+  // main file to start the server
   "main": "server.js",
   "scripts": {
+    //npm start = nodemon server.js
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "MIT",
+  // can separate into dev dependencies that only runs when developing and not in production ex: nodemon 
   "dependencies": {
+    // hash our passwords
     "bcrypt": "^5.0.1",
+    // cdn for media 
     "cloudinary": "^1.25.1",
+    // used for storage of the session
     "connect-mongo": "^3.2.0",
+    //creates .env file to store sensitve keys 
     "dotenv": "^8.2.0",
+    // Views templating language
     "ejs": "^3.1.6",
+    //framework that prevents having to use basic node (lots of needing to know specifics of each request)
     "express": "^4.17.1",
+    // show flash messages during login/signup 
     "express-flash": "^0.0.2",
+    // creates cookies on our browser so we can save the sessions into data bases
     "express-session": "^1.17.1",
+    // allows form requests to be PUT and DELETE req
     "method-override": "^3.0.0",
+    // connects to the db 
     "mongodb": "^3.6.5",
+    // Object data modeling library that abstracts lots of things from mongo client 
     "mongoose": "^5.12.3",
+    // morgan is the dev logger 
     "morgan": "^1.10.0",
+    // allows client to upload files 
     "multer": "^1.4.5-lts.1",
+    // allows the server to refresh without starting and stoping the server
     "nodemon": "^2.0.7",
+    // needed for authentication
     "passport": "^0.6.0",
+    // package is needed for local authentication
     "passport-local": "^1.0.0",
+    // used for POST req for signup/login 
     "validator": "^13.6.0"
   }
 }

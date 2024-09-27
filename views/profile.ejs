@@ -3,10 +3,13 @@
   <div class="row mt-5">
       <div class="col-6">
           <div>
+            <!-- Uses request info (found in posts controller) to display userName and email for that logged in user's profile -->
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
+              <!-- get request for loggout -->
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
+          <!-- Add a post with title, caption, image enctype="multipart/form-data" is important for muelter to work -->
           <div class="mt-5">
             <h2>Add a post</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
@@ -26,6 +29,7 @@
             </form>
           </div>
       </div>
+      <!-- Loops through each post by the user and displays it's image and attaches post id  -->
       <div class="col-6">
         <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
@@ -36,6 +40,7 @@
           </li>
         <% } %>
         </ul>
+        <!-- get request for a /feed -->
         <div class="row justify-content-center mt-5">
           <a class="btn btn-primary" href="/feed">Return to Feed</a>
         </div>  

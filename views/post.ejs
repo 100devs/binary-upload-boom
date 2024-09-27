@@ -1,10 +1,12 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row justify-content-center mt-5">
+    <!-- display the post title, likes, delete button that has method override on it, and add a caption -->
     <div class="col-6">
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
+        <!-- Use method override to do PUT and Deletes  -->
         <form
           class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"

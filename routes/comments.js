@@ -8,3 +8,4 @@ router.post("/createComment/:id", commentsController.createComment);
 
 
 module.exports = router;
+module.exports = router;

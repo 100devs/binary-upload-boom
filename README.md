@@ -13,7 +13,7 @@
   - API_KEY = `your cloudinary api key`
   - API_SECRET = `your cloudinary api secret`
 
----
+----
 
 # Run
 

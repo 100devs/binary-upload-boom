@@ -3,7 +3,7 @@ const router = express.Router();
 const authController = require("../controllers/auth");
 const homeController = require("../controllers/home");
 const postsController = require("../controllers/posts");
-const { ensureAuth, ensureGuest } = require("../middleware/auth");
+const { ensureAuth, ensureGuest } = require("../middleware/auth"); //brings in authentication modules 
 
 //Main Routes - simplified for now
 router.get("/", homeController.getIndex);

@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -12,7 +13,7 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      const posts = await Post.find().sort({ createdAt: "desc" }).lean(); //sorts posts in feed from newest to oldest
       res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
@@ -21,7 +22,8 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean(); //sorts comments on posts from newest to oldest
+      res.render("post.ejs", { post: post, comments: comments, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -50,7 +52,7 @@ module.exports = {
       await Post.findOneAndUpdate(
         { _id: req.params.id },
         {
-          $inc: { likes: 1 },
+          $inc: { likes: 1 },//increases like count by one
         }
       );
       console.log("Likes +1");

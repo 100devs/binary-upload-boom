@@ -21,6 +21,7 @@ const PostSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  comments:[{ body: String, date: Date }],
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

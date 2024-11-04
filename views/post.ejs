@@ -27,11 +27,46 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
+
+    <div class="mt-5">
+      <h2>Add a comment</h2>
+      <form action="/comment/createComment/<%=post._id%>" method="POST">
+        <div class="mb-3">
+          <label for="comment" class="form-label"></label>
+          <input type="text" class="form-control" id="comment" name="comment">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <h4>Comments:</h4>
+      <ul class="list-unstyled mt-4">
+          <% comments.forEach(comment => { %>
+            <li class="border p-3 mb2">
+              <span class="comment-owner"><%= comment.user.userName %>:</span>
+              <span><%= comment.comment %></span>
+              <div class="mt-2">
+                <form class="d-inline" action="/comment/likeComment/<%= comment._id %>?_method=PUT" method="POST">
+                  <input type="hidden" name="postId" value="<%= post._id %>">
+                  <button class="btn btn-secondary fa fa-heart" type="submit"></button>
+                </form>
+                <span><%= comment.likes %></span>
+                <%if(comment.user._id == user.id){ %>
+                  <form class="d-line" action="/comment/deleteComment/<%= comment._id%>?_method=DELETE" method="POST">
+                    <input type="hidden" name="postId" value="<%= post._id %>">
+                    <button class="btn btn-secondary fa fa-trash" type="submit"></button>
+                  </form>
+                <%}%>
+              </div>
+            </li>
+          <%})%>
+      </ul>
+
+      <div class="col-6 mt-5">
+        <a class="btn btn-primary" href="/profile">Return to Profile</a>
+        <a class="btn btn-primary" href="/feed">Return to Feed</a>
+      </div>
     </div>
-  </div>
 </div>
 
 <%- include('partials/footer') -%>
+<!--in the comments' section the input type hidden under the form was added so that the server knows where to redirect after liking/deleting a comment-->

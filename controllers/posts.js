@@ -1,18 +1,26 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comments");
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.user.id });
-      res.render("profile.ejs", { posts: posts, user: req.user });
+      res.render("profile.ejs", {
+        posts: posts,
+        user: req.user
+      });
     } catch (err) {
       console.log(err);
     }
   },
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      const posts = await Post
+      .find()
+      .sort({ createdAt: "desc" })
+      .populate('user', 'userName') 
+      .lean();
       res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
@@ -21,7 +29,16 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment
+        .find({ post: req.params.id })
+        .sort({ createdAt: "asc" })
+        .populate('user', 'userName')
+        .lean();
+      res.render("post.ejs", {
+        post: post,
+        user: req.user,
+        comments: comments
+      });
     } catch (err) {
       console.log(err);
     }
@@ -74,3 +91,11 @@ module.exports = {
     }
   },
 };
+
+//COMMENTS:
+
+//In getFeed ".populate('user', 'userName')" is a mongoose method.
+//It gets the user info associated with each post.
+//This is necessary to show the user name of the creator
+//of each post in the feed. The next thing we do is reference it
+//in the feed.ejs file

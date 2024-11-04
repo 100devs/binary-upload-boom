@@ -32,3 +32,10 @@ const PostSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Post", PostSchema);
+
+//COMMENTS:
+
+//The user field is referencing the User.js model
+//thru an ObjectId which basically ties the schemas together.
+//We can use this to reference and later show the user name
+//of the creator of each post in the feed.

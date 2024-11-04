@@ -1,0 +1,20 @@
+.post-creator {
+    color: black;
+    font-weight: bold;
+}
+
+.post-title {
+    color: black;
+}
+
+.post-caption {
+    color: gray;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.comment-owner {
+    color: gray;
+}

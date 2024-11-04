@@ -1,0 +1,14 @@
+FUNCTIONALITY TO CHANGE/ADD
+
+- Add comments - DONE
+- Add likes to comments - DONE
+- Add a route for comment's likes - DONE
+- Include usernames with posts in feed - DONE
+- Include post title in feed - DONE
+- Include post caption in feed - DONE
+- Button to make a post while in feed - DONE but needs fixing
+- fix likePost and deletePost to make them work in the comments.js controller - DONE
+- Allow OP to delete any comment on it's post
+- Add nested comments. Watch Rascal's stream for that
+- Allow users to change their username
+- Add profile pictures for users 

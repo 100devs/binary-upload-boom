@@ -18,3 +18,11 @@
 # Run
 
 `npm start`
+
+# Elements Added
+- Added input field to posts.ejs
+- Work that will likely need to be redone
+    - Added comments to the new post schema
+    - Added an addComments route and controller (This is ok for the moment but will likely need to be update in the future)
+
+Verified that the above works as expected, but will need to create a comments collection for all the new comments. 

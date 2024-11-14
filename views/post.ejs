@@ -25,7 +25,24 @@
       </div>
     </div>
     <div class="col-3 mt-5">
+      <h4 col="col-3">Image Caption:</h4>
       <p><%= post.caption %></p>
+      <h4 class="col-3">Comments</h4>
+      <form 
+        action="/post/addComment/<%= post.id %>?_method=PUT"
+        method="POST">
+        <input class="form-control" type="text" id="comment" name="comment">
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+      <h5 col="col-3">Post Comments</h5>
+      <ul>
+      <% for(let i = 0; i<comments.length; i++ ) {%>
+        <li>
+          <p><%= comments[i].comment %> </p>
+          <p><%= users[i]._id === comments[i].user ? users[i].userName : "Unknown"%></p>
+        </li>
+      <% } %>
+    </ul>
     </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>

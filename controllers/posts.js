@@ -1,11 +1,15 @@
 const cloudinary = require("../middleware/cloudinary");
+const User = require('../models/User');
 const Post = require("../models/Post");
+const Comment = require('../models/Comment');
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id });
-      res.render("profile.ejs", { posts: posts, user: req.user });
+      const id = req.params.id;
+      const userProfile = await User.findById(id);
+      const posts = await Post.find({ user: id});
+      res.render("profile.ejs", { posts: posts, user: req.user, userProfile: userProfile });
     } catch (err) {
       console.log(err);
     }
@@ -13,7 +17,7 @@ module.exports = {
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      res.render("feed.ejs", { posts: posts, user: req.user});
     } catch (err) {
       console.log(err);
     }
@@ -21,7 +25,13 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const userPost = await User.findById(post.user);
+      const comments = await Comment.find({post: req.params.id});
+      const commentUsers = [];
+      for(let i = 0; i < comments.length; i++) {
+        commentUsers.push(await User.findById(comments[i].user));
+      }
+      res.render("post.ejs", { user: userPost, post: post, comments: comments, commentUsers: commentUsers, loggedUser: req.user});
     } catch (err) {
       console.log(err);
     }

@@ -1,46 +1,74 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-          </div>
-          <div class="mt-5">
-            <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
-              </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
-          </div>
-      </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>  
-      </div>  
+
+<div class="container-fluid mr-2.5" style="display: flex; justify-content: end">
+  <a href="/profile">
+    <h1><%= user.userName %></h1>
+  </a>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center">
+  <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mb-3.5">
+    <div class="card-body">
+      <h2 class="font-bold">Add a post</h2>
+      <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Title</span>
+          </label>
+          <input type="text" placeholder="Post title" id="title" name="title" class="input input-bordered" />
+        </div>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Caption</span>
+          </label>
+          <textarea id="caption" name="caption" class="textarea textarea-bordered" placeholder="Tell everyone about your post"></textarea>
+        </div>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Image</span>
+          </label>
+          <input type="file" id="imageUpload" name="file" class="input" />
+        </div>
+        <div class="form-control mt-6">
+          <button class="btn btn-primary">Post</button>
+        </div>
+      </form>
     </div>
   </div>
+
+  <div style="display: flex; flex-direction: column; align-items: center">
+    <% for(var i=0; i<posts.length; i++) {%>
+      <div class="card w-96 bg-base-100 shadow-xl mb-2.5">
+        <figure>
+          <a href="/post/<%= posts[i]._id%>">
+            <img class="img-fluid" src="<%= posts[i].image%>">
+          </a>
+        </figure>
+        <div class="card-body">
+          <div class="mb-3" style="display: flex; justify-content: space-between">
+            <form
+              class="col-1"
+              action="/post/likePost/<%= posts[i].id %>?_method=PUT"
+              method="POST"
+            >
+              <button class="fa fa-heart btn btn-primary btn-sm" type="submit" style="border: none; font-size: 2rem;"></button>
+            </form>
+            <span class="col-3">Likes: <%= posts[i].likes %></span>
+          </div>
+          <h2 class="card-title"><%= posts[i].title %></h2>
+          <p><%= posts[i].caption %></p>
+          <div class="card-actions justify-end">
+            <a href="/post/<%= posts[i]._id%>" class="btn btn-primary">View post</a>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+
+  <div class="row justify-content-center mt-5 mb-5">
+    <a class="btn btn-primary" href="/feed">Return to Feed</a>
+  </div>
+  
 </div>
+
 <%- include('partials/footer') -%>

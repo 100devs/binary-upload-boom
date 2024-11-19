@@ -17,10 +17,6 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  likes: {
-    type: Number,
-    required: true,
-  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -29,6 +25,21 @@ const PostSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+}, {
+  toObject: { virtuals: true }
 });
+
+PostSchema.virtual('comments', {
+  ref: 'Comment',
+  localField: '_id',
+  foreignField: 'post'
+})
+
+PostSchema.virtual('likes', {
+  ref: 'Like',
+  localField: '_id',
+  foreignField: 'post',
+  count: true
+})
 
 module.exports = mongoose.model("Post", PostSchema);

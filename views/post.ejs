@@ -23,6 +23,38 @@
         </form>
         <%}%>
       </div>
+
+      <div id="comment">
+        <form action="/comment/createComment/<%=post._id%>" method="POST">
+
+          <div class="commentInput">
+            <label for="comment">Leave a comment</label>
+            <input type="text" id="comment" name="comment">
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </div>
+        </form>
+          
+          <% if(comments.length != 0) { %>
+
+          <ul class="commentList">
+
+            <% comments.forEach(comment => { %>
+            
+              <div>
+                <li><i><%= user.userName %>: </i> <%= comment.comment %></li>
+
+                <form action="/comment/likeComment/<%= comment._id %>?_method=PUT" method="POST">
+                  <button class="btn btn-primary fa fa-heart" type="submit"> <%= comment.likes %></button>
+                </form>
+
+              </div>
+            <% }) %>
+          </ul>
+
+          <% } %>
+        
+      </div>
+
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>

@@ -1,0 +1,42 @@
+<%- include('partials/header') -%>
+<div class="container">
+  <div class="row mt-5">
+      <div class="col-6">
+          <div>
+              <img src="<%= user.image %>" class="avatar" alt="avatar">
+              <p><strong>User Name</strong>: <%= user.userName %></p>
+              <p><strong>Email</strong>: <%= user.email %></p>
+              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+          </div>
+          <div class="mt-5">
+            <h2>Profile</h2>
+            <form action="/config/userName?_method=PUT" method="POST">
+              <div class="mb-3">
+                  <label for="userName" class="form-label">UserName</label>
+                  <input type="text" class="form-control" id="userName" name="userName" value="<%= user.userName %>">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+              <!-- <div class="mb-3">
+                <label for="caption" class="form-label">Caption</label>
+                <textarea class="form-control" id="caption" name="caption"></textarea>
+              </div> -->
+            
+            <form action="/config/imageAvatar?_method=PUT" enctype="multipart/form-data" method="POST">
+                <div class="mb-3">
+                      <label for="imgUpload" class="form-label">Image</label>
+                      <input type="file" class="form-control" id="imageUpload" name="file">
+                </div>
+                <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+            </form>
+          </div>
+      </div>
+      <div class="col-6">
+        <div class="row justify-content-center mt-5">
+          <a class="btn btn-primary" href="/feed">Return to Feed</a>
+        </div>  
+      </div>  
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') -%>

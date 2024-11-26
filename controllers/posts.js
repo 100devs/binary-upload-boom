@@ -4,7 +4,9 @@ const Post = require("../models/Post");
 module.exports = {
   getProfile: async (req, res) => {
     try {
+      // finds the all the posts by the user
       const posts = await Post.find({ user: req.user.id });
+      // redners the profile and passing all the posts from the user
       res.render("profile.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
@@ -12,7 +14,9 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
+      // gets every post based on descending order of createdAt
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      // renders the feed page with all the posts that were found
       res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
@@ -20,7 +24,9 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
+      // gets a single post based on the id that was requested
       const post = await Post.findById(req.params.id);
+      // renders the post page with said post that was requested by the user
       res.render("post.ejs", { post: post, user: req.user });
     } catch (err) {
       console.log(err);
@@ -30,7 +36,7 @@ module.exports = {
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
-
+      // creates a post entry to the database
       await Post.create({
         title: req.body.title,
         image: result.secure_url,
@@ -39,7 +45,9 @@ module.exports = {
         likes: 0,
         user: req.user.id,
       });
+      // consoles to the log if the post was added
       console.log("Post has been added!");
+      // redirects to the profile page
       res.redirect("/profile");
     } catch (err) {
       console.log(err);
@@ -68,6 +76,7 @@ module.exports = {
       // Delete post from db
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
+      // redirects to profile page
       res.redirect("/profile");
     } catch (err) {
       res.redirect("/profile");

@@ -27,6 +27,42 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <ul class="row list-unstyled">
+      <% for(var i=0; i<comments.length; i++) {%>
+        <li class="col-6 justify-content-between mt-5">
+          <p><%= comments[i].commentText%></p>
+          <div class="row justify-content-between">
+            <form
+              class="col-1"
+              action="/comment/likeComment/<%= comments[i]._id %>/<%= post.id %>?_method=PUT"
+              method="POST"
+            >
+              <button class="btn btn-primary fa fa-heart" type="submit"></button>
+            </form>
+            <h3 class="col-3">Likes: <%= comments[i].likes %></h3>
+            <%if(comments[i].user == user.id){ %>
+            <form
+              action="/comment/deleteComment/<%= comments[i]._id %>/?_method=DELETE"
+              method="POST"
+              class="col-3"
+            >
+              <button class="btn btn-primary fa fa-trash" type="submit"></button>
+            </form>
+            <%}%>
+          </div>
+        </li>
+      <% } %>
+    </ul>
+    <div class="mt-5">
+      <h2>Add a comment</h2>
+      <form action="/comment/createComment/<%= post.id %>" method="POST">
+        <div class="mb-3">
+            <label for="comment" class="form-label">Comment</label>
+            <input type="text" class="form-control" id="comment" name="comment">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

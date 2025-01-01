@@ -1,5 +1,7 @@
+//import for schema
 const mongoose = require("mongoose");
 
+//schema for properties in posts
 const PostSchema = new mongoose.Schema({
   title: {
     type: String,

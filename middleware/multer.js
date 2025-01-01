@@ -1,6 +1,8 @@
+//import for multer
 const multer = require("multer");
 const path = require("path");
 
+/*stores image string not image*/
 module.exports = multer({
   storage: multer.diskStorage({}),
   fileFilter: (req, file, cb) => {

@@ -1,46 +1,76 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row mt-5">
-      <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+    <div class="col-6">
+      <div>
+        <p><strong>User Name</strong>: <%= user.userName %></p>
+        <p><strong>Email</strong>: <%= user.email %></p>
+        <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+      </div>
+      <div class="mt-5">
+        <h2>Add a plugin</h2>
+        <form action="/post/createPost" method="POST">
+          <div class="mb-3">
+            <label for="plugin" class="form-label">Plugin</label>
+            <input type="text" class="form-control" id="plugin" name="plugin" />
           </div>
-          <div class="mt-5">
-            <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
-              </div>
-              <div class="mb-3">
+          <div class="mb-3">
+            <label for="company" class="form-label">Company</label>
+            <input
+              type="text"
+              class="form-control"
+              id="company"
+              name="company"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="category">Category</label>
+            <select id="category" name="category">
+              <option value="Instrument">Instrument</option>
+              <option value="Synthesizer">Synthesizer</option>
+              <option value="Fx">FX</option>
+              <option value="Dynamics">Dynamics</option>
+              <option value="EQ/Filter">EQ/Filter</option>
+              <option value="Reverb/Delay">Reverb/Delay</option>
+              <option value="Distortion/Saturation">
+                Distortion/Saturation
+              </option>
+              <option value="Utility/Imaging">Utility/Imaging</option>
+              <option value="Mixing/Mastering">Mixing/Mastering</option>
+              <option value="Bundle">Bundle</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="freeOrPaid">Free or Paid?</label>
+            <select id="freeOrPaid" name="freeOrPaid">
+              <option value="Free">Free</option>
+              <option value="Paid">Paid</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="link" class="form-label">Link to product page</label>
+            <input type="text" class="form-control" id="link" name="link" />
+          </div>
+          <!-- <div class="mb-3">
                 <label for="caption" class="form-label">Caption</label>
                 <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
+              </div> -->
+          <!-- <div class="mb-3">
                 <label for="imgUpload" class="form-label">Image</label>
                 <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
-          </div>
-      </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-        <div class="row justify-content-center mt-5">
+              </div> -->
+          <button type="submit" class="btn btn-primary" value="Upload">
+            Submit
+          </button>
+        </form>
+        <div class="mt-5">
           <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>  
-      </div>  
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="row justify-content-center mt-5"></div>
     </div>
   </div>
+  <%- include('partials/footer') -%>
 </div>
-<%- include('partials/footer') -%>

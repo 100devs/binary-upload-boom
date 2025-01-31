@@ -1,7 +1,10 @@
 const bcrypt = require("bcrypt");
+//// USE THE BCRYPT MODULE TO ENCRYPT YOUR PASWWORD
 const mongoose = require("mongoose");
+//USE MONGOOSE TO INTERACT WITH MONGO DB AND ALLOW US TO USE SCHEMA
 
 const UserSchema = new mongoose.Schema({
+  //CREATE A SCHEMA USER WHERE USER,EMAIL AND PASSWORD IS A STRING AND UNQIUE
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
   password: String,
@@ -40,3 +43,4 @@ UserSchema.methods.comparePassword = function comparePassword(
 };
 
 module.exports = mongoose.model("User", UserSchema);
+//EXPORT THE USER AND USERSCHEMA 

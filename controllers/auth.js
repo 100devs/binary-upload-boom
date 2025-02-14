@@ -1,8 +1,8 @@
 const passport = require("passport");
 const validator = require("validator");
-const User = require("../models/User");
+const User = require("../models/User"); 
 
-exports.getLogin = (req, res) => {
+exports.getLogin = async (req, res) => {
   if (req.user) {
     return res.redirect("/profile");
   }
@@ -11,7 +11,7 @@ exports.getLogin = (req, res) => {
   });
 };
 
-exports.postLogin = (req, res, next) => {
+exports.postLogin = async (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
     validationErrors.push({ msg: "Please enter a valid email address." });
@@ -26,7 +26,7 @@ exports.postLogin = (req, res, next) => {
     gmail_remove_dots: false,
   });
 
-  passport.authenticate("local", (err, user, info) => {
+  passport.authenticate("local", async (err, user, info) => {
     if (err) {
       return next(err);
     }
@@ -34,7 +34,7 @@ exports.postLogin = (req, res, next) => {
       req.flash("errors", info);
       return res.redirect("/login");
     }
-    req.logIn(user, (err) => {
+    req.logIn(user, async (err) => {
       if (err) {
         return next(err);
       }
@@ -65,7 +65,7 @@ exports.getSignup = (req, res) => {
   });
 };
 
-exports.postSignup = (req, res, next) => {
+exports.postSignup = async (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
     validationErrors.push({ msg: "Please enter a valid email address." });
@@ -89,30 +89,26 @@ exports.postSignup = (req, res, next) => {
     email: req.body.email,
     password: req.body.password,
   });
-
-  User.findOne(
-    { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
-    (err, existingUser) => {
-      if (err) {
-        return next(err);
-      }
-      if (existingUser) {
-        req.flash("errors", {
-          msg: "Account with that email address or username already exists.",
-        });
-        return res.redirect("../signup");
-      }
-      user.save((err) => {
-        if (err) {
-          return next(err);
-        }
-        req.logIn(user, (err) => {
-          if (err) {
-            return next(err);
-          }
-          res.redirect("/profile");
-        });
+  try {
+    const existingUser = await User.findOne({ $or: [{ email: req.body.email }, { userName: req.body.userName }] });
+    if (existingUser) {
+      req.flash("errors", {
+        msg: "Account with that email address or username already exists.",
       });
+      return res.redirect("../signup");
     }
-  );
+    await user.save();
+    await new Promise((resolve, reject)=> {
+      req.logIn(user, (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+    res.redirect("/profile");
+  } catch (err) {
+    next(err)
+  }
 };

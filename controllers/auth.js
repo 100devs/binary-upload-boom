@@ -44,17 +44,37 @@ exports.postLogin = (req, res, next) => {
   })(req, res, next);
 };
 
-exports.logout = (req, res) => {
-  req.logout(() => {
-    console.log('User has logged out.')
-  })
-  req.session.destroy((err) => {
-    if (err)
-      console.log("Error : Failed to destroy the session during logout.", err);
-    req.user = null;
-    res.redirect("/");
+exports.logout = (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      console.error("Error during logout:", err);
+      return next(err);
+    }
+    // Destroy the session
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("Error destroying session:", err);
+        return next(err);
+      }
+      // Clear the session cookie
+      res.clearCookie("connect.sid");
+      // Redirect to the homepage
+      res.redirect("/");
+    });
   });
 };
+
+// exports.logout = async (req, res) => { //depreceated
+//   req.logout(() => {
+//     console.log('User has logged out.')
+//   })
+//   req.session.destroy((err) => {
+//     if (err)
+//       console.log("Error : Failed to destroy the session during logout.", err);
+//     req.user = null;
+//     res.redirect("/");
+//   });
+// };
 
 exports.getSignup = (req, res) => {
   if (req.user) {
@@ -65,7 +85,7 @@ exports.getSignup = (req, res) => {
   });
 };
 
-exports.postSignup = (req, res, next) => {
+exports.postSignup = async(req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
     validationErrors.push({ msg: "Please enter a valid email address." });
@@ -84,35 +104,32 @@ exports.postSignup = (req, res, next) => {
     gmail_remove_dots: false,
   });
 
-  const user = new User({
-    userName: req.body.userName,
-    email: req.body.email,
-    password: req.body.password,
-  });
+  try {
+    // Check if the user already exists
+    const existingUser = await User.findOne({ email: req.body.email });
+    if (existingUser) {
+      req.flash("errors", { msg: "An account with that email already exists." });
+      return res.redirect("../signup");
+    }
 
-  User.findOne(
-    { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
-    (err, existingUser) => {
+    // Create a new user
+    const newUser = new User({
+      userName: req.body.userName,
+      email: req.body.email,
+      password: req.body.password,
+    });
+
+    await newUser.save();
+
+    req.logIn(newUser, (err) => {
       if (err) {
         return next(err);
       }
-      if (existingUser) {
-        req.flash("errors", {
-          msg: "Account with that email address or username already exists.",
-        });
-        return res.redirect("../signup");
-      }
-      user.save((err) => {
-        if (err) {
-          return next(err);
-        }
-        req.logIn(user, (err) => {
-          if (err) {
-            return next(err);
-          }
-          res.redirect("/profile");
-        });
-      });
-    }
-  );
+      req.flash("success", { msg: "You have successfully signed up!" });
+      res.redirect("/profile");
+    });
+  } catch (err) {
+    console.error(err);
+    res.redirect("/signup");
+  }
 };

@@ -1,5 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
+
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -21,9 +23,15 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({ post: req.params.id })
+      .populate("user", "userName ") //populate user field with username
+      .sort({ createdAt: "asc" })
+      .lean();
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });
+
     } catch (err) {
       console.log(err);
+      res.redirect("/feed"); //redirect to feed
     }
   },
   createPost: async (req, res) => {
@@ -62,14 +70,24 @@ module.exports = {
   deletePost: async (req, res) => {
     try {
       // Find post by id
-      let post = await Post.findById({ _id: req.params.id });
+      let post = await Post.findById(req.params.id);
+      // Check if post exists
+      if (!post) {
+        console.error("Post not found");
+        return res.redirect("/profile");
+      }
+
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);
+      // Delete all comments associated with the post
+      await Comment.deleteMany({ post: req.params.id });
       // Delete post from db
-      await Post.remove({ _id: req.params.id });
+      await Post.findByIdAndDelete(req.params.id);
+
       console.log("Deleted Post");
       res.redirect("/profile");
     } catch (err) {
+      console.error("Error deleting post:", err);
       res.redirect("/profile");
     }
   },

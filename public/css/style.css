@@ -1,0 +1,13 @@
+.comment-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  
+  .comment-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .inline-form {
+    display: inline;
+  }

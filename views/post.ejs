@@ -27,6 +27,48 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    <h2>Add a comment</h2>
+    <form action="/comment/createComment/<%= post._id%>" method="POST">
+      <div class="mb-3">
+          <label for="comment" class="form-label">Comment</label>
+          <input type="text" class="form-control" id="comment" name="comment" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <h3>Comments</h3>
+    <ul>
+      <% comments.forEach(comment => { %>
+        <li class="comment-item mt-3">
+          <strong><%= comment.user ? comment.user.userName : "Unknown User" %></strong>
+          <p><%= comment.comment %></p>
+          <p>
+            Posted on: <%= new Date(comment.createdAt).toLocaleString() %> | 
+            Likes: <%= comment.likes %>
+          </p>
+          <div class="comment-actions">
+            <!-- Like Button -->
+            <form
+              action="/comment/likeComment/<%= comment._id %>?_method=PUT"
+              method="POST"
+              class="inline-form"
+            >
+              <input type="hidden" name="postId" value="<%= post._id %>" />
+              <button class="btn btn-primary fa fa-thumbs-up" type="submit"></button>
+            </form>
+
+            <!-- Delete Button -->
+            <form
+              action="/comment/deleteComment/<%= comment._id %>?_method=DELETE"
+              method="POST"
+              class="inline-form"
+            >
+              <input type="hidden" name="postId" value="<%= post._id %>" />
+              <button class="btn btn-danger fa fa-trash" type="submit"></button>
+            </form>
+          </div>
+        </li>
+      <% }); %>
+    </ul>
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

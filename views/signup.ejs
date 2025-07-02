@@ -12,24 +12,30 @@
                         <div class="alert alert-info"><%= el.msg %></div>
                     <% }) %>    
                 <% } %>
+                <!--post form to signup-->
                 <form action="/signup" method="POST">
                     <div class="mb-3">
                         <label for="userName" class="form-label">User Name</label>
+                        <!--user name required-->
                         <input type="text" class="form-control" id="userName" name="userName">
                       </div>
                     <div class="mb-3">
                       <label for="exampleInputEmail1" class="form-label">Email address</label>
+                      <!--email required-->
                       <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
                       <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <div class="mb-3">
                       <label for="password" class="form-label">Password</label>
+                      <!--password required-->
                       <input type="password" class="form-control" id="password" name="password">
                     </div>
                     <div class="mb-3">
                         <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <!--confirm password-->
                         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
                       </div>
+                      <!--submit signup post request-->
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
             </section>

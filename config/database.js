@@ -1,3 +1,4 @@
+//mongoDB connection made consolidated
 const mongoose = require("mongoose");
 
 const connectDB = async () => {

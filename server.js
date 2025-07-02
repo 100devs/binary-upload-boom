@@ -1,3 +1,4 @@
+//modules needed at top level
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -11,32 +12,32 @@ const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
 
-//Use .env file in config folder
+//.env file for secrets
 require("dotenv").config({ path: "./config/.env" });
 
-// Passport config
+//passport configuration
 require("./config/passport")(passport);
 
-//Connect To Database
+//connect to mongoDB
 connectDB();
 
-//Using EJS for views
+//ejs for views
 app.set("view engine", "ejs");
 
-//Static Folder
+//static files 
 app.use(express.static("public"));
 
-//Body Parsing
+//sending and receiving json data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//Logging
+//logger
 app.use(logger("dev"));
 
-//Use forms for put / delete
+//use forms for PUT and DELETE requests
 app.use(methodOverride("_method"));
 
-// Setup Sessions - stored in MongoDB
+//session middleware
 app.use(
   session({
     secret: "keyboard cat",
@@ -46,18 +47,18 @@ app.use(
   })
 );
 
-// Passport middleware
+//passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Use flash messages for errors, info, ect...
+//error messages
 app.use(flash());
 
-//Setup Routes For Which The Server Is Listening
+//receiving requests and allocating routers
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 
-//Server Running
+//start the server
 app.listen(process.env.PORT, () => {
   console.log("Server is running, you better catch it!");
 });

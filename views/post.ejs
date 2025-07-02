@@ -2,33 +2,43 @@
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
+      <!--display the post's title-->
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
+        <!--PUT request to like post, made on posts/likePost/postID route-->
         <form
           class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"
           method="POST"
-        >
+        > <!--using method override-->
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
+        <!--display the post's likes-->
         <h3 class="col-3">Likes: <%= post.likes %></h3>
+        <!--if the post's poster is the same as the logged in user-->
         <%if(post.user == user.id){ %>
+          <!--give the option to delete the post-->
+          <!--DELETE request to delete post, made on posts/delete/postID route-->
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
           method="POST"
           class="col-3"
         >
+        <!--using method override-->
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
         <%}%>
       </div>
     </div>
     <div class="col-3 mt-5">
+      <!--display the post's caption-->
       <p><%= post.caption %></p>
     </div>
     <div class="col-6 mt-5">
+      <!--GET request link to the logged in user's profile-->
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
+      <!--GET request link to the general feed-->
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
   </div>

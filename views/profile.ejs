@@ -5,38 +5,48 @@
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
+              <!--logout GET request-->
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
           <div class="mt-5">
             <h2>Add a post</h2>
+            <!--form for create post POST request, uses multipart/form-data for image-->
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
                   <label for="title" class="form-label">Title</label>
+                  <!--post title-->
                   <input type="text" class="form-control" id="title" name="title">
               </div>
               <div class="mb-3">
                 <label for="caption" class="form-label">Caption</label>
+                <!--post caption-->
                 <textarea class="form-control" id="caption" name="caption"></textarea>
               </div>
               <div class="mb-3">
                 <label for="imgUpload" class="form-label">Image</label>
+                <!--post file upload-->
                 <input type="file" class="form-control" id="imageUpload" name="file">
               </div>
+              <!--submit the post request-->
               <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
             </form>
           </div>
       </div>
       <div class="col-6">
         <ul class="row list-unstyled">
+        <!--for every post passed into the ejs in the posts array-->
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
+            <!--link a GET request for that specific post-->
             <a href="/post/<%= posts[i]._id%>">
+              <!--the link is the image posted-->
               <img class="img-fluid" src="<%= posts[i].image%>">
             </a>
           </li>
         <% } %>
         </ul>
         <div class="row justify-content-center mt-5">
+          <!--user can return to the public feed from their profile at any time-->
           <a class="btn btn-primary" href="/feed">Return to Feed</a>
         </div>  
       </div>  

@@ -1,19 +1,22 @@
 <%- include('partials/header') -%>
-
+<!--login page-->
 <main class="container">
   <div class="row justify-content-center">
     <section class="col-6 mt-5">
+      <!--error messages for login-->
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
       <div class="alert alert-danger"><%= el.msg %></div>
       <% }) %> <% } %> <% if (locals.messages.info) { %> <%
       messages.info.forEach( el => { %>
       <div class="alert alert-info"><%= el.msg %></div>
       <% }) %> <% } %>
+      <!--POST request made on login route-->
       <form action="/login" method="POST">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label"
             >Email address</label
           >
+          <!--email required to login-->
           <input
             type="email"
             class="form-control"
@@ -24,6 +27,7 @@
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Password</label>
+          <!--password required to login-->
           <input
             type="password"
             class="form-control"
@@ -31,6 +35,7 @@
             name="password"
           />
         </div>
+        <!--submit login post request-->
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </section>

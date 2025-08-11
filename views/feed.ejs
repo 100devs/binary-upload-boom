@@ -1,15 +1,44 @@
 <%- include('partials/header') -%>
+<div class="mt-5">
+  <h1 class="text-center">Feed</h1>
+  <h3 class="text-center">View Products and Filter by Company</h3>
   <div class="container">
     <div class="row justify-content-center mt-5">
       <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
+        <% for(var i=0; i<products.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
+            <div class="card">
+              <img src="<%= products[i].image%>" class="card-img-top" alt="product image">
+              <div class="card-body">
+                <h5 class="card-title"><%= products[i].productTitle%></h5>
+                <p class="card-text"><%=products[i].productDescription%></p>
+                <a href="/product/<%= products[i]._id%>" class="btn btn-primary">More</a>
+              </div>
+            </div>
           </li>
         <% } %>
         </ul>
     </div>
   </div>  
+  <div class="row justify-content-center">
+<div class="col-6">
+  <h2 class="text-center">Filter Products</h2>
+  <form action="/product/filterProducts" method="POST">
+    <div class="mb-3">
+      <label for="company" class="form-label">Company</label>
+      <select class="form-control" id="company" name="company">
+        <%if(company){ %>
+          <option value="<%=company.id%>"><%= company.companyName%></option>
+        <% } %>
+          <% companies.forEach(company => { %>
+            <option value="<%=company.id%>"><%= company.  companyName %></option>
+          <% }) %>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+  </form>
+  </div>
+</div>
+</div>
+
 <%- include('partials/footer') -%>

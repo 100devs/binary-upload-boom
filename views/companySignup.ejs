@@ -12,11 +12,9 @@
                         <div class="alert alert-info"><%= el.msg %></div>
                     <% }) %>    
                 <% } %>
-                <form action="/signup" method="POST">
-                    <div class="mb-3">
-                        <label for="userName" class="form-label">User Name</label>
-                        <input type="text" class="form-control" id="userName" name="userName">
-                      </div>
+                <h2>Company Signup</h2>
+                <h3> Signup your company to add a product for your customers to review!</h3>
+                <form action="/companySignup"  method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                       <label for="exampleInputEmail1" class="form-label">Email address</label>
                       <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
@@ -24,11 +22,23 @@
                     </div>
                     <div class="mb-3">
                       <label for="password" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="password" name="password">
+                      <input type="text" class="form-control" id="password" name="password">
                     </div>
                     <div class="mb-3">
                         <label for="confirmPassword" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+                        <input type="text" class="form-control" id="confirmPassword" name="confirmPassword">
+                      </div>
+                      <div class="mb-3">
+                        <label for="companyname" class="form-label">Company Name</label>
+                        <input type="text" class="form-control" id="companyName" name="companyName">
+                      </div>
+                    <div class="mb-3">
+                        <label for="companyDescription" class="form-label">Company Description</label>
+                        <textarea class="form-control" id="companyDescription" name="companyDescription"></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="imgUpload" class="form-label">Image</label>
+                        <input type="file" class="form-control" id="imageUpload" name="file">
                       </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>

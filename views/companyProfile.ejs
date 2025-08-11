@@ -1,0 +1,47 @@
+<%- include('partials/header') -%>
+<div class="container">
+  <div class="row mt-5">
+      <div class="col-6">
+          <div>
+            <h1>Company Profile</h1>
+              <p><strong>Company Name</strong>: <%= user.companyName %></p>
+              <p><strong>Email</strong>: <%= user.email %></p>
+              
+          </div>
+          <div class="mt-5">
+            <h2>Add a Product</h2>
+            <form action="/product/createProduct" enctype="multipart/form-data" method="POST">
+              <div class="mb-3">
+                  <label for="productTitle" class="form-label">Title</label>
+                  <input type="text" class="form-control" id="productTitle" name="productTitle">
+              </div>
+              <div class="mb-3">
+                <label for="productDescription" class="form-label">Product Description</label>
+                <textarea class="form-control" id="productDescription" name="productDescription"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="imageUpload" class="form-label">Image</label>
+                <input type="file" class="form-control" id="imageUpload" name="file">
+              </div>
+              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+            </form>
+          </div>
+      </div>
+      <div class="col-6">
+        <h2>Products</h2>
+        <ul class="row list-unstyled">
+        <% for(var i=0; i<products.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <h3><%= products[i].productTitle%></h3>
+            <a href="/product/<%= products[i]._id%>">
+              <img class="img-fluid" src="<%= products[i].image%>">
+            </a>
+          </li>
+        <% } %>
+        </ul>
+        
+      </div>  
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') -%>

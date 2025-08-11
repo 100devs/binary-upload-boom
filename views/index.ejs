@@ -1,9 +1,18 @@
 <%- include('partials/header') -%>
 
 <main class="container">
+    <h1 class="text-center mt-5">Welcome to Product Pulse!</h1>
+        <div class="row">
+            <p class="col-6 justify-content-center mt-4">Signup or Login as a Customer to review and rate products from your favorite companies.</p>
+            <p class="col-6 justify-content-around mt-4"> Signup or Login as a Company to create products for your customers to review.</p>
+        </div>
     <div class="row justify-content-around mt-5">
-        <a href="/login" class="col-3 btn btn-primary"> Login</a>
-        <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
+        <a href="/customerLogin" class="col-3 btn btn-primary"> Customer Login</a>
+        <a href="/companyLogin" class="col-3 btn btn-primary"> Company Login</a>
+    </div>
+    <div class="row justify-content-around mt-5">
+        <a href="/customerSignup" class="col-3 btn btn-primary"> Customer Signup</a>
+        <a href="/companySignup" class="col-3 btn btn-primary"> Company Signup</a>
     </div>
 </main>
     

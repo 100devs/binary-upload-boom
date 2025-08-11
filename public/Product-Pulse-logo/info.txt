@@ -1,0 +1,14 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+font name: Montserrat-Medium
+font link: https://fonts.google.com/specimen/Montserrat
+font author: Julieta Ulanovsky
+font author site: http://www.zkysky.com.ar/
+
+
+icon designer: Phạm Thanh Lộc
+icon designer link: /thanhloc1009
+        
+{"bg-gradient-0":"#0076DD","bg-gradient-1":"#00CDE9","icon":"#ffffff","font":"#ffffff","slogan":"#ffffff"}
+      

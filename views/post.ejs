@@ -21,7 +21,30 @@
         >
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
-        <%}%>
+        <%}else{%>
+          <form
+          action="/post/addComment/<%= post.id %>"
+          method="POST"
+          class="col-3"
+        >
+          <input type="text" name="commentText">
+          <button class="btn btn-primary fa fa-pen" type="submit"></button>
+        </form>
+          <%}%>
+
+          <%if(comments.length > 0){ %>
+            <div id="commentContainer"></div>
+            <% for (let i = 0; i < comments.length; i++) { %>
+                  <div id="individualComment">
+                    <h3><%= comments.userName %> </h3>
+                    <span><%= comments.commentText %></span>
+                  </div>
+            <% } %>
+              </div>
+
+
+          <%}%>
+
       </div>
     </div>
     <div class="col-3 mt-5">

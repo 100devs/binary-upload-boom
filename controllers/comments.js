@@ -19,29 +19,32 @@ module.exports = {
   // increment the like count of the given post
   likeComment: async (req, res) => {
     try {
-      await Comment.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
-        }
-      );
+      const comment = await Comment.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { likes: 1 } },
+      { new: false }        // we only need comment.post to redirect
+    );
       console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
+      res.redirect(`/post/${comment.post}`);
     } catch (err) {
       console.log(err);
+      res.redirect('back');
     }
   },
-  // delete a comment by id from the given post
+  // delete a comment by id from the given post with authorization
   deleteComment: async (req, res) => {
     try {
-      // Find Comment by id
-      let comment = await Comment.findById({ _id: req.params.id });
+      // Find Comment by id and authorization
+      const comment = await Comment.findById({ _id: req.params.id }).populate({ path: 'post', select: 'user' }).lean();
+      const isCommentAuthor = String(comment.user) === String(req.user._id);
+      const isPostAuthor    = String(comment.post.user) === String(req.user._id);
       // Delete comment from db
-      await Comment.remove({ _id: req.params.id });
+      await Comment.deleteOne({ _id: req.params.id });
       console.log("Deleted Comment");
-      res.redirect(`/post/${req.params.id}`);
+      const postId = comment.post?._id || comment.post;
+      return res.redirect(`/post/${postId}`);
     } catch (err) {
-      res.redirect(`/post/${req.params.id}`);
+      res.redirect('back');
     }
   },
 };

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Connect to MongoDB using connection string from env variable
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.DB_STRING, {
@@ -16,4 +17,5 @@ const connectDB = async () => {
   }
 };
 
+// Export the function so it can be used in our app
 module.exports = connectDB;

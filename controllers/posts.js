@@ -1,7 +1,9 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
-
+const Comment = require("../models/Comments");
+// Export functions
 module.exports = {
+  // render profile for logged in user 
   getProfile: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.user.id });
@@ -10,6 +12,7 @@ module.exports = {
       console.log(err);
     }
   },
+  // Render feed with all posts
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
@@ -18,14 +21,17 @@ module.exports = {
       console.log(err);
     }
   },
+  // Render a post with its comments
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).populate("user", "userName").lean();
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
     }
   },
+  // Create a new post
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
@@ -45,6 +51,7 @@ module.exports = {
       console.log(err);
     }
   },
+  // increment the post's like count
   likePost: async (req, res) => {
     try {
       await Post.findOneAndUpdate(
@@ -59,6 +66,7 @@ module.exports = {
       console.log(err);
     }
   },
+  // Delete the post
   deletePost: async (req, res) => {
     try {
       // Find post by id

@@ -13,4 +13,5 @@ router.put("/likePost/:id", postsController.likePost);
 
 router.delete("/deletePost/:id", postsController.deletePost);
 
+// Export functions for the app 
 module.exports = router;

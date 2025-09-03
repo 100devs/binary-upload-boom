@@ -1,7 +1,8 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
-
+// Export function so app can use them
+  // Show login page if logged in redirect to /profile
 exports.getLogin = (req, res) => {
   if (req.user) {
     return res.redirect("/profile");
@@ -10,8 +11,9 @@ exports.getLogin = (req, res) => {
     title: "Login",
   });
 };
-
+  // Handle POST login
 exports.postLogin = (req, res, next) => {
+  // validate email
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
     validationErrors.push({ msg: "Please enter a valid email address." });
@@ -22,10 +24,11 @@ exports.postLogin = (req, res, next) => {
     req.flash("errors", validationErrors);
     return res.redirect("/login");
   }
+  // Normalize email 
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
   });
-
+  // Use passport local strategy to authenticate and handle fail/error
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       return next(err);
@@ -43,7 +46,7 @@ exports.postLogin = (req, res, next) => {
     });
   })(req, res, next);
 };
-
+// Handle logout
 exports.logout = (req, res) => {
   req.logout(() => {
     console.log('User has logged out.')
@@ -55,7 +58,7 @@ exports.logout = (req, res) => {
     res.redirect("/");
   });
 };
-
+// Handle GET signup
 exports.getSignup = (req, res) => {
   if (req.user) {
     return res.redirect("/profile");
@@ -64,7 +67,7 @@ exports.getSignup = (req, res) => {
     title: "Create Account",
   });
 };
-
+// Handle POST signup
 exports.postSignup = (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
@@ -83,13 +86,13 @@ exports.postSignup = (req, res, next) => {
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
   });
-
+  // Create a new User instance
   const user = new User({
     userName: req.body.userName,
     email: req.body.email,
     password: req.body.password,
   });
-
+  // Check if email || username already exists
   User.findOne(
     { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
     (err, existingUser) => {

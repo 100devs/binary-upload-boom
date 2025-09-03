@@ -15,4 +15,5 @@ router.get("/logout", authController.logout);
 router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
 
+// Export functions for the app 
 module.exports = router;

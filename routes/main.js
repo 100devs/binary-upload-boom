@@ -15,4 +15,7 @@ router.get("/logout", authController.logout);
 router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
 
+// post
+router.post("/comment/createComment/:id", postsController.createComment)
+
 module.exports = router;

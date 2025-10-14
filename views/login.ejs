@@ -1,40 +1,71 @@
 <%- include('partials/header') -%>
 
-<main class="container">
-  <div class="row justify-content-center">
-    <section class="col-6 mt-5">
-      <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
-      <div class="alert alert-danger"><%= el.msg %></div>
-      <% }) %> <% } %> <% if (locals.messages.info) { %> <%
-      messages.info.forEach( el => { %>
-      <div class="alert alert-info"><%= el.msg %></div>
-      <% }) %> <% } %>
-      <form action="/login" method="POST">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            name="email"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-            name="password"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </section>
-  </div>
-</main>
 
-<%- include('partials/footer') -%>
+  <div class="bg-gray-700 w-full h-dvh flex justify-center">
+
+
+
+    <div class="flex min-h-full bg-linear-to-bl from-gray-900 to-violet w-full flex-col justify-center px-6 py-12 lg:px-8">
+      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=red&shade=500" alt="Your Company"
+          class="mx-auto h-10 w-auto" />
+        <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">Sign in to your account</h2>
+      </div>
+
+      <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <% if (locals.messages.errors) { %>
+          <% messages.errors.forEach( el=> { %>
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100" role="alert">
+              <%= el.msg %>
+            </div>
+            <% }) %>
+              <% } %>
+                <% if (locals.messages.info) { %>
+                  <% messages.info.forEach( el=> { %>
+                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100" role="alert">
+                      <%= el.msg %>
+                    </div>
+                    <% }) %>
+                      <% } %>
+                        <form action="/login" method="POST" class="space-y-6">
+                          <div>
+                            <label for="exampleInputEmail1" class="block text-sm/6 font-medium text-gray-100">Email
+                              address</label>
+                            <div class="mt-2">
+                              <input id="exampleInputEmail1" type="email" name="email" required autocomplete="email"
+                                class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
+                            </div>
+                          </div>
+
+                          <div>
+                            <div class="flex items-center justify-between">
+                              <label for="exampleInputPassword1"
+                                class="block text-sm/6 font-medium text-gray-100">Password</label>
+                              <div class="text-sm">
+                                <a href="#" class="font-semibold text-indigo-400 hover:text-indigo-300">Forgot
+                                  password?</a>
+                              </div>
+                            </div>
+                            <div class="mt-2">
+                              <input id="exampleInputPassword1" type="password" name="password" required
+                                autocomplete="current-password"
+                                class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
+                            </div>
+                          </div>
+
+                          <div>
+                            <button type="submit"
+                              class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Sign
+                              in</button>
+                          </div>
+                        </form>
+
+                        <p class="mt-10 text-center text-sm/6 text-gray-400">
+                          Not a member?
+                          <a href="/signup" class="font-semibold text-indigo-400 hover:text-indigo-300">Sign up</a>
+                        </p>
+      </div>
+    </div>
+  </div>
+
+  <%- include('partials/footer') -%>

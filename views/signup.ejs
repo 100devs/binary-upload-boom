@@ -1,39 +1,78 @@
 <%- include('partials/header') -%>
-    <main class="container">
-        <div class="row justify-content-center">
-            <section class="col-6 mt-5">
-                <% if (locals.messages.errors) { %>
-                    <% messages.errors.forEach( el => { %>
-                        <div class="alert alert-danger"><%= el.msg %></div>
-                    <% }) %>    
-                <% } %>
-                <% if (locals.messages.info) { %>
-                    <% messages.info.forEach( el => { %>
-                        <div class="alert alert-info"><%= el.msg %></div>
-                    <% }) %>    
-                <% } %>
-                <form action="/signup" method="POST">
-                    <div class="mb-3">
-                        <label for="userName" class="form-label">User Name</label>
-                        <input type="text" class="form-control" id="userName" name="userName">
-                      </div>
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Email address</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
-                      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                    </div>
-                    <div class="mb-3">
-                      <label for="password" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="password" name="password">
-                    </div>
-                    <div class="mb-3">
-                        <label for="confirmPassword" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
-                      </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
-            </section>
-        </div>
-    </main>
 
-<%- include('partials/footer') -%>
+
+  <div class="flex h-full bg-linear-to-bl from-gray-900 to-gray-500 flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+      <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=red&shade=500" alt="Your Company"
+        class="mx-auto h-10 w-auto" />
+      <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">Create a new account</h2>
+    </div>
+
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <% if (locals.messages.errors) { %>
+        <% messages.errors.forEach( el=> { %>
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100" role="alert">
+            <%= el.msg %>
+          </div>
+          <% }) %>
+            <% } %>
+              <% if (locals.messages.info) { %>
+                <% messages.info.forEach( el=> { %>
+                  <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100" role="alert">
+                    <%= el.msg %>
+                  </div>
+                  <% }) %>
+                    <% } %>
+
+
+                      <form action="/signup" method="POST" class="space-y-6">
+                        <div class="">
+                          <label for="userName" class="block text-sm/6 font-medium text-gray-100">User Name</label>
+                          <div class="mt-2">
+                            <input type="text" required autocomplete="userNAme"
+                              class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                              id="userName" name="userName">
+                          </div>
+                        </div>
+                        <div class="">
+                          <label for="exampleInputEmail1" class="block text-sm/6 font-medium text-gray-100">Email
+                            address</label>
+                          <div class="mt-2">
+                            <input type="email" required autocomplete="email"
+                              class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                              id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                          </div>
+                        </div>
+                        <div class="">
+                          <label for="password" class="block text-sm/6 font-medium text-gray-100">Password</label>
+                          <div class="mt-2">
+                            <input type="password" required autocomplete="password"
+                              class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                              id="password" name="password">
+                          </div>
+                        </div>
+                        <div class="">
+                          <label for="confirmPassword" class="block text-sm/6 font-medium text-gray-100">Confirm
+                            Password</label>
+                          <div class="mt-2"> <input type="password" required autocomplete="confirm Passord"
+                              class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                              id="confirmPassword" name="confirmPassword">
+                          </div>
+                        </div>
+                        <div class="">
+                          <button type="submit"
+                            class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Sign
+                            up</button>
+                        </div>
+                      </form>
+                      <p class="mt-10 text-center text-sm/6 text-gray-400">
+                        Already have an account?
+                        <a href="/login" class="font-semibold text-indigo-400 hover:text-indigo-300">Sign in</a>
+                      </p>
+
+    </div>
+  </div>
+  
+
+
+  <%- include('partials/footer') -%>

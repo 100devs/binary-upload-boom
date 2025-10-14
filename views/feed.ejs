@@ -1,15 +1,39 @@
 <%- include('partials/header') -%>
-  <div class="container">
-    <div class="row justify-content-center mt-5">
-      <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
+  <div class="w-full bg-gray-900 h-full  flex flex-col place-content-center items-center">
+    <div class=" w-full p-2 flex place-content-between">
+      <a class="bg-yellow-700 text-black px-5  rounded-sm hover:bg-green-700 transition" href="/profile">Return to
+        Profile</a>
+      <a class="bg-red-300 text-black px-5  rounded-sm hover:bg-red-700 transition" href="/logout">logout</a>
     </div>
-  </div>  
-<%- include('partials/footer') -%>
+    <div class="flex bg-gray-900 flex-wrap lg:w-3/4 justify-evenly gap-2 p-2">
+      <% for(var i=0; i<posts.length; i++) {%>
+        <div class="max-w-md rounded h-full shadow-lg bg-white">
+          <h2 class="text-xl font-semibold">
+            @<%=posts[i].uname%>
+          </h2>
+          <a href="/post/<%= posts[i]._id%>">
+            <img class="w-full object-scale-down" src="<%= posts[i].image%>" alt="Card Image"></a>
+          <div class="px-2 py-1">
+            <div class=" text-xl">
+              <%= posts[i].title%>
+            </div>
+            <div class="flex place-content-between">
+              <div>
+                <p class="text-gray-700 text-base">
+                  <%= posts[i].likes %> <span class="btn btn-primary fa fa-heart"></span>
+              </div>
+              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 rounded:sm ">
+                <a href="/post/<%= posts[i]._id%>">Open</a>
+              </button>
+            </div>
+
+
+
+
+          </div>
+        </div>
+        <% } %>
+    </div>
+  </div>
+
+  <%- include('partials/footer') -%>

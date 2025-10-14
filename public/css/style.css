@@ -1,0 +1,16 @@
+/* *{
+    border: solid 1px black;
+} */
+
+.backgroundImage{
+    width: 100%;
+    background: url(https://themes.coderthemes.com/opixo-angular/assets/small-4-B1wJiOWM.jpg);
+    background-size: cover;
+    background-repeat:no-repeat;
+    background-position: center;
+    height: 100lvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

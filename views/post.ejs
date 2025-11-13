@@ -1,37 +1,94 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-6">
-      <h2><%= post.title %></h2>
+<%- include('partials/topnav') -%>
+
+<div class="container-lg shadow-sm bg-white">
+  <div class="row text-center">
+    <h1 class="mt-3 fs-3"><%= post.title %></h1>
+  </div>
+  <div class="row justify-content-between">
+    <div class="col-md-6">
+      <h3 class="fs-5">Posted by: <%= poster %></h3>
+    </div>
+    <div class="col-md-6">
+      <h3 class="fs-5"><%= postDate %></h3>
+    </div>
+  </div>
+  <div class="row justify-content-between">
+    <div class="col-md-6">
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
         <form
           class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
+          action="/post/likePost/<%= post._id %>?_method=PUT"
           method="POST"
         >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          <button class="btn btn-sm fa fa-heart <%= post.likedBy.includes(user.id) ? 'btn-secondary' : 'btn-primary' %>" type="submit"></button>
         </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
+        <p class="col-9 mt-1">Likes: <%= post.likes %></p>
         <%if(post.user == user.id){ %>
         <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
+          action="/post/deletePost/<%= post._id %>?_method=DELETE"
           method="POST"
-          class="col-3"
+          class="col-auto"
         >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
+          <button class="btn btn-primary btn-sm fa fa-trash" type="submit"></button>
         </form>
         <%}%>
       </div>
+      <div class="container">
+    
+  </div>  
     </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
+    <!--Caption-->
+    <div class="col-md-6">
+      <p class="p-3 mb-2 bg-light"><%= post.caption %></p>
     </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
-    </div>
+    
+
   </div>
+</div>
+<!--Comment Section-->
+<div class="container">
+    <div class="row justify-content-center mt-2">
+        <div class="mt-5 bg-primary-subtle border-primary border-3 rounded p-3">
+              <h2 class="fs-3">Add a comment</h2>
+              <form action="/comment/createComment/<%= post.id %>" method="POST">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Comment</label>
+                    <input type="text" class="form-control" id="comment" name="comment">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+        </div>
+        <ul class="row list-unstyled">
+          <% for(var i=0; i<comments.length; i++) {%>
+            <li class="col-12 mt-5 bg-light border border-primary-subtle rounded-3 py-2">
+              <p class="text-primary-emphasis border-bottom border-primary-subtle"> <%= comments[i].user.userName%> - <%= moment(comments[i].createdAt).format("lll") %> </p>
+              <%= comments[i].comment%>
+              <!--comment buttons-->
+              <div class="row justify-content-end mt-2">
+                <form
+                  class="col-auto"
+                  action="/comment/likeComment/<%= comments[i]._id %>?_method=PUT"
+                  method="POST"
+                >
+                <button class="btn btn-sm fa fa-heart <%= comments[i].likedBy && comments[i].likedBy.some(id => id.toString() === user.id.toString()) ? 'btn-secondary' : 'btn-primary' %>" type="submit"></button>
+                </form>
+                <p class="col-auto mt-1">Likes: <%= comments[i].likes || 0 %></p>
+                <%if(post.user == user.id || comments[i].user._id == user.id){ %>
+                  <form
+                    action="/comment/deleteComment/<%= comments[i]._id %>?_method=DELETE"
+                    method="POST"
+                    class="col-auto"
+                  >
+                  <button class="btn btn-primary btn-sm fa fa-trash" type="submit"></button>
+                  </form>
+                <% } %>
+              </div>
+            </li>
+          <% } %>
+          </ul>
+      </div>
 </div>
 
 <%- include('partials/footer') -%>

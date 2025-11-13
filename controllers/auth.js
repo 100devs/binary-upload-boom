@@ -11,7 +11,7 @@ exports.getLogin = (req, res) => {
   });
 };
 
-exports.postLogin = (req, res, next) => {
+exports.postLogin = async (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
     validationErrors.push({ msg: "Please enter a valid email address." });
@@ -26,34 +26,54 @@ exports.postLogin = (req, res, next) => {
     gmail_remove_dots: false,
   });
 
-  passport.authenticate("local", (err, user, info) => {
-    if (err) {
-      return next(err);
-    }
-    if (!user) {
-      req.flash("errors", info);
-      return res.redirect("/login");
-    }
-    req.logIn(user, (err) => {
-      if (err) {
-        return next(err);
-      }
-      req.flash("success", { msg: "Success! You are logged in." });
-      res.redirect(req.session.returnTo || "/profile");
+  try{
+    const { user, info } = await new Promise((resolve, reject) => {
+      passport.authenticate("local", (err, user, info) => {
+        if (err) return reject(err);
+        resolve({ user, info });
+      })(req, res, next);
     });
-  })(req, res, next);
+      if (!user) {
+        req.flash("errors", info);
+        return res.redirect("/login");
+      }
+        
+      await new Promise ((resolve, reject) => {
+        req.logIn(user, (err) => {
+            if (err) reject(err);
+            else resolve();
+        });
+      });
+        
+      req.flash("success", { msg: "Success! You are logged in." });
+      res.redirect(req.session.returnTo || "/profile");  
+  } catch (err){
+    return next(err);
+  };
 };
 
-exports.logout = (req, res) => {
-  req.logout(() => {
-    console.log('User has logged out.')
-  })
-  req.session.destroy((err) => {
-    if (err)
-      console.log("Error : Failed to destroy the session during logout.", err);
+exports.logout = async (req, res) => {
+  try{
+    await new Promise((resolve, reject) => {
+      req.logout((err) =>{
+        if (err) reject(err);
+        else resolve();
+      });
+    });
+
+    console.log('User has logged out.');
+    
+    await new Promise ((resolve, reject) =>{
+      req.session.destroy((err)=> {
+        if (err) reject(err);
+        else resolve();
+      });
+    });
     req.user = null;
     res.redirect("/");
-  });
+  } catch (err) {
+    console.log("Error : Failed to destroy the session during logout.", err);
+  }
 };
 
 exports.getSignup = (req, res) => {
@@ -65,7 +85,7 @@ exports.getSignup = (req, res) => {
   });
 };
 
-exports.postSignup = (req, res, next) => {
+exports.postSignup = async (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
     validationErrors.push({ msg: "Please enter a valid email address." });
@@ -90,29 +110,33 @@ exports.postSignup = (req, res, next) => {
     password: req.body.password,
   });
 
-  User.findOne(
-    { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
-    (err, existingUser) => {
-      if (err) {
-        return next(err);
-      }
-      if (existingUser) {
-        req.flash("errors", {
-          msg: "Account with that email address or username already exists.",
-        });
-        return res.redirect("../signup");
-      }
-      user.save((err) => {
-        if (err) {
-          return next(err);
-        }
-        req.logIn(user, (err) => {
-          if (err) {
-            return next(err);
-          }
-          res.redirect("/profile");
-        });
+  try {
+    const existingUser = await User.findOne(
+    { $or: [{ email: req.body.email }, { userName: req.body.userName }] }
+    );
+    
+    if (existingUser) {
+      req.flash("errors", {
+        msg: "Account with that email address or username already exists.",
       });
+      return res.redirect("../signup");
     }
-  );
-};
+    
+    await user.save();
+    
+    await new Promise((resolve, reject) => {
+      req.logIn(user, (err) => {
+          if (err) reject(err);
+          else resolve();
+      });
+    });
+    
+    res.redirect("/profile");
+    
+    
+  } catch (err) {        
+      return next(err);        
+  }
+}
+
+

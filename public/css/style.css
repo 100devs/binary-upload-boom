@@ -1,0 +1,99 @@
+.futuristic-text{
+    font-family: 'Smooch Sans', sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    text-shadow: 0 0 20px white, 0 0 20px white;
+}
+
+
+/*BACKGROUND ANIMATION*/
+.number-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index:-1;
+        }
+
+        .number-stream {
+            position: absolute;
+            font-family: 'Bytesized', monospace; 
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        .number {
+            display: block;
+            padding: 2px 0;
+            text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+        }
+
+        .stream-1 { left: 5%; color: #a4ceff; }
+        .stream-2 { left: 12%; color: #82daea; }
+        .stream-3 { left: 19%; color: #afd2fd; }
+        .stream-4 { left: 26%; color: #86d2f4; }
+        .stream-5 { left: 33%; color: #9dc1fb; }
+        .stream-6 { left: 40%; color: #a4ffff; }
+        .stream-7 { left: 47%; color: #81c2e3; }
+        .stream-8 { left: 54%; color: #90e9f7; }
+        .stream-9 { left: 61%; color: #9bdefc; }
+        .stream-10 { left: 68%; color: #84c8d9; }
+        .stream-11 { left: 75%; color: #92b1f5; }
+        .stream-12 { left: 82%; color: #82daea; }
+        .stream-13 { left: 89%; color: #afd2fd; }
+        .stream-14 { left: 96%; color: #a4ceff; }
+
+/*
+        @keyframes streamUp {
+            0% {
+                bottom: -30%;
+                transform: translateX(0);
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            20% {
+                transform: translateX(0);
+            }
+            30% {
+                transform: translateX(60px);
+            }
+            40% {
+                transform: translateX(60px);
+            }
+            50% {
+                transform: translateX(-40px);
+            }
+            60% {
+                transform: translateX(-40px);
+            }
+            70% {
+                transform: translateX(30px);
+            }
+            80% {
+                transform: translateX(30px);
+            }
+            95% {
+                opacity: 1;
+            }
+            100% {
+                bottom: 120%;
+                transform: translateX(30px);
+                opacity: 0;
+            }
+        }
+*/
+        @keyframes glow {
+            0%, 100% {
+                filter: brightness(1);
+            }
+            50% {
+                filter: brightness(1.4);
+            }
+        }
+

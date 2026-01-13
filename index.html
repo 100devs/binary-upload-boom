@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="EOD Response Notes for IMS reports">
+	<meta name="keywords" content="one, two, three">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>EOD Incident Response Notes</title>
+
+	<!-- external CSS link -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+		integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+	<header>
+		<details>
+			<summary>Menu</summary>
+			<nav>
+				<a href="">Home</a>
+				<a href="">Incident Numbers</a>
+				<a href="">Personnel</a>
+				<a href="">Start Time</a>
+				<a href="">Arrival on Scene</a>
+				<a href="">Depart Scene</a>
+				<a href="">Detonation</a>
+				<a href="">Mission Complete</a>
+			</nav>
+		</details>
+		<a href="https://cat-uxo.com/" target="_blank" rel="noopener noreferrer">
+			<img src="img/catUXO.png" alt="Collective Awareness To UXO Logo" height="40px" width="40px">
+		</a>
+		<a href="https://www.phmsa.dot.gov/training/hazmat/erg/emergency-response-guidebook-erg" target="_blank" rel="noopener noreferrer">
+			<img src="img/ergBook.png" alt="Emergency Response Guidebook" height="40px" width="40px">
+		</a>
+	</header>
+	<main>
+		<section>
+			<h3>Incident Numbers</h3>
+			<input type="text" placeholder="Group">
+			<input type="text" placeholder="Battalion">
+			<input type="text" placeholder="Company">
+		</section>
+		<section>
+			<h3>Personnel</h3>
+			<input type="text" placeholder="Team Leader">
+			<input type="text" placeholder="Duty Officer">
+			<input type="text" placeholder="Team Member 1">
+			<input type="text" placeholder="Team Member 2">
+			<input type="text" placeholder="Team Member 3">
+		</section>
+		<section>
+			
+			<fieldset><legend><h3>Start</h3></legend>
+				<form>
+					<section>
+						<label for="time">Call Recieved</label>
+						<input type="time" placeholder="Start time">
+						<input type="date">
+						<input type="number" placeholder="Start Miles">
+					</section>
+					<section>
+						<label for="Unit / LEO Info">Contact Info</label>
+						<input type="text" name="rank" placeholder="Rank">
+						<input type="text" name="firstName" placeholder="First Name">
+						<input type="text" name="lastName" placeholder="Last Name">
+						<input type="tel" name="phoneNumber" placeholder="Cell">
+						<input type="tel" name="officeNumber" placeholder="Office">
+						<input type="email" name="email" placeholder="Email">
+					</section>
+					<section>
+						<label for="itemDescription">Item Description</label>
+						<textarea name="itemDescription"
+							placeholder="1ea 105mm M1, Projectile, 60-D-2-00-00"></textarea>
+					</section>
+					<section>
+						<label for="explosives">Explosives Drawn</label>
+						<textarea name="explosives" placeholder="Ex. 2ea MN88  LOT: ABC-123"></textarea>
+					</section>
+
+					<section>
+						<label for="departTime">Depart Time</label>
+						<input type="time" name="departTime">
+						<label for="departDate">Depart Date</label>
+						<input type="date" name="departDate">
+						<input type="number" name="truckDepartMiles" placeholder="Start Miles">
+					</section>
+				</form>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset><legend><h3>Arrival On-Scene</h3></legend>
+				<form>
+					<section>
+						<label for="time">Arrive Time</label>
+						<input type="time" name="arrivalTime">
+						<label for="arrivalDate">Arrival Date</label>
+						<input type="date" name="arrivalDate">
+					</section>
+					<section>
+						<label for="onSceneSafeArea">Safe Area Grid</label>
+						<input type="text" name="onSceneSafeArea" placeholder="Safe Area Grid">
+					</section>
+					<section>
+						<label for="onSceneCommander">On-Scene Commander</label>
+						<section>
+							<input type="text" name="rank" placeholder="Rank">
+							<input type="text" name="firstName" placeholder="First Name">
+							<input type="text" name="lastName" placeholder="Last Name">
+							<input type="tel" name="phoneNumber" placeholder="Cell">
+							<input type="tel" name="officeNumber" placeholder="Office">
+							<input type="email" name="email" placeholder="Email">
+						</section>
+					</section>
+					<section>
+						<label for="actualItems">Items On-Scene</label>
+						<textarea name="actualItems" id=""
+							placeholder="1ea 105mm M1 Practice, Fired Projectile, 60-D-2-00-00; 1ea M564 MTSQ, Fuze, 60-X-2-00-00"></textarea>
+						<label for="itemGrid">Item Grid</label>
+						<textarea name="itemGrid" placeholder="MGRS"></textarea>
+					</section>
+					<section>
+						<label for="rspProcedures">RSP Procedures</label>
+						<textarea name="rsspProcedures" placeholder="IAW 60-X-2-00-00..."></textarea>
+					</section>
+				</form>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset><legend><h3>Depart Scene</h3></legend>
+				<form action="">
+					<section>
+						<label for="departSceneTime">Scene Departure Time</label>
+						<input type="time" name="departSceneTime">
+						<label for="departSceneDate">Scene Departure Date</label>
+						<input type="date" name="arrivalDate">
+					</section>
+					<section>
+						<label for="departSceneGrid">Depart Scene Grid</label>
+						<input type="text" name="departSceneGrid" placeholder="MGRS">
+					</section>
+					<section></section>
+				</form>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset><legend><h3>Detonation / Disposal</h3></legend>
+				<form action="">
+					<section>
+						<section>
+							<label for="detonationTime">Detonation Time</label>
+							<input type="time" name="detonationTime">
+							<label for="detonationDate">Detonation Date</label>
+							<input type="date" name="detonationDate">
+						</section>
+						<section>
+							<label for="detonationGrid">Detonation Grid</label>
+							<input type="text" name="detonationGrid" placeholder="MGRS">
+							<label for="disposalProcedures">Disposal Procedures</label>
+							<textarea name="disposalProcedures" placeholder="Disposed of 1ea 105mm M1, 2ea MN88...""></textarea>
+							<label for=" explosivesUsed">Explosives Used</label>
+							<textarea name="explosivesUsed" placeholder="Lot Numbers and DODIC"></textarea>
+						</section>
+					</section>
+				</form>
+			</fieldset>
+		</section>
+
+		<section>
+			<fieldset><legend><h3>5 W's</h3></legend> <!--chat gpt summary-->
+				<form action="">
+					<!-- Autopopulate from other sections or ai summary -->
+					<section>
+						<label for="who">Who</label> 
+						<input type="text" name="who" placeholder="who">
+					</section>
+					<section>
+						<label for="what">What</label>
+						<input type="text" name="" placeholder="what">
+					</section>
+
+					<section>
+						<label for="where">Where</label>
+						<input type="text" name="" placeholder="where">
+					</section>
+
+					<section>
+						<label for="when">When</label>
+						<input type="text" name="" placeholder="when">
+					</section>
+
+					<section>
+						<label for="why">Why</label>
+						<input type="text" name="why" placeholder="why">
+					</section>
+
+				</form>
+			</fieldset>
+		</section>
+
+		<section>
+			<fieldset><legend><h3>Mission Complete</h3></legend>
+				<form action="">
+					<section>
+						<label for="truckEndMiles">End Mileage</label>
+						<input type="number" name="truckEndMiles" placeholder="End Mileage">
+						<label for="mcTime">Mission Complete Time</label>
+						<input type="time" name="mcTime">
+						<label for="mcDate">Mission Complete Date</label>
+						<input type="date" name="mcDate">
+					</section>
+				</form>
+			</fieldset>
+		</section>
+	</main>
+	<footer>
+		<section class=" contactUs">
+			<a id="eodHotline" href="https://www.veteranscrisisline.net/"target="_blank" rel="noopener noreferrer">
+				<img src="img/eodHotline.jpg" alt="" height="80px" width="100px">
+			</a>
+			<p>EOD Hotline</p>
+			<p>888-412-0474</p>
+		</section>
+		<section></section>
+		<section class="icons"><i class="fa-brands fa-instagram"></i><i class="fa-brands fa-square-facebook"></i>
+		</section>
+	</footer>
+
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+
+</html>

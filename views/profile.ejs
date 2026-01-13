@@ -1,46 +1,519 @@
 <%- include('partials/header') -%>
+
 <div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-          </div>
-          <div class="mt-5">
-            <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
-              </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
-          </div>
-      </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>  
-      </div>  
+  <div class="row mt-4">
+    <div class="col-12 text-right">
+      <a href="/logout" class="btn btn-outline-primary">Logout</a>
+      <a class="btn btn-primary" href="/feed">Return to Feed</a>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-12">
+      <h1>Incident Report</h1>
+      <p class="lead">Use the steps to complete an incident report. You can move between steps with the buttons or by clicking a step.</p>
     </div>
   </div>
+
+  <!-- Step progression UI -->
+  <div class="row">
+    <div class="col-12">
+      <div id="stepProgress" class="d-flex justify-content-between align-items-center mb-3">
+        <div class="step" data-step="1">Admin</div>
+        <div class="step" data-step="2">Start</div>
+        <div class="step" data-step="3">Arrival</div>
+        <div class="step" data-step="4">Depart Scene</div>
+        <div class="step" data-step="5">Detonation</div>
+        <div class="step" data-step="6">Five Ws</div>
+        <div class="step" data-step="7">Mission Complete</div>
+        <div class="step" data-step="8">Media</div>
+        <div class="step" data-step="9">Review</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <form id="incidentForm" action="/post/createPost" enctype="multipart/form-data" method="POST" novalidate>
+    <div class="form-step" data-step="1">
+      <fieldset class="card card-body mb-3">
+        <legend><h4>Administrative</h4></legend>
+
+        <div class="row">
+          <div class="col-md-6">
+            <h5>Incident Numbers</h5>
+            <div class="mb-2">
+              <label>Group</label>
+              <input type="text" name="group" class="form-control">
+            </div>
+            <div class="mb-2">
+              <label>Battalion</label>
+              <input type="text" name="battalion" class="form-control">
+            </div>
+            <div class="mb-2">
+              <label>Company</label>
+              <input type="text" name="company" class="form-control">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <h5>Personnel</h5>
+            <div class="mb-2">
+              <label>Team Leader</label>
+              <input type="text" name="teamLeader" class="form-control">
+            </div>
+            <div class="mb-2">
+              <label>Duty Officer</label>
+              <input type="text" name="dutyOfficer" class="form-control">
+            </div>
+            <div class="mb-2">
+              <label>Team Member 1</label>
+              <input type="text" name="teamMember1" class="form-control">
+            </div>
+            <div class="mb-2">
+              <label>Team Member 2</label>
+              <input type="text" name="teamMember2" class="form-control">
+            </div>
+            <div class="mb-2">
+              <label>Team Member 3</label>
+              <input type="text" name="teamMember3" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+          <div></div>
+          <div>
+            <button type="button" class="btn btn-secondary next-btn">Next</button>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- Start Phase-->
+    <div class="form-step" data-step="2" style="display:none">
+      <fieldset class="card card-body mb-3">
+        <legend><h4>Start</h4></legend>
+
+        <div class="row">
+          <div class="col-md-4">
+            <label>Call Received Time</label>
+            <input type="time" name="startTime" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label>Call Received Date</label>
+            <input type="date" name="dateCallRecieved" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label>Start Truck Miles</label>
+            <input type="number" name="truckDepartMiles" class="form-control">
+          </div>
+        </div>
+
+        <hr>
+
+        <h5>Unit and LEO Info</h5>
+        <div class="row">
+          <div class="col-md-3">
+            <label>Rank</label>
+            <input type="text" name="rank" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <label>LEO First Name</label>
+            <input type="text" name="leoFirstName" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <label>LEO Last Name</label>
+            <input type="text" name="leoLastName" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <label>LEO Cell</label>
+            <input type="tel" name="leoCell" class="form-control">
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="mb-2">
+          <label>Item Description</label>
+          <textarea name="itemDescription" class="form-control" rows="2" placeholder="E.g. 1ea 105mm M1 Practice"></textarea>
+        </div>
+
+        <div class="mb-2">
+          <label>Explosives Drawn</label>
+          <textarea name="explosives" class="form-control" rows="2" placeholder="E.g. 2ea MN88 LOT: ABC-123"></textarea>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+          <button type="button" class="btn btn-outline-secondary prev-btn">Back</button>
+          <button type="button" class="btn btn-secondary next-btn">Next</button>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- Arrival -->
+    <div class="form-step" data-step="3" style="display:none">
+      <fieldset class="card card-body mb-3">
+        <legend><h4>Arrival On Scene</h4></legend>
+
+        <div class="row">
+          <div class="col-md-4">
+            <label>Arrival Time</label>
+            <input type="time" name="arrivalTime" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label>Arrival Date</label>
+            <input type="date" name="arrivalDate" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label>Safe Area Latitude</label>
+            <input type="number" step="0.000001" name="onSceneLat" class="form-control" placeholder="e.g. 38.8977">
+            <label class="mt-2">Safe Area Longitude</label>
+            <input type="number" step="0.000001" name="onSceneLong" class="form-control" placeholder="e.g. -77.0365">
+          </div>
+        </div>
+
+        <hr>
+
+        <h5>On Scene Commander</h5>
+        <div class="row">
+          <div class="col-md-2">
+            <label>Rank</label>
+            <input type="text" name="oscRank" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <label>First Name</label>
+            <input type="text" name="oscFirstName" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <label>Last Name</label>
+            <input type="text" name="oscLastName" class="form-control">
+          </div>
+          <div class="col-md-2">
+            <label>Phone</label>
+            <input type="tel" name="oscPhoneNumber" class="form-control">
+          </div>
+          <div class="col-md-2">
+            <label>Office</label>
+            <input type="tel" name="oscOfficeNumber" class="form-control">
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="mb-2">
+          <label>Items On Scene</label>
+          <textarea name="actualItems" class="form-control" rows="2"></textarea>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <label>Item Latitude</label>
+            <input type="number" step="0.000001" name="itemLat" class="form-control" placeholder="required to show map marker">
+          </div>
+          <div class="col-md-6">
+            <label>Item Longitude</label>
+            <input type="number" step="0.000001" name="itemLong" class="form-control" placeholder="required to show map marker">
+          </div>
+        </div>
+
+        <div class="mb-2 mt-2">
+          <label>RSP Procedures</label>
+          <textarea name="rspProcedures" class="form-control" rows="2"></textarea>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+          <button type="button" class="btn btn-outline-secondary prev-btn">Back</button>
+          <button type="button" class="btn btn-secondary next-btn">Next</button>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- Depart Scene -->
+    <div class="form-step" data-step="4" style="display:none">
+      <fieldset class="card card-body mb-3">
+        <legend><h4>Depart Scene</h4></legend>
+
+        <div class="row">
+          <div class="col-md-4">
+            <label>Scene Departure Time</label>
+            <input type="time" name="departSceneTime" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label>Scene Departure Date</label>
+            <input type="date" name="departSceneDate" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label>Depart Scene Latitude</label>
+            <input type="number" step="0.000001" name="departSceneLat" class="form-control">
+            <label class="mt-2">Depart Scene Longitude</label>
+            <input type="number" step="0.000001" name="departSceneLong" class="form-control">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+          <button type="button" class="btn btn-outline-secondary prev-btn">Back</button>
+          <button type="button" class="btn btn-secondary next-btn">Next</button>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- Detonation -->
+    <div class="form-step" data-step="5" style="display:none">
+      <fieldset class="card card-body mb-3">
+        <legend><h4>Detonation Disposal</h4></legend>
+
+        <div class="row">
+          <div class="col-md-4">
+            <label>Detonation Time</label>
+            <input type="time" name="detonationTime" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label>Detonation Date</label>
+            <input type="date" name="detonationDate" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label>Detonation Latitude</label>
+            <input type="number" step="0.000001" name="detonationLat" class="form-control">
+            <label class="mt-2">Detonation Longitude</label>
+            <input type="number" step="0.000001" name="detonationLong" class="form-control">
+          </div>
+        </div>
+
+        <div class="mb-2 mt-2">
+          <label>Disposal Procedures</label>
+          <textarea name="disposalProcedures" class="form-control" rows="2"></textarea>
+        </div>
+
+        <div class="mb-2">
+          <label>Explosives Used</label>
+          <textarea name="explosivesUsed" class="form-control" rows="2"></textarea>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+          <button type="button" class="btn btn-outline-secondary prev-btn">Back</button>
+          <button type="button" class="btn btn-secondary next-btn">Next</button>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- Five W's -->
+    <div class="form-step" data-step="6" style="display:none">
+      <fieldset class="card card-body mb-3">
+        <legend><h4>Five Ws</h4></legend>
+
+        <div class="row">
+          <div class="col-md-6">
+            <label>Who</label>
+            <input type="text" name="who" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label>What</label>
+            <input type="text" name="what" class="form-control">
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-md-4">
+            <label>Where</label>
+            <input type="text" name="where" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label>When</label>
+            <input type="text" name="when" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label>Why</label>
+            <input type="text" name="why" class="form-control">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+          <button type="button" class="btn btn-outline-secondary prev-btn">Back</button>
+          <button type="button" class="btn btn-secondary next-btn">Next</button>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- Mission Complete -->
+    <div class="form-step" data-step="7" style="display:none">
+      <fieldset class="card card-body mb-3">
+        <legend><h4>Mission Complete</h4></legend>
+
+        <div class="row">
+          <div class="col-md-4">
+            <label>End Mileage</label>
+            <input type="number" name="truckEndMiles" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label>Mission Complete Time</label>
+            <input type="time" name="mcTime" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label>Mission Complete Date</label>
+            <input type="date" name="mcDate" class="form-control">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+          <button type="button" class="btn btn-outline-secondary prev-btn">Back</button>
+          <button type="button" class="btn btn-secondary next-btn">Next</button>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- Incident Overview Photo -->
+    <div class="form-step" data-step="8" style="display:none">
+      <fieldset class="card card-body mb-3">
+        <legend><h4>Upload Media</h4></legend>
+
+        <div class="mb-3">
+          <label>Image</label>
+          <input type="file" name="file" class="form-control">
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+          <button type="button" class="btn btn-outline-secondary prev-btn">Back</button>
+          <button type="button" class="btn btn-secondary next-btn">Next</button>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- Review Step -->
+    <div class="form-step" data-step="9" style="display:none">
+      <fieldset class="card card-body mb-3">
+        <legend><h4>Review and Submit</h4></legend>
+
+        <p>Review your entries. The incident will be saved to the database when Submitted.</p>
+
+        <div id="reviewArea" class="mb-3">
+          <!-- JS will populate a simple summary here -->
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+          <button type="button" class="btn btn-outline-secondary prev-btn">Back</button>
+          <button type="submit" class="btn btn-primary">Submit Incident</button>
+        </div>
+      </fieldset>
+    </div>
+  </form>
 </div>
-<%- include('partials/footer') -%>
+    <div class="container mt-5">
+      <h2>Your Incident Map</h2>
+      <div id="profileMap" style="height: 400px;"></div>
+    </div>
+
+          <% for(var i=0; i<posts.length; i++) {%>
+            <li class="col-6 justify-content-between mt-5 mb-3">
+              <a href="/post/<%= posts[i]._id%>">
+                <img class="img-fluid" src="<%= posts[i].start?.image%>">
+              </a>
+            </li>
+            <%= console.log('from pofile.ejs last log:', posts[i]._id, 'user: ' , user.id, 'posts._id' , posts.id ) %>
+              <% } %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step logic -->
+<script>
+  (function () {
+    const steps = Array.from(document.querySelectorAll('.form-step'));
+    const stepBtns = Array.from(document.querySelectorAll('#stepProgress .step'));
+    const nextBtns = Array.from(document.querySelectorAll('.next-btn'));
+    const prevBtns = Array.from(document.querySelectorAll('.prev-btn'));
+    const form = document.getElementById('incidentForm');
+    const reviewArea = document.getElementById('reviewArea');
+    let current = 0;
+
+    function show(index) {
+      if (index < 0) index = 0;
+      if (index >= steps.length) index = steps.length - 1;
+      steps.forEach((s, i) => {
+        s.style.display = i === index ? 'block' : 'none';
+        stepBtns[i].classList.toggle('active', i === index);
+        stepBtns[i].classList.toggle('completed', i < index);
+      });
+      current = index;
+      if (index === steps.length - 1) populateReview();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function populateReview() {
+      const fd = new FormData(form);
+      let out = '<dl class="row">';
+      for (const [key, value] of fd.entries()) {
+        if (!value) continue;
+        out += `<dt class="col-sm-4">${key}</dt><dd class="col-sm-8">${String(value)}</dd>`;
+      }
+      out += '</dl>';
+      reviewArea.innerHTML = out;
+    }
+
+    // step button clicks
+    stepBtns.forEach((btn, idx) => {
+      btn.addEventListener('click', () => show(idx));
+    });
+
+    nextBtns.forEach(btn => {
+      btn.addEventListener('click', () => show(current + 1));
+    });
+
+    prevBtns.forEach(btn => {
+      btn.addEventListener('click', () => show(current - 1));
+    });
+
+    // initialize step
+    show(0);
+
+    // prevents advancing if required lat/long missing for arrival where markers needed
+    const arrivalStepIndex = 2; // zero based
+    document.querySelectorAll('.next-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (current === arrivalStepIndex) {
+          const lat = document.querySelector('input[name="itemLat"]').value;
+          const lng = document.querySelector('input[name="itemLong"]').value;
+          // only warn do not block submission entirely
+          if (!lat || !lng) {
+            // simple confirm lets user continue without coords
+            const ok = confirm('Item latitude and longitude are empty. The map marker will not show. Continue anyway?');
+            if (!ok) return;
+          }
+        }
+      });
+    });
+
+    // Submit Handler
+    form.addEventListener('submit', (e) => {
+      // allow default submit. server will handle persistence.
+    });
+  })();
+</script>
+
+<!-- Map w/ popup content -->
+<script>
+  const profileMap = L.map('profileMap').setView([38.9072, -77.0369], 1);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors',
+    noWrap: true
+  }).addTo(profileMap);
+
+  const posts = <%- JSON.stringify(posts) %>;
+
+  posts.forEach(post => {
+    if(post.arrival?.itemLat && post.arrival?.itemLong) {
+      const marker = L.marker([post.arrival.itemLat, post.arrival.itemLong]).addTo(profileMap);
+
+      const popupContent = `
+        <b>Who:</b> ${post.fiveWs.who} <br>
+        <b>What:</b> ${post.fiveWs.what} <br>
+        <b>Where:</b> ${post.fiveWs.where} <br>
+        <b>When:</b> ${post.fiveWs.when} <br>
+        <b>Why:</b> ${post.fiveWs.why}
+      `;
+
+      marker.bindPopup(popupContent);
+    }
+  });
+</script>
+  <%- include('partials/footer') -%>

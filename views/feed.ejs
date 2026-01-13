@@ -1,15 +1,92 @@
 <%- include('partials/header') -%>
-  <div class="container">
-    <div class="row justify-content-center mt-5">
-      <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-    </div>
-  </div>  
+
+<div class="container mt-5">
+
+<!-- Date Range Filter -->
+<span>Date Range</span>
+<select name="dateRange" id="">
+  <option value="7">Past 7 Days</option>
+  <option value="30">Past 30 Days</option>
+  <option value="365">YTD</option>
+  <option>All</option>
+</select>
+
+<!-- City Filter -->
+<span>City Filter</span>
+<select name="cityFilter" id="">
+  <option value="all" checked>Global</option>
+  <option value="nyc">NYC, USA</option><!---->
+  <option value="kandahar">Kandahar, AFG</option> <!--https://www.bbc.com/news/world-asia-35043938-->
+  <option value="beirut">Beirut, LBN</option> <!--https://www.bbc.com/news/science-environment-54420033-->
+  <option value="sonora">Sonora, MEX</option><!--https://www.aljazeera.com/news/2025/11/2/at-least-23-killed-in-supermarket-explosion-in-mexicos-sonora-state-->
+</select>
+<button type="button" class="btn btn-primary btn-sm">Filter</button>
+
+  <!-- Map Container -->
+  <div id="feedMap" style="height: 400px; width: 100%;"></div>
+  <!-- Map Container -->
+
+
+  <div class="row justify-content-center mt-5">
+    <ul class="row list-unstyled">
+      <% for(var i=0; i<posts.length; i++) { %>
+        <li class="col-6 justify-content-between mt-5">
+          <a href="/post/<%= posts[i]._id %>">
+            <p src></p>
+            <img class="img-fluid" src="<%= posts[i].start?.image %>">
+          </a>
+        </li>
+      <% } %>
+    </ul>
+  </div>
+</div>
+
+
+
+<!-- LEAFLET CSS -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+<!-- LEAFLET JS -->
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  const posts = <%- JSON.stringify(posts) %>;
+
+  // Init map
+  const feedMap = L.map('feedMap').setView([38, -77], 1);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors',
+    noWrap: true
+  }).addTo(feedMap);
+
+  // Add markers for posts
+  posts.forEach(post => {
+
+    if (post.arrival?.itemLat && post.arrival?.itemLong) {
+      const marker = L.marker([post.arrival.itemLat, post.arrival.itemLong]).addTo(feedMap);
+
+      const popupContent = `
+        <strong>Who:</strong> ${post.fiveWs?.who || ''}<br>
+        <strong>What:</strong> ${post.fiveWs?.what || ''}<br>
+        <strong>Where:</strong> ${post.fiveWs?.where || ''}<br>
+        <strong>When:</strong> ${post.fiveWs?.when || ''}<br>
+        <strong>Why:</strong> ${post.fiveWs?.why || ''}
+      `;
+
+      marker.bindPopup(popupContent);
+    }
+
+  });
+
+});
+</script>
+
 <%- include('partials/footer') -%>

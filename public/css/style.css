@@ -1,0 +1,39 @@
+ #stepProgress  .step:hover,
+  #stepProgress .step.active:hover,
+  #stepProgress .step.completed:hover{
+    background-color: #86c6c6;
+ }
+ 
+ #stepProgress .step {
+     flex: 1;
+     text-align: center;
+     padding: 8px 6px;
+     border-radius: 6px;
+     margin-right: 6px;
+     background: #f1f1f1;
+     cursor: pointer;
+     border: 1px solid #ddd;
+     font-weight: 600;
+     font-size: 0.9rem;
+ }
+
+ #stepProgress .step:last-child {
+     margin-right: 0;
+ }
+
+ #stepProgress .step.active {
+     background: #0d6efd;
+     color: #fff;
+     border-color: #0b5ed7;
+ }
+
+ #stepProgress .step.completed {
+     background: #198754;
+     color: #fff;
+     border-color: #157347;
+ }
+
+#width400{
+    width: 75%;
+    height: auto;
+}

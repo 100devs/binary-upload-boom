@@ -65,7 +65,7 @@ exports.getSignup = (req, res) => {
   });
 };
 
-exports.postSignup = (req, res, next) => {
+exports.postSignup = async (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
     validationErrors.push({ msg: "Please enter a valid email address." });
@@ -90,7 +90,33 @@ exports.postSignup = (req, res, next) => {
     password: req.body.password,
   });
 
-  User.findOne(
+  const existingUser = await User.findOne(
+    { $or: [{ email: req.body.email }, { userName: req.body.userName }] }
+  )
+  if (existingUser) {
+    req.flash("errors", {
+      msg: "Account with that email address or username already exists.",
+    });
+    return res.redirect("../signup");
+  }
+  user.save()
+    .then(usr => {
+      req.logIn(user, (err) => {
+        if (err) {
+          return next(err);
+        }
+        res.redirect("/profile");
+      });
+    });
+
+};
+
+
+
+/**
+ * This is the depriated version, findone is not available as a callback
+ * 
+ * User.findOne(
     { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
     (err, existingUser) => {
       if (err) {
@@ -115,4 +141,4 @@ exports.postSignup = (req, res, next) => {
       });
     }
   );
-};
+ */

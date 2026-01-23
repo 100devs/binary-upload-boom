@@ -7,36 +7,29 @@ const UserSchema = new mongoose.Schema({
   password: String,
 });
 
-// Password hash middleware.
+// Password hashing middleware (async/await, no next needed)
+UserSchema.pre("save", async function () {
+  // If password wasn't modified, skip hashing
+  if (!this.isModified("password")) return;
 
-UserSchema.pre("save", function save(next) {
-  const user = this;
-  if (!user.isModified("password")) {
-    return next();
-  }
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) {
-      return next(err);
-    }
-    bcrypt.hash(user.password, salt, (err, hash) => {
-      if (err) {
-        return next(err);
-      }
-      user.password = hash;
-      next();
-    });
-  });
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
 });
 
-// Helper method for validating user's password.
+// Helper method to validate password
 
-UserSchema.methods.comparePassword = function comparePassword(
-  candidatePassword,
-  cb
-) {
+// UserSchema.methods.comparePassword = function (candidatePassword) {
+//   return bcrypt.compare(candidatePassword, this.password);
+// };
+
+
+UserSchema.methods.comparePassword = function (candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-    cb(err, isMatch);
+    if (err) return cb(err);
+    cb(null, isMatch);
   });
 };
+
+
 
 module.exports = mongoose.model("User", UserSchema);

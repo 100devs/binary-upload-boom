@@ -2,6 +2,7 @@ const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
 
+// render login page
 exports.getLogin = (req, res) => {
   if (req.user) {
     return res.redirect("/profile");
@@ -11,6 +12,7 @@ exports.getLogin = (req, res) => {
   });
 };
 
+// handle login form submission
 exports.postLogin = (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
@@ -44,6 +46,7 @@ exports.postLogin = (req, res, next) => {
   })(req, res, next);
 };
 
+// log user out and destroy session
 exports.logout = (req, res) => {
   req.logout(() => {
     console.log('User has logged out.')
@@ -56,6 +59,7 @@ exports.logout = (req, res) => {
   });
 };
 
+// render signup page
 exports.getSignup = (req, res) => {
   if (req.user) {
     return res.redirect("/profile");
@@ -65,6 +69,7 @@ exports.getSignup = (req, res) => {
   });
 };
 
+// handle signup form submission
 exports.postSignup = (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))

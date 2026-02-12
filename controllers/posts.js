@@ -2,6 +2,7 @@ const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 
 module.exports = {
+  // gets user profile with posts
   getProfile: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.user.id });
@@ -10,6 +11,7 @@ module.exports = {
       console.log(err);
     }
   },
+  // get all posts for feed
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
@@ -18,6 +20,7 @@ module.exports = {
       console.log(err);
     }
   },
+  // get single post
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
@@ -26,6 +29,7 @@ module.exports = {
       console.log(err);
     }
   },
+  // create new post with image upload
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
@@ -45,6 +49,7 @@ module.exports = {
       console.log(err);
     }
   },
+  // increment post likes
   likePost: async (req, res) => {
     try {
       await Post.findOneAndUpdate(
@@ -59,6 +64,7 @@ module.exports = {
       console.log(err);
     }
   },
+  // delete post and image
   deletePost: async (req, res) => {
     try {
       // Find post by id

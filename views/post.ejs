@@ -27,6 +27,45 @@
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
     </div>
+    
+    <!-- Comments Section -->
+    <div class="col-6 mt-5">
+      <h4>Comments</h4>
+      
+      <!-- Add Comment Form -->
+      <% if(user) { %>
+      <form action="/comment/createComment/<%= post.id %>" method="POST" class="mb-4">
+        <div class="form-group">
+          <textarea 
+            class="form-control" 
+            name="comment" 
+            placeholder="Add a comment..." 
+            rows="3" 
+            required>
+          </textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Post Comment</button>
+      </form>
+      <% } %>
+      
+      <!-- Display Comments -->
+      <% if(comments && comments.length > 0) { %>
+        <% comments.forEach(comment => { %>
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <strong><%= comment.user.userName %></strong>
+                <small class="text-muted"><%= comment.createdAt.toDateString() %></small>
+              </div>
+              <p class="mt-2"><%= comment.comment %></p>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p class="text-muted">No comments yet. Be the first to comment!</p>
+      <% } %>
+    </div>
+    
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>

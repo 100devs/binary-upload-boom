@@ -1,8 +1,9 @@
 <%- include('partials/header') -%>
-
+<!-- include page header -->
 <main class="container">
   <div class="row justify-content-center">
     <section class="col-6 mt-5">
+      <!-- interactivity used for possible errors when user attempts to login -->
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
       <div class="alert alert-danger"><%= el.msg %></div>
       <% }) %> <% } %> <% if (locals.messages.info) { %> <%
@@ -11,6 +12,7 @@
       <% }) %> <% } %>
       <form action="/login" method="POST">
         <div class="mb-3">
+          <!-- input for user to input their email address, updated to be required -->
           <label for="exampleInputEmail1" class="form-label"
             >Email address</label
           >
@@ -20,17 +22,21 @@
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             name="email"
+            required
           />
         </div>
         <div class="mb-3">
+          <!-- input for user to input their password to login, updated to be required -->
           <label for="exampleInputPassword1" class="form-label">Password</label>
           <input
             type="password"
             class="form-control"
             id="exampleInputPassword1"
             name="password"
+            required
           />
         </div>
+        <!-- button to submit the form, potentially logging in the user -->
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </section>
@@ -38,3 +44,4 @@
 </main>
 
 <%- include('partials/footer') -%>
+<!-- include page footer -->

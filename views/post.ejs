@@ -1,10 +1,14 @@
 <%- include('partials/header') -%>
+<!-- include page header -->
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
+      <!-- interactive, uses the title from the specific post page is rendered for -->
       <h2><%= post.title %></h2>
+      <!-- img's src comes from post -->
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
+        <!-- form action makes request to backend to increment value for likes -->
         <form
           class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"
@@ -12,7 +16,9 @@
         >
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
+        <!-- displays the number of likes on post -->
         <h3 class="col-3">Likes: <%= post.likes %></h3>
+        <!-- if the user owns the post, option to delete post -->
         <%if(post.user == user.id){ %>
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
@@ -25,9 +31,11 @@
       </div>
     </div>
     <div class="col-3 mt-5">
+      <!-- displays caption associated with post -->
       <p><%= post.caption %></p>
     </div>
     <div class="col-6 mt-5">
+      <!-- general applications to return to profile or overall social feed -->
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
@@ -35,3 +43,4 @@
 </div>
 
 <%- include('partials/footer') -%>
+<!-- include page footer -->

@@ -1,4 +1,8 @@
 <%- include('partials/header') -%>
+<!-- bring in header -->
+
+
+<!-- boilerplate code from todo list application -->
 
     <h1>Todos</h1>
     <ul>
@@ -7,7 +11,7 @@
                 <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
                 <span class='del'> Delete </span>
             </li>
-    <% }) %>    
+    <% }) %>
     </ul>
 
     <h2><%= user.userName %> has <%= left %> things left to do.</h2>
@@ -22,3 +26,4 @@
     <script src="js/main.js"></script>
 
 <%- include('partials/footer') -%>
+<!-- bring in footer -->

@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"); // imports mongoose
 
-const PostSchema = new mongoose.Schema({
+const PostSchema = new mongoose.Schema({ // creating the post schema
   title: {
     type: String,
     required: true,
@@ -22,7 +22,7 @@ const PostSchema = new mongoose.Schema({
     required: true,
   },
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId, // stores the unique mongodb objectid given to the user document
     ref: "User",
   },
   createdAt: {
@@ -31,4 +31,4 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Post", PostSchema); // turns the schema into a mongoose model that is exported to other files requesting an import

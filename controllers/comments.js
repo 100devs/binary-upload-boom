@@ -10,7 +10,7 @@ module.exports = { // exports the createComment function so the comment route ca
         post: req.params.id, // keeps track of what post the comment is associated with via the post id
       });
       console.log("Comment has been added!"); // if everything succeeds, this is printed to the console
-      res.redirect("/post/" + req.params.id); // user is redirected to the post
+      res.redirect(`/post/${req.params.id}`); // user is redirected to the post
     } catch (err) { // if something in the try block fails, it jumps to the catch block to throw an error
       console.log(err); // logs the error
     }

@@ -1,7 +1,10 @@
 <%- include('partials/header') -%>
+
 <div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
+  <div class="row gx-4 gy-4 profile-layout">
+
+      <div class="col-12 col-lg-6">
+        <div class="content-panel">
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
@@ -25,22 +28,28 @@
               <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
             </form>
           </div>
+        </div>
       </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>  
-      </div>  
-    </div>
+
+      <div class="col-12 col-lg-6">
+        <div class="content-panel profile-posts">
+          <ul class="row list-unstyled post-grid">
+          <% for(var i=0; i<posts.length; i++) {%>
+            <li class="col-12 col-md-6 col-lg-4 mt-4">
+              <a href="/post/<%= posts[i]._id%>" class="post-thumbnail">
+                <img class="post-thumbnail-bg" src="<%= posts[i].image %>" alt="" aria-hidden="true">
+                <img class="post-thumbnail-img" src="<%= posts[i].image %>" alt="Post image">
+              </a>
+            </li>
+          <% } %>
+          </ul>
+          <div class="row justify-content-center mt-5">
+            <a class="btn btn-primary" href="/feed">Return to Feed</a>
+          </div>
+        </div>
+      </div>
+
   </div>
 </div>
+
 <%- include('partials/footer') -%>

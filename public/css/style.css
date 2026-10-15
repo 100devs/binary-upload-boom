@@ -1,0 +1,267 @@
+.post-thumbnail {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 240px;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #e8eef5;
+}
+
+.post-thumbnail-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(18px) brightness(0.7);
+  transform: scale(1.1);
+}
+
+.post-thumbnail-img {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.post-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.post-grid .post-thumbnail {
+  height: 200px;
+}
+
+/* General page styling */
+body {
+  min-height: 100vh;
+  color: #243650;
+  background:
+    radial-gradient(
+      ellipse at 8% 20%,
+      rgba(58, 130, 246, 0.23),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 90% 80%,
+      rgba(0, 91, 210, 0.20),
+      transparent 45%
+    ),
+    linear-gradient(
+      135deg,
+      #ffffff 10%,
+      #edf5ff 55%,
+      #ffffff 100%
+    );
+  background-attachment: fixed;
+  padding-bottom: 3rem;
+}
+
+/* Site header */
+header.container {
+  padding: 1.5rem 1rem;
+  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(150, 190, 240, 0.3);
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(30, 85, 160, 0.08);
+}
+
+header h1 a {
+  color: #1769df;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+header h1 a:hover {
+  color: #0847a6;
+}
+
+header span {
+  color: #64748b;
+}
+
+/* Form fields */
+.form-control {
+  border-radius: 10px;
+  border-color: #c9d9ef;
+  padding: 0.65rem 0.85rem;
+}
+
+.form-control:focus {
+  border-color: #4389ed;
+  box-shadow: 0 0 0 0.2rem rgba(67, 137, 237, 0.15);
+}
+
+/* Buttons */
+.btn {
+  border-radius: 10px;
+  padding: 0.55rem 1rem;
+  font-weight: 500;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(20, 80, 160, 0.15);
+}
+
+/* Post thumbnails */
+.post-thumbnail {
+  box-shadow: 0 6px 20px rgba(28, 65, 120, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-thumbnail:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(28, 65, 120, 0.22);
+}
+
+/* Reusable content panels */
+.content-panel {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(175, 200, 235, 0.45);
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: 0 8px 30px rgba(35, 80, 145, 0.09);
+}
+
+.profile-layout {
+  margin-top: 1.5rem;
+}
+
+.profile-posts {
+  min-height: 300px;
+}
+
+.profile-posts .post-grid {
+  margin-bottom: 1.5rem;
+}
+
+.comment-list,
+.comment-replies {
+  list-style: none;
+  padding-left: 0;
+}
+
+.comment-item {
+  margin-top: 1rem;
+}
+
+.comment-content {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #c9d9ef;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.comment-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.comment-replies {
+  margin-left: 1.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid #a5c7f4;
+}
+
+.comment-replies .comment-content {
+  background: rgba(235, 245, 255, 0.9);
+}
+
+/* Individual post layout */
+.post-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.post-detail h2 {
+  margin: 0;
+}
+
+.post-detail-image {
+  display: block;
+  max-width: 100%;
+  max-height: 70vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.post-detail-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.post-detail-actions form {
+  margin: 0;
+}
+
+.post-like-count {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.post-caption {
+  padding: 1rem 1.25rem;
+  background: #edf5ff;
+  border-left: 4px solid #1769df;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+
+.post-caption p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* Comment action and editing layout */
+.comment-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.comment-actions > .comment-editor[open] {
+  flex-basis: 100%;
+}
+
+.comment-editor[open] {
+  order: 10;
+}
+
+.comment-editor form {
+  width: 100%;
+  max-width: 650px;
+  margin-top: 0.75rem;
+}
+
+.comment-editor textarea {
+  width: 100%;
+  min-height: 100px;
+  resize: vertical;
+}
+
+.comment-editor summary {
+  width: fit-content;
+  list-style: none;
+  cursor: pointer;
+}
+
+.comment-editor summary::-webkit-details-marker {
+  display: none;
+}

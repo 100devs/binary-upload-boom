@@ -1,0 +1,96 @@
+<li class="comment-item">
+  <div class="comment-content">
+    <p>
+        <% if (comment.isDeleted) { %>
+            <em class="text-muted">Comment was deleted</em>
+        <% } else { %>
+            <strong><%= comment.createdBy %></strong>
+
+            <% if (comment.editedAt) { %>
+            <small class="text-muted" title="Edited on <%= new Date(comment.editedAt).toLocaleString() %>">(edited)</small>
+            <% } %>
+
+            says: "<%= comment.comment %>"
+        <% } %>
+    </p>
+
+    <div class="comment-actions">
+      <form
+        action="/comment/likeComment/<%= post.id %>/<%= comment._id %>?_method=PUT"
+        method="POST"
+      >
+        <button class="btn btn-outline-primary btn-sm" type="submit">
+          <i class="fa fa-heart"></i>
+          <%= comment.likes %>
+        </button>
+      </form>
+
+      <details class="comment-editor">
+        <summary class="btn btn-outline-primary btn-sm">Reply</summary>
+
+        <form
+          action="/comment/createComment/<%= post.id %>"
+          method="POST"
+          class="mt-2"
+        >
+          <input
+            type="hidden"
+            name="parentComment"
+            value="<%= comment._id %>"
+          >
+
+          <textarea
+            name="comment"
+            class="form-control mb-2"
+            rows="2"
+            required
+          ></textarea>
+
+          <button type="submit" class="btn btn-primary btn-sm">
+            Submit Reply
+          </button>
+        </form>
+      </details>
+
+      <% if (!comment.isDeleted && comment.createdById == user.id) { %>
+        <details class="comment-editor">
+          <summary class="btn btn-outline-primary btn-sm">Edit</summary>
+
+          <form
+            action="/comment/editComment/<%= post.id %>/<%= comment._id %>?_method=PUT"
+            method="POST"
+            class="mt-2"
+          >
+            <textarea
+              name="comment"
+              class="form-control mb-2"
+              rows="3"
+              required
+            ><%= comment.comment %></textarea>
+
+            <button type="submit" class="btn btn-primary btn-sm">
+              Save Changes
+            </button>
+          </form>
+        </details>
+
+        <form
+          action="/comment/deleteComment/<%= post.id %>/<%= comment._id %>?_method=DELETE"
+          method="POST"
+        >
+          <button class="btn btn-outline-danger btn-sm" type="submit">
+            Delete
+          </button>
+        </form>
+      <% } %>
+    </div>
+  </div>
+
+  <% if (comment.replies.length > 0) { %>
+    <ul class="comment-replies">
+      <% comment.replies.forEach((reply) => { %>
+        <%- include("comment", { comment: reply, post: post, user: user }) %>
+      <% }) %>
+    </ul>
+  <% } %>
+</li>

@@ -1,0 +1,73 @@
+<%#
+  Renders one comment and (recursively) its replies.
+  Expects: comment, user, depth
+%>
+<%
+  const author = comment.user || { userName: "Deleted user" };
+  const initial = (author.userName || "?").charAt(0).toUpperCase();
+  const isOwner = comment.user && comment.user._id.toString() === user._id.toString();
+  const hasLiked = comment.likes.some((id) => id.toString() === user._id.toString());
+  const hasDisliked = comment.dislikes.some((id) => id.toString() === user._id.toString());
+  const posted = new Date(comment.createdAt).toLocaleString("en-US", {
+    month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit",
+  });
+%>
+<li class="comment" id="comment-<%= comment._id %>">
+  <div class="d-flex gap-3">
+    <% if (author.profilePic) { %>
+      <img class="comment-avatar" src="<%= author.profilePic %>" alt="<%= author.userName %>'s profile picture">
+    <% } else { %>
+      <div class="comment-avatar comment-avatar--initial" aria-hidden="true"><%= initial %></div>
+    <% } %>
+
+    <div class="flex-grow-1">
+      <div class="comment-meta">
+        <strong><%= author.userName %></strong>
+        <time datetime="<%= new Date(comment.createdAt).toISOString() %>"><%= posted %></time>
+      </div>
+
+      <p class="comment-text"><%= comment.text %></p>
+
+      <div class="comment-actions">
+        <form action="/comment/like/<%= comment._id %>?_method=PUT" method="POST">
+          <button type="submit" class="btn btn-sm <%= hasLiked ? 'btn-primary' : 'btn-outline-primary' %>" aria-pressed="<%= hasLiked %>">
+            <i class="fa fa-thumbs-up"></i> <%= comment.likes.length %>
+          </button>
+        </form>
+
+        <form action="/comment/dislike/<%= comment._id %>?_method=PUT" method="POST">
+          <button type="submit" class="btn btn-sm <%= hasDisliked ? 'btn-secondary' : 'btn-outline-secondary' %>" aria-pressed="<%= hasDisliked %>">
+            <i class="fa fa-thumbs-down"></i> <%= comment.dislikes.length %>
+          </button>
+        </form>
+
+        <details class="reply-toggle">
+          <summary class="btn btn-sm btn-link">Reply</summary>
+          <form action="/comment/reply/<%= comment._id %>" method="POST" class="mt-2">
+            <textarea name="text" class="form-control form-control-sm" rows="2" maxlength="1000"
+              placeholder="Reply to <%= author.userName %>..." required></textarea>
+            <button type="submit" class="btn btn-sm btn-primary mt-2">Post reply</button>
+          </form>
+        </details>
+
+        <% if (isOwner) { %>
+          <form action="/comment/delete/<%= comment._id %>?_method=DELETE" method="POST"
+            onsubmit="return confirm('Delete this comment<%= comment.replies.length ? ' and its replies' : '' %>?');">
+            <button type="submit" class="btn btn-sm btn-outline-danger">
+              <i class="fa fa-trash"></i> Delete
+            </button>
+          </form>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <% if (comment.replies.length) { %>
+    <%# Indent replies, but stop indenting after a few levels so deep threads stay readable %>
+    <ul class="list-unstyled <%= depth < 3 ? 'comment-replies' : '' %>">
+      <% comment.replies.forEach((reply) => { %>
+        <%- include('comment', { comment: reply, user, depth: depth + 1 }) %>
+      <% }) %>
+    </ul>
+  <% } %>
+</li>

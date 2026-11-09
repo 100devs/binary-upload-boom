@@ -7,7 +7,7 @@
       <div class="row justify-content-between">
         <form
           class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
+          action="/post/likePost/<%= post._id %>?_method=PUT"
           method="POST"
         >
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
@@ -15,7 +15,7 @@
         <h3 class="col-3">Likes: <%= post.likes %></h3>
         <%if(post.user == user.id){ %>
         <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
+          action="/post/deletePost/<%= post._id %>?_method=DELETE"
           method="POST"
           class="col-3"
         >
@@ -31,6 +31,39 @@
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
+  </div>
+</div>
+
+
+<!-- Comments -->
+  <div class="row justify-content-center mt-5 mb-5">
+    <section class="col-9" id="comments">
+      <h3>Comments (<%= commentCount %>)</h3>
+
+      <form action="/comment/createComment/<%= post._id %>" method="POST" class="d-flex gap-3 mt-3">
+        <% if (user.profilePic) { %>
+          <img class="comment-avatar" src="<%= user.profilePic %>" alt="Your profile picture">
+        <% } else { %>
+          <div class="comment-avatar comment-avatar--initial" aria-hidden="true"><%= user.userName.charAt(0).toUpperCase() %></div>
+        <% } %>
+        <div class="flex-grow-1">
+          <label for="newComment" class="visually-hidden">Add a comment</label>
+          <textarea id="newComment" name="text" class="form-control" rows="2" maxlength="1000"
+            placeholder="Comment as <%= user.userName %>..." required></textarea>
+          <button type="submit" class="btn btn-primary mt-2">Comment</button>
+        </div>
+      </form>
+
+      <% if (comments.length) { %>
+        <ul class="list-unstyled mt-4">
+          <% comments.forEach((comment) => { %>
+            <%- include('partials/comment', { comment, user, depth: 0 }) %>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p class="text-muted mt-4">No comments yet. Start the conversation.</p>
+      <% } %>
+    </section>
   </div>
 </div>
 

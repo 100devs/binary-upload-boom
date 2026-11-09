@@ -5,6 +5,16 @@
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
+              <div class="mt-3">
+  <% if (user.profilePic) { %>
+    <img src="<%= user.profilePic %>" alt="Your profile picture" width="80" height="80" style="border-radius:50%;object-fit:cover;">
+  <% } %>
+  <form action="/profile/avatar" enctype="multipart/form-data" method="POST" class="mt-2">
+    <label for="avatar" class="form-label">Profile picture</label>
+    <input type="file" class="form-control" id="avatar" name="avatar" accept=".jpg,.jpeg,.png" required>
+    <button type="submit" class="btn btn-primary mt-2">Upload</button>
+  </form>
+</div>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
           <div class="mt-5">

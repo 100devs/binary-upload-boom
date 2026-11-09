@@ -34,4 +34,37 @@
   </div>
 </div>
 
+
+<!-- Comments -->
+  <div class="row justify-content-center mt-5 mb-5">
+    <section class="col-9" id="comments">
+      <h3>Comments (<%= commentCount %>)</h3>
+
+      <form action="/comment/createComment/<%= post._id %>" method="POST" class="d-flex gap-3 mt-3">
+        <% if (user.profilePic) { %>
+          <img class="comment-avatar" src="<%= user.profilePic %>" alt="Your profile picture">
+        <% } else { %>
+          <div class="comment-avatar comment-avatar--initial" aria-hidden="true"><%= user.userName.charAt(0).toUpperCase() %></div>
+        <% } %>
+        <div class="flex-grow-1">
+          <label for="newComment" class="visually-hidden">Add a comment</label>
+          <textarea id="newComment" name="text" class="form-control" rows="2" maxlength="1000"
+            placeholder="Comment as <%= user.userName %>..." required></textarea>
+          <button type="submit" class="btn btn-primary mt-2">Comment</button>
+        </div>
+      </form>
+
+      <% if (comments.length) { %>
+        <ul class="list-unstyled mt-4">
+          <% comments.forEach((comment) => { %>
+            <%- include('partials/comment', { comment, user, depth: 0 }) %>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p class="text-muted mt-4">No comments yet. Start the conversation.</p>
+      <% } %>
+    </section>
+  </div>
+</div>
+
 <%- include('partials/footer') -%>
